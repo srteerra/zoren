@@ -3,7 +3,7 @@ import {ArrowLeftOnRectangleIcon} from "@heroicons/react/24/solid";
 function Sidebar() {
     
     return(
-        <aside className="hidden lg:flex flex-col items-center justify-around p-4 h-screen w-3/12 2xl:w-1/5 bg-primary">
+        <aside className="hidden lg:flex flex-col fixed items-center justify-around p-4 h-screen w-3/12 2xl:w-1/5 bg-primary">
             <div>
                 <div className="flex flex-col items-center">
                     <h1 className="text-white">Logo</h1>
