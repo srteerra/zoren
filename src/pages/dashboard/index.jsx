@@ -1,12 +1,9 @@
 import Nav from "@/components/Nav";
-import { Profile } from "@/components/Profile";
-import Sidebar from "@/components/sidebar";
-import { Collections } from "@/containers/Collections";
 import Link from "next/link";
 
 const dashboard = () => {
   return (
-    <div className="my-10 px-16">
+    <div className="py-10 px-16 h-screen overflow-y-scroll">
         <Nav />
         <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 gap-12">
           {/* Balance card */}

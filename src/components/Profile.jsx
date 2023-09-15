@@ -12,7 +12,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 const Profile = () => {
-  const [show, steShow] = useState(true);
+  const [show, steShow] = useState(false);
   const route = usePathname();
 
   const slide = (
@@ -34,7 +34,7 @@ const Profile = () => {
     null;
   } else {
     return (
-      <aside className="flex lg:pt-10 justify-between md:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen lg:w-3/12 p-2 right-0">
+      <aside className="flex lg:pt-10 justify-between md:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen lg:w-4/12 p-2 right-0">
         {show ? slide : null}
         {/* Menu title */}
         <div className="flex justify-between items-center  lg:p-2">
