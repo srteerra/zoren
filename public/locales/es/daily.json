@@ -1,0 +1,11 @@
+{
+    "correct": "correcto",
+    "partial": "parcial",
+    "incorrect": "incorrecto",
+    "guessPlaceholder": "Adivina el campeon...",
+    "guessPlaceholderDone": "Ya lo has encontrado!",
+    "fetchingChamps": "Cargando datos de Runaterra...",
+    "ChampNotFound": "Campeon no encontrado",
+    "peopleFoundIt": "personas ya lo encontraron",
+    "yesterdayWas": "Ayer fue"
+}

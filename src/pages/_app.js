@@ -1,10 +1,16 @@
 import "@/styles/globals.css";
 import Layout from "./layout";
+import { ThemeProvider } from "next-themes";
+import { appWithTranslation } from "next-i18next";
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ThemeProvider attribute="class">
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
   );
 }
+
+export default appWithTranslation(App);
