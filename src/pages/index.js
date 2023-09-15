@@ -1,7 +1,5 @@
 import Nav from "@/components/Nav";
 import { Profile } from "@/components/Profile";
-import Sidebar from "@/components/sidebar";
-import { Collections } from "@/containers/Collections";
 import Link from "next/link";
 
 export default function Home() {

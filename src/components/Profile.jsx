@@ -1,6 +1,5 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { DarkTheme } from "./DarkTheme";
 import {
   Bars3Icon,
   XMarkIcon,
@@ -24,7 +23,6 @@ const Profile = () => {
             <XMarkIcon className="h-8 w-8" />
           </button>
           <div className="flex items-center justify-center h-full">
-            <DarkTheme />
             <h1 className="dark:text-red-400">Hello</h1>
           </div>
         </div>
