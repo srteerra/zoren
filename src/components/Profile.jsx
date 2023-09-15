@@ -5,25 +5,68 @@ import {
   XMarkIcon,
   QrCodeIcon,
   PlusSmallIcon,
+  ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/solid";
 import { Slide } from "react-awesome-reveal";
 import { Collections } from "@/containers/Collections";
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
+import DarkMode from "./DarkMode";
+import RegionChange from "./Region";
+
+// Images
+import logo from "../../public/logos/horizontal-dark.png";
 
 const Profile = () => {
-  const [show, steShow] = useState(false);
+  const [show, steShow] = useState(true);
   const route = usePathname();
 
   const slide = (
-    <div className="fixed top-0 right-0 w-full flex justify-end h-screen backdrop-brightness-75">
-      <Slide direction="right" className="w-1/2">
-        <div className="w-full h-full bg-white rounded-l-2xl p-4 relative">
-          <button onClick={() => steShow(!show)} className="absolute right-4">
+    <div className="lg:hidden fixed z-20 top-0 right-0 w-full flex justify-end h-screen backdrop-brightness-75">
+      <Slide direction="right" className="w-11/12 sm:w-8/12 lg:w-1/2">
+        <div className="w-full h-full bg-white sm:rounded-l-2xl p-4 relative">
+          <button
+            onClick={() => steShow(!show)}
+            className="absolute top-6 sm:top-10 right-[42%] sm:right-6 text-dark dark:text-dark"
+          >
             <XMarkIcon className="h-8 w-8" />
           </button>
-          <div className="flex items-center justify-center h-full">
-            <h1 className="dark:text-red-400">Hello</h1>
+          <div className="py-6 sm:py-0 flex flex-col items-center justify-around h-full">
+            <Link href={"/"} className="mx-auto">
+              <Image src={logo} width={100} height={100} alt="logo" />
+            </Link>
+            <div className="w-full text-dark flex justify-center items-center gap-4">
+              <DarkMode />
+              <RegionChange />
+            </div>
+            <ul className="flex flex-col text-center gap-6">
+              {[
+                ["Home", "/"],
+                ["Collections", "/collections"],
+                ["Inbox", "/inbox"],
+                ["Settings", "/settings"],
+              ].map(([title, href]) => (
+                <li key={title}>
+                  <Link
+                    className={
+                      route === href
+                        ? active
+                        : "text-dark text-large hover:opacity-60 gap-6 transition duration-150 ease-linear"
+                    }
+                    href={href}
+                  >
+                    {title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="w-full flex flex-col items-center">
+              <button className="w-1/2 hover:bg-dark dark:text-dark hover:text-white transition duration-150 ease-linear flex justify-center items-center gap-2 border-2 py-2 px-4 my-4 rounded-full">
+                <ArrowLeftOnRectangleIcon className="w-6 h-6" />
+                Disconnect
+              </button>
+            </div>
           </div>
         </div>
       </Slide>
