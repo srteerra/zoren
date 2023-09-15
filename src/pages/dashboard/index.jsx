@@ -15,7 +15,7 @@ const dashboard = () => {
             </p>
           </div>
           {/* Reminder card */} 
-          <div className="bg-black dark:bg-dark p-14 rounded-3xl text-light dark:text-dark">
+          <div className="bg-black dark:bg-dark p-14 rounded-3xl text-light">
             <div>
               <p className="text-4xl">
                 Hi, <span className="font-bold">Terra</span>
