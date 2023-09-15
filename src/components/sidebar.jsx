@@ -23,7 +23,7 @@ const Sidebar = () => {
         }
         </ul> 
         <div className="w-full flex flex-col items-center">
-          <button className="w-2/3 bg-white transition flex justify-center items-center gap-2 border-2 py-2 px-4 my-4 rounded-full">
+          <button className="w-2/3 bg-white transition flex justify-center items-center gap-2 border-2 py-2 px-4 my-4 dark:text-dark rounded-full">
             <ArrowLeftOnRectangleIcon className="w-6 h-6" />
             Disconnect
           </button>
