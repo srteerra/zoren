@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const Sidebar = () => {
   const route = usePathname();
+  const active = "text-white gap-6"
   if (route === "/") {
     null;
   } else {
@@ -16,26 +17,11 @@ const Sidebar = () => {
           </div>
         </div>
 
-        {/* <ul className="text-center">
+        <ul className="flex flex-col text-center gap-6">
         {
-          [['Home', '/'], ['collections', '/collections']].map(([title, href]) => <li key={title}><Link className="text-gray-400 hover:text-white" href={href}>{title}</Link></li>)
+          [['Home', '/'], ['Collections', '/collections'],['Inbox', '/inbox'],['Settings', '/settings']].map(([title, href]) => <li key={title}><Link className={route===href ? active : "text-slate-400 hover:text-white gap-6 transition duration-150 ease-linear"} href={href}>{title}</Link></li>)
         }
-        </ul> */}
-
-        <div className="flex flex-col items-center gap-6">
-          <div>
-            <p className="text-gray-400 hover:text-white">Home</p>
-          </div>
-          <div>
-            <p className="text-gray-400 hover:text-white">Collections</p>
-          </div>
-          <div>
-            <p className="text-gray-400 hover:text-white">Inbox</p>
-          </div>
-          <div>
-            <p className="text-gray-400 hover:text-white">Settings</p>
-          </div>
-        </div>
+        </ul> 
         <div className="w-full flex flex-col items-center">
           <button className="w-2/3 bg-white transition flex justify-center items-center gap-2 border-2 py-2 px-4 my-4 rounded-full">
             <ArrowLeftOnRectangleIcon className="w-6 h-6" />
