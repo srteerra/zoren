@@ -12,15 +12,15 @@ const dashboard = () => {
           {/* Balance card */}
           <div className="bg-secondary p-14 rounded-3xl text-light">
             <p className="text-lg">Your balance</p>
-            <p className="text-5xl font-extrabold py-2">34 SOL</p>
+            <p className="text-4xl font-extrabold py-2">34 SOL</p>
             <p className="text-lg">
               <span>=</span> $642.63 USD
             </p>
           </div>
-          {/* Reminder card */}
-          <div className="bg-secondary p-14 rounded-3xl text-light">
+          {/* Reminder card */} 
+          <div className="bg-black dark:bg-dark p-14 rounded-3xl text-light dark:text-dark">
             <div>
-              <p className="text-5xl">
+              <p className="text-4xl">
                 Hi, <span className="font-bold">Terra</span>
               </p>
               <p className="text-xl pt-2 font-light">
@@ -28,7 +28,7 @@ const dashboard = () => {
               </p>
             </div>
             <div className="pt-12">
-              <Link href="/" className="text-xl font-light underline">
+              <Link href="/" className="text-lg font-light underline">
                 Explore more
               </Link>
             </div>
