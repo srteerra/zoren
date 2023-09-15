@@ -1,8 +1,9 @@
 import "@/styles/globals.css";
 import Layout from "./layout";
 import { ThemeProvider } from "next-themes";
+import { appWithTranslation } from "next-i18next";
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <ThemeProvider attribute="class">
       <Layout>
@@ -11,3 +12,5 @@ export default function App({ Component, pageProps }) {
     </ThemeProvider>
   );
 }
+
+export default appWithTranslation(App);
