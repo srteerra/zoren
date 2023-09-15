@@ -2,6 +2,10 @@
 import { usePathname } from "next/navigation";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import Image from "next/image";
+
+import logo from '../../public/logos/horizontal-light.png'; 
+import icon from '../../public/logos/icon-light.png';
 
 const Sidebar = () => {
   const route = usePathname();
@@ -13,7 +17,9 @@ const Sidebar = () => {
       <aside className="hidden lg:flex flex-col items-center justify-around p-4 h-screen w-3/12 w-2xl:w-4/12 bg-primary">
         <div>
           <div className="flex flex-col items-center">
-            <h1 className="text-white">Logo</h1>
+          <Link href={'/'}>
+                <Image src={logo} width={100} height={100} alt="logo" />
+            </Link>
           </div>
         </div>
 
@@ -28,6 +34,7 @@ const Sidebar = () => {
             Disconnect
           </button>
         </div>
+        <Image src={icon} width={50} height={50} alt="icon"/>
       </aside>
     );
   }
