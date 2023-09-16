@@ -15,7 +15,7 @@ const DarkMode = () => {
   return (
     <button
       onClick={() => handleClick()}
-      className="bg-slate-900 dark:bg-slate-100 text-slate-100 dark:text-slate-900 p-2 rounded-xl hover:cursor-legacyp"
+      className="bg-black text-white dark:bg-transparent dark:text-white p-2 rounded-xl hover:cursor-legacyp"
     >
       {click ? <MoonIcon width={25} /> : <SunIcon width={25} />}
     </button>
