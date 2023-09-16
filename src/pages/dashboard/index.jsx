@@ -1,5 +1,6 @@
 import ActionCenterDashboard from "@/components/ActionDash";
 import Nav from "@/components/Nav";
+import MostRecentTransactions from "@/components/RecentTransactions";
 import Link from "next/link";
 
 const dashboard = () => {
@@ -33,6 +34,7 @@ const dashboard = () => {
           </div>
         </div>
         <ActionCenterDashboard />
+        <MostRecentTransactions />
       </div>
   );
 };
