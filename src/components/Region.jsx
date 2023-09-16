@@ -21,7 +21,7 @@ const RegionChange = () => {
     <Menu as="div" className="flex items-center justify-center">
       <div>
         <Menu.Button className="flex gap-2 justify-center items-center">
-        <FontAwesomeIcon className="w-10 h-10 hover:scale-105 transition duration-150 ease-linear" icon={faEarthAmerica} />
+        <FontAwesomeIcon className="w-5 h-5 hover:scale-105 transition duration-150 ease-linear" icon={faEarthAmerica} />
         </Menu.Button>
       </div>
       <Transition
@@ -41,7 +41,7 @@ const RegionChange = () => {
                     key={l}
                     onClick={handleClick(l)}
                     className={`${
-                      active ? "bg-red-400 text-white" : "text-gray-900"
+                      active ? " text-white bg-secondary" : "text-gray-900"
                     } flex w-full gap-3 items-center justify-center rounded-md px-2 py-2`}
                   >
                     <Image

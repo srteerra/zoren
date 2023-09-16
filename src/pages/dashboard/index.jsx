@@ -7,7 +7,7 @@ const dashboard = () => {
         <Nav />
         <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 gap-12">
           {/* Balance card */}
-          <div className="bg-secondary p-14 rounded-3xl text-light">
+          <div className="bg-secondary dark:bg-gray-600 p-14 rounded-3xl text-light">
             <p className="text-lg">Your balance</p>
             <p className="text-4xl font-extrabold py-2">34 SOL</p>
             <p className="text-lg">

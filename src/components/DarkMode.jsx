@@ -22,7 +22,7 @@ const DarkMode = () => {
   return (
     <button
       onClick={() => handleClick()}
-      className="bg-black text-white dark:bg-transparent hover:scale-105 transition duration-150 ease-linear p-2 rounded-xl"
+      className="text-black dark:text-white bg-transparent hover:scale-105 transition duration-150 ease-linear p-2 rounded-xl"
     >
       {click ? <MoonIcon width={25} /> : <SunIcon width={25} />}
     </button>
