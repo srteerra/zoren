@@ -1,6 +1,12 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowLeftOnRectangleIcon,
+  HomeIcon,
+  BanknotesIcon,
+  UserIcon,
+  Cog8ToothIcon,
+} from "@heroicons/react/24/solid";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -10,7 +16,7 @@ import icon from "../../public/logos/icon-light.png";
 
 const Sidebar = () => {
   const route = usePathname();
-  const active = "text-white gap-6";
+  const active = "text-white font-bold gap-6";
   if (route === "/") {
     null;
   } else {
@@ -24,11 +30,11 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <ul className="flex flex-col text-center gap-6">
+        <ul className="flex flex-col text-start gap-3 w-full px-12">
           {[
-            ["Home", "/"],
-            ["Collections", "/collections"],
-            ["Inbox", "/inbox"],
+            ["Home", "/dashboard"],
+            ["Bills", "/bills"],
+            ["Friends", "/friends"],
             ["Settings", "/settings"],
           ].map(([title, href]) => (
             <li key={title}>
@@ -40,15 +46,67 @@ const Sidebar = () => {
                 }
                 href={href}
               >
-                {title}
+                {title === "Home" ? (
+                  <div className="flex gap-4 items-center">
+                    <div
+                      className={
+                        route === href
+                          ? "bg-black/40 p-4 rounded-2xl"
+                          : "bg-black/10 p-4 rounded-2xl"
+                      }
+                    >
+                      <HomeIcon width={25} />
+                    </div>{" "}
+                    {title}
+                  </div>
+                ) : title === "Bills" ? (
+                  <div className="flex gap-4 items-center">
+                    <div
+                      className={
+                        route === href
+                          ? "bg-black/40 p-4 rounded-2xl"
+                          : "bg-black/10 p-4 rounded-2xl"
+                      }
+                    >
+                      <BanknotesIcon width={25} />
+                    </div>{" "}
+                    {title}
+                  </div>
+                ) : title === "Friends" ? (
+                  <div className="flex gap-4 items-center">
+                    <div
+                      className={
+                        route === href
+                          ? "bg-black/40 p-4 rounded-2xl"
+                          : "bg-black/10 p-4 rounded-2xl"
+                      }
+                    >
+                      <UserIcon width={25} />
+                    </div>{" "}
+                    {title}
+                  </div>
+                ) : (
+                  <div className="flex gap-4 items-center">
+                    <div
+                      className={
+                        route === href
+                          ? "bg-black/40 p-4 rounded-2xl"
+                          : "bg-black/10 p-4 rounded-2xl"
+                      }
+                    >
+                      <Cog8ToothIcon width={25} />
+                    </div>{" "}
+                    {title}
+                  </div>
+                )}
               </Link>
             </li>
           ))}
         </ul>
         <div className="w-full flex flex-col items-center">
-          <button className="w-2/3 bg-white transition flex justify-center items-center gap-2 border-2 py-2 px-4 my-4 dark:text-dark rounded-full">
-            <ArrowLeftOnRectangleIcon className="w-6 h-6" />
-            Disconnect
+          <button className="w-2/3 bg-white hover:opacity-70 transition flex justify-center items-center gap-2 border-2 py-3 px-6 my-4 dark:text-dark rounded-full">
+            <ArrowLeftOnRectangleIcon width={25} />
+            <span>Disconnect</span>
           </button>
         </div>
         <Image src={icon} width={50} height={50} alt="icon" />

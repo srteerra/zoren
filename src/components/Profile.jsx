@@ -43,8 +43,8 @@ const Profile = () => {
             <ul className="flex flex-col text-center gap-6">
               {[
                 ["Home", "/"],
-                ["Collections", "/collections"],
-                ["Inbox", "/inbox"],
+                ["Bills", "/bills"],
+                ["Friends", "/friends"],
                 ["Settings", "/settings"],
               ].map(([title, href]) => (
                 <li key={title}>
