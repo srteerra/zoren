@@ -19,8 +19,9 @@ import RegionChange from "./Region";
 import logo from "../../public/logos/horizontal-dark.png";
 
 const Profile = () => {
-  const [show, steShow] = useState(true);
+  const [show, steShow] = useState(false);
   const route = usePathname();
+  const active = "text-dark font-bold gap-6";
 
   const slide = (
     <div className="lg:hidden fixed z-20 top-0 right-0 w-full flex justify-end h-screen backdrop-brightness-75">
@@ -28,7 +29,7 @@ const Profile = () => {
         <div className="w-full h-full bg-white sm:rounded-l-2xl p-4 relative">
           <button
             onClick={() => steShow(!show)}
-            className="absolute top-6 sm:top-10 right-[42%] sm:right-6 text-dark dark:text-dark"
+            className="absolute top-6 sm:top-10 right-[46%] sm:right-6 text-dark dark:text-dark"
           >
             <XMarkIcon className="h-8 w-8" />
           </button>
