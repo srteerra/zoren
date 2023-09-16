@@ -44,7 +44,7 @@ const RegionChange = () => {
                     key={l}
                     onClick={handleClick(l)}
                     className={`${
-                      active ? " text-white bg-secondary" : "text-gray-900"
+                      active ? " text-white bg-secondary dark:bg-gray-600" : "text-gray-900"
                     } flex w-full gap-3 items-center justify-center rounded-md px-2 py-2`}
                   >
                     <Image

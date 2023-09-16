@@ -2,7 +2,7 @@ import { QrCodeIcon, LinkIcon } from "@heroicons/react/24/solid";
 
 function ActionCenterDashboard() {
   return (
-    <div className="flex gap-12 my-12">
+    <div className="hidden lg:flex gap-12 my-16">
       {/* Create session action */}
       <div className="flex gap-6 items-center text-black dark:text-white">
         <button

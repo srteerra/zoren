@@ -5,7 +5,7 @@ export default function Layout({ children }) {
   return (
     <main className="flex flex-col-reverse overflow-y-scroll lg:flex-row">
       <Sidebar />
-      <div className="w-full h-screen">{children}</div>
+      <div className="w-full lg:w-2/3 xl:w-3/4 h-screen">{children}</div>
       <Profile />
     </main>
   );

@@ -44,8 +44,8 @@ const Profile = () => {
             <ul className="flex flex-col text-center gap-6">
               {[
                 ["Home", "/"],
-                ["Collections", "/collections"],
-                ["Inbox", "/inbox"],
+                ["Bills", "/bills"],
+                ["Friends", "/friends"],
                 ["Settings", "/settings"],
               ].map(([title, href]) => (
                 <li key={title}>
@@ -81,7 +81,7 @@ const Profile = () => {
       <aside className="flex lg:pt-10 justify-between md:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen lg:w-4/12 p-2 right-0">
         {show ? slide : null}
         {/* Menu title */}
-        <div className="flex justify-between items-center  lg:p-2">
+        <div className="flex justify-between items-center lg:p-2">
           <h3 className="hidden lg:block">My profile</h3>
           <button
             onClick={() => steShow(!show)}
