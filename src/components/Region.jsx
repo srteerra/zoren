@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Menu, Transition } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEarthAmerica } from "@fortawesome/free-solid-svg-icons";
 
 import mexicoFlag from "../../public/icons/mexico.png";
 import usFlag from "../../public/icons/estados-unidos.png";
@@ -20,25 +21,7 @@ const RegionChange = () => {
     <Menu as="div" className="flex items-center justify-center">
       <div>
         <Menu.Button className="flex gap-2 justify-center items-center">
-          {locale === "es" ? (
-            <>
-              <Image
-                src={mexicoFlag}
-                className="w-[35px] md:w-[35px] mx-auto"
-                alt="mx-flag"
-                priority={true}
-              />
-            </>
-          ) : (
-            <>
-              <Image
-                src={usFlag}
-                className="w-[35px] md:w-[35px] mx-auto"
-                alt="us-flag"
-                priority={true}
-              />
-            </>
-          )}
+        <FontAwesomeIcon className="w-10 h-10 hover:scale-105 transition duration-150 ease-linear" icon={faEarthAmerica} />
         </Menu.Button>
       </div>
       <Transition
