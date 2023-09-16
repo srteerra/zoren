@@ -3,7 +3,7 @@ import { Sidebar } from "@/components/Sidebar";
 
 export default function Layout({ children }) {
   return (
-    <main className="flex flex-col-reverse lg:flex-row">
+    <main className="flex flex-col-reverse overflow-y-scroll lg:flex-row">
       <Sidebar />
       <div className="w-full h-screen">{children}</div>
       <Profile />

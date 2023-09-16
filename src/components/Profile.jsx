@@ -12,7 +12,7 @@ import { Collections } from "@/containers/Collections";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
-import DarkMode from "./DarkMode";
+import { DarkModeMobile } from "./DarkMode";
 import RegionChange from "./Region";
 
 // Images
@@ -38,7 +38,7 @@ const Profile = () => {
               <Image src={logo} width={100} height={100} alt="logo" />
             </Link>
             <div className="w-full text-dark flex justify-center items-center gap-4">
-              <DarkMode />
+              <DarkModeMobile />
               <RegionChange />
             </div>
             <ul className="flex flex-col text-center gap-6">

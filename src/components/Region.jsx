@@ -21,7 +21,10 @@ const RegionChange = () => {
     <Menu as="div" className="flex items-center justify-center">
       <div>
         <Menu.Button className="flex gap-2 justify-center items-center">
-        <FontAwesomeIcon className="w-5 h-5 hover:scale-105 transition duration-150 ease-linear" icon={faEarthAmerica} />
+          <FontAwesomeIcon
+            className="w-5 h-5 hover:scale-105 transition duration-150 ease-linear"
+            icon={faEarthAmerica}
+          />
         </Menu.Button>
       </div>
       <Transition
