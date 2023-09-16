@@ -21,7 +21,7 @@ const Sidebar = () => {
     null;
   } else {
     return (
-      <aside className="hidden lg:flex flex-col items-center justify-around p-4 h-screen w-3/12 w-2xl:w-4/12 bg-primary dark:bg-gray-800">
+      <aside className="hidden 2xl:flex flex-col items-center justify-around p-4 h-screen w-3/12 w-2xl:w-4/12 bg-primary dark:bg-gray-800">
         <div>
           <div className="flex flex-col items-center">
             <Link href={"/"}>
