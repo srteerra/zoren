@@ -1,3 +1,4 @@
+import ActionCenterDashboard from "@/components/ActionDash";
 import Nav from "@/components/Nav";
 import Link from "next/link";
 
@@ -5,7 +6,7 @@ const dashboard = () => {
   return (
     <div className="py-10 px-16 h-screen lg:overflow-y-scroll">
         <Nav />
-        <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 gap-12">
+        <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 gap-12">
           {/* Balance card */}
           <div className="bg-secondary dark:bg-gray-600 p-14 rounded-3xl text-light">
             <p className="text-lg">Your balance</p>
@@ -31,6 +32,7 @@ const dashboard = () => {
             </div>
           </div>
         </div>
+        <ActionCenterDashboard />
       </div>
   );
 };
