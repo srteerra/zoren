@@ -8,7 +8,7 @@ import { ViewfinderCircleIcon } from "@heroicons/react/24/solid";
 import ticket from "../../public/images/ticket.png";
 import friends from "../../public/images/friends.png";
 import Image from "next/image";
-import { Zoom } from "react-awesome-reveal";
+import { Fade, Zoom } from "react-awesome-reveal";
 
 const Home = () => {
   const [show, setShow] = useState("friends");
@@ -84,7 +84,11 @@ const Home = () => {
             <div className="relative">
               <div className="grid grid-rows-3 p-4 h-full">
                 <div className="row-span-2 grid grid-rows-4">
-                  <div className="h-full grid place-items-center relative row-span-2 row-start-2 max-h-[250px] lg:bg-secondary rounded-2xl ">
+                  <Fade
+                    direction="down"
+                    triggerOnce
+                    className="h-full grid place-items-center relative row-span-2 row-start-2 max-h-[250px] lg:bg-secondary rounded-2xl "
+                  >
                     <Image
                       src={ticket}
                       alt="tickets"
@@ -93,7 +97,7 @@ const Home = () => {
                       quality={100}
                       className="2xl:absolute bottom-0 left-[20%]"
                     />
-                  </div>
+                  </Fade>
                 </div>
                 <span className="absolute bottom-40 left-32">
                   <Zoom triggerOnce>
@@ -110,7 +114,11 @@ const Home = () => {
               </span>
               <div className="grid grid-rows-3 h-full">
                 <div className="row-span-2 row-start-2 grid grid-rows-3 ">
-                  <div className="h-full grid place-items-center relative row-span-2 max-h-[300px] row-start-2 lg:bg-secondary rounded-2xl ">
+                  <Fade
+                    direction="up"
+                    triggerOnce
+                    className="h-full grid place-items-center relative row-span-2 max-h-[300px] row-start-2 lg:bg-secondary rounded-2xl "
+                  >
                     <Image
                       src={friends}
                       alt="tickets"
@@ -119,7 +127,7 @@ const Home = () => {
                       quality={100}
                       className="2xl:absolute bottom-4 left-[20%]"
                     />
-                  </div>
+                  </Fade>
                 </div>
               </div>
             </div>
@@ -130,7 +138,7 @@ const Home = () => {
       <div className="bg-primary flex flex-col justify-between overflow-hidden h-screen w-full text-white">
         <div className="h-2/6 flex text-center flex-col w-full sm:w-1/2 px-10 py-20 lg:w-1/3 mx-auto">
           <h1 className="lg:text-5xl">For whatever the occasion</h1>
-          <p>You can use Zoren form your phone or PC</p>
+          <p className="py-2">You can use Zoren form your phone or PC</p>
         </div>
         <div className="h-3/6 flex items-end justify-center bg-[url('../../public/images/banner.png')] bg-no-repeat bg-cover lg:bg-contain bg-center"></div>
       </div>
