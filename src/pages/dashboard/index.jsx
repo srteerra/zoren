@@ -1,4 +1,4 @@
-import ActionCenterDashboard from "@/components/ActionDash";
+import ActionCenterDashboard from "@/components/actions/ActionDash";
 import { Collections } from "@/containers/Collections";
 import Nav from "@/components/Nav";
 import MostRecentTransactions from "@/components/RecentTransactions";
@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const dashboard = () => {
   return (
-    <div className="py-10 px-4 sm:px-8 lg:px-16 h-screen lg:overflow-y-scroll">
+    <div className="py-10 px-4 sm:px-8 lg:px-16 h-screen lg:overflow-y-scroll hiddenScroll">
         <Nav />
         <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 gap-12">
           {/* Balance card */}

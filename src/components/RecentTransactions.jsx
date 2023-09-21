@@ -31,7 +31,7 @@ function MostRecentTransactions() {
             </div>
             {/* Amount */}
             <div>
-                <p className="font-bold text-primary">+20 SOL</p>
+                <p className="font-bold text-primary dark:text-white">+20 SOL</p>
             </div>
         </div>
       </div>

@@ -78,11 +78,10 @@ const Profile = () => {
     null;
   } else {
     return (
-      <aside className="flex lg:pt-10 justify-between md:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen lg:w-4/12 p-2 right-0">
+      <aside className="flex py-16 justify-between md:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen lg:w-4/12 px-8 right-0">
         {show ? slide : null}
         {/* Menu title */}
         <div className="flex justify-between items-center lg:p-2">
-          <h3 className="hidden lg:block">My profile</h3>
           <button
             onClick={() => steShow(!show)}
             className="block lg:hidden text-slate-500 hover:text-slate-700"
@@ -107,7 +106,7 @@ const Profile = () => {
             </button>
           </div>
           <div className="flex flex-col">
-            <span className="font-bold">Terra</span>
+            <span className="font-bold text-xl">Terra</span>
             <span
               className="text-slate-500 hover:cursor-copy"
               onClick={() => navigator.clipboard.writeText("Hola")}
@@ -120,7 +119,7 @@ const Profile = () => {
         {/* Collection section */}
         <section className="hidden lg:block p-0 xl:p-2">
           <div className="flex items-center justify-between">
-            <span className="font-bold">My collection</span>
+            <h3 className="font-bold">My bills</h3>
             <button>
               <PlusSmallIcon className="h-6 w-6" />
             </button>
