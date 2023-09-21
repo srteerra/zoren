@@ -14,7 +14,7 @@ const bills = () => {
           <div className="bg-secondary md:col-span-2 dark:bg-dark p-16 rounded-3xl text-light">
             <div className="w-[60%]">
               <p className="2xl:text-4xl lg:text-3xl md:text-3xl">
-                You have <span className="font-bold text-red-400">1</span> bill <span className="font-bold text-red-400">Incompleted</span> 
+                You have <span className="font-bold text-red-500 dark:text-red-400">1</span> bill <span className="font-bold text-red-500 dark:text-red-400">Incompleted</span> 
               </p>
               <p className="2xl:text-xl lg:text-md text-md pt-2 font-light">
               take a look on your list to identify the bill
