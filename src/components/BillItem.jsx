@@ -1,11 +1,21 @@
 import { faMugHot, faMoneyBills } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
+import { useRouter } from 'next/router'
 
 const Bill = (data) => {
   const icons = [faMugHot, faMoneyBills];
+  const router = useRouter()
   return (
-    <button className="flex flex-col gap-8 justify-between p-10 bg-terce dark:bg-gray-800 rounded-2xl min-w-[280px] w-auto hover:brightness-90 hover:shadow-2xl group transition ease-out">
+    <button
+      onClick={() => {
+        router.push({
+          pathname: "/bills/[name]",
+          query: { name: "dinner" },
+        });
+      }}
+      className="flex flex-col gap-8 justify-between p-10 bg-terce dark:bg-gray-800 rounded-2xl min-w-[280px] w-auto hover:brightness-90 hover:shadow-2xl group transition ease-out"
+    >
       {/* Head */}
       <div>
         <div className="flex justify-between">
@@ -14,7 +24,9 @@ const Bill = (data) => {
               className="w-7 2xl:w-8 text-dark dark:text-white"
               icon={faMoneyBills}
             />
-            <p className="font-bold pr-6 text-xl text-dark dark:text-white">Dinner</p>
+            <p className="font-bold pr-6 text-xl text-dark dark:text-white">
+              Dinner
+            </p>
           </div>
           <p className="font-bold text-xl text-primary dark:text-terce">5/5</p>
         </div>

@@ -174,7 +174,7 @@ const TransactionQRModal = ({
                   height={110}
                   width={110}
                 />
-                <p className="text-dark dark:text-white mb-2 xl:text-2xl font-bold">
+                <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
                   Set the contributors
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
@@ -204,9 +204,9 @@ const TransactionQRModal = ({
 
                 <button
                   onClick={() => setModalOpen(false)}
-                  className="w-full rounded-lg border-2 border-danger py-3 hover:bg-opacity-70"
+                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-danger">Close</span>
+                  <span className="font-medium text-red-300">Close</span>
                 </button>
               </div>
             </div>
@@ -221,7 +221,7 @@ const TransactionQRModal = ({
                   height={110}
                   width={110}
                 />
-                <p className="text-dark dark:text-white mb-2 xl:text-2xl font-bold">
+                <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
                   Set an amount
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
@@ -251,15 +251,15 @@ const TransactionQRModal = ({
 
                 <button
                   onClick={() => setModalOpen(false)}
-                  className="w-full rounded-lg border-2 border-danger py-3 hover:bg-opacity-70"
+                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-danger">Close</span>
+                  <span className="font-medium text-red-300">Close</span>
                 </button>
               </div>
             </div>
           ) : stepModal === 3 ? (
             <div>
-              <div className="flex flex-col mx-auto text-center w-2/3 px-12">
+              <div className="flex flex-col mx-auto text-center w-[75%] px-12">
                 <Image
                   className="rounded-full mx-auto my-8"
                   src={"https://picsum.photos/id/237/200/200"}
@@ -268,7 +268,7 @@ const TransactionQRModal = ({
                   height={110}
                   width={110}
                 />
-                <p className="text-dark dark:text-white mb-2 xl:text-2xl font-bold">
+                <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
                   Add a concept
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
@@ -297,9 +297,9 @@ const TransactionQRModal = ({
 
                 <button
                   onClick={() => setModalOpen(false)}
-                  className="w-full rounded-lg border-2 border-danger py-3 hover:bg-opacity-70"
+                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-danger">Close</span>
+                  <span className="font-medium text-red-300">Close</span>
                 </button>
               </div>
             </div>
@@ -394,9 +394,9 @@ const TransactionQRModal = ({
 
                 <button
                   onClick={() => setModalOpen(false)}
-                  className="w-full rounded-lg border-2 border-danger py-3 hover:bg-opacity-70"
+                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-danger">Close</span>
+                  <span className="font-medium text-red-300">Close</span>
                 </button>
               </div>
             </>
@@ -423,9 +423,9 @@ const TransactionQRModal = ({
                     setStepModal(4)
                     setModalOpen(false)
                   }}
-                  className="w-full rounded-lg border-2 border-danger py-3 hover:bg-opacity-70"
+                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-danger">Cancel</span>
+                  <span className="font-medium text-red-300">Cancel</span>
                 </button>
               </div>
             </div>
