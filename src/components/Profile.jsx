@@ -22,6 +22,11 @@ const Profile = () => {
   const [show, steShow] = useState(false);
   const route = usePathname();
   const active = "text-dark font-bold gap-6";
+  const limits = [
+    '/',
+    '/how',
+    '/about',
+  ]
 
   const slide = (
     <div className="lg:hidden fixed z-20 top-0 right-0 w-full flex justify-end h-screen backdrop-brightness-75">
@@ -74,7 +79,7 @@ const Profile = () => {
     </div>
   );
 
-  if (route === "/") {
+  if (limits.includes(route)) {
     null;
   } else {
     return (

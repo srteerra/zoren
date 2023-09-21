@@ -17,7 +17,12 @@ import icon from "../../public/logos/icon-light.png";
 const Sidebar = () => {
   const route = usePathname();
   const active = "text-white font-bold gap-6";
-  if (route === "/") {
+  const limits = [
+    '/',
+    '/how',
+    '/about',
+  ]
+  if (limits.includes(route)) {
     null;
   } else {
     return (
