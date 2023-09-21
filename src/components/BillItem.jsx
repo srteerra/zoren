@@ -14,7 +14,7 @@ const Bill = (data) => {
           query: { name: "dinner" },
         });
       }}
-      className="flex flex-col gap-8 justify-between p-10 bg-terce dark:bg-gray-800 rounded-2xl min-w-[280px] w-auto hover:brightness-90 hover:shadow-2xl group transition ease-out"
+      className="flex flex-col gap-8 justify-between p-10 bg-terce dark:bg-dark rounded-2xl min-w-[280px] w-auto hover:brightness-90 hover:shadow-2xl group transition ease-out"
     >
       {/* Head */}
       <div>
