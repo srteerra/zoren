@@ -3,6 +3,7 @@ import { LoginNav } from "@/components/LoginNav";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ViewfinderCircleIcon } from "@heroicons/react/24/solid";
+import { Footer } from "@/components/Footer";
 
 // Images
 import ticket from "../../public/images/ticket.png";
@@ -34,21 +35,24 @@ const Home = () => {
       <LoginNav />
 
       {/* Fisrt section */}
-      <div className="w-full lg:w-4/5 mx-auto flex h-5/6 items-center">
+      <div className="w-full lg:w-4/5 mt-4 mx-auto flex h-5/6 items-center">
         {/* left side */}
         <div className="w-full text-center md:text-start md:w-1/2 p-8 lg:p-0 overflow-hidden">
           <div className="">
             <p className="text-slate-500 my-4">Want to separate the bill?</p>
             <div>
-              <p className="text-4xl lg:text-5xl font-light">
+              <h1 className="text-4xl lg:text-5xl font-light">
                 Generate QR codes to <br /> split bill payments <br /> between
                 your
-                <span className="text-primary font-bold"> {show}</span>.
-              </p>
+                <span className="text-primary dark:text-secondary font-bold">
+                  {" "}
+                  {show}
+                </span>
+                .
+              </h1>
             </div>
 
             <p className="my-6">
-              Using{" "}
               <Link href={"/"}>
                 <strong>Solana</strong>
               </Link>{" "}
@@ -142,6 +146,7 @@ const Home = () => {
         </div>
         <div className="h-3/6 flex items-end justify-center bg-[url('../../public/images/banner.png')] bg-no-repeat bg-cover lg:bg-contain bg-center"></div>
       </div>
+      <Footer />
     </div>
   );
 };

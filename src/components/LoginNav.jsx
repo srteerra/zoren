@@ -9,6 +9,7 @@ import Link from "next/link";
 
 // Images
 import logo from "../../public/logos/horizontal-color.png";
+import logo_l from "../../public/logos/horizontal-light.png";
 import RegionChange from "./Region";
 
 const LoginNav = () => {
@@ -68,10 +69,20 @@ const LoginNav = () => {
     <nav className="h-1/6 w-full">
       {show ? slide : null}
       <div className="w-4/5 h-full flex items-center justify-between mx-auto">
-        <div>
+        <div className="block dark:hidden">
           <Image
             priority={true}
             src={logo}
+            alt="logo"
+            width={90}
+            height={90}
+            className="w-auto"
+          />
+        </div>
+        <div className="hidden dark:block">
+          <Image
+            priority={true}
+            src={logo_l}
             alt="logo"
             width={90}
             height={90}
