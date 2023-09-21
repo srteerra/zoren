@@ -3,12 +3,13 @@ import { LoginNav } from "@/components/LoginNav";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ViewfinderCircleIcon } from "@heroicons/react/24/solid";
+import { Footer } from "@/components/Footer";
 
 // Images
 import ticket from "../../public/images/ticket.png";
 import friends from "../../public/images/friends.png";
 import Image from "next/image";
-import { Fade, Zoom } from "react-awesome-reveal";
+import { Fade, Flip, Zoom } from "react-awesome-reveal";
 
 const Home = () => {
   const [show, setShow] = useState("friends");
@@ -23,7 +24,7 @@ const Home = () => {
         if (i === 2) {
           i = 0;
         } else i++;
-      }, 5000);
+      }, 4000);
     };
 
     changeWords();
@@ -34,21 +35,49 @@ const Home = () => {
       <LoginNav />
 
       {/* Fisrt section */}
-      <div className="w-full lg:w-4/5 mx-auto flex h-5/6 items-center">
+      <div className="w-full lg:w-4/5 mt-4 mx-auto flex h-5/6 items-center">
         {/* left side */}
         <div className="w-full text-center md:text-start md:w-1/2 p-8 lg:p-0 overflow-hidden">
           <div className="">
             <p className="text-slate-500 my-4">Want to separate the bill?</p>
             <div>
-              <p className="text-4xl lg:text-5xl font-light">
+              <h1 className="text-4xl lg:text-5xl font-light">
                 Generate QR codes to <br /> split bill payments <br /> between
-                your
-                <span className="text-primary font-bold"> {show}</span>.
-              </p>
+                your{" "}
+                <Flip
+                  direction="horizontal"
+                  className={
+                    show === "friends"
+                      ? "text-primary inline-block dark:text-secondary font-bold"
+                      : "hidden"
+                  }
+                >
+                  {show}
+                </Flip>
+                <Flip
+                  direction="horizontal"
+                  className={
+                    show === "mates"
+                      ? "text-primary dark:text-secondary font-bold inline-block"
+                      : "hidden"
+                  }
+                >
+                  {show}
+                </Flip>
+                <Flip
+                  direction="horizontal"
+                  className={
+                    show === "family"
+                      ? "text-primary dark:text-secondary font-bold inline-block"
+                      : "hidden"
+                  }
+                >
+                  {show}
+                </Flip>
+              </h1>
             </div>
 
             <p className="my-6">
-              Using{" "}
               <Link href={"/"}>
                 <strong>Solana</strong>
               </Link>{" "}
@@ -142,6 +171,7 @@ const Home = () => {
         </div>
         <div className="h-3/6 flex items-end justify-center bg-[url('../../public/images/banner.png')] bg-no-repeat bg-cover lg:bg-contain bg-center"></div>
       </div>
+      <Footer />
     </div>
   );
 };
