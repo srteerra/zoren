@@ -5,7 +5,7 @@ import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 const Bill = (data) => {
   const icons = [faMugHot, faMoneyBills];
   return (
-    <button className="flex flex-col gap-8 justify-between p-10 bg-terce dark:bg-gray-600 rounded-2xl min-w-[280px] w-auto hover:brightness-90 hover:shadow-2xl group transition ease-out">
+    <button className="flex flex-col gap-8 justify-between p-10 bg-terce dark:bg-gray-800 rounded-2xl min-w-[280px] w-auto hover:brightness-90 hover:shadow-2xl group transition ease-out">
       {/* Head */}
       <div>
         <div className="flex justify-between">
