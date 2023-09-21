@@ -3,15 +3,33 @@ import { TrashIcon, CheckIcon } from "@heroicons/react/24/solid";
 import { ExclamationCircleIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import DeleteBillModal from "@/components/billFunctions/deleteModal";
+import { useState } from "react";
+import SetBillModal from "@/components/billFunctions/setBillModal";
 
 const BillView = (data) => {
+  const [deleteBillModalOpen, setDeleteBillModalOpen] = useState(false);
+  const [billModalOpen, setBillModalOpen] = useState(false);
   const nav = {
     title: "bills",
     isSubpage: true,
   };
+  const res = {
+    hola: "hello"
+  }
   const router = useRouter();
   return (
-    <div className="py-0 xl:py-10 px-4 sm:px-8 lg:px-16 h-screen lg:overflow-y-scroll hiddenScroll">
+    <div className="py-8 xl:py-10 px-4 sm:px-8 lg:px-16 h-screen lg:overflow-y-scroll hiddenScroll">
+      <DeleteBillModal
+        modalOpen={deleteBillModalOpen}
+        setModalOpen={setDeleteBillModalOpen}
+        data={res}
+      />
+      <SetBillModal
+        modalOpen={billModalOpen}
+        setModalOpen={setBillModalOpen}
+        data={res}
+      />
       <Nav data={nav} />
       {false ? (
         <div className="w-full bg-success dark:bg-success/40 text-white px-8 py-3 md:py-2 rounded-full">
@@ -31,10 +49,15 @@ const BillView = (data) => {
           <div className="flex flex-col gap-8 text-start text-gray-500">
             <p>Concept</p>
             <p>Contributors</p>
+            <p>Total</p>
           </div>
           <div className="flex flex-col gap-8 text-end font-bold">
             <p>Ana’s Party</p>
-            <p>2 People</p>
+            <p>4 People</p>
+            <div className="flex flex-col gap-2">
+              <p>{"40"} SOL</p>
+              <p className="opacity-50 font-semibold">${"6450"} USD</p>
+            </div>
           </div>
         </div>
       </div>
@@ -42,22 +65,25 @@ const BillView = (data) => {
       <div className="my-20">
         <div className="flex justify-between">
           <div className="flex flex-col gap-8 text-start text-gray-500">
-            <p>Total</p>
+            <p>Pool</p>
             <p>Collected</p>
           </div>
           <div className="flex flex-col gap-8 text-end font-bold">
-            <p>{"40"} SOL</p>
-            <p className="text-danger">{"20"} SOL</p>
+            <p>{"2"} / {"4"}</p>
+            <div className="flex flex-col gap-2">
+              <p className="text-danger">{"20"} SOL</p>
+              <p className="text-danger opacity-70 font-semibold">${"3450"} USD</p>
+            </div>
           </div>
         </div>
       </div>
       <div className="my-20">
         <div className="flex gap-4 flex-col md:flex-row text-center justify-end">
-          <button className="flex gap-3 justify-center text-center font-bold text-danger border-danger border-2 px-10 py-4 rounded-full">
+          <button onClick={() => setDeleteBillModalOpen(true)} className="flex gap-3 justify-center text-center items-center text-sm font-bold text-danger border-danger border-2 px-8 py-4 rounded-full">
             <TrashIcon width={20} />
             Delete
           </button>
-          {true ? (<button className="flex gap-3 justify-center text-center font-bold text-white bg-primary dark:bg-success/40 px-8 py-4 rounded-full">
+          {true ? (<button onClick={() => setBillModalOpen(true)} className="flex gap-3 justify-center text-center items-center text-sm font-bold text-white bg-primary dark:bg-success/40 px-8 py-4 rounded-full">
             <CheckIcon width={20} />
             Set completed
           </button>) : <></>}

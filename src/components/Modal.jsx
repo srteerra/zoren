@@ -13,7 +13,7 @@ const Modal = ({ modalOpen, setModalOpen, children }) => {
                     <div className="fixed inset-0 bg-black bg-opacity-25" />
                 </Transition.Child>
 
-                <div className="fixed inset-0 overflow-y-auto">
+                <div className="fixed inset-0 overflow-y-hidden sm:overflow-y-auto">
                     <div className="flex min-h-full items-center justify-center p-0 sm:p-4 text-center">
                         <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
                             <Dialog.Panel className="transform absolute sm:static bottom-[-20%] rounded-3xl bg-white dark:bg-gray-700 p-4 sm:p-10 pb-[50%] text-left align-middle shadow-xl transition-all">{children}</Dialog.Panel>
