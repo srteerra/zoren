@@ -1,9 +1,9 @@
-import ActionCenterFriends from "@/components/actions/ActionFriends";
+// import ActionCenterFriends from "@/components/actions/ActionFriends";
 import { Collections } from "@/containers/Collections";
 import Nav from "@/components/Nav";
 import { QrCodeIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import AllFriends from "@/components/AllFriends";
+// import AllFriends from "@/components/AllFriends";
 
 const friends = () => {
   const nav = {
@@ -33,12 +33,12 @@ const friends = () => {
           </div>
         </div>
         <div className="row-start-2 row-span-2 col-start-1 xl:row-start-1 xl:col-start-3">
-          <ActionCenterFriends />
+          {/* <ActionCenterFriends /> */}
         </div>
       </div>
       <div className="w-full">
         {/* Reminder card */}
-        <AllFriends />
+        {/* <AllFriends /> */}
       </div>
     </div>
   );
