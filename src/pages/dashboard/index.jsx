@@ -1,4 +1,4 @@
-import ActionCenterDashboard from "@/components/ActionDash";
+import ActionCenterDashboard from "@/components/actions/ActionDash";
 import { Collections } from "@/containers/Collections";
 import Nav from "@/components/Nav";
 import MostRecentTransactions from "@/components/RecentTransactions";
@@ -6,9 +6,13 @@ import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
 const dashboard = () => {
+  const nav = {
+    title: "dashboard",
+    isSubpage: false
+  }
   return (
-    <div className="py-10 px-4 sm:px-8 lg:px-16 h-screen lg:overflow-y-scroll">
-        <Nav />
+    <div className="py-10 px-4 sm:px-8 lg:px-16 h-screen lg:overflow-y-scroll hiddenScroll">
+        <Nav data={nav} />
         <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 gap-12">
           {/* Balance card */}
           <div className="bg-secondary dark:bg-gray-600 p-12 lg:p-14 rounded-3xl text-light">

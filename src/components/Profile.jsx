@@ -30,11 +30,11 @@ const Profile = () => {
 
   const slide = (
     <div className="lg:hidden fixed z-20 top-0 right-0 w-full flex justify-end h-screen backdrop-brightness-75">
-      <Slide direction="right" className="w-11/12 sm:w-8/12 lg:w-1/2">
-        <div className="w-full h-full bg-white sm:rounded-l-2xl p-4 relative">
+      <Slide direction="right" className="w-[90%] sm:w-[50%] md:w-[40%] lg:w-[30%]">
+        <div className="w-full h-full bg-white rounded-l-2xl p-4 relative">
           <button
             onClick={() => steShow(!show)}
-            className="absolute top-6 sm:top-10 right-[46%] sm:right-6 text-dark dark:text-dark"
+            className="absolute top-6 sm:top-10 left-6 sm:left-10 text-dark dark:text-dark"
           >
             <XMarkIcon className="h-8 w-8" />
           </button>
@@ -48,7 +48,7 @@ const Profile = () => {
             </div>
             <ul className="flex flex-col text-center gap-6">
               {[
-                ["Home", "/"],
+                ["Home", "/dashboard"],
                 ["Bills", "/bills"],
                 ["Friends", "/friends"],
                 ["Settings", "/settings"],
@@ -68,7 +68,7 @@ const Profile = () => {
               ))}
             </ul>
             <div className="w-full flex flex-col items-center">
-              <button className="w-1/2 hover:bg-dark dark:text-dark hover:text-white transition duration-150 ease-linear flex justify-center items-center gap-2 border-2 py-2 px-4 my-4 rounded-full">
+              <button className="w-[70%] bg-dark text-white transition duration-150 ease-linear flex justify-center items-center gap-2 border-2 py-4 px-8 my-4 rounded-full">
                 <ArrowLeftOnRectangleIcon className="w-6 h-6" />
                 Disconnect
               </button>
@@ -83,11 +83,10 @@ const Profile = () => {
     null;
   } else {
     return (
-      <aside className="flex lg:pt-10 justify-between md:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen lg:w-4/12 p-2 right-0">
+      <aside className="flex pt-8 xl:py-16 justify-between xl:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen lg:w-4/12 px-4 sm:px-8 lg:px-16 right-0">
         {show ? slide : null}
         {/* Menu title */}
         <div className="flex justify-between items-center lg:p-2">
-          <h3 className="hidden lg:block">My profile</h3>
           <button
             onClick={() => steShow(!show)}
             className="block lg:hidden text-slate-500 hover:text-slate-700"
@@ -98,7 +97,7 @@ const Profile = () => {
 
         {/* Profile image */}
         <div className="flex lg:flex-col lg:my-10 lg:text-center min-[280]:justify-center items-center max-[280]:gap-2 gap-4">
-          <div className="pl-2 lg:pl-0 w-1/3 lg:w-1/2 relative">
+          <div className="pl-2 lg:pl-0 w-[25%] lg:w-1/2 relative">
             <Image
               className="rounded-full"
               src={"https://picsum.photos/id/237/200/200"}
@@ -107,12 +106,12 @@ const Profile = () => {
               height={200}
               width={200}
             />
-            <button className="bg-white rounded-full h-8 w-8 hidden md:grid place-content-center absolute right-1 -bottom-1">
+            <button className="bg-white rounded-full h-8 w-8 hidden lg:grid place-content-center absolute right-1 -bottom-1">
               <QrCodeIcon className="h-6 w-6" />
             </button>
           </div>
           <div className="flex flex-col">
-            <span className="font-bold">Terra</span>
+            <span className="font-bold text-xl">Terra</span>
             <span
               className="text-slate-500 hover:cursor-copy"
               onClick={() => navigator.clipboard.writeText("Hola")}
@@ -125,7 +124,7 @@ const Profile = () => {
         {/* Collection section */}
         <section className="hidden lg:block p-0 xl:p-2">
           <div className="flex items-center justify-between">
-            <span className="font-bold">My collection</span>
+            <h3 className="font-bold">My bills</h3>
             <button>
               <PlusSmallIcon className="h-6 w-6" />
             </button>
