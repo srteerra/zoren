@@ -35,7 +35,7 @@ const Home = () => {
       <LoginNav />
 
       {/* Fisrt section */}
-      <div className="w-full lg:w-4/5 mt-4 mx-auto flex h-5/6 items-center">
+      <div className="w-full lg:w-4/5 mx-auto flex h-5/6 items-center">
         {/* left side */}
         <div className="w-full text-center md:text-start md:w-1/2 p-8 lg:p-0 overflow-hidden">
           <div className="">
