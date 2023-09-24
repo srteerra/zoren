@@ -7,7 +7,7 @@ export default function Layout({ children }) {
   const route = usePathname();
   const limits = ["/", "/how", "/about"];
   return (
-    <main className="flex flex-col-reverse lg:flex-row dark:bg-dark">
+    <main className="flex flex-col-reverse lg:flex-row">
       <Sidebar />
       <div
         className={
