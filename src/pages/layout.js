@@ -2,10 +2,23 @@
 import { usePathname } from "next/navigation";
 import { Profile } from "@/components/Profile";
 import { Sidebar } from "@/components/Sidebar";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useZoren } from "../hooks/useZoren";
 
 export default function Layout({ children }) {
+  const router = useRouter();
   const route = usePathname();
+
+  const { connected, publicKey } = useZoren();
   const limits = ["/", "/how", "/about"];
+
+  useEffect(() => {
+    if (!connected) {
+      router.push("/");
+    }
+  }, [connected]);
+
   return (
     <main className="flex flex-col-reverse lg:flex-row">
       <Sidebar />
