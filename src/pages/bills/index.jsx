@@ -5,7 +5,7 @@ import MostRecentBills from "@/components/RecentBills";
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
-const bills = () => {
+const Bills = () => {
   const nav = {
     title: "bills",
     isSubpage: false,
@@ -52,4 +52,4 @@ const bills = () => {
   );
 };
 
-export default bills;
+export default Bills;

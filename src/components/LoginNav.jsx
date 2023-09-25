@@ -5,7 +5,12 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Slide } from "react-awesome-reveal";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import Link from "next/link";
+import { useZoren } from "../hooks/useZoren";
+import { truncate } from "../utils/string";
+
+require('@solana/wallet-adapter-react-ui/styles.css');
 
 // Images
 import logo from "../../public/logos/horizontal-color.png";
@@ -15,6 +20,11 @@ import RegionChange from "./Region";
 const LoginNav = () => {
   const [show, steShow] = useState(false);
   const path = usePathname();
+
+  const {
+    connected,
+    publicKey,
+  } = useZoren();
 
   const active = "font-bold text-primary dark:text-secondary";
 
@@ -55,7 +65,7 @@ const LoginNav = () => {
                   </Link>
                 </li>
               ))}
-              <button className="bg-primary my-6 text-white hover:bg-secondary transition duration-150 ease-linear p-2 w-40 rounded-full">
+              <button className="bg-primary my-6 text-white hover:bg-secondary transition duration-150 ease-linear px-4 py-3 w-40 rounded-full">
                 Connect Wallet
               </button>
             </ul>
@@ -74,8 +84,7 @@ const LoginNav = () => {
             priority={true}
             src={logo}
             alt="logo"
-            width={90}
-            height={90}
+            width={100}
             className="w-auto"
           />
         </div>
@@ -84,8 +93,7 @@ const LoginNav = () => {
             priority={true}
             src={logo_l}
             alt="logo"
-            width={90}
-            height={90}
+            width={100}
             className="w-auto"
           />
         </div>
@@ -110,9 +118,14 @@ const LoginNav = () => {
             </li>
           ))}
           <DarkMode />
-          <button className="bg-primary text-white hover:bg-secondary transition duration-150 ease-linear p-2 w-40 rounded-full">
+          <WalletMultiButton className="flex items-center wallet-btn">
+            <span className="text-sm">
+              {connected ? truncate(publicKey.toString()) : "Connect Wallet"}
+            </span>
+          </WalletMultiButton>
+          {/* <button className="bg-primary text-white hover:opacity-70 transition duration-150 ease-in px-10 py-3 rounded-full">
             Connect Wallet
-          </button>
+          </button> */}
         </ul>
 
         <button onClick={() => steShow(!show)} className="block lg:hidden">

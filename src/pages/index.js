@@ -12,17 +12,28 @@ import {
   handleModifyData,
   validatePaid,
 } from "@/hooks/useGetCollection";
+import { useZoren } from "../hooks/useZoren";
 
 // Images
 import ticket from "../../public/images/ticket.png";
 import friends from "../../public/images/friends.png";
 import Image from "next/image";
 import { Fade, Flip, Zoom } from "react-awesome-reveal";
+import { useRouter } from "next/router";
 
 const Home = () => {
+  const router = useRouter();
   const [show, setShow] = useState("friends");
 
-  const words = ["family", "mates", "friends"];
+  const words = ["family", "friends", "partners", "mates", "couple"];
+
+  const { connected, publicKey } = useZoren();
+
+  useEffect(() => {
+    if (connected) {
+      router.push("/dashboard");
+    }
+  }, [connected]);
 
   useEffect(() => {
     const changeWords = () => {
@@ -82,6 +93,26 @@ const Home = () => {
                 >
                   {show}
                 </Flip>
+                <Flip
+                  direction="horizontal"
+                  className={
+                    show === "partners"
+                      ? "text-primary dark:text-secondary font-bold inline-block"
+                      : "hidden"
+                  }
+                >
+                  {show}
+                </Flip>
+                <Flip
+                  direction="horizontal"
+                  className={
+                    show === "couple"
+                      ? "text-primary dark:text-secondary font-bold inline-block"
+                      : "hidden"
+                  }
+                >
+                  {show}
+                </Flip>
               </h1>
             </div>
 
@@ -97,7 +128,7 @@ const Home = () => {
             </p>
           </div>
           <div className="w-full flex justify-center md:justify-start items-center gap-2 my-6">
-            <button className="bg-secondary focus:bg-secondary hover:bg-primary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
+            <button className="bg-primary focus:bg-primary hover:bg-secondary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
               Ty it now
             </button>
             <Link href={"/"}>Learn more</Link>
@@ -173,7 +204,7 @@ const Home = () => {
       </div>
 
       <div className="bg-primary flex flex-col justify-between overflow-hidden h-screen w-full text-white">
-        <div className="h-2/6 flex text-center flex-col w-full sm:w-1/2 px-10 py-20 lg:w-1/3 mx-auto">
+        <div className="h-2/6 flex text-center flex-col w-full sm:w-1/2 px-10 pt-20 lg:w-1/3 mx-auto">
           <h1 className="lg:text-5xl">For whatever the occasion</h1>
           <p className="py-2">You can use Zoren form your phone or PC</p>
         </div>

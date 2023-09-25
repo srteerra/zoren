@@ -15,3 +15,16 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.wallet-btn {
+  background-color: #535f8b !important;
+  color: white !important;
+  border-radius: 25px !important;
+  padding: 0 35px !important;
+  transition: ease-out 0.2s !important;
+}
+
+.wallet-btn:hover {
+  background-color: #535f8bd3 !important;
+  color: white !important;
+}
