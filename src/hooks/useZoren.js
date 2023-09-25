@@ -22,6 +22,7 @@ export const useZoren = () => {
   const [userName, setUserName] = useState("Unnamed");
   const [userAddress, setUserAddress] = useState(undefined);
   const [userContacts, setUserContacts] = useState([]);
+  const [userBalance, setUserBalance] = useState(0);
   const [amount, setAmount] = useState(0);
   const [receiver, setReceiver] = useState("");
   const [transactionPurpose, setTransactionPurpose] = useState("");
@@ -44,6 +45,11 @@ export const useZoren = () => {
         userContacts: [],
       };
 
+      connection.getBalance(publicKey).then((value) => {
+        setUserBalance(value / LAMPORTS_PER_SOL);
+        console.log(value);
+      });
+
       client.createIfNotExists(userDoc).then((result) => {
         setUserAddress(result.userAddress);
         setUserName(result.userName);
@@ -58,8 +64,7 @@ export const useZoren = () => {
     }`;
 
     const collectData = await client.fetch(query);
-    setAvatar(await collectData[1].imageUrl);
-    console.log(avatar);
+    setAvatar(await collectData[0].imageUrl);
   };
 
   useEffect(() => {
@@ -162,5 +167,6 @@ export const useZoren = () => {
     setChangeWallet,
     userContacts,
     setUserContacts,
+    userBalance,
   };
 };

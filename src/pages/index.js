@@ -45,6 +45,13 @@ const Home = () => {
 
   return (
     <div className="w-full h-screen">
+      <div className="bg-black text-center text-white py-3">
+        <p>
+          This application is working on{" "}
+          <span className="font-bold">Devnet</span> for now, please make sure
+          you're connected
+        </p>
+      </div>
       <LoginNav />
 
       {/* Fisrt section */}

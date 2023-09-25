@@ -4,8 +4,10 @@ import Nav from "@/components/Nav";
 import MostRecentTransactions from "@/components/RecentTransactions";
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { useZoren } from "../../hooks/useZoren";
 
 const Dashboard = () => {
+  const { connected, userName, userBalance } = useZoren();
   const nav = {
     title: "dashboard",
     isSubpage: false,
@@ -18,7 +20,13 @@ const Dashboard = () => {
         <div className="bg-secondary dark:bg-gray-600 p-12 lg:p-14 rounded-3xl text-light">
           <p className="2xl:text-lg lg:text-md text-md">Your balance</p>
           <p className="2xl:text-5xl lg:text-4xl text-4xl font-extrabold py-2">
-            34 SOL
+            {(userBalance) < 100 ? (
+              userBalance.toString().slice(0, 4)
+            ) : (userBalance) > 1000 ? (
+              (userBalance).toString().slice(0, 7)
+            ) : (
+              (userBalance).toString().slice(0, 6)
+            )} SOL
           </p>
           <p className="2xl:text-lg lg:text-md text-lg">
             <span>=</span> $642.63 USD
@@ -28,7 +36,7 @@ const Dashboard = () => {
         <div className="bg-black hidden md:block dark:bg-dark p-14 rounded-3xl text-light">
           <div>
             <p className="2xl:text-4xl lg:text-3xl md:text-3xl">
-              Hi, <span className="font-bold">Terra</span>
+              Hi, <span className="font-bold">{userName}</span>
             </p>
             <p className="2xl:text-xl lg:text-md text-md pt-2 font-light">
               Welcome to your dashboard

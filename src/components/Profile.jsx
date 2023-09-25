@@ -141,7 +141,8 @@ const Profile = () => {
           </div>
           <div className="flex flex-col">
             <span className="font-bold text-xl">{userName}</span>
-            <span
+            {userAddress ? (
+              <span
               className="text-slate-500 hover:opacity-70 transition ease-in flex gap-2 flex-row-reverse items-center hover:cursor-pointer"
               onClick={copyText}
             >
@@ -150,6 +151,9 @@ const Profile = () => {
                 ? truncate(userAddress.toString())
                 : "Loading wallet..."}
             </span>
+            ) : (
+              <span className="text-slate-500">Loading wallet...</span>
+            )}
           </div>
         </div>
 
