@@ -9,6 +9,8 @@ import {
   handleGetCollections,
   handleGetCollectionsOpen,
   handleGetCollectionsPaid,
+  handleModifyData,
+  validatePaid,
 } from "@/hooks/useGetCollection";
 
 // Images
@@ -95,21 +97,7 @@ const Home = () => {
             </p>
           </div>
           <div className="w-full flex justify-center md:justify-start items-center gap-2 my-6">
-            <button
-              onClick={async () =>
-                console.log(
-                  await handleAddData({
-                    wallet: "PtRddzPsiDtaYJEuWdZO",
-                    title: "pizza",
-                    amount: 600,
-                    status: "open",
-                    people: 2,
-                    hasPaid: 0,
-                  })
-                )
-              }
-              className="bg-secondary focus:bg-secondary hover:bg-primary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold"
-            >
+            <button className="bg-secondary focus:bg-secondary hover:bg-primary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
               Ty it now
             </button>
             <Link href={"/"}>Learn more</Link>
