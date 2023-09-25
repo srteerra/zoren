@@ -4,6 +4,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ViewfinderCircleIcon } from "@heroicons/react/24/solid";
 import { Footer } from "@/components/Footer";
+import {
+  handleAddData,
+  handleGetCollections,
+  handleGetCollectionsOpen,
+  handleGetCollectionsPaid,
+} from "@/hooks/useGetCollection";
 
 // Images
 import ticket from "../../public/images/ticket.png";
@@ -89,7 +95,21 @@ const Home = () => {
             </p>
           </div>
           <div className="w-full flex justify-center md:justify-start items-center gap-2 my-6">
-            <button className="bg-secondary focus:bg-secondary hover:bg-primary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
+            <button
+              onClick={async () =>
+                console.log(
+                  await handleAddData({
+                    wallet: "PtRddzPsiDtaYJEuWdZO",
+                    title: "pizza",
+                    amount: 600,
+                    status: "open",
+                    people: 2,
+                    hasPaid: 0,
+                  })
+                )
+              }
+              className="bg-secondary focus:bg-secondary hover:bg-primary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold"
+            >
               Ty it now
             </button>
             <Link href={"/"}>Learn more</Link>
@@ -171,7 +191,7 @@ const Home = () => {
         </div>
         <div className="h-3/6 flex items-end justify-center bg-[url('../../public/images/banner.png')] bg-no-repeat bg-cover lg:bg-contain bg-center"></div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
