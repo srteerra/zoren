@@ -11,18 +11,24 @@ import {
   Transaction,
 } from "@solana/web3.js";
 import BigNumber from "bignumber.js";
+import { client } from "../../lib/sanityClient";
+import imageUrlBuilder from "@sanity/image-url";
+
+// Get a pre-configured url-builder from your sanity client
+const builder = imageUrlBuilder(client);
 
 export const useZoren = () => {
-  const [avatar, setAvatar] = useState(
-    "https://certchain.infura-ipfs.io/ipfs/Qmf5tiCy77SqzAfAfXCQDuR4NPktQ8AYzkEeN9NrsnYSD6"
-  );
+  const [avatar, setAvatar] = useState("");
   const [userName, setUserName] = useState("Unnamed");
-  const [userAddress, setUserAddress] = useState("");
+  const [userAddress, setUserAddress] = useState(undefined);
+  const [userContacts, setUserContacts] = useState([]);
   const [amount, setAmount] = useState(0);
   const [receiver, setReceiver] = useState("");
   const [transactionPurpose, setTransactionPurpose] = useState("");
   const [newTransactionModalOpen, setNewTransactionModalOpen] = useState(false);
   const [userTransactions, setUserTransactions] = useState([]);
+
+  const [changeWallet, setChangeWallet] = useState(false);
 
   const { connected, publicKey, sendTransaction } = useWallet();
   const { connection } = useConnection();
@@ -30,9 +36,37 @@ export const useZoren = () => {
   // Setting the user address if the wallet is connected
   useEffect(() => {
     if (connected) {
-      setUserAddress(publicKey.toString());
+      const userDoc = {
+        _type: "users",
+        _id: publicKey.toString(),
+        userName: "Unnamed",
+        userAddress: publicKey.toString(),
+        userContacts: [],
+      };
+
+      client.createIfNotExists(userDoc).then((result) => {
+        setUserAddress(result.userAddress);
+        setUserName(result.userName);
+        setUserContacts(result.userContacts);
+      });
     }
   }, [connected]);
+
+  const fetchData = async () => {
+    const query = `*[_type == "users" && userAddress == "${userAddress}"] {
+      "imageUrl": userAvatar.asset->url
+    }`;
+
+    const collectData = await client.fetch(query);
+    setAvatar(await collectData[1].imageUrl);
+    console.log(avatar);
+  };
+
+  useEffect(() => {
+    if (userAddress != undefined) {
+      fetchData();
+    }
+  }, [userAddress]);
 
   const makeTransaction = async (fromWallet, toWallet, amount, reference) => {
     console.log(fromWallet);
@@ -124,5 +158,9 @@ export const useZoren = () => {
     newTransactionModalOpen,
     setNewTransactionModalOpen,
     userTransactions,
+    changeWallet,
+    setChangeWallet,
+    userContacts,
+    setUserContacts,
   };
 };
