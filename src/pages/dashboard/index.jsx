@@ -1,3 +1,4 @@
+"use client";
 import ActionCenterDashboard from "@/components/actions/ActionDash";
 import { Collections } from "@/containers/Collections";
 import Nav from "@/components/Nav";
@@ -5,6 +6,7 @@ import MostRecentTransactions from "@/components/RecentTransactions";
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useZoren } from "../../hooks/useZoren";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
   const { connected, userName, userBalance } = useZoren();
@@ -12,6 +14,7 @@ const Dashboard = () => {
     title: "dashboard",
     isSubpage: false,
   };
+
   return (
     <div className="py-10 px-4 sm:px-8 lg:px-16 h-screen lg:overflow-y-scroll hiddenScroll">
       <Nav data={nav} />

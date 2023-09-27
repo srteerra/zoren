@@ -22,9 +22,11 @@ import toast, { ToastBar, Toaster } from "react-hot-toast";
 
 // Images
 import logo from "../../public/logos/horizontal-dark.png";
+import EditProfleModal from "./EditProfileModal";
 
 const Profile = () => {
-  const { connected, userName, userAddress, userContacts, avatar } = useZoren();
+  const { connected, userName, userAddress, avatar } = useZoren();
+  const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const [show, steShow] = useState(false);
   const route = usePathname();
   const active = "text-dark font-bold gap-6";
@@ -94,6 +96,12 @@ const Profile = () => {
     return (
       <aside className="flex pt-8 xl:py-16 justify-between xl:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen lg:w-4/12 px-4 sm:px-8 lg:px-16 right-0">
         {show ? slide : null}
+        <EditProfleModal
+          modalOpen={editProfileModalOpen}
+          setModalOpen={setEditProfileModalOpen}
+          userAddress={userAddress}
+          avatar={avatar}
+        />
         <Toaster>
           {(t) => (
             <ToastBar
@@ -135,7 +143,7 @@ const Profile = () => {
                 backgroundImage: `url("${avatar}")`,
               }}
             ></div>
-            <button className="dark:bg-white bg-black hover:bg-gray-800 dark:hover:bg-gray-400 rounded-full h-10 w-10 hidden lg:grid place-content-center absolute right-[-5px] bottom-[-5px] transition ease-out">
+            <button onClick={() => setEditProfileModalOpen(true)} className="dark:bg-white bg-black hover:bg-gray-800 dark:hover:bg-gray-400 rounded-full h-10 w-10 hidden lg:grid place-content-center absolute right-[-5px] bottom-[-5px] transition ease-out">
               <PencilIcon className="h-4 w-4 text-white dark:text-dark" />
             </button>
           </div>

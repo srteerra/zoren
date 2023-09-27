@@ -19,7 +19,7 @@ const builder = imageUrlBuilder(client);
 
 export const useZoren = () => {
   const [avatar, setAvatar] = useState("");
-  const [userName, setUserName] = useState("Unnamed");
+  const [userName, setUserName] = useState("");
   const [userAddress, setUserAddress] = useState(undefined);
   const [userContacts, setUserContacts] = useState([]);
   const [userBalance, setUserBalance] = useState(0);
@@ -60,11 +60,13 @@ export const useZoren = () => {
 
   const fetchData = async () => {
     const query = `*[_type == "users" && userAddress == "${userAddress}"] {
+      userName,
       "imageUrl": userAvatar.asset->url
     }`;
 
     const collectData = await client.fetch(query);
     setAvatar(await collectData[0].imageUrl);
+    setUserName(await collectData[0].userName);
   };
 
   useEffect(() => {
@@ -102,6 +104,48 @@ export const useZoren = () => {
     transaction.add(transferInstruction);
 
     return transaction;
+  };
+
+  const updateAcc = (newN, newA) => {
+    if (newA) {
+      client.assets
+        .upload("image", newA)
+        .then(async (imageAsset) => {
+          return client
+            .patch(userAddress)
+            .set({
+              userAvatar: {
+                _type: "image",
+                asset: {
+                  _type: "reference",
+                  _ref: imageAsset._id,
+                },
+              },
+            })
+            .commit()
+            .then((res) => {
+              console.log(res);
+              setAvatar(builder.image(res.userAvatar).url());
+              fetchData();
+            });
+        })
+        .then(() => {
+          console.log("Done!");
+        });
+    }
+    if (newN) {
+      client
+        .patch(userAddress)
+        .set({ userName: newN })
+        .commit()
+        .then((updatedAcc) => {
+          console.log("Hurray, the acc is updated! New document:");
+          console.log(updatedAcc);
+          console.log(updatedAcc.userName);
+          setUserName(updatedAcc.userName);
+          fetchData();
+        });
+    }
   };
 
   const doTransaction = async ({ amount, receiver, transactionPurpose }) => {
@@ -142,7 +186,6 @@ export const useZoren = () => {
       identifier: "-",
     };
     setNewTransactionModalOpen(false);
-    setTransactions([newTransaction, ...transactions]);
   };
 
   return {
@@ -154,6 +197,7 @@ export const useZoren = () => {
     avatar,
     setAvatar,
     doTransaction,
+    updateAcc,
     amount,
     setAmount,
     receiver,
