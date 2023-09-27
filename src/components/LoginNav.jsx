@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useZoren } from "../hooks/useZoren";
 import { truncate } from "../utils/string";
 
-require('@solana/wallet-adapter-react-ui/styles.css');
+require("@solana/wallet-adapter-react-ui/styles.css");
 
 // Images
 import logo from "../../public/logos/horizontal-color.png";
@@ -21,10 +21,7 @@ const LoginNav = () => {
   const [show, steShow] = useState(false);
   const path = usePathname();
 
-  const {
-    connected,
-    publicKey,
-  } = useZoren();
+  const { connected } = useZoren();
 
   const active = "font-bold text-primary dark:text-secondary";
 
@@ -119,9 +116,7 @@ const LoginNav = () => {
           ))}
           <DarkMode />
           <WalletMultiButton className="flex items-center wallet-btn">
-            <span className="text-sm">
-              {connected ? truncate(publicKey.toString()) : "Connect Wallet"}
-            </span>
+            <span className="text-sm">Connect Wallet</span>
           </WalletMultiButton>
           {/* <button className="bg-primary text-white hover:opacity-70 transition duration-150 ease-in px-10 py-3 rounded-full">
             Connect Wallet

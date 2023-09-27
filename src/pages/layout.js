@@ -11,7 +11,7 @@ export default function Layout({ children }) {
   const router = useRouter();
   const route = usePathname();
 
-  const { connected, publicKey } = useZoren();
+  const { connected } = useZoren();
   const limits = ["/", "/how", "/about"];
 
   useEffect(() => {
