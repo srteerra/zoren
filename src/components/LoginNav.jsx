@@ -116,11 +116,7 @@ const LoginNav = () => {
           ))}
           <DarkMode />
           <WalletMultiButton className="flex items-center wallet-btn">
-            {connected ? (
-              <span className="text-sm">{truncate(publicKey.toString())}</span>
-            ) : (
-              <span className="text-sm">Connect Wallet</span>
-            )}
+            <span className="text-sm">Connect Wallet</span>
           </WalletMultiButton>
           {/* <button className="bg-primary text-white hover:opacity-70 transition duration-150 ease-in px-10 py-3 rounded-full">
             Connect Wallet
