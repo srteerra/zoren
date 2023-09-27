@@ -1,3 +1,18 @@
 {
-    "hello": "hola"
+    "Add1": "Esta aplicación está funcionando en",
+    "Add2": "Devnet",
+    "Add3": "por ahora, asegúrate de estar conectado",
+    "WantSeparateBill": "¿Quieres separar la cuenta?",
+    "GenerateQR": "Genera códigos QR para",
+    "SplitBill": "dividir los pagos de la cuenta",
+    "BetweenYFriends": "entre tus amigos",
+    "And": "y",
+    "TryIt": " Pruébalo ahora",
+    "LearnMore": "Más información",
+    "PleaseCheck": "Por favor, consulta nuestra",
+    "PrivacyPolicy": "Política de privacidad",
+    "TermsConsitions": "y Términos y condiciones.",
+    "ThisIsProject": "Esto es un proyecto para el Hackatón Hyperdrive.",
+    "WhatherOcassion": "Para cualquier ocasión",
+    "CanUseZoren": "Puedes usar Zoren desde tu teléfono o PC"
 }

@@ -9,6 +9,8 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import Link from "next/link";
 import { useZoren } from "../hooks/useZoren";
 import { truncate } from "../utils/string";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 
@@ -18,6 +20,7 @@ import logo_l from "../../public/logos/horizontal-light.png";
 import RegionChange from "./Region";
 
 const LoginNav = () => {
+  const { t: translate } = useTranslation("loginav");
   const [show, steShow] = useState(false);
   const path = usePathname();
 
@@ -63,7 +66,7 @@ const LoginNav = () => {
                 </li>
               ))}
               <button className="bg-primary my-6 text-white hover:bg-secondary transition duration-150 ease-linear px-4 py-3 w-40 rounded-full">
-                Connect Wallet
+                {translate("ConnectWallet")}
               </button>
             </ul>
           </div>
@@ -116,7 +119,7 @@ const LoginNav = () => {
           ))}
           <DarkMode />
           <WalletMultiButton className="flex items-center wallet-btn">
-            <span className="text-sm">Connect Wallet</span>
+            <span className="text-sm">{translate("ConnectWallet")}</span>
           </WalletMultiButton>
           {/* <button className="bg-primary text-white hover:opacity-70 transition duration-150 ease-in px-10 py-3 rounded-full">
             Connect Wallet
@@ -130,5 +133,13 @@ const LoginNav = () => {
     </nav>
   );
 };
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["loginav"])),
+    },
+  };
+}
 
 export { LoginNav };
