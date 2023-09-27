@@ -29,8 +29,6 @@ export const useZoren = () => {
   const [newTransactionModalOpen, setNewTransactionModalOpen] = useState(false);
   const [userTransactions, setUserTransactions] = useState([]);
 
-  const [changeWallet, setChangeWallet] = useState(false);
-
   const { connected, publicKey, sendTransaction } = useWallet();
   const { connection } = useConnection();
 
@@ -207,8 +205,6 @@ export const useZoren = () => {
     newTransactionModalOpen,
     setNewTransactionModalOpen,
     userTransactions,
-    changeWallet,
-    setChangeWallet,
     userContacts,
     setUserContacts,
     userBalance,
