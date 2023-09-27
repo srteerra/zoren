@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/exhaustive-deps */
-"use client";
 import { LoginNav } from "@/components/LoginNav";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -25,9 +24,9 @@ import { useRouter } from "next/router";
 
 const Home = () => {
   const router = useRouter();
-  const [show, setShow] = useState("friends");
+  // const [show, setShow] = useState("friends");
 
-  const words = ["family", "friends", "partners", "mates", "couple"];
+  // const words = ["family", "friends", "partners", "mates", "couple"];
 
   const { connected } = useZoren();
 
@@ -37,19 +36,19 @@ const Home = () => {
     }
   }, [connected]);
 
-  useEffect(() => {
-    const changeWords = () => {
-      let i = 0;
-      setInterval(() => {
-        setShow(words[i]);
-        if (i === 2) {
-          i = 0;
-        } else i++;
-      }, 4000);
-    };
+  // useEffect(() => {
+  //   const changeWords = () => {
+  //     let i = 0;
+  //     setInterval(() => {
+  //       setShow(words[i]);
+  //       if (i === 2) {
+  //         i = 0;
+  //       } else i++;
+  //     }, 4000);
+  //   };
 
-    changeWords();
-  }, []);
+  //   changeWords();
+  // }, []);
 
   return (
     <div className="w-full h-screen">
@@ -71,57 +70,7 @@ const Home = () => {
             <div>
               <h1 className="text-4xl lg:text-5xl font-light">
                 Generate QR codes to <br /> split bill payments <br /> between
-                your{" "}
-                <Flip
-                  direction="horizontal"
-                  className={
-                    show === "friends"
-                      ? "text-primary inline-block dark:text-secondary font-bold"
-                      : "hidden"
-                  }
-                >
-                  {show}
-                </Flip>
-                <Flip
-                  direction="horizontal"
-                  className={
-                    show === "mates"
-                      ? "text-primary dark:text-secondary font-bold inline-block"
-                      : "hidden"
-                  }
-                >
-                  {show}
-                </Flip>
-                <Flip
-                  direction="horizontal"
-                  className={
-                    show === "family"
-                      ? "text-primary dark:text-secondary font-bold inline-block"
-                      : "hidden"
-                  }
-                >
-                  {show}
-                </Flip>
-                <Flip
-                  direction="horizontal"
-                  className={
-                    show === "partners"
-                      ? "text-primary dark:text-secondary font-bold inline-block"
-                      : "hidden"
-                  }
-                >
-                  {show}
-                </Flip>
-                <Flip
-                  direction="horizontal"
-                  className={
-                    show === "couple"
-                      ? "text-primary dark:text-secondary font-bold inline-block"
-                      : "hidden"
-                  }
-                >
-                  {show}
-                </Flip>
+                your friends
               </h1>
             </div>
 
