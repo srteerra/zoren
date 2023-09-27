@@ -9,6 +9,7 @@ const friends = () => {
   const nav = {
     title: "friends",
     isSubpage: false,
+    id: 3
   };
   return (
     <div className="py-10 px-4 sm:px-8 lg:px-16 h-screen lg:overflow-y-scroll hiddenScroll">

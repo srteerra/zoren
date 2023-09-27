@@ -9,6 +9,7 @@ const Bills = () => {
   const nav = {
     title: "bills",
     isSubpage: false,
+    id: 2
   }
   return (
     <div className="py-0 xl:py-10 px-4 sm:px-8 lg:px-16 h-screen lg:overflow-y-scroll hiddenScroll">

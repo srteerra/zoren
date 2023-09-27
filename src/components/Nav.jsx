@@ -14,7 +14,7 @@ function Nav({ data }) {
         </button>
         {data.isSubpage ? (
           <h2 className="capitalize">
-            <Link href={`/${data.title}`} className="opacity-60 capitalize">
+            <Link href={`/${data.title}`} ref={data.id} className="opacity-60 capitalize">
               {data.title} /{" "}
             </Link>
             {router.query.name}
