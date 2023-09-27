@@ -29,13 +29,13 @@ const Home = () => {
 
   const words = ["family", "friends", "partners", "mates", "couple"];
 
-  const { connected, publicKey } = useZoren();
+  const { connected } = useZoren();
 
-  // useEffect(() => {
-  //   if (connected) {
-  //     router.push("/dashboard");
-  //   }
-  // }, [connected]);
+  useEffect(() => {
+    if (connected) {
+      router.push("/dashboard");
+    }
+  }, [connected]);
 
   useEffect(() => {
     const changeWords = () => {
