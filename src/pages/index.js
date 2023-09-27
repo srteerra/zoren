@@ -31,11 +31,11 @@ const Home = () => {
 
   const { connected, publicKey } = useZoren();
 
-  useEffect(() => {
-    if (connected) {
-      router.push("/dashboard");
-    }
-  }, [connected]);
+  // useEffect(() => {
+  //   if (connected) {
+  //     router.push("/dashboard");
+  //   }
+  // }, [connected]);
 
   useEffect(() => {
     const changeWords = () => {
