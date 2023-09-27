@@ -21,7 +21,7 @@ const LoginNav = () => {
   const [show, steShow] = useState(false);
   const path = usePathname();
 
-  const { connected, publicKey } = useZoren();
+  const { connected } = useZoren();
 
   const active = "font-bold text-primary dark:text-secondary";
 
