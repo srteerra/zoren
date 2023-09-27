@@ -24,6 +24,7 @@ const TransactionQRModal = ({
   userName,
   avatar,
   setQrCode,
+  publicKey,
 }) => {
   const qrRef = useRef();
   const [handleClick, setHandleClick] = useState(false);
@@ -36,12 +37,14 @@ const TransactionQRModal = ({
   const toastId = useRef(null);
 
   const trans = () =>
-    (toastId.current = toast.loading("Waiting for payment...", {
+    (toastId.current = toast.loading("Waiting for payments...", {
+      position: "bottom-right",
       closeOnClick: false,
       closeButton: true,
     }));
   const update = () =>
     toast.update(toastId.current, {
+      position: "bottom-right",
       render: "Completed",
       type: toast.TYPE.SUCCESS,
       isLoading: false,
@@ -50,7 +53,8 @@ const TransactionQRModal = ({
     });
   const notify = () =>
     toast.update(toastId.current, {
-      render: "Transaction request cancelled",
+      position: "bottom-right",
+      render: "Transaction Request Cancelled",
       type: toast.TYPE.WARNING,
       isLoading: false,
       closeOnClick: true,
@@ -72,11 +76,11 @@ const TransactionQRModal = ({
   };
 
   useEffect(() => {
-    if (userAddress != "") {
+    if (userAddress) {
       const recipient = new PublicKey(userAddress);
       const amount = new BigNumber(amountInput);
       const reference = Keypair.generate().publicKey;
-      const label = "Dashy Payment";
+      const label = "Zoren Payment";
       const concept = conceptInput;
       const urlParams = {
         recipient,
@@ -162,9 +166,6 @@ const TransactionQRModal = ({
   return (
     <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
       <div>
-        <div className="flex flex-col items-center justify-center space-y-1">
-          <div ref={qrRef} />
-        </div>
         <div className="flex flex-col items-center justify-center space-y-1 p-4">
           {stepModal === 1 ? (
             <div>
@@ -177,7 +178,7 @@ const TransactionQRModal = ({
                   height={110}
                   width={110}
                 />
-                <p className="text-dark dark:text-white mb-2 xl:text-2xl font-bold">
+                <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
                   Set the contributors
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
@@ -186,30 +187,30 @@ const TransactionQRModal = ({
                 </p>
               </div>
               <div className="my-12 flex gap-3 justify-center">
-                <button className="bg-gray-500 w-4 h-4 rounded-full"></button>
+                <button className="bg-gray-500 w-3 h-3 rounded-full"></button>
                 <button
                   onClick={() => setStepModal(2)}
-                  className="bg-gray-300 w-4 h-4 rounded-full"
+                  className="bg-gray-300 w-3 h-3 rounded-full"
                 ></button>
                 <button
                   onClick={() => setStepModal(3)}
-                  className="bg-gray-300 w-4 h-4 rounded-full"
+                  className="bg-gray-300 w-3 h-3 rounded-full"
                 ></button>
               </div>
               <div className="flex flex-col w-full gap-4">
                 <button
                   onClick={() => setStepModal(2)}
                   disabled={handleClick}
-                  className="w-full rounded-lg bg-secondary py-3 px-8 hover:bg-opacity-70"
+                  className="w-full rounded-lg bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
                 >
                   <span className="font-bold text-white">Next</span>
                 </button>
 
                 <button
                   onClick={() => setModalOpen(false)}
-                  className="w-full rounded-lg border-2 border-danger py-3 hover:bg-opacity-70"
+                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-danger">Close</span>
+                  <span className="font-medium text-red-300">Close</span>
                 </button>
               </div>
             </div>
@@ -224,45 +225,45 @@ const TransactionQRModal = ({
                   height={110}
                   width={110}
                 />
-                <p className="text-dark dark:text-white mb-2 xl:text-2xl font-bold">
+                <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
                   Set an amount
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
-                  Zoren will calculate the amount to pay per
-                  number of contributors
+                  Zoren will calculate the amount to pay per number of
+                  contributors
                 </p>
               </div>
               <div className="my-12 flex gap-3 justify-center">
                 <button
                   onClick={() => setStepModal(1)}
-                  className="bg-gray-300 w-4 h-4 rounded-full"
+                  className="bg-gray-300 w-3 h-3 rounded-full"
                 ></button>
-                <button className="bg-gray-500 w-4 h-4 rounded-full"></button>
+                <button className="bg-gray-500 w-3 h-3 rounded-full"></button>
                 <button
                   onClick={() => setStepModal(3)}
-                  className="bg-gray-300 w-4 h-4 rounded-full"
+                  className="bg-gray-300 w-3 h-3 rounded-full"
                 ></button>
               </div>
               <div className="flex flex-col w-full gap-4">
                 <button
                   onClick={() => setStepModal(3)}
                   disabled={handleClick}
-                  className="w-full rounded-lg bg-secondary py-3 px-8 hover:bg-opacity-70"
+                  className="w-full rounded-lg bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
                 >
                   <span className="font-bold text-white">Next</span>
                 </button>
 
                 <button
                   onClick={() => setModalOpen(false)}
-                  className="w-full rounded-lg border-2 border-danger py-3 hover:bg-opacity-70"
+                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-danger">Close</span>
+                  <span className="font-medium text-red-300">Close</span>
                 </button>
               </div>
             </div>
           ) : stepModal === 3 ? (
             <div>
-              <div className="flex flex-col mx-auto text-center w-2/3 px-12">
+              <div className="flex flex-col mx-auto text-center w-[75%] px-12">
                 <Image
                   className="rounded-full mx-auto my-8"
                   src={"https://picsum.photos/id/237/200/200"}
@@ -271,7 +272,7 @@ const TransactionQRModal = ({
                   height={110}
                   width={110}
                 />
-                <p className="text-dark dark:text-white mb-2 xl:text-2xl font-bold">
+                <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
                   Add a concept
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
@@ -281,56 +282,52 @@ const TransactionQRModal = ({
               <div className="my-12 flex gap-3 justify-center">
                 <button
                   onClick={() => setStepModal(1)}
-                  className="bg-gray-300 w-4 h-4 rounded-full"
+                  className="bg-gray-300 w-3 h-3 rounded-full"
                 ></button>
                 <button
                   onClick={() => setStepModal(2)}
-                  className="bg-gray-300 w-4 h-4 rounded-full"
+                  className="bg-gray-300 w-3 h-3 rounded-full"
                 ></button>
-                <button className="bg-gray-500 w-4 h-4 rounded-full"></button>
+                <button className="bg-gray-500 w-3 h-3 rounded-full"></button>
               </div>
               <div className="flex flex-col w-full gap-4">
                 <button
-                  onClick={() => setStepModal(0)}
+                  onClick={() => setStepModal(4)}
                   disabled={handleClick}
-                  className="w-full rounded-lg bg-secondary py-3 px-8 hover:bg-opacity-70"
+                  className="w-full rounded-lg bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
                 >
                   <span className="font-bold text-white">Ok, got it</span>
                 </button>
 
                 <button
                   onClick={() => setModalOpen(false)}
-                  className="w-full rounded-lg border-2 border-danger py-3 hover:bg-opacity-70"
+                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-danger">Close</span>
+                  <span className="font-medium text-red-300">Close</span>
                 </button>
               </div>
             </div>
-          ) : (
+          ) : stepModal === 4 ? (
             <>
-              <div className="grid grid-cols-2">
-                <div className="flex items-center">
-                  <Image
-                    className="w-14 rounded-full"
-                    src={avatar}
-                    alt="Profile"
-                    priority={true}
-                    height={200}
-                    width={200}
-                  />
-                </div>
+              <div className="flex gap-4">
+                <div
+                  className="rounded-full w-[50px] h-[50px] bg-no-repeat bg-center bg-cover"
+                  style={{
+                    backgroundImage: `url("${avatar}")`,
+                  }}
+                ></div>
                 <div className="my-auto">
-                  <p className="text-lg font-medium text-gray-800">
-                    {userName}
+                  <p className="text-lg font-bold text-gray-800 dark:text-white">
+                    @{userName}
                   </p>
-                  <p className="text-sm font-light text-gray-600">
+                  <p className="text-sm font-light text-gray-600 dark:text-white">
                     Create a code
                   </p>
                 </div>
               </div>
 
               <div className="w-full flex gap-4 flex-col py-12">
-                <div className="flex w-full justify-between gap-4 rounded-lg border border-gray-200">
+                <div className="flex w-full justify-between gap-4 rounded-lg">
                   <div>
                     <label className="text-gray-500" htmlFor="qrPurpose">
                       Amount:
@@ -338,7 +335,7 @@ const TransactionQRModal = ({
                   </div>
                   <div className="flex w-[40%] justify-end">
                     <input
-                      className="font-extrabold text-end text-gray-600 placeholder-gray-400 outline-none"
+                      className="font-extrabold text-end text-gray-600 dark:text-white placeholder-gray-400 bg-transparent outline-none"
                       id="qrPurpose"
                       name="qrPurpose"
                       type="text"
@@ -349,14 +346,14 @@ const TransactionQRModal = ({
                     <p className="font-bold ml-2">SOL</p>
                   </div>
                 </div>
-                <div className="flex w-full justify-between gap-4 rounded-lg border border-gray-200">
+                <div className="flex w-full justify-between gap-4 rounded-lg">
                   <div>
                     <label className="text-gray-500" htmlFor="peoplePurpose">
                       Amount of people:
                     </label>
                   </div>
                   <input
-                    className="w-full font-extrabold text-end text-gray-800 placeholder-gray-400 outline-none"
+                    className="w-full font-extrabold text-end text-gray-800 dark:text-white placeholder-gray-400 bg-transparent outline-none"
                     id="peoplePurpose"
                     name="peoplePurpose"
                     type="text"
@@ -365,14 +362,14 @@ const TransactionQRModal = ({
                     onChange={(e) => setPeopleInput(e.target.value)}
                   />
                 </div>
-                <div className="flex w-full justify-between gap-4 rounded-lg border border-gray-200">
+                <div className="flex w-full justify-between gap-4 rounded-lg">
                   <div>
                     <label className="text-gray-500" htmlFor="msgPurpose">
                       Concept:
                     </label>
                   </div>
                   <input
-                    className="w-full font-extrabold text-end text-primary placeholder-gray-400 outline-none"
+                    className="w-full font-extrabold text-end text-primary dark:text-white placeholder-gray-400 bg-transparent outline-none"
                     id="msgPurpose"
                     name="msgPurpose"
                     type="text"
@@ -385,21 +382,55 @@ const TransactionQRModal = ({
 
               <div className="flex flex-col w-full gap-4">
                 <button
-                  onClick={() => loadQr()}
-                  disabled={handleClick}
-                  className="w-full rounded-lg bg-secondary py-3 hover:bg-opacity-70"
+                  onClick={() => {
+                    loadQr();
+                    setStepModal(5);
+                  }}
+                  disabled={!peopleInput || !conceptInput || !amountInput}
+                  className="w-full rounded-lg disabled:opacity-60 disabled:hover:bg-secondary disabled:dark:bg-secondary/60 bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
                 >
                   <span className="font-bold text-white">Load QR code</span>
                 </button>
 
                 <button
-                  onClick={() => loadOff()}
-                  className="w-full rounded-lg border-2 border-danger py-3 hover:bg-opacity-70"
+                  onClick={() => setModalOpen(false)}
+                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-danger">Cancel</span>
+                  <span className="font-medium text-red-300">Close</span>
                 </button>
               </div>
             </>
+          ) : (
+            <div>
+              <div className="flex flex-col gap-6 items-center justify-center space-y-1">
+                <div className="w-full flex justify-between font-bold">
+                  <p className="text-dark dark:text-white text-lg">5 People</p>
+                  <p className="text-primary dark:text-white text-lg">Dinner</p>
+                  <p className="text-dark dark:text-white text-lg">5 SOL</p>
+                </div>
+                <div className="text-white bg-white rounded-3xl" ref={qrRef} />
+                <div className="flex justify-center flex-col gap-4 text-center">
+                  <div>
+                    <p className="font-normal text-2xl">Waiting...</p>
+                  </div>
+                  <div>
+                    <p className="font-extrabold text-xl text-primary dark:text-white">
+                      0/5 Contributions
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
+                    loadOff();
+                    setStepModal(4);
+                    setModalOpen(false);
+                  }}
+                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
+                >
+                  <span className="font-medium text-red-300">Cancel</span>
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>

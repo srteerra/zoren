@@ -6,35 +6,46 @@ import {
   QrCodeIcon,
   PlusSmallIcon,
   ArrowLeftOnRectangleIcon,
+  PencilIcon,
 } from "@heroicons/react/24/solid";
+import { ClipboardIcon } from "@heroicons/react/24/outline";
 import { Slide } from "react-awesome-reveal";
 import { Collections } from "@/containers/Collections";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DarkModeMobile } from "./DarkMode";
 import RegionChange from "./Region";
+import { useZoren } from "../hooks/useZoren";
+import { truncate } from "../utils/string";
+import toast, { ToastBar, Toaster } from "react-hot-toast";
 
 // Images
 import logo from "../../public/logos/horizontal-dark.png";
+import EditProfleModal from "./EditProfileModal";
 
 const Profile = () => {
+  const { connected, userName, userAddress, avatar } = useZoren();
+  const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const [show, steShow] = useState(false);
   const route = usePathname();
   const active = "text-dark font-bold gap-6";
-  const limits = [
-    '/',
-    '/how',
-    '/about',
-  ]
+  const limits = ["/", "/how", "/about"];
+
+  const copyText = () => {
+    navigator.clipboard.writeText(userAddress.toString()), toast("Copied!");
+  };
 
   const slide = (
     <div className="lg:hidden fixed z-20 top-0 right-0 w-full flex justify-end h-screen backdrop-brightness-75">
-      <Slide direction="right" className="w-11/12 sm:w-8/12 lg:w-1/2">
-        <div className="w-full h-full bg-white sm:rounded-l-2xl p-4 relative">
+      <Slide
+        direction="right"
+        className="w-[90%] sm:w-[50%] md:w-[40%] lg:w-[30%]"
+      >
+        <div className="w-full h-full bg-white rounded-l-2xl p-4 relative">
           <button
             onClick={() => steShow(!show)}
-            className="absolute top-6 sm:top-10 right-[46%] sm:right-6 text-dark dark:text-dark"
+            className="absolute top-6 sm:top-10 left-6 sm:left-10 text-dark dark:text-dark"
           >
             <XMarkIcon className="h-8 w-8" />
           </button>
@@ -48,7 +59,7 @@ const Profile = () => {
             </div>
             <ul className="flex flex-col text-center gap-6">
               {[
-                ["Home", "/"],
+                ["Home", "/dashboard"],
                 ["Bills", "/bills"],
                 ["Friends", "/friends"],
                 ["Settings", "/settings"],
@@ -68,7 +79,7 @@ const Profile = () => {
               ))}
             </ul>
             <div className="w-full flex flex-col items-center">
-              <button className="w-1/2 hover:bg-dark dark:text-dark hover:text-white transition duration-150 ease-linear flex justify-center items-center gap-2 border-2 py-2 px-4 my-4 rounded-full">
+              <button className="w-[70%] bg-dark text-white transition duration-150 ease-linear flex justify-center items-center gap-2 border-2 py-4 px-8 my-4 rounded-full">
                 <ArrowLeftOnRectangleIcon className="w-6 h-6" />
                 Disconnect
               </button>
@@ -83,8 +94,36 @@ const Profile = () => {
     null;
   } else {
     return (
-      <aside className="flex py-16 justify-between md:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen lg:w-4/12 px-8 right-0">
+      <aside className="flex pt-8 xl:py-16 justify-between xl:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen lg:w-4/12 px-4 sm:px-8 lg:px-16 right-0">
         {show ? slide : null}
+        <EditProfleModal
+          modalOpen={editProfileModalOpen}
+          setModalOpen={setEditProfileModalOpen}
+          userAddress={userAddress}
+          avatar={avatar}
+        />
+        <Toaster>
+          {(t) => (
+            <ToastBar
+              toast={t}
+              style={{
+                color: "#2C3333",
+                background: "#FFFFFF",
+                padding: "10px 20px",
+                boxShadow: "0px 20px 67px 19px rgba(0,0,0,0.1)"
+              }}
+              position="top-center"
+            >
+              {({ message }) => (
+                <>
+                  <ClipboardIcon className="h-5 w-5" />
+                  <span className="m-0 p-0">{message}</span>
+                </>
+              )}
+            </ToastBar>
+          )}
+        </Toaster>
+
         {/* Menu title */}
         <div className="flex justify-between items-center lg:p-2">
           <button
@@ -97,27 +136,32 @@ const Profile = () => {
 
         {/* Profile image */}
         <div className="flex lg:flex-col lg:my-10 lg:text-center min-[280]:justify-center items-center max-[280]:gap-2 gap-4">
-          <div className="pl-2 lg:pl-0 w-1/3 lg:w-1/2 relative">
-            <Image
-              className="rounded-full"
-              src={"https://picsum.photos/id/237/200/200"}
-              alt="Profile"
-              priority={true}
-              height={200}
-              width={200}
-            />
-            <button className="bg-white rounded-full h-8 w-8 hidden md:grid place-content-center absolute right-1 -bottom-1">
-              <QrCodeIcon className="h-6 w-6" />
+          <div className="pl-2 lg:pl-0 w-[25%] lg:w-1/2 relative">
+            <div
+              className="rounded-full w-[200px] h-[200px] bg-no-repeat bg-center bg-cover"
+              style={{
+                backgroundImage: `url("${avatar}")`,
+              }}
+            ></div>
+            <button onClick={() => setEditProfileModalOpen(true)} className="dark:bg-white bg-black hover:bg-gray-800 dark:hover:bg-gray-400 rounded-full h-10 w-10 hidden lg:grid place-content-center absolute right-[-5px] bottom-[-5px] transition ease-out">
+              <PencilIcon className="h-4 w-4 text-white dark:text-dark" />
             </button>
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-xl">Terra</span>
-            <span
-              className="text-slate-500 hover:cursor-copy"
-              onClick={() => navigator.clipboard.writeText("Hola")}
+            <span className="font-bold text-xl">{userName}</span>
+            {userAddress ? (
+              <span
+              className="text-slate-500 hover:opacity-70 transition ease-in flex gap-2 flex-row-reverse items-center hover:cursor-pointer"
+              onClick={copyText}
             >
-              BKEq...Rs4
+              <ClipboardIcon className="h-5 w-5" />
+              {userAddress
+                ? truncate(userAddress.toString())
+                : "Loading wallet..."}
             </span>
+            ) : (
+              <span className="text-slate-500">Loading wallet...</span>
+            )}
           </div>
         </div>
 
