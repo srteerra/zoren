@@ -14,6 +14,8 @@ import {
   validatePaid,
 } from "@/hooks/useGetCollection";
 import { useZoren } from "../hooks/useZoren";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // Images
 import ticket from "../../public/images/ticket.png";
@@ -23,6 +25,7 @@ import { Fade, Flip, Zoom } from "react-awesome-reveal";
 import { useRouter } from "next/router";
 
 const Home = () => {
+  const { t: translate } = useTranslation("home");
   const router = useRouter();
   // const [show, setShow] = useState("friends");
 
@@ -66,7 +69,8 @@ const Home = () => {
         {/* left side */}
         <div className="w-full text-center md:text-start md:w-1/2 p-8 lg:p-0 overflow-hidden">
           <div className="">
-            <p className="text-slate-500 my-4">Want to separate the bill?</p>
+            {/* <p className="text-slate-500 my-4">Want to separate the bill?</p> */}
+            <p className="text-slate-500 my-4">{translate("hello")}</p>
             <div>
               <h1 className="text-4xl lg:text-5xl font-light">
                 Generate QR codes to <br /> split bill payments <br /> between
@@ -172,5 +176,13 @@ const Home = () => {
     </div>
   );
 };
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["home"])),
+    },
+  };
+}
 
 export default Home;

@@ -13,16 +13,15 @@ import {
 import BigNumber from "bignumber.js";
 import { client } from "../../lib/sanityClient";
 import imageUrlBuilder from "@sanity/image-url";
+import { useContext } from "react";
+import AppContext from "@/context/AppContext";
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
 
 export const useZoren = () => {
-  const [avatar, setAvatar] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userAddress, setUserAddress] = useState(undefined);
-  const [userContacts, setUserContacts] = useState([]);
-  const [userBalance, setUserBalance] = useState(0);
+  const { state, setName, setAvatar, setAddress, setBalance } =
+    useContext(AppContext);
   const [amount, setAmount] = useState(0);
   const [receiver, setReceiver] = useState("");
   const [transactionPurpose, setTransactionPurpose] = useState("");
@@ -42,36 +41,36 @@ export const useZoren = () => {
         userAddress: publicKey.toString(),
         userContacts: [],
       };
-
       connection.getBalance(publicKey).then((value) => {
-        setUserBalance(value / LAMPORTS_PER_SOL);
-        console.log(value);
+        // Setting up the SOL balance
+        setBalance(value / LAMPORTS_PER_SOL);
       });
-
       client.createIfNotExists(userDoc).then((result) => {
-        setUserAddress(result.userAddress);
-        setUserName(result.userName);
-        setUserContacts(result.userContacts);
+        // Setting up the user data
+        setName(result.userName);
+        setAddress(result.userAddress);
       });
     }
   }, [connected]);
 
   const fetchData = async () => {
-    const query = `*[_type == "users" && userAddress == "${userAddress}"] {
+    const query = `*[_type == "users" && userAddress == "${state.userAddress}"] {
       userName,
       "imageUrl": userAvatar.asset->url
     }`;
 
     const collectData = await client.fetch(query);
+
+    // Setting up the user data on fetch
+    setName(await collectData[0].userName);
     setAvatar(await collectData[0].imageUrl);
-    setUserName(await collectData[0].userName);
   };
 
   useEffect(() => {
-    if (userAddress != undefined) {
+    if (state.userAddress != undefined) {
       fetchData();
     }
-  }, [userAddress]);
+  }, [state.userAddress]);
 
   const makeTransaction = async (fromWallet, toWallet, amount, reference) => {
     console.log(fromWallet);
@@ -110,7 +109,7 @@ export const useZoren = () => {
         .upload("image", newA)
         .then(async (imageAsset) => {
           return client
-            .patch(userAddress)
+            .patch(state.userAddress)
             .set({
               userAvatar: {
                 _type: "image",
@@ -123,8 +122,6 @@ export const useZoren = () => {
             .commit()
             .then((res) => {
               console.log(res);
-              setAvatar(builder.image(res.userAvatar).url());
-              fetchData();
             });
         })
         .then(() => {
@@ -133,15 +130,13 @@ export const useZoren = () => {
     }
     if (newN) {
       client
-        .patch(userAddress)
+        .patch(state.userAddress)
         .set({ userName: newN })
         .commit()
         .then((updatedAcc) => {
           console.log("Hurray, the acc is updated! New document:");
           console.log(updatedAcc);
           console.log(updatedAcc.userName);
-          setUserName(updatedAcc.userName);
-          fetchData();
         });
     }
   };
@@ -189,11 +184,6 @@ export const useZoren = () => {
   return {
     connected,
     publicKey,
-    userAddress,
-    userName,
-    setUserName,
-    avatar,
-    setAvatar,
     doTransaction,
     updateAcc,
     amount,
@@ -205,8 +195,5 @@ export const useZoren = () => {
     newTransactionModalOpen,
     setNewTransactionModalOpen,
     userTransactions,
-    userContacts,
-    setUserContacts,
-    userBalance,
   };
 };
