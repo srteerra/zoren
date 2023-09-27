@@ -14,11 +14,11 @@ export default function Layout({ children }) {
   const { connected } = useZoren();
   const limits = ["/", "/how", "/about"];
 
-  // useEffect(() => {
-  //   if (!connected) {
-  //     router.push("/");
-  //   }
-  // }, [connected]);
+  useEffect(() => {
+    if (!connected) {
+      router.push("/");
+    }
+  }, [connected]);
 
   return (
     <main className="flex flex-col-reverse lg:flex-row">
