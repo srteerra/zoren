@@ -10,14 +10,13 @@ export default function Layout({ children }) {
   const router = useRouter();
   const route = usePathname();
 
-  const { connected, publicKey, setChangeWallet } = useZoren();
+  const { connected, publicKey } = useZoren();
   const limits = ["/", "/how", "/about"];
 
   useEffect(() => {
     setChangeWallet(true);
     if (!connected) {
       router.push("/");
-      setChangeWallet(false);
     }
   }, [connected]);
 

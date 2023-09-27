@@ -27,13 +27,12 @@ const Home = () => {
 
   const words = ["family", "friends", "partners", "mates", "couple"];
 
-  const { connected, publicKey, setChangeWallet } = useZoren();
+  const { connected, publicKey } = useZoren();
 
   useEffect(() => {
     setChangeWallet(true);
     if (connected) {
       router.push("/dashboard");
-      setChangeWallet(false);
     }
   }, [connected]);
 
