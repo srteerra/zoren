@@ -19,6 +19,8 @@ import RegionChange from "./Region";
 import { useZoren } from "../hooks/useZoren";
 import { truncate } from "../utils/string";
 import toast, { ToastBar, Toaster } from "react-hot-toast";
+import { useContext } from "react";
+import AppContext from "@/context/AppContext";
 
 // Images
 import logo from "../../public/logos/horizontal-dark.png";
@@ -27,6 +29,7 @@ import EditProfleModal from "./EditProfileModal";
 const Profile = () => {
   const { connected, userName, userAddress, avatar } = useZoren();
   const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
+  const { state } = useContext(AppContext);
   const [show, steShow] = useState(false);
   const route = usePathname();
   const active = "text-dark font-bold gap-6";

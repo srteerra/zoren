@@ -7,6 +7,8 @@ import { client } from "../../lib/sanityClient";
 import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { useZoren } from "../hooks/useZoren";
+import { useContext } from "react";
+import AppContext from "@/context/AppContext";
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
@@ -14,12 +16,11 @@ const builder = imageUrlBuilder(client);
 const EditProfleModal = ({
   modalOpen,
   setModalOpen,
-  userAddress,
-  avatar,
 }) => {
   const { userName, updateAcc } = useZoren();
   const [newUsername, setNewUsername] = useState("");
   const [newAvatar, setNewAvatar] = useState("");
+  const { state, onUpdate } = useContext(AppContext);
 
   const toastId = useRef(null);
 
@@ -41,7 +42,8 @@ const EditProfleModal = ({
     }
   };
 
-  const onUpdate = () => {
+  const handleUpdate = () => {
+    onUpdate({userName: newUsername, avatar: newAvatar})
     updateAcc(newUsername, newAvatar)
     setNewUsername("")
     setNewAvatar("")
@@ -57,12 +59,12 @@ const EditProfleModal = ({
             <div
               className="rounded-full w-[80px] h-[80px] mx-auto bg-no-repeat bg-center bg-cover"
               style={{
-                backgroundImage: `url("${avatar}")`,
+                backgroundImage: `url("${state.avatar}")`,
               }}
             ></div>
             <div className="my-auto">
               <p className="text-lg font-bold text-gray-800 dark:text-white">
-                @{userName}
+                @{state.userName}
               </p>
               <p className="text-md font-light text-gray-600 dark:text-white">
                 Edit profile
@@ -89,7 +91,7 @@ const EditProfleModal = ({
                   id="usernamePurpose"
                   name="usernamePurpose"
                   type="text"
-                  placeholder={userName}
+                  placeholder={state.userName}
                   value={newUsername}
                   onChange={(e) => setNewUsername(e.target.value)}
                 />
@@ -117,8 +119,8 @@ const EditProfleModal = ({
 
           <div className="flex flex-col w-full gap-4">
             <button
-              onClick={() => onUpdate()}
-              disabled={!userName}
+              onClick={() => handleUpdate()}
+              disabled={!newUsername}
               className="w-full rounded-lg disabled:opacity-60 disabled:hover:bg-secondary disabled:dark:bg-secondary/60 bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
             >
               <span className="font-bold text-white">Confirm</span>
