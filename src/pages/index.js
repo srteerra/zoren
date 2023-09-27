@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use clients";
 import { LoginNav } from "@/components/LoginNav";
 import Link from "next/link";
@@ -30,7 +31,6 @@ const Home = () => {
   const { connected, publicKey } = useZoren();
 
   useEffect(() => {
-    setChangeWallet(true);
     if (connected) {
       router.push("/dashboard");
     }
