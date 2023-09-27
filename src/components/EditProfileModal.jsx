@@ -23,25 +23,6 @@ const EditProfleModal = ({
 
   const toastId = useRef(null);
 
-  const update = () =>
-    toast.update(toastId.current, {
-      position: "bottom-right",
-      render: "Completed",
-      type: toast.TYPE.SUCCESS,
-      isLoading: false,
-      closeOnClick: true,
-      autoClose: 3000,
-    });
-  const notify = () =>
-    toast.update(toastId.current, {
-      position: "bottom-right",
-      render: "Transaction Request Cancelled",
-      type: toast.TYPE.WARNING,
-      isLoading: false,
-      closeOnClick: true,
-      autoClose: 3000,
-    });
-
   const success = () =>
     toast.success("Profile updated", {
       position: "bottom-right",

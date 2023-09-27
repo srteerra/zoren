@@ -13,6 +13,7 @@ const Dashboard = () => {
   const nav = {
     title: "dashboard",
     isSubpage: false,
+    id: 1
   };
 
   return (
