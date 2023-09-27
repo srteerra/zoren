@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { usePathname } from "next/navigation";
 import { Profile } from "@/components/Profile";
@@ -14,7 +15,6 @@ export default function Layout({ children }) {
   const limits = ["/", "/how", "/about"];
 
   useEffect(() => {
-    setChangeWallet(true);
     if (!connected) {
       router.push("/");
     }
