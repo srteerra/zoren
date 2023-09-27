@@ -4,6 +4,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ViewfinderCircleIcon } from "@heroicons/react/24/solid";
 import { Footer } from "@/components/Footer";
+import {
+  handleAddData,
+  handleGetCollections,
+  handleGetCollectionsOpen,
+  handleGetCollectionsPaid,
+  handleModifyData,
+  validatePaid,
+} from "@/hooks/useGetCollection";
 import { useZoren } from "../hooks/useZoren";
 
 // Images
@@ -211,7 +219,7 @@ const Home = () => {
         </div>
         <div className="h-3/6 flex items-end justify-center bg-[url('../../public/images/banner.png')] bg-no-repeat bg-cover lg:bg-contain bg-center"></div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
