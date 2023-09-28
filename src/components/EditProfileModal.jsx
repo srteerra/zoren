@@ -17,10 +17,10 @@ const EditProfleModal = ({
   modalOpen,
   setModalOpen,
 }) => {
-  const { userName, updateAcc } = useZoren();
+  const { updateAcc } = useZoren();
   const [newUsername, setNewUsername] = useState("");
   const [newAvatar, setNewAvatar] = useState("");
-  const { state, onUpdate } = useContext(AppContext);
+  const { state, updateProfile } = useContext(AppContext);
 
   const toastId = useRef(null);
 
@@ -43,7 +43,6 @@ const EditProfleModal = ({
   };
 
   const handleUpdate = () => {
-    onUpdate({userName: newUsername, avatar: newAvatar})
     updateAcc(newUsername, newAvatar)
     setNewUsername("")
     setNewAvatar("")

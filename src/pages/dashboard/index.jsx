@@ -5,13 +5,11 @@ import Nav from "@/components/Nav";
 import MostRecentTransactions from "@/components/RecentTransactions";
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { useZoren } from "../../hooks/useZoren";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import AppContext from "@/context/AppContext";
 
 const Dashboard = () => {
-  const { connected } = useZoren();
   const { state } = useContext(AppContext);
   const nav = {
     title: "dashboard",

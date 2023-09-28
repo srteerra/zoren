@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/exhaustive-deps */
+"use client";
 import { LoginNav } from "@/components/LoginNav";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -36,6 +37,8 @@ const Home = () => {
   useEffect(() => {
     if (connected) {
       router.push("/dashboard");
+    } else {
+      router.push("/");
     }
   }, [connected]);
 
