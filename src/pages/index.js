@@ -24,6 +24,7 @@ import friends from "../../public/images/friends.png";
 import Image from "next/image";
 import { Fade, Flip, Zoom } from "react-awesome-reveal";
 import { useRouter } from "next/router";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const Home = () => {
   // const { t: translate } = useTranslation("home");
@@ -32,7 +33,7 @@ const Home = () => {
 
   // const words = ["family", "friends", "partners", "mates", "couple"];
 
-  const { connected } = useZoren();
+  const { connected } = useWallet();
 
   useEffect(() => {
     if (connected) {
