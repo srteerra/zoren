@@ -6,8 +6,9 @@ import { Slide } from "react-awesome-reveal";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
 import Link from "next/link";
-import { useTranslation } from "next-i18next";
+// import { useTranslation } from "next-i18next";
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 
@@ -17,10 +18,11 @@ import logo_l from "../../public/logos/horizontal-light.png";
 import RegionChange from "./Region";
 
 const LoginNav = () => {
-  const { t: translate } = useTranslation("loginav");
-  console.log("Translations:", translate("Home"), translate("How"), translate("About"), translate("ConnectWallet"));
+  // const { t: translate } = useTranslation("loginav");
+  // console.log("Translations:", translate("Home"), translate("How"), translate("About"), translate("ConnectWallet"));
   const [show, steShow] = useState(false);
   const path = usePathname();
+  const { connected } = useWallet();
 
   const active = "font-bold text-primary dark:text-secondary";
 
@@ -44,9 +46,9 @@ const LoginNav = () => {
             </div>
             <ul className="flex flex-col gap-y-10 items-center">
               {[
-                [`${translate("Home")}`, "/"],
-                [`${translate("How")}`, "/how"],
-                [`${translate("About")}`, "/about"],
+                [`Home`, "/"],
+                [`How`, "/how"],
+                [`About`, "/about"],
               ].map(([title, href]) => (
                 <li key={title}>
                   <Link
@@ -62,7 +64,7 @@ const LoginNav = () => {
                 </li>
               ))}
               <button className="bg-primary my-6 text-white hover:bg-secondary transition duration-150 ease-linear px-4 py-3 w-40 rounded-full">
-                {translate("ConnectWallet")}
+                {"Connect Wallet"}
               </button>
             </ul>
           </div>
@@ -96,9 +98,9 @@ const LoginNav = () => {
 
         <ul className="hidden lg:flex gap-x-10 items-center">
           {[
-              [`${translate("Home")}`, "/"],
-              [`${translate("How")}`, "/how"],
-              [`${translate("About")}`, "/about"],
+            [`Home`, "/"],
+            [`How`, "/how"],
+            [`About`, "/about"],
           ].map(([title, href]) => (
             <li key={title}>
               <Link
@@ -115,7 +117,11 @@ const LoginNav = () => {
           ))}
           <DarkMode />
           <WalletMultiButton className="flex items-center wallet-btn">
-            <span className="text-sm">{translate("ConnectWallet")}</span>
+            {connected ? (
+              <span className="text-sm">{"Dashboard"}</span>
+            ) : (
+              <span className="text-sm">{"Connect Wallet"}</span>
+            )}
           </WalletMultiButton>
           {/* <button className="bg-primary text-white hover:opacity-70 transition duration-150 ease-in px-10 py-3 rounded-full">
             Connect Wallet

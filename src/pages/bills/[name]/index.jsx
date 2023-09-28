@@ -4,12 +4,15 @@ import { ExclamationCircleIcon, CheckCircleIcon } from "@heroicons/react/24/outl
 import Link from "next/link";
 import { useRouter } from "next/router";
 import DeleteBillModal from "@/components/billFunctions/deleteModal";
-import { useState } from "react";
+import axios from "axios";
 import SetBillModal from "@/components/billFunctions/setBillModal";
+import { useEffect, useState } from "react";
 
 const BillView = (data) => {
   const [deleteBillModalOpen, setDeleteBillModalOpen] = useState(false);
   const [billModalOpen, setBillModalOpen] = useState(false);
+  const [balanceUSD, setBalanceUSD] = useState(0);
+  const router = useRouter();
   const nav = {
     title: "bills",
     isSubpage: true,
@@ -17,7 +20,27 @@ const BillView = (data) => {
   const res = {
     hola: "hello"
   }
-  const router = useRouter();
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
+      )
+      .then((res) => {
+        setBalanceUSD(res.data.solana.usd);
+      });
+  }, []);
+
+  const trunacteNumbers = (conv) => {
+    if (balanceUSD * conv < 100) {
+      return (balanceUSD * conv).toString().slice(0, 5)
+    } else if (balanceUSD * conv > 1000) {
+      return (balanceUSD * conv).toString().slice(0, 7)
+    } else {
+      return (balanceUSD * conv).toString().slice(0, 6)
+    }
+  }
+
   return (
     <div className="py-8 xl:py-10 px-4 sm:px-8 lg:px-16 h-screen lg:overflow-y-scroll hiddenScroll">
       <DeleteBillModal
@@ -52,11 +75,11 @@ const BillView = (data) => {
             <p>Total</p>
           </div>
           <div className="flex flex-col gap-8 text-end font-bold">
-            <p>Ana’s Party</p>
+            <p>🍕 Dinner</p>
             <p>4 People</p>
             <div className="flex flex-col gap-2">
               <p>{"40"} SOL</p>
-              <p className="opacity-50 font-semibold">${"6450"} USD</p>
+              <p className="opacity-50 font-semibold">${trunacteNumbers(40)} USD</p>
             </div>
           </div>
         </div>
@@ -72,7 +95,7 @@ const BillView = (data) => {
             <p>{"2"} / {"4"}</p>
             <div className="flex flex-col gap-2">
               <p className="text-danger">{"20"} SOL</p>
-              <p className="text-danger opacity-70 font-semibold">${"3450"} USD</p>
+              <p className="text-danger opacity-70 font-semibold">${trunacteNumbers(20)} USD</p>
             </div>
           </div>
         </div>

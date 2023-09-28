@@ -25,6 +25,7 @@
     "@solana/wallet-adapter-wallets": "^0.18.10",
     "@solana/web3.js": "^1.73.3",
     "autoprefixer": "10.4.15",
+    "axios": "^1.5.1",
     "bn.js": "^5.2.1",
     "date-fns": "^2.29.3",
     "eslint": "8.49.0",

@@ -2,20 +2,23 @@ import { QrCodeIcon, LinkIcon } from "@heroicons/react/24/solid";
 import TransactionQRModal from "../transaction/TransactionQRModal";
 import { useState } from 'react';
 import { useZoren } from "@/hooks/useZoren";
+import { useContext } from "react";
+import AppContext from "@/context/AppContext";
 
 function ActionCenterDashboard() {
+  const { state } = useContext(AppContext);
   const [qrCode, setQrCode] = useState(false);
-  const { connected, userName, userAddress, avatar, publicKey } = useZoren();
+  const { publicKey } = useZoren();
   const [transactionQRModalOpen, setTransactionQRModalOpen] = useState(false);
   return (
     <div className="hidden lg:flex gap-12 my-16">
       <TransactionQRModal
         modalOpen={transactionQRModalOpen}
         setModalOpen={setTransactionQRModalOpen}
-        userAddress={userAddress}
-        userName={userName}
+        userAddress={state.userAddress}
+        userName={state.userName}
         myKey={publicKey}
-        avatar={avatar}
+        avatar={state.avatar}
         setQrCode={setQrCode}
       />
       {/* Create session action */}

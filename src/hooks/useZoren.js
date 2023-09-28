@@ -20,8 +20,7 @@ import AppContext from "@/context/AppContext";
 const builder = imageUrlBuilder(client);
 
 export const useZoren = () => {
-  const { state, setName, setAvatar, setAddress, setBalance } =
-    useContext(AppContext);
+  const { state, initialFetch, updateProfile } = useContext(AppContext);
   const [amount, setAmount] = useState(0);
   const [receiver, setReceiver] = useState("");
   const [transactionPurpose, setTransactionPurpose] = useState("");
@@ -41,36 +40,37 @@ export const useZoren = () => {
         userAddress: publicKey.toString(),
         userContacts: [],
       };
-      connection.getBalance(publicKey).then((value) => {
-        // Setting up the SOL balance
-        setBalance(value / LAMPORTS_PER_SOL);
-      });
-      client.createIfNotExists(userDoc).then((result) => {
-        // Setting up the user data
-        setName(result.userName);
-        setAddress(result.userAddress);
-      });
+
+      client.createIfNotExists(userDoc);
     }
   }, [connected]);
 
   const fetchData = async () => {
-    const query = `*[_type == "users" && userAddress == "${state.userAddress}"] {
+    const query = `*[_type == "users" && userAddress == "${publicKey.toString()}"] {
       userName,
       "imageUrl": userAvatar.asset->url
     }`;
 
-    const collectData = await client.fetch(query);
+    connection.getBalance(publicKey).then(async (value) => {
+      console.log(value);
 
-    // Setting up the user data on fetch
-    setName(await collectData[0].userName);
-    setAvatar(await collectData[0].imageUrl);
+      const collectData = await client.fetch(query);
+
+      // Setting up the user data on fetch
+      initialFetch({
+        username: await collectData[0].userName,
+        address: publicKey.toString(),
+        balance: value / LAMPORTS_PER_SOL,
+        avatar: await collectData[0].imageUrl,
+      });
+    });
   };
 
   useEffect(() => {
-    if (state.userAddress != undefined) {
+    if (publicKey) {
       fetchData();
     }
-  }, [state.userAddress]);
+  }, [publicKey]);
 
   const makeTransaction = async (fromWallet, toWallet, amount, reference) => {
     console.log(fromWallet);
@@ -105,27 +105,37 @@ export const useZoren = () => {
 
   const updateAcc = (newN, newA) => {
     if (newA) {
-      client.assets
-        .upload("image", newA)
-        .then(async (imageAsset) => {
-          return client
-            .patch(state.userAddress)
-            .set({
-              userAvatar: {
-                _type: "image",
-                asset: {
-                  _type: "reference",
-                  _ref: imageAsset._id,
-                },
-              },
+      client
+        .patch(state.userAddress)
+        .set({ userName: newN })
+        .commit()
+        .then((updatedAcc) => {
+          client.assets
+            .upload("image", newA)
+            .then(async (imageAsset) => {
+              return client
+                .patch(state.userAddress)
+                .set({
+                  userAvatar: {
+                    _type: "image",
+                    asset: {
+                      _type: "reference",
+                      _ref: imageAsset._id,
+                    },
+                  },
+                })
+                .commit()
+                .then((res) => {
+                  console.log(res);
+                  updateProfile({
+                    username: updatedAcc.userName,
+                    avatar: builder.image(res.userAvatar).url(),
+                  });
+                });
             })
-            .commit()
-            .then((res) => {
-              console.log(res);
+            .then(() => {
+              console.log("Done!");
             });
-        })
-        .then(() => {
-          console.log("Done!");
         });
     }
     if (newN) {
@@ -137,6 +147,10 @@ export const useZoren = () => {
           console.log("Hurray, the acc is updated! New document:");
           console.log(updatedAcc);
           console.log(updatedAcc.userName);
+          updateProfile({
+            username: updatedAcc.userName,
+            avatar: state.avatar,
+          });
         });
     }
   };

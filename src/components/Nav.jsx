@@ -17,7 +17,7 @@ function Nav({ data }) {
             <Link href={`/${data.title}`} ref={data.id} className="opacity-60 capitalize">
               {data.title} /{" "}
             </Link>
-            {router.query.name}
+            🍕 {router.query.name}
           </h2>
         ) : (
           <h2 className="capitalize">{data.title}</h2>

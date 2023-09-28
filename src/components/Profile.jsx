@@ -16,27 +16,25 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DarkModeMobile } from "./DarkMode";
 import RegionChange from "./Region";
-import { useZoren } from "../hooks/useZoren";
-import { truncate } from "../utils/string";
-import toast, { ToastBar, Toaster } from "react-hot-toast";
 import { useContext } from "react";
 import AppContext from "@/context/AppContext";
+import { truncate } from "../utils/string";
+import toast, { ToastBar, Toaster } from "react-hot-toast";
 
 // Images
 import logo from "../../public/logos/horizontal-dark.png";
 import EditProfleModal from "./EditProfileModal";
 
 const Profile = () => {
-  const { connected, userName, userAddress, avatar } = useZoren();
-  const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const { state } = useContext(AppContext);
+  const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const [show, steShow] = useState(false);
   const route = usePathname();
   const active = "text-dark font-bold gap-6";
   const limits = ["/", "/how", "/about"];
 
   const copyText = () => {
-    navigator.clipboard.writeText(userAddress.toString()), toast("Copied!");
+    navigator.clipboard.writeText(state.userAddress.toString()), toast("Copied!");
   };
 
   const slide = (
@@ -102,8 +100,8 @@ const Profile = () => {
         <EditProfleModal
           modalOpen={editProfileModalOpen}
           setModalOpen={setEditProfileModalOpen}
-          userAddress={userAddress}
-          avatar={avatar}
+          userAddress={state.userAddress}
+          avatar={state.avatar}
         />
         <Toaster>
           {(t) => (
@@ -143,7 +141,7 @@ const Profile = () => {
             <div
               className="rounded-full w-[200px] h-[200px] bg-no-repeat bg-center bg-cover"
               style={{
-                backgroundImage: `url("${avatar}")`,
+                backgroundImage: `url("${state.avatar}")`,
               }}
             ></div>
             <button onClick={() => setEditProfileModalOpen(true)} className="dark:bg-white bg-black hover:bg-gray-800 dark:hover:bg-gray-400 rounded-full h-10 w-10 hidden lg:grid place-content-center absolute right-[-5px] bottom-[-5px] transition ease-out">
@@ -151,15 +149,15 @@ const Profile = () => {
             </button>
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-xl">{userName}</span>
-            {userAddress ? (
+            <span className="font-bold text-xl">{state.userName}</span>
+            {state.userAddress ? (
               <span
               className="text-slate-500 hover:opacity-70 transition ease-in flex gap-2 flex-row-reverse items-center hover:cursor-pointer"
               onClick={copyText}
             >
               <ClipboardIcon className="h-5 w-5" />
-              {userAddress
-                ? truncate(userAddress.toString())
+              {state.userAddress
+                ? truncate(state.userAddress.toString())
                 : "Loading wallet..."}
             </span>
             ) : (

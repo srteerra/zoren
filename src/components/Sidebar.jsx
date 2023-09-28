@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import Image from "next/image";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 // Images
 import logo from "../../public/logos/horizontal-light.png";
@@ -22,6 +23,8 @@ const Sidebar = () => {
     '/how',
     '/about',
   ]
+  const { disconnect } = useWallet();
+
   if (limits.includes(route)) {
     null;
   } else {
@@ -109,7 +112,7 @@ const Sidebar = () => {
           ))}
         </ul>
         <div className="w-full flex flex-col items-center">
-          <button className="w-2/3 bg-white hover:opacity-70 transition flex justify-center items-center gap-2 border-2 py-3 px-6 my-4 dark:text-dark rounded-full">
+          <button onClick={() => disconnect()} className="w-2/3 bg-white hover:opacity-70 transition flex justify-center items-center gap-2 border-2 py-3 px-6 my-4 dark:text-dark rounded-full">
             <ArrowLeftOnRectangleIcon width={25} />
             <span>Disconnect</span>
           </button>
