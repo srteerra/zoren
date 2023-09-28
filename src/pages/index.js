@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/exhaustive-deps */
+"use client";
 import { LoginNav } from "@/components/LoginNav";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -14,6 +15,8 @@ import {
   validatePaid,
 } from "@/hooks/useGetCollection";
 import { useZoren } from "../hooks/useZoren";
+// import { useTranslation } from "next-i18next";
+// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // Images
 import ticket from "../../public/images/ticket.png";
@@ -23,6 +26,7 @@ import { Fade, Flip, Zoom } from "react-awesome-reveal";
 import { useRouter } from "next/router";
 
 const Home = () => {
+  // const { t: translate } = useTranslation("home");
   const router = useRouter();
   // const [show, setShow] = useState("friends");
 
@@ -33,6 +37,8 @@ const Home = () => {
   useEffect(() => {
     if (connected) {
       router.push("/dashboard");
+    } else {
+      router.push("/");
     }
   }, [connected]);
 
@@ -78,7 +84,6 @@ const Home = () => {
               <Link href={"/"}>
                 <strong>Solana</strong>
               </Link>{" "}
-              and
               <Link href={"/"}>
                 {" "}
                 <strong>Phantom</strong>
@@ -87,7 +92,7 @@ const Home = () => {
           </div>
           <div className="w-full flex justify-center md:justify-start items-center gap-2 my-6">
             <button className="bg-primary focus:bg-primary hover:bg-secondary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
-              Ty it now
+              Try it now
             </button>
             <Link href={"/"}>Learn more</Link>
           </div>
@@ -172,5 +177,13 @@ const Home = () => {
     </div>
   );
 };
+
+// export async function getStaticProps({ locale }) {
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale, ["home"])),
+//     },
+//   };
+// }
 
 export default Home;
