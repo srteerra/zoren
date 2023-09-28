@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import AppContext from "@/context/AppContext";
+// import { useTranslation } from "next-i18next";
+// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Dashboard = () => {
   const { state } = useContext(AppContext);

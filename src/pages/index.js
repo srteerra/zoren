@@ -15,8 +15,8 @@ import {
   validatePaid,
 } from "@/hooks/useGetCollection";
 import { useZoren } from "../hooks/useZoren";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+// import { useTranslation } from "next-i18next";
+// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // Images
 import ticket from "../../public/images/ticket.png";
@@ -26,7 +26,7 @@ import { Fade, Flip, Zoom } from "react-awesome-reveal";
 import { useRouter } from "next/router";
 
 const Home = () => {
-  const { t: translate } = useTranslation("home");
+  // const { t: translate } = useTranslation("home");
   const router = useRouter();
   // const [show, setShow] = useState("friends");
 
@@ -59,14 +59,10 @@ const Home = () => {
   return (
     <div className="w-full h-screen">
       <div className="bg-black text-center text-white py-3">
-        {/* <p>
+        <p>
           This application is working on{" "}
           <span className="font-bold">Devnet</span> for now, please make sure
           you're connected
-        </p> */}
-        <p>
-          {translate("Add1")}{" "}
-          <span className="font-bold">{translate("Add2")}</span> {translate("Add3")}
         </p>
       </div>
       <LoginNav />
@@ -76,15 +72,11 @@ const Home = () => {
         {/* left side */}
         <div className="w-full text-center md:text-start md:w-1/2 p-8 lg:p-0 overflow-hidden">
           <div className="">
-            {/* <p className="text-slate-500 my-4">Want to separate the bill?</p> */}
-            <p className="text-slate-500 my-4">{translate("WantSeparateBill")}</p>
+            <p className="text-slate-500 my-4">Want to separate the bill?</p>
             <div>
-              {/* <h1 className="text-4xl lg:text-5xl font-light">
+              <h1 className="text-4xl lg:text-5xl font-light">
                 Generate QR codes to <br /> split bill payments <br /> between
                 your friends
-              </h1> */}
-              <h1 className="text-4xl lg:text-5xl font-light">
-              {translate("GenerateQR")} <br /> {translate("SplitBill")} <br /> {translate("BetweenYFriends")}
               </h1>
             </div>
 
@@ -92,7 +84,6 @@ const Home = () => {
               <Link href={"/"}>
                 <strong>Solana</strong>
               </Link>{" "}
-              {translate("And")}
               <Link href={"/"}>
                 {" "}
                 <strong>Phantom</strong>
@@ -100,33 +91,21 @@ const Home = () => {
             </p>
           </div>
           <div className="w-full flex justify-center md:justify-start items-center gap-2 my-6">
-            {/* <button className="bg-primary focus:bg-primary hover:bg-secondary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
-              Try it now
-            </button> */}
             <button className="bg-primary focus:bg-primary hover:bg-secondary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
-              {translate("TryIt")}
+              Try it now
             </button>
-            <Link href={"/"}>{translate("LearnMore")}</Link>
-            {/* <Link href={"/"}>Learn more</Link> */}
+            <Link href={"/"}>Learn more</Link>
           </div>
 
           <div className="my-14 text-sm">
-            {/* <p>
+            <p>
               Please check our{" "}
               <Link href={"/"} className="font-bold">
                 Privacy policy
               </Link>{" "}
               and Terms and consitions.
-            </p> */}
-            <p>
-              {translate("PleaseCheck")}{" "}
-              <Link href={"/"} className="font-bold">
-                {translate("PrivacyPolicy")}
-              </Link>{" "}
-              {translate("TermsConsitions")}
             </p>
-            {/* <p>This is a project for Hyperdrive Hackaton.</p> */}
-            <p>{translate("ThisIsProject")}</p>
+            <p>This is a project for Hyperdrive Hackaton.</p>
           </div>
         </div>
 
@@ -189,10 +168,8 @@ const Home = () => {
 
       <div className="bg-primary flex flex-col justify-between overflow-hidden h-screen w-full text-white">
         <div className="h-2/6 flex text-center flex-col w-full sm:w-1/2 px-10 pt-20 lg:w-1/3 mx-auto">
-          {/* <h1 className="lg:text-5xl">For whatever the occasion</h1> */}
-          <h1 className="lg:text-5xl">{translate("WhatherOcassion")}</h1>
-          {/* <p className="py-2">You can use Zoren form your phone or PC</p> */}
-          <p className="py-2">{translate("CanUseZoren")}</p>
+          <h1 className="lg:text-5xl">For whatever the occasion</h1>
+          <p className="py-2">You can use Zoren form your phone or PC</p>
         </div>
         <div className="h-3/6 flex items-end justify-center bg-[url('../../public/images/banner.png')] bg-no-repeat bg-cover lg:bg-contain bg-center"></div>
       </div>
@@ -201,12 +178,12 @@ const Home = () => {
   );
 };
 
-export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["home"])),
-    },
-  };
-}
+// export async function getStaticProps({ locale }) {
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale, ["home"])),
+//     },
+//   };
+// }
 
 export default Home;
