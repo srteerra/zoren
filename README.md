@@ -37,7 +37,9 @@ La falta de una solución eficiente para realizar transferencias de dinero rápi
 ## Social Media
 
 [Twitter](https://twitter.com/ZorenApp)
+
 [Instagram](https://www.instagram.com/zorenapp/)
+
 ### This platform is now working at [Zoren.site](https://www.dashy.site/)
 
 
