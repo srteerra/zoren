@@ -1,5 +1,6 @@
 # zoren
-![[Pasted image 20230928134315.png]]
+![image](https://github.com/srteerra/zoren/assets/74383100/f73a2345-6c7d-4899-a887-219a581751b7)
+
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 ![](https://img.shields.io/github/stars/srteerra/zoren)![](https://img.shields.io/github/forks/srteerra/zoren)
@@ -20,7 +21,7 @@ Zoren is a decentralized platform built on the Solana blockchain that enables us
 - [Authors](#authors)
 - [See our Demo](#demo-on-figma)
   - [Requirements](#requirements)
-  -  [Quick start](#Quick-start)
+  -  [Quick start](#quick-start)
 -  [Project Structure](#project-structure)
 
 ### Description
@@ -76,8 +77,10 @@ This project is currently under active development and updates are made on a reg
 
 ## Development Workflow  
 
-We follow a GitFlow workflow for development. Contributions are made in feature branches and merged into the main branch after a review.
-![[Pasted image 20230928144724.png]]
+We follow a GitFlow workflow for development. Contributions are made in feature branches and merged into the main branch after a review. 
+
+![image](https://github.com/srteerra/zoren/assets/74383100/a0aa2faa-8af9-4b4d-bcf5-f0f967d4939b)
+
 
 ## Features
 
