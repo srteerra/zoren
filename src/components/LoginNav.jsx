@@ -62,7 +62,7 @@ const LoginNav = () => {
                 </li>
               ))}
               <button className="bg-primary my-6 text-white hover:bg-secondary transition duration-150 ease-linear px-4 py-3 w-40 rounded-full">
-                {"ConnectWallet"}
+                {"Connect Wallet"}
               </button>
             </ul>
           </div>
@@ -115,7 +115,7 @@ const LoginNav = () => {
           ))}
           <DarkMode />
           <WalletMultiButton className="flex items-center wallet-btn">
-            <span className="text-sm">{"ConnectWallet"}</span>
+            <span className="text-sm">{"Connect Wallet"}</span>
           </WalletMultiButton>
           {/* <button className="bg-primary text-white hover:opacity-70 transition duration-150 ease-in px-10 py-3 rounded-full">
             Connect Wallet

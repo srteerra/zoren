@@ -7,17 +7,29 @@ import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
+import axios from "axios";
 import AppContext from "@/context/AppContext";
 // import { useTranslation } from "next-i18next";
 // import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Dashboard = () => {
   const { state } = useContext(AppContext);
+  const [balanceUSD, setBalanceUSD] = useState(0);
   const nav = {
     title: "dashboard",
     isSubpage: false,
-    id: 1
+    id: 1,
   };
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
+      )
+      .then((res) => {
+        setBalanceUSD(res.data.solana.usd);
+      });
+  }, []);
 
   return (
     <div className="py-10 px-4 sm:px-8 lg:px-16 h-screen lg:overflow-y-scroll hiddenScroll">
@@ -27,16 +39,21 @@ const Dashboard = () => {
         <div className="bg-secondary dark:bg-gray-600 p-12 lg:p-14 rounded-3xl text-light">
           <p className="2xl:text-lg lg:text-md text-md">Your balance</p>
           <p className="2xl:text-5xl lg:text-4xl text-4xl font-extrabold py-2">
-            {(state.userBalance) < 100 ? (
-              (state.userBalance).toString().slice(0, 4)
-            ) : (state.userBalance) > 1000 ? (
-              (state.userBalance).toString().slice(0, 7)
-            ) : (
-              (state.userBalance).toString().slice(0, 6)
-            )} SOL
+            {state.userBalance < 100
+              ? state.userBalance.toString().slice(0, 4)
+              : state.userBalance > 1000
+              ? state.userBalance.toString().slice(0, 7)
+              : state.userBalance.toString().slice(0, 6)}{" "}
+            SOL
           </p>
           <p className="2xl:text-lg lg:text-md text-lg">
-            <span>=</span> $642.63 USD
+            <span>=</span> $
+            {balanceUSD * state.userBalance < 100
+              ? (balanceUSD * state.userBalance).toString().slice(0, 5)
+              : balanceUSD * state.userBalance > 1000
+              ? (balanceUSD * state.userBalance).toString().slice(0, 7)
+              : (balanceUSD * state.userBalance).toString().slice(0, 6)}{" "}
+            USD
           </p>
         </div>
         {/* Reminder card */}

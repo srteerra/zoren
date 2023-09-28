@@ -113,6 +113,7 @@ const EditProfleModal = ({
                 multiple={false}
                 onChange={(e) => uploadImage(e)}
               />
+              <p className="text-sm opacity-50">*Please enter your username to confirm this action.</p>
             </div>
           </div>
 
