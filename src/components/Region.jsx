@@ -8,6 +8,10 @@ import { faEarthAmerica } from "@fortawesome/free-solid-svg-icons";
 
 import mexicoFlag from "../../public/icons/mexico.png";
 import usFlag from "../../public/icons/estados-unidos.png";
+import portugueseflag from "../../public/icons/portugal.png"
+import alemanflag from "../../public/icons/alemania.png"
+import frenchflag from "../../public/icons/francia.png"
+
 
 const RegionChange = () => {
   const [click, setClick] = useState(false);
@@ -48,13 +52,13 @@ const RegionChange = () => {
                     } flex w-full gap-3 items-center justify-center rounded-md px-2 py-2`}
                   >
                     <Image
-                      src={l === "en" ? usFlag : mexicoFlag}
+                      src={l === "en" ? usFlag : l === "es" ? mexicoFlag : l === "pt" ? portugueseflag : l === "de" ? alemanflag : frenchflag}
                       className="w-[25px] md:w-[30px]"
                       alt="lang"
                       priority={true}
                     />
                     <p className="text-sm">
-                      {l === "en" ? "English" : "Spanish"}
+                      {l === "en" ? "English" : l === "es" ? "Spanish" : l === "pt" ? "Portuguese" : l === "de" ? "Deutsch" : "French"}
                     </p>
                   </button>
                 )}
