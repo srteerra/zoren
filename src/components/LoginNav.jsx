@@ -1,4 +1,4 @@
-"use clients";
+"use client";
 import Image from "next/image";
 import { DarkMode, DarkModeMobile } from "./DarkMode";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
@@ -7,10 +7,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import Link from "next/link";
-import { useZoren } from "../hooks/useZoren";
-import { truncate } from "../utils/string";
 import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 
@@ -21,10 +18,9 @@ import RegionChange from "./Region";
 
 const LoginNav = () => {
   const { t: translate } = useTranslation("loginav");
+  console.log("Translations:", translate("Home"), translate("How"), translate("About"), translate("ConnectWallet"));
   const [show, steShow] = useState(false);
   const path = usePathname();
-
-  const { connected } = useZoren();
 
   const active = "font-bold text-primary dark:text-secondary";
 
@@ -48,9 +44,9 @@ const LoginNav = () => {
             </div>
             <ul className="flex flex-col gap-y-10 items-center">
               {[
-                ["Home", "/"],
-                ["How it works?", "/how"],
-                ["About us", "/about"],
+                [`${translate("Home")}`, "/"],
+                [`${translate("How")}`, "/how"],
+                [`${translate("About")}`, "/about"],
               ].map(([title, href]) => (
                 <li key={title}>
                   <Link
@@ -100,9 +96,9 @@ const LoginNav = () => {
 
         <ul className="hidden lg:flex gap-x-10 items-center">
           {[
-            ["Home", "/"],
-            ["How it works?", "/how"],
-            ["About us", "/about"],
+              [`${translate("Home")}`, "/"],
+              [`${translate("How")}`, "/how"],
+              [`${translate("About")}`, "/about"],
           ].map(([title, href]) => (
             <li key={title}>
               <Link
@@ -133,13 +129,5 @@ const LoginNav = () => {
     </nav>
   );
 };
-
-export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["loginav"])),
-    },
-  };
-}
 
 export { LoginNav };
