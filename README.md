@@ -9,7 +9,6 @@
 Zoren is a decentralized platform built on the Solana blockchain that enables users to streamline money transfers through easily accessible QR codes. It also allows the creation of 'Parties,' which enable splitting a single payment among different users.
 
 # Table of contents
-- [Description](#description)
 - [Social Media](#social-media)
 - [Deck](#deck)
 - [Pich](#pitch)
@@ -24,23 +23,13 @@ Zoren is a decentralized platform built on the Solana blockchain that enables us
   -  [Quick start](#quick-start)
 -  [Project Structure](#project-structure)
 
-### Description
-
-Day by day, thousands of users within Latin America make use of money transfer platforms. According to a study conducted by Kantar TNS, 63% of internet users utilize digital transaction services.
-
-The lack of an efficient solution for quick money transfers and splitting payments among different users has created significant obstacles in everyday financial management. Currently, money transfer methods are often complicated and slow, resulting in delays and difficulties in splitting expenses among friends or colleagues. To address this issue, a web3 application is required to operate on the Solana network, enabling users to generate QR codes for instant transfers and the ability to create shared payments divided among multiple users. This application can effectively resolve the problem by simplifying financial transactions and promoting more efficient management of shared expenses.
-***
-Día con día miles de usuarios dentro de America Latina hace uso de plataformas de envió de dinero,según un estudio realizado por Kantar TNS, el 63% de los usuarios que hacen uso de internet, utilizan servicios de transacciones digitales.
-
-La falta de una solución eficiente para realizar transferencias de dinero rápidas y dividir pagos entre diferentes usuarios ha creado obstáculos significativos en la gestión financiera cotidiana. Actualmente, los métodos de transferencia de dinero son a menudo complicados y lentos, lo que resulta en retrasos y dificultades para dividir gastos entre amigos o colegas. Para abordar este problema, se requiere una aplicación web3 que funcione en la red de Solana y permita a los usuarios generar códigos QR para transferencias instantáneas y la capacidad de crear pagos compartidos divididos en múltiples usuarios. Esta aplicación puede resolver eficazmente la problemática al simplificar las transacciones financieras y promover una gestión más eficiente de los gastos compartidos.
-
 ## Social Media
 
 [Twitter](https://twitter.com/ZorenApp)
 
 [Instagram](https://www.instagram.com/zorenapp/)
 
-### This platform is now working at [Zoren.site](https://www.dashy.site/)
+### This platform is now working at [Zoren.site](https://www.zoren.site/)
 
 
 ## Pitch
