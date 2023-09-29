@@ -29,7 +29,7 @@ Zoren is a decentralized platform built on the Solana blockchain that enables us
 
 [Instagram](https://www.instagram.com/zorenapp/)
 
-### This platform is now working at [Zoren.site](https://www.zoren.site/)
+### This platform is now working at [Zoren.site]()
 
 
 ## Pitch
