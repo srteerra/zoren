@@ -142,38 +142,38 @@ http:/localhost:3000/
     $ Zoren Tree
     Zoren/
     ├── .next:                                  
-	│    ├── cache/:                            # Next.js cache files
-	│ 	├──	server/:                           # Server-related files
-	│ 	├── static/:                           # Static files
-	│ 	├── build-manifest.json                # Build manifest for fallback
-	│ 	├── fallback-build-manifest.json
-	│ 	├── package.json                       # Package configuration
-	│ 	├── react-loadable-manifest.json
-	│ 	└──	trace                              # Trace file
+    │   ├── cache/:                             # Next.js cache files
+    │ 	├──	server/:                        # Server-related files
+    │ 	├── static/:                            # Static files
+    │ 	├── build-manifest.json                 # Build manifest for fallback
+    │ 	├── fallback-build-manifest.json
+    │ 	├── package.json                        # Package configuration
+    │ 	├── react-loadable-manifest.json
+    │ 	└──	trace                           # Trace file
     ├── .vscode/:
     │    └── settings.json                      # VS Code configuration 
     ├── lib/:  
     │    └── sanitClient.js                     # Sanitization client file    
     ├── node_modules/:                          # Folder for all project modules.
     ├── public/:
-	│	├── icons/
-	│	├── images/
-	│	├── locales/
-	│	├── logos/
-	│	├── favicon.ico
-	│	├── next.svg
-	│	└── vercel.svg                          
+    │	│	├── icons/
+    │	│	├── images/
+    │	│	├── locales/
+    │	│	├── logos/
+    │	│	├── favicon.ico
+    │	│	├── next.svg
+    │	│	└── vercel.svg                          
     ├── src/:                                   # Folder for development content.
     │    ├── components/:                       # Reusable React components
     │    ├── actions/:                         
-	│    │    ├── ActionBills.jsx               # Actions related to bills
+    │    │    ├── ActionBills.jsx               # Actions related to bills
     │    │    └── ActionDash.jsx                # Actions related to the dashboard     
     │    ├──billFuntions/:                        
     │    │    ├──deleteModal.jsx                # Modal for deleting bills
     │    │    └──setBillModal.jsx               # Modal for setting up bills   
     │    ├── transactions/:
-	│    │    └── TransactionsQRModal.jsx       # QR transactions modal
-	│    │                                      # Other components and files               
+    │    │    └── TransactionsQRModal.jsx       # QR transactions modal
+    │    │                                      # Other components and files               
     │    ├── Billtem.jsx                        
     │    ├── CollectionItem.jsx
     │    ├── DarkMode.jsx
@@ -188,7 +188,7 @@ http:/localhost:3000/
     │    ├── Region.jsx
     │    └── Sidebar.jsx                           
     ├── containers/: 
-             └── Collections.jsx                    # Collections component                
+    │        └── Collections.jsx                # Collections component                
     ├── context/:                                 
     │    ├── AppContext.jsx                     # Application context 
     │    └── WalletConectioProvider.js          # Wallet connection provider      
@@ -215,7 +215,7 @@ http:/localhost:3000/
     │    │    ├── index.js                      # Schema index
     │    │    └── users.js                      # User schema
     │    └── static/
-    │    │    └── .gitkeep                      # Placeholder to keep the directory in version control
+    │         └── .gitkeep                      # Placeholder to keep the directory in version control
     ├── .eslintrc.json                          # ESLint configuration
     ├── .gitignore                              # Git ignore configuration file
     ├── jsconfig.json
