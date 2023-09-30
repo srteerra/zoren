@@ -92,10 +92,10 @@ const Profile = () => {
   );
 
   if (limits.includes(route)) {
-    null;
+    return null;
   } else {
     return (
-      <aside className="flex pt-8 xl:py-16 justify-between xl:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen lg:w-4/12 px-4 sm:px-8 lg:px-16 right-0">
+      <aside className="flex pt-8 xl:py-16 justify-between xl:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen max-h-screen overflow-hidden lg:w-4/12 px-4 sm:px-8 lg:px-16 right-0">
         {show ? slide : null}
         <EditProfleModal
           modalOpen={editProfileModalOpen}
@@ -167,7 +167,7 @@ const Profile = () => {
         </div>
 
         {/* Collection section */}
-        <section className="hidden lg:block p-0 xl:p-2">
+        <section className="hidden w-full lg:block p-0 h-full">
           <div className="flex items-center justify-between">
             <h3 className="font-bold">My bills</h3>
             <button>
@@ -175,7 +175,7 @@ const Profile = () => {
             </button>
           </div>
           {/* list of collections */}
-          <div className="my-6">
+          <div className="my-6 h-2/6 max-w-full overflow-scroll">
             <Collections />
           </div>
         </section>

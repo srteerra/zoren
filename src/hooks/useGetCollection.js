@@ -24,16 +24,28 @@ const firestore = getFirestore(app);
 
 // get all collections in a wallet
 export async function handleGetCollections(wallet) {
-  const snapshot = await getDocs(
-    collection(firestore, "wallets", wallet, "wallet-collections")
+  if (wallet) {
+    const snapshot = await getDocs(
+      collection(firestore, "wallets", wallet, "wallet-collections")
+    );
+
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return data;
+  } else {
+    return;
+  }
+}
+
+// get all collections in a wallet
+export async function handleGetCollection(wallet, collection) {
+  const snapshot = await getDoc(
+    doc(firestore, "wallets", wallet, "wallet-collections", collection)
   );
 
-  const data = snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-
-  return data;
+  return snapshot.data();
 }
 
 // get all collections in a wallet with status 'open'
@@ -119,14 +131,14 @@ export async function handleAddData(data) {
           collection(firestore, "wallets", data.wallet, "wallet-collections"),
           {
             amount: data.amount,
-            hasPaid: data.hasPaid,
+            hasPaid: 0,
             people: data.people,
-            status: data.status,
+            status: "open",
             title: data.title,
             transactions: [],
           }
         );
-        return true;
+        return fn.id;
       } catch (error) {
         console.log(error);
         return false;
@@ -135,21 +147,32 @@ export async function handleAddData(data) {
       return false;
     }
   } else {
-    await setDoc(doc(firestore, "wallets", data.wallet), {
-      name: data.name || data.wallet,
-    });
-    const fn = await addDoc(
-      collection(firestore, "wallets", data.wallet, "wallet-collections"),
-      {
-        amount: data.amount,
-        hasPaid: data.hasPaid,
-        people: data.people,
-        status: data.status,
-        title: data.title,
-        transactions: [],
-      }
-    );
-    return true;
+    try {
+      await setDoc(doc(firestore, "wallets", data.wallet), {
+        name: data.name || data.wallet,
+      });
+      await addDoc(
+        collection(firestore, "wallets", data.wallet, "transactions"),
+        {
+          name: data.wallet,
+        }
+      );
+      const fn = await addDoc(
+        collection(firestore, "wallets", data.wallet, "wallet-collections"),
+        {
+          amount: data.amount,
+          hasPaid: 0,
+          people: data.people,
+          status: "open",
+          title: data.title,
+          transactions: [],
+        }
+      );
+      return fn.id;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
 }
 
@@ -186,6 +209,19 @@ export async function handleModifyData(data) {
           }),
         }
       ).then(async () => {
+        try {
+          await addDoc(
+            collection(firestore, "wallets", data.walletTo, "transactions"),
+            {
+              address: data.walletFrom,
+              amount: data.amount,
+              date: `${new Date().getFullYear()}-${new Date().getDate()}-${new Date().getMonth()}`,
+              bill: data.walletCollectionTo,
+            }
+          );
+        } catch (error) {
+          console.log("ass transactions: ", error);
+        }
         if (await validatePaid(data.walletTo, data.walletCollectionTo)) {
           await updateDoc(
             doc(

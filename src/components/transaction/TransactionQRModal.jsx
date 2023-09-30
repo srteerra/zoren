@@ -1,3 +1,4 @@
+"use client";
 import { Modal, ModalClose } from "../Modal";
 import { truncate } from "@/utils/string";
 import {
@@ -12,10 +13,26 @@ import { PublicKey, Keypair } from "@solana/web3.js";
 import BigNumber from "bignumber.js";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useZoren } from "../../hooks/useZoren";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import {
+  handleAddData,
+  handleGetCollection,
+  handleModifyData,
+} from "@/hooks/useGetCollection";
+import AppContext from "@/context/AppContext";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
+import {
+  getFirestore,
+  collection,
+  query,
+  onSnapshot,
+  doc,
+} from "firebase/firestore";
+import { app } from "@/firebase";
+// get the firestore
+const firestore = getFirestore(app);
 
 const TransactionQRModal = ({
   modalOpen,
@@ -32,6 +49,10 @@ const TransactionQRModal = ({
   const [peopleInput, setPeopleInput] = useState("");
   const [conceptInput, setConceptInput] = useState("");
   const [stepModal, setStepModal] = useState(1);
+  const [col, setCol] = useState("");
+  const [newAdded, setNewAdded] = useState("");
+  const { listener, setListener, state } = useContext(AppContext);
+  const [counter, setCounter] = useState(0);
 
   const { transactions, setTransactions } = useZoren();
   const toastId = useRef(null);
@@ -60,19 +81,68 @@ const TransactionQRModal = ({
       closeOnClick: true,
       autoClose: 3000,
     });
+  const setError = (text) =>
+    toast.error(text, {
+      position: "bottom-right",
+      isLoading: false,
+      closeOnClick: true,
+      autoClose: 3000,
+    });
 
   const { connection } = useConnection();
 
-  const loadQr = () => {
-    setQrCode(true);
-    setHandleClick(true);
-    trans();
+  if (userAddress) {
+    if (listener) {
+      onSnapshot(
+        query(
+          collection(
+            firestore,
+            "wallets",
+            userAddress,
+            "wallet-collections"
+          )
+        ),
+        (snapshot) => {
+          snapshot.docChanges().forEach(async (change) => {
+            if (change.type === "modified") {
+              setCounter(counter+1);
+            }
+          });
+        }
+      );
+    } else null;
+  }
+
+  const loadQr = async () => {
+    setListener(true);
+    const register = await handleAddData({
+      wallet: userAddress,
+      amount: Number(amountInput),
+      people: Number(peopleInput),
+      title: conceptInput,
+    });
+    if (register) {
+      setNewAdded(register);
+      setCol(await handleGetCollection(userAddress, register));
+      setQrCode(true);
+      setHandleClick(true);
+      trans();
+    } else {
+      loadOff();
+      setStepModal(4);
+      setModalOpen(false);
+      setError("Something went wrong!, try again");
+      setTimeout(() => setListener(false), 1000);
+      setCounter(0);
+    }
   };
 
   const loadOff = () => {
     setModalOpen(false);
     setHandleClick(false);
     notify();
+    setTimeout(() => setListener(false), 1000);
+    setCounter(0);
   };
 
   useEffect(() => {
@@ -404,18 +474,36 @@ const TransactionQRModal = ({
             <div>
               <div className="flex flex-col gap-6 items-center justify-center space-y-1">
                 <div className="w-full flex justify-between font-bold">
-                  <p className="text-dark dark:text-white text-lg">5 People</p>
-                  <p className="text-primary dark:text-white text-lg">Dinner</p>
-                  <p className="text-dark dark:text-white text-lg">5 SOL</p>
+                  <p className="text-dark dark:text-white text-lg">
+                    {col.people || 0} People
+                  </p>
+                  <p className="text-primary dark:text-white text-lg">
+                    {col.title || "Dinner"}
+                  </p>
+                  <p className="text-dark dark:text-white text-lg">
+                    {col.amount || 0} SOL
+                  </p>
                 </div>
                 <div className="text-white bg-white rounded-3xl" ref={qrRef} />
+                <button
+                  onClick={async () =>
+                    await handleModifyData({
+                      walletTo: "FhWidpNLmYTL8vfTrSYApDtwfcryvXzPAxCX5PVMauBa",
+                      walletFrom: "pepe",
+                      amount: 1,
+                      walletCollectionTo: newAdded,
+                    })
+                  }
+                >
+                  send
+                </button>
                 <div className="flex justify-center flex-col gap-4 text-center">
                   <div>
                     <p className="font-normal text-2xl">Waiting...</p>
                   </div>
                   <div>
                     <p className="font-extrabold text-xl text-primary dark:text-white">
-                      0/5 Contributions
+                      {counter || 0}/{col.people || 0} Contributions
                     </p>
                   </div>
                 </div>
