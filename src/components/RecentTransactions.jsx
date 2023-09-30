@@ -10,7 +10,7 @@ function MostRecentTransactions() {
       </div>
       <div className="my-12 overflow-x-scroll">
         {/* Transaction card */}
-        <div className="flex justify-between min-w-[800px]">
+        <div className="flex justify-between items-center min-w-[800px]">
             {/* Avatar */}
             <div>a</div>
             {/* Name */}

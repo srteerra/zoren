@@ -21,7 +21,7 @@ const Bill = (data) => {
         <div className="flex justify-between">
           <div className="flex w-full justify-between items-center pb-5">
             <div className="flex gap-3 items-center">
-              <div className="bg-slate-800 grid p-0 place-items-center rounded-xl w-12 h-12">
+              <div className="bg-slate-800 dark:bg-gray-600 grid p-0 place-items-center rounded-xl w-12 h-12">
                 <p className="text-xl">🍕</p>
               </div>
               <p className="font-bold overflow-x-hidden w-20 pr-6 text-xl text-white">Dinner</p>

@@ -103,6 +103,16 @@ export const useZoren = () => {
     return transaction;
   };
 
+  const addContact = (address) => {
+    if (address) {
+      client
+        .patch(state.userAddress)
+        .setIfMissing({ userContacts: [] })
+        .append("userContacts", [address])
+        .commit({ autoGenerateArrayKeys: true });
+    }
+  };
+
   const updateAcc = (newN, newA) => {
     if (newA) {
       client
@@ -209,5 +219,6 @@ export const useZoren = () => {
     newTransactionModalOpen,
     setNewTransactionModalOpen,
     userTransactions,
+    addContact,
   };
 };

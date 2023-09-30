@@ -35,6 +35,7 @@
     "next-i18next": "^14.0.3",
     "next-themes": "^0.2.1",
     "postcss": "8.4.29",
+    "qrcode": "^1.5.3",
     "react": "18.2.0",
     "react-awesome-reveal": "^4.2.5",
     "react-dom": "18.2.0",

@@ -14,10 +14,14 @@ export default function Layout({ children }) {
   const limits = ["/", "/how", "/about"];
 
   useEffect(() => {
-    if (!connected) {
+    if (
+      !connected &&
+      (route === "/dashboard" ||
+        route === "/bills" ||
+        route === "/friends" ||
+        route === "/settings")
+    ) {
       router.push("/");
-    } else {
-      router.push("/dashboard");
     }
   }, [connected]);
 
