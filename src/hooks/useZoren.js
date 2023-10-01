@@ -15,6 +15,7 @@ import { client } from "../../lib/sanityClient";
 import imageUrlBuilder from "@sanity/image-url";
 import { useContext } from "react";
 import AppContext from "@/context/AppContext";
+import Base58 from "base58";
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
