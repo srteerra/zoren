@@ -18,7 +18,7 @@ function AllFriends() {
         <h2>My friends</h2>
         <p>List of contacts</p>
       </div>
-      <div className="my-12 overflow-x-scroll">
+      <div className="hiddenScroll my-12 overflow-x-scroll">
         {!state.userContacts ? (
           <div className="flex items-center justify-between min-w-[800px]">
             <p>You dont have anyone added.</p>
@@ -26,7 +26,7 @@ function AllFriends() {
         ) : (
           <div className="flex flex-col gap-6">
             {friendsList.map((contact, key) => (
-              <FriendItem key={key} address={contact} />
+              <FriendItem key={key} address={contact.contactAddress} />
             ))}
           </div>
         )}

@@ -58,14 +58,25 @@ export const useZoren = () => {
 
       const collectData = await client.fetch(query);
 
-      // Setting up the user data on fetch
-      initialFetch({
-        username: await collectData[0].userName,
-        address: publicKey.toString(),
-        balance: value / LAMPORTS_PER_SOL,
-        avatar: await collectData[0].imageUrl,
-        contacts: await collectData[0].userContacts,
-      });
+      if (await collectData[0].imageUrl) {
+        // Setting up the user data on fetch
+        initialFetch({
+          username: await collectData[0].userName,
+          address: publicKey.toString(),
+          balance: value / LAMPORTS_PER_SOL,
+          avatar: await collectData[0].imageUrl,
+          contacts: await collectData[0].userContacts,
+        });
+      } else {
+        // Setting up the user data on fetch
+        initialFetch({
+          username: await collectData[0].userName,
+          address: publicKey.toString(),
+          balance: value / LAMPORTS_PER_SOL,
+          avatar: "https://avatar.iran.liara.run/public/12",
+          contacts: await collectData[0].userContacts,
+        });
+      }
     });
   };
 
@@ -111,9 +122,23 @@ export const useZoren = () => {
       client
         .patch(state.userAddress)
         .setIfMissing({ userContacts: [] })
-        .append("userContacts", [address])
+        .append("userContacts", [{ contactAddress: address }])
         .commit({ autoGenerateArrayKeys: true })
         .then((res) => {
+          setContacts(res.userContacts);
+        });
+    }
+  };
+
+  const removeContact = (address) => {
+    if (address) {
+      // const reviewsToRemove = ["reviews[0]", 'reviews[_key=="abc123"]'];
+      client
+        .patch(state.userAddress)
+        .unset([`userContacts[contactAddress=="${address.toString()}"]`])
+        .commit()
+        .then((res) => {
+          console.log(res);
           setContacts(res.userContacts);
         });
     }
@@ -226,5 +251,6 @@ export const useZoren = () => {
     setNewTransactionModalOpen,
     userTransactions,
     addContact,
+    removeContact,
   };
 };

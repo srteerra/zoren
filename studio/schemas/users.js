@@ -25,7 +25,18 @@ export default {
       name: 'userContacts',
       title: 'Contacts',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [
+        {
+          type: 'object',
+          fields: [
+            // fields must be defined, and it must be an array
+            {
+              name: 'contactAddress', // field name is required and must be unique
+              type: 'string', // field type is required
+            },
+          ],
+        },
+      ],
     },
   ],
 }

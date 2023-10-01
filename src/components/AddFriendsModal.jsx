@@ -14,8 +14,15 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
   const [catchMsg, setCatchMsg] = useState("");
   const [isVerified, setIsVerified] = useState(undefined);
   const [isAdded, setIsAdded] = useState(false);
+  const [contacts, setContacts] = useState([]);
   const { addContact } = useZoren();
   const { state } = useContext(AppContext);
+
+  useEffect(() => {
+    state.userContacts.map((e) => {
+      setContacts((contacts) => [...contacts, e.contactAddress]);
+    });
+  }, [state.userContacts]);
 
   const verifyUser = () => {
     if (searchPeople.toString().length === 44) {
@@ -23,13 +30,11 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
       const publicKey = new PublicKey(input);
       const isValidAddress = PublicKey.isOnCurve(publicKey);
 
-      console.log(input);
-
       if (isValidAddress) {
         client.getDocument(searchPeople.toString()).then((r) => {
           if (r) {
             setIsVerified(true);
-            if (state.userContacts.includes(searchPeople.toString())) {
+            if (contacts.includes(searchPeople.toString())) {
               setCatchMsg("You have already added this user");
               setIsAdded(true);
             } else {
@@ -75,7 +80,7 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
                         : isVerified === false
                         ? "border-red-400 placeholder-red-200 text-red-400"
                         : "border-gray-400 text-gray-600 placeholder-gray-400"
-                    } font-extrabold w-[400px] disabled:opacity-50 text-start border-2 px-6 py-2 rounded-xl dark:text-white bg-transparent outline-none`}
+                    } font-extrabold w-[400px] disabled:opacity-50 text-start border-2 px-6 py-2 rounded-xl bg-transparent outline-none`}
                     id="searchPurpose"
                     name="searchPurpose"
                     type="text"
