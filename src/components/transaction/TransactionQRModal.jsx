@@ -4,6 +4,7 @@ import EmojiStyle from "emoji-picker-react";
 import EmojiClickData from "emoji-picker-react";
 import { Emoji } from "emoji-picker-react";
 import { truncate } from "@/utils/string";
+import axios from "axios";
 import {
   createQR,
   encodeURL,
@@ -43,7 +44,7 @@ const firestore = getFirestore(app);
 import friends2 from "../../../public/images/friends2.png";
 import coinsIcon from "../../../public/images/coins.png";
 import receiptIcon from "../../../public/images/mobile-receipt.png";
-import swaptIcon from "../../../public/images/swap.png";
+import swapIcon from "../../../public/images/swap.png";
 
 const TransactionQRModal = ({
   modalOpen,
@@ -56,7 +57,9 @@ const TransactionQRModal = ({
 }) => {
   const qrRef = useRef();
   const [handleClick, setHandleClick] = useState(false);
+  const [swapCurrency, setSwapCurrency] = useState(true);
   const [amountInput, setAmountInput] = useState("");
+  const [amountInputCrypto, setAmountInputCrypto] = useState("");
   const [peopleInput, setPeopleInput] = useState("");
   const [conceptInput, setConceptInput] = useState("");
   const [pickerValue, setPickerValue] = useState("");
@@ -67,6 +70,7 @@ const TransactionQRModal = ({
   const [newAdded, setNewAdded] = useState("");
   const { listener, setListener, state } = useContext(AppContext);
   const [counter, setCounter] = useState(0);
+  const [solanaUSD, setSolanaUSD] = useState(0);
 
   const { transactions, setTransactions } = useZoren();
   const toastId = useRef(null);
@@ -107,13 +111,13 @@ const TransactionQRModal = ({
       closeOnClick: true,
       autoClose: 3000,
     });
-  
-  const clearInputs= () => {
+
+  const clearInputs = () => {
     setShowPicker(false);
     setAmountInput("");
     setPeopleInput("");
     setConceptInput("");
-  }
+  };
 
   const { connection } = useConnection();
 
@@ -165,6 +169,38 @@ const TransactionQRModal = ({
     setTimeout(() => setListener(false), 1000);
     setCounter(0);
   };
+
+  useEffect(() => {
+    axios
+    .get(
+      "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
+    )
+    .then((res) => {
+      setSolanaUSD(res.data.solana.usd);
+    });
+  }, [])
+
+  useEffect(() => {
+    if(!swapCurrency) {
+      if(amountInput <= 0) {
+        setAmountInputCrypto(0)
+      }
+    } else {
+      if(amountInputCrypto <= 0) {
+        setAmountInput(0)
+      }
+    }
+  }, [swapCurrency])
+
+  const AmountChangeFiat = (amount) => {
+    setAmountInput(Number(amount))
+    setAmountInputCrypto((amount / solanaUSD).toFixed(0));
+  }
+
+  const AmountChangeCrypto = (amount) => {
+    setAmountInputCrypto(Number(amount))
+    setAmountInput((amount * solanaUSD).toFixed(0));
+  }
 
   useEffect(() => {
     if (userAddress) {
@@ -272,8 +308,7 @@ const TransactionQRModal = ({
                   Set the contributors
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
-                  You can add your friends to make a whitelist or a simple
-                  number
+                  Specify the amount of people that will be separated.
                 </p>
               </div>
               <div className="my-12 flex gap-3 justify-center">
@@ -318,8 +353,8 @@ const TransactionQRModal = ({
                   Set an amount
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
-                  Zoren will calculate the amount to pay per number of
-                  contributors
+                  Zoren will calculate the amount to pay by number of
+                  contributors.
                 </p>
               </div>
               <div className="my-12 flex gap-3 justify-center">
@@ -364,7 +399,7 @@ const TransactionQRModal = ({
                   Add a concept
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
-                  To separate a bill into a group and organize them
+                  To separate a bill into a group and organize them.
                 </p>
               </div>
               <div className="my-12 flex gap-3 justify-center">
@@ -415,25 +450,109 @@ const TransactionQRModal = ({
               </div>
 
               <div className="w-full flex gap-4 flex-col py-12">
-                <div className="flex w-full justify-between gap-4 rounded-lg">
-                  <div>
-                    <label className="text-gray-500" htmlFor="qrPurpose">
-                      Amount:
-                    </label>
-                  </div>
-                  <div className="flex w-[40%] justify-end">
-                    <input
-                      className="font-extrabold text-end text-gray-600 dark:text-white placeholder-gray-400 bg-transparent outline-none"
-                      id="qrPurpose"
-                      name="qrPurpose"
-                      type="number"
-                      placeholder="0"
-                      value={amountInput}
-                      onChange={(e) => setAmountInput(e.target.value)}
-                    />
-                    <p className="font-bold ml-2">SOL</p>
-                  </div>
-                </div>
+                {swapCurrency ? (
+                  <>
+                    <div className="flex w-full justify-between gap-4 rounded-lg">
+                      <div>
+                        <label className="text-gray-500" htmlFor="cryptoPurpose">
+                          Amount:
+                        </label>
+                      </div>
+                      <div className="flex w-[40%] justify-end">
+                        <input
+                          className="font-extrabold text-end text-gray-600 dark:text-white placeholder-gray-400 bg-transparent outline-none"
+                          id="cryptoPurpose"
+                          name="cryptoPurpose"
+                          type="number"
+                          placeholder="0"
+                          value={amountInputCrypto}
+                          onChange={(e) => AmountChangeCrypto(e.target.value)}
+                        />
+                        <p className="font-bold ml-2">SOL</p>
+                      </div>
+                    </div>
+                    <div className="flex w-full justify-end gap-4 rounded-lg">
+                      <button onClick={() => setSwapCurrency(!swapCurrency)}>
+                        <Image
+                          className=""
+                          src={swapIcon}
+                          alt="SwapButton"
+                          priority={true}
+                          width={20}
+                        />
+                      </button>
+                    </div>
+                    <div className="flex w-full justify-end gap-4 rounded-lg">
+                      <div className="flex w-[40%] justify-end">
+                        <input
+                          className="font-bold text-end disabled:opacity-70 text-gray-600 dark:text-white placeholder-gray-400 bg-transparent outline-none"
+                          id="fiatPurpose"
+                          name="fiatPurpose"
+                          type="number"
+                          placeholder="0"
+                          disabled={true}
+                          value={parseFloat(
+                            amountInput.toString()
+                          ).toFixed(2)}
+                        />
+                        <p className="font-medium ml-2 opacity-70 text-gray-600 dark:text-white">
+                          USD
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex w-full justify-between gap-4 rounded-lg">
+                      <div>
+                        <label className="text-gray-500" htmlFor="fiatPurpose">
+                          Amount:
+                        </label>
+                      </div>
+                      <div className="flex w-[40%] justify-end">
+                        <input
+                          className="font-extrabold text-end text-gray-600 dark:text-white placeholder-gray-400 bg-transparent outline-none"
+                          id="fiatPurpose"
+                          name="fiatPurpose"
+                          type="number"
+                          placeholder="0"
+                          value={amountInput}
+                          onChange={(e) => AmountChangeFiat(e.target.value)}
+                        />
+                        <p className="font-bold ml-2">USD</p>
+                      </div>
+                    </div>
+                    <div className="flex w-full justify-end gap-4 rounded-lg">
+                      <button onClick={() => setSwapCurrency(!swapCurrency)}>
+                        <Image
+                          className=""
+                          src={swapIcon}
+                          alt="SwapButton"
+                          priority={true}
+                          width={20}
+                        />
+                      </button>
+                    </div>
+                    <div className="flex w-full justify-end gap-4 rounded-lg">
+                      <div className="flex w-[40%] justify-end">
+                        <input
+                          className="font-bold text-end disabled:opacity-70 text-gray-600 dark:text-white placeholder-gray-400 bg-transparent outline-none"
+                          id="cryptoPurpose"
+                          name="cryptoPurpose"
+                          type="number"
+                          placeholder="0"
+                          disabled={true}
+                          value={parseFloat(
+                            amountInputCrypto.toString()
+                          ).toFixed(2)}
+                        />
+                        <p className="font-medium ml-2 opacity-70 text-gray-600 dark:text-white">
+                          SOL
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                )}
                 <div className="flex w-full justify-between gap-4 rounded-lg">
                   <div>
                     <label className="text-gray-500" htmlFor="peoplePurpose">
@@ -473,7 +592,10 @@ const TransactionQRModal = ({
                   className="border-2 w-full border-sky-300 flex justify-around items-center overflow-hidden gap-4 py-2 px-4 rounded-lg"
                   onClick={() => setShowPicker(!showPicker)}
                 >
-                  Set an emoji for styled you collection <span><ChevronDownIcon className="w-6 h-6" /></span>
+                  Set an emoji for styled you collection{" "}
+                  <span>
+                    <ChevronDownIcon className="w-6 h-6" />
+                  </span>
                 </button>
               </div>
               {showPicker && (
@@ -496,7 +618,7 @@ const TransactionQRModal = ({
 
                 <button
                   onClick={() => {
-                    setModalOpen(false)
+                    setModalOpen(false);
                     clearInputs();
                   }}
                   className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
