@@ -8,7 +8,7 @@ function MostRecentTransactions() {
         <h2>Most Recent</h2>
         <p>Trasactions</p>
       </div>
-      <div className="my-12 overflow-x-scroll">
+      <div className="hiddenScroll my-12 overflow-x-scroll">
         {/* Transaction card */}
         <div className="flex justify-between items-center min-w-[800px]">
             {/* Avatar */}

@@ -175,7 +175,7 @@ const Profile = () => {
             </button>
           </div>
           {/* list of collections */}
-          <div className="my-6 h-2/6 max-w-full overflow-scroll">
+          <div className="hiddenScroll my-6 h-2/6 max-w-full overflow-scroll">
             <Collections />
           </div>
         </section>
