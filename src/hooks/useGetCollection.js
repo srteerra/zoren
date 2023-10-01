@@ -14,6 +14,7 @@ import {
   updateDoc,
   arrayUnion,
   increment,
+  limit,
 } from "firebase/firestore";
 import { app } from "../firebase.js";
 
@@ -35,11 +36,34 @@ export async function handleGetCollections(wallet) {
     }));
     return data;
   } else {
-    return;
+    return false;
   }
 }
 
-// get all collections in a wallet
+// get most recent transactions
+export async function handleGetRecentTrans(wallet) {
+  if (wallet) {
+    const snapshot = await getDocs(
+      query(
+        collection(firestore, "wallets", wallet, "transactions"),
+        where("date", "!=", ""),
+        limit(5),
+        orderBy("date")
+      )
+    );
+
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    console.log(data);
+    return data;
+  } else {
+    return false;
+  }
+}
+
+// get a collection
 export async function handleGetCollection(wallet, collection) {
   const snapshot = await getDoc(
     doc(firestore, "wallets", wallet, "wallet-collections", collection)
