@@ -36,6 +36,7 @@ import {
 } from "firebase/firestore";
 import { app } from "@/firebase";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { Ring } from "@uiball/loaders";
 
 // Get the firestore
 const firestore = getFirestore(app);
@@ -78,6 +79,7 @@ const TransactionQRModal = ({
   const handleClickPicker = (emojiData) => {
     setPickerValue(emojiData.emoji);
     setSelectedEmoji(emojiData.emoji);
+    setShowPicker(false);
   };
 
   const trans = () =>
@@ -172,35 +174,35 @@ const TransactionQRModal = ({
 
   useEffect(() => {
     axios
-    .get(
-      "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
-    )
-    .then((res) => {
-      setSolanaUSD(res.data.solana.usd);
-    });
-  }, [])
+      .get(
+        "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
+      )
+      .then((res) => {
+        setSolanaUSD(res.data.solana.usd);
+      });
+  }, []);
 
   useEffect(() => {
-    if(!swapCurrency) {
-      if(amountInput <= 0) {
-        setAmountInputCrypto(0)
+    if (!swapCurrency) {
+      if (amountInput <= 0) {
+        setAmountInputCrypto(0);
       }
     } else {
-      if(amountInputCrypto <= 0) {
-        setAmountInput(0)
+      if (amountInputCrypto <= 0) {
+        setAmountInput(0);
       }
     }
-  }, [swapCurrency])
+  }, [swapCurrency]);
 
   const AmountChangeFiat = (amount) => {
-    setAmountInput(Number(amount))
+    setAmountInput(Number(amount));
     setAmountInputCrypto((amount / solanaUSD).toFixed(0));
-  }
+  };
 
   const AmountChangeCrypto = (amount) => {
-    setAmountInputCrypto(Number(amount))
+    setAmountInputCrypto(Number(amount));
     setAmountInput((amount * solanaUSD).toFixed(0));
-  }
+  };
 
   useEffect(() => {
     if (userAddress) {
@@ -454,7 +456,10 @@ const TransactionQRModal = ({
                   <>
                     <div className="flex w-full justify-between gap-4 rounded-lg">
                       <div>
-                        <label className="text-gray-500" htmlFor="cryptoPurpose">
+                        <label
+                          className="text-gray-500"
+                          htmlFor="cryptoPurpose"
+                        >
                           Amount:
                         </label>
                       </div>
@@ -491,9 +496,7 @@ const TransactionQRModal = ({
                           type="number"
                           placeholder="0"
                           disabled={true}
-                          value={parseFloat(
-                            amountInput.toString()
-                          ).toFixed(2)}
+                          value={parseFloat(amountInput.toString()).toFixed(2)}
                         />
                         <p className="font-medium ml-2 opacity-70 text-gray-600 dark:text-white">
                           USD
@@ -585,24 +588,23 @@ const TransactionQRModal = ({
                     onChange={(e) => setConceptInput(e.target.value)}
                   />
                 </div>
-              </div>
-              <div className="flex w-full flex-col items-center gap-4 py-4">
-                {showPicker ? <h2>{pickerValue}</h2> : null}
-                <button
-                  className="border-2 w-full border-sky-300 flex justify-around items-center overflow-hidden gap-4 py-2 px-4 rounded-lg"
-                  onClick={() => setShowPicker(!showPicker)}
-                >
-                  Set an emoji for styled you collection{" "}
-                  <span>
-                    <ChevronDownIcon className="w-6 h-6" />
-                  </span>
-                </button>
-              </div>
-              {showPicker && (
-                <div className="flex pb-10">
-                  <EmojiStyle onEmojiClick={handleClickPicker} />
+                <div className="flex w-full justify-between items-center rounded-lg">
+                  <p className="text-gray-500">Icon:</p>
+                  <div>
+                    <button
+                      className="flex text-lg justify-around items-center overflow-hidden rounded-lg"
+                      onClick={() => setShowPicker(!showPicker)}
+                    >
+                      {pickerValue || "💸"}
+                    </button>
+                    {showPicker && (
+                      <div className="flex pb-10">
+                        <EmojiStyle onEmojiClick={handleClickPicker} />
+                      </div>
+                    )}
+                  </div>
                 </div>
-              )}
+              </div>
 
               <div className="flex flex-col w-full gap-4">
                 <button
@@ -635,33 +637,24 @@ const TransactionQRModal = ({
                     {col.people || 0} People
                   </p>
                   <p className="text-primary dark:text-white text-lg">
-                    {col.title || "Dinner"}
+                    {col.icon} {col.title || "..."}
                   </p>
                   <p className="text-dark dark:text-white text-lg">
                     {col.amount || 0} SOL
                   </p>
                 </div>
                 <div className="text-white bg-white rounded-3xl" ref={qrRef} />
-                <button
-                  onClick={async () =>
-                    await handleModifyData({
-                      walletTo: "FhWidpNLmYTL8vfTrSYApDtwfcryvXzPAxCX5PVMauBa",
-                      walletFrom: "pepe",
-                      amount: 1,
-                      walletCollectionTo: newAdded,
-                    })
-                  }
-                >
-                  send
-                </button>
                 <div className="flex justify-center flex-col gap-4 text-center">
-                  <div>
-                    <p className="font-normal text-2xl">Waiting...</p>
-                  </div>
-                  <div>
-                    <p className="font-extrabold text-xl text-primary dark:text-white">
-                      {counter || 0}/{col.people || 0} Contributions
-                    </p>
+                  <div className="mx-auto flex flex-col gap-2 items-center">
+                    <div className="font-normal flex gap-3 text-2xl">
+                      <Ring size={25} lineWeight={5} speed={2} color="black" />{" "}
+                      <p>Waiting...</p>
+                    </div>
+                    <div className="flex justify-center">
+                      <p className="font-extrabold text-xl text-primary dark:text-white">
+                        {counter || 0}/{col.people || 0} Contributions
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <button
@@ -674,6 +667,11 @@ const TransactionQRModal = ({
                 >
                   <span className="font-medium text-red-300">Cancel</span>
                 </button>
+                <div className="w-[60%] flex justify-center mx-auto text-center">
+                  <p className="font-normal text-md opacity-60 mx-auto">
+                    Dont close this window or the transaction waiting will end.
+                  </p>
+                </div>
               </div>
             </div>
           )}
