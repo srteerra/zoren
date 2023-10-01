@@ -74,7 +74,7 @@ export default function Layout({ children }) {
         className={
           limits.includes(route)
             ? "w-full h-screen"
-            : "w-full lg:w-2/3 xl:w-3/4 h-screen"
+            : "w-full lg:w-2/3 xl:w-3/4 max-h-screen overflow-hidden"
         }
       >
         {children}
