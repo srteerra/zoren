@@ -41,6 +41,7 @@ const Collections = () => {
         key={collection.title}
         title={collection.title}
         contrib={collection.hasPaid}
+        placeH={collection.people}
         icon={collection.icon}
       />
     ));

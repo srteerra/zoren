@@ -85,7 +85,7 @@ const Dashboard = () => {
           </button>
         </div>
         {/* list of collections */}
-        <div className="flex my-4">
+        <div className="flex flex-nowrap my-4 max-w-full overflow-x-scroll">
           <Collections />
         </div>
       </section>
