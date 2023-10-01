@@ -35,8 +35,15 @@ import {
 } from "firebase/firestore";
 import { app } from "@/firebase";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-// get the firestore
+
+// Get the firestore
 const firestore = getFirestore(app);
+
+// Images import
+import friends2 from "../../../public/images/friends2.png";
+import coinsIcon from "../../../public/images/coins.png";
+import receiptIcon from "../../../public/images/mobile-receipt.png";
+import swaptIcon from "../../../public/images/swap.png";
 
 const TransactionQRModal = ({
   modalOpen,
@@ -255,12 +262,11 @@ const TransactionQRModal = ({
             <div>
               <div className="flex flex-col mx-auto text-center w-2/3">
                 <Image
-                  className="rounded-full mx-auto my-8"
-                  src={"https://picsum.photos/id/237/200/200"}
+                  className="mx-auto"
+                  src={friends2}
                   alt="Profile"
                   priority={true}
-                  height={110}
-                  width={110}
+                  width={180}
                 />
                 <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
                   Set the contributors
@@ -302,12 +308,11 @@ const TransactionQRModal = ({
             <div>
               <div className="flex flex-col mx-auto text-center w-2/3">
                 <Image
-                  className="rounded-full mx-auto my-8"
-                  src={"https://picsum.photos/id/237/200/200"}
+                  className="mx-auto my-8"
+                  src={coinsIcon}
                   alt="Profile"
                   priority={true}
-                  height={110}
-                  width={110}
+                  width={120}
                 />
                 <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
                   Set an amount
@@ -349,12 +354,11 @@ const TransactionQRModal = ({
             <div>
               <div className="flex flex-col mx-auto text-center w-[75%] px-12">
                 <Image
-                  className="rounded-full mx-auto my-8"
-                  src={"https://picsum.photos/id/237/200/200"}
+                  className="mx-auto my-8"
+                  src={receiptIcon}
                   alt="Profile"
                   priority={true}
-                  height={110}
-                  width={110}
+                  width={100}
                 />
                 <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
                   Add a concept
