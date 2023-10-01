@@ -28,16 +28,14 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
       if (isValidAddress) {
         client.getDocument(searchPeople.toString()).then((r) => {
           if (r) {
-            client.getDocument(state.userAddress).then((res) => {
-              setIsVerified(true);
-              if (res.userContacts.includes(searchPeople.toString())) {
-                setCatchMsg("You have already added this user");
-                setIsAdded(true);
-              } else {
-                setCatchMsg("This user is using Zoren!");
-                setIsAdded(false);
-              }
-            })
+            setIsVerified(true);
+            if (state.userContacts.includes(searchPeople.toString())) {
+              setCatchMsg("You have already added this user");
+              setIsAdded(true);
+            } else {
+              setCatchMsg("This user is using Zoren!");
+              setIsAdded(false);
+            }
           } else {
             setIsVerified(false);
             setCatchMsg("This user is not using Zoren :(");
@@ -96,7 +94,13 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
                 </div>
                 {catchMsg ? (
                   <div className="flex items-center justify-center w-full">
-                    <p className={isVerified === true ? 'text-green-800' : 'text-red-400'}>{catchMsg}</p>
+                    <p
+                      className={
+                        isVerified === true ? "text-green-800" : "text-red-400"
+                      }
+                    >
+                      {catchMsg}
+                    </p>
                   </div>
                 ) : (
                   <></>
@@ -109,8 +113,8 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
                   if (!isVerified) {
                     verifyUser();
                   } else if (!isAdded) {
-                    addContact(searchPeople.toString())
-                    setModalOpen(false)
+                    addContact(searchPeople.toString());
+                    setModalOpen(false);
                     setIsVerified(undefined);
                     setSearchPeople("");
                     setCatchMsg("");
@@ -121,7 +125,11 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
                 className="w-full rounded-lg disabled:opacity-60 disabled:hover:bg-secondary disabled:dark:bg-secondary/60 bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
               >
                 <span className="font-bold text-white">
-                  {!isVerified ? "Verify" : isAdded ? "In contacts" : "Add friend"}
+                  {!isVerified
+                    ? "Verify"
+                    : isAdded
+                    ? "In contacts"
+                    : "Add friend"}
                 </span>
               </button>
               <button

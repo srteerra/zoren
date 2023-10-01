@@ -7,7 +7,7 @@ import ActionCenterFriends from "@/components/actions/ActionFriends";
 import AllFriends from "@/components/AllFriends";
 import { QRCode } from "qrcode";
 
-const friends = () => {
+const Friends = () => {
   const nav = {
     title: "friends",
     isSubpage: false,
@@ -78,4 +78,4 @@ const friends = () => {
   );
 };
 
-export default friends;
+export default Friends;

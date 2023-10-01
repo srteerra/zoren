@@ -31,7 +31,7 @@ const useInitialState = () => {
       avatar: payload.avatar,
       userName: payload.username,
       userAddress: payload.address,
-      userContacts: [],
+      userContacts: payload.contacts,
       userBalance: payload.balance,
       isConnected: payload.isconnected,
     });

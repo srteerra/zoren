@@ -20,7 +20,8 @@ import AppContext from "@/context/AppContext";
 const builder = imageUrlBuilder(client);
 
 export const useZoren = () => {
-  const { state, initialFetch, updateProfile } = useContext(AppContext);
+  const { state, initialFetch, updateProfile, setContacts } =
+    useContext(AppContext);
   const [amount, setAmount] = useState(0);
   const [receiver, setReceiver] = useState("");
   const [transactionPurpose, setTransactionPurpose] = useState("");
@@ -48,6 +49,7 @@ export const useZoren = () => {
   const fetchData = async () => {
     const query = `*[_type == "users" && userAddress == "${publicKey.toString()}"] {
       userName,
+      userContacts,
       "imageUrl": userAvatar.asset->url
     }`;
 
@@ -62,6 +64,7 @@ export const useZoren = () => {
         address: publicKey.toString(),
         balance: value / LAMPORTS_PER_SOL,
         avatar: await collectData[0].imageUrl,
+        contacts: await collectData[0].userContacts,
       });
     });
   };
@@ -109,7 +112,10 @@ export const useZoren = () => {
         .patch(state.userAddress)
         .setIfMissing({ userContacts: [] })
         .append("userContacts", [address])
-        .commit({ autoGenerateArrayKeys: true });
+        .commit({ autoGenerateArrayKeys: true })
+        .then((res) => {
+          setContacts(res.userContacts);
+        });
     }
   };
 
