@@ -1,5 +1,8 @@
 "use client";
 import { Modal, ModalClose } from "../Modal";
+import EmojiStyle from "emoji-picker-react";
+import EmojiClickData from "emoji-picker-react";
+import { Emoji } from "emoji-picker-react";
 import { truncate } from "@/utils/string";
 import {
   createQR,
@@ -31,6 +34,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { app } from "@/firebase";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 // get the firestore
 const firestore = getFirestore(app);
 
@@ -48,6 +52,9 @@ const TransactionQRModal = ({
   const [amountInput, setAmountInput] = useState("");
   const [peopleInput, setPeopleInput] = useState("");
   const [conceptInput, setConceptInput] = useState("");
+  const [pickerValue, setPickerValue] = useState("");
+  const [showPicker, setShowPicker] = useState(false);
+  const [selectedEmoji, setSelectedEmoji] = useState("");
   const [stepModal, setStepModal] = useState(1);
   const [col, setCol] = useState("");
   const [newAdded, setNewAdded] = useState("");
@@ -56,6 +63,11 @@ const TransactionQRModal = ({
 
   const { transactions, setTransactions } = useZoren();
   const toastId = useRef(null);
+
+  const handleClickPicker = (emojiData) => {
+    setPickerValue(emojiData.emoji);
+    setSelectedEmoji(emojiData.emoji);
+  };
 
   const trans = () =>
     (toastId.current = toast.loading("Waiting for payments...", {
@@ -88,6 +100,13 @@ const TransactionQRModal = ({
       closeOnClick: true,
       autoClose: 3000,
     });
+  
+  const clearInputs= () => {
+    setShowPicker(false);
+    setAmountInput("");
+    setPeopleInput("");
+    setConceptInput("");
+  }
 
   const { connection } = useConnection();
 
@@ -95,17 +114,12 @@ const TransactionQRModal = ({
     if (listener) {
       onSnapshot(
         query(
-          collection(
-            firestore,
-            "wallets",
-            userAddress,
-            "wallet-collections"
-          )
+          collection(firestore, "wallets", userAddress, "wallet-collections")
         ),
         (snapshot) => {
           snapshot.docChanges().forEach(async (change) => {
             if (change.type === "modified") {
-              setCounter(counter+1);
+              setCounter(counter + 1);
             }
           });
         }
@@ -119,6 +133,7 @@ const TransactionQRModal = ({
       wallet: userAddress,
       amount: Number(amountInput),
       people: Number(peopleInput),
+      icon: showPicker ? pickerValue : "💸",
       title: conceptInput,
     });
     if (register) {
@@ -132,7 +147,6 @@ const TransactionQRModal = ({
       setStepModal(4);
       setModalOpen(false);
       setError("Something went wrong!, try again");
-      setTimeout(() => setListener(false), 1000);
       setCounter(0);
     }
   };
@@ -408,7 +422,7 @@ const TransactionQRModal = ({
                       className="font-extrabold text-end text-gray-600 dark:text-white placeholder-gray-400 bg-transparent outline-none"
                       id="qrPurpose"
                       name="qrPurpose"
-                      type="text"
+                      type="number"
                       placeholder="0"
                       value={amountInput}
                       onChange={(e) => setAmountInput(e.target.value)}
@@ -426,7 +440,7 @@ const TransactionQRModal = ({
                     className="w-full font-extrabold text-end text-gray-800 dark:text-white placeholder-gray-400 bg-transparent outline-none"
                     id="peoplePurpose"
                     name="peoplePurpose"
-                    type="text"
+                    type="number"
                     placeholder="How many people?"
                     value={peopleInput}
                     onChange={(e) => setPeopleInput(e.target.value)}
@@ -449,6 +463,20 @@ const TransactionQRModal = ({
                   />
                 </div>
               </div>
+              <div className="flex w-full flex-col items-center gap-4 py-4">
+                {showPicker ? <h2>{pickerValue}</h2> : null}
+                <button
+                  className="border-2 w-full border-sky-300 flex justify-around items-center overflow-hidden gap-4 py-2 px-4 rounded-lg"
+                  onClick={() => setShowPicker(!showPicker)}
+                >
+                  Set an emoji for styled you collection <span><ChevronDownIcon className="w-6 h-6" /></span>
+                </button>
+              </div>
+              {showPicker && (
+                <div className="flex pb-10">
+                  <EmojiStyle onEmojiClick={handleClickPicker} />
+                </div>
+              )}
 
               <div className="flex flex-col w-full gap-4">
                 <button
@@ -463,7 +491,10 @@ const TransactionQRModal = ({
                 </button>
 
                 <button
-                  onClick={() => setModalOpen(false)}
+                  onClick={() => {
+                    setModalOpen(false)
+                    clearInputs();
+                  }}
                   className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
                   <span className="font-medium text-red-300">Close</span>

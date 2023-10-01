@@ -134,6 +134,7 @@ export async function handleAddData(data) {
             hasPaid: 0,
             people: data.people,
             status: "open",
+            icon: data.icon,
             title: data.title,
             transactions: [],
           }
@@ -164,6 +165,7 @@ export async function handleAddData(data) {
           hasPaid: 0,
           people: data.people,
           status: "open",
+          icon: data.icon,
           title: data.title,
           transactions: [],
         }
