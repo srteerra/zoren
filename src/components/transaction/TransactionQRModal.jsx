@@ -13,7 +13,7 @@ import {
   FindReferenceError,
   ValidateTransferError,
 } from "@solana/pay";
-import { PublicKey, Keypair } from "@solana/web3.js";
+import { PublicKey, Keypair, Connection, Commitment } from "@solana/web3.js";
 import BigNumber from "bignumber.js";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useZoren } from "../../hooks/useZoren";
@@ -37,6 +37,8 @@ import {
 import { app } from "@/firebase";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { Ring } from "@uiball/loaders";
+
+// import toast, { ToastBar, Toaster } from "react-hot-toast";
 
 // Get the firestore
 const firestore = getFirestore(app);
@@ -72,8 +74,11 @@ const TransactionQRModal = ({
   const { listener, setListener, state } = useContext(AppContext);
   const [counter, setCounter] = useState(0);
   const [solanaUSD, setSolanaUSD] = useState(0);
+  const [transactionsList, setTransactionsList] = useState(0);
 
-  const { transactions, setTransactions } = useZoren();
+  const { userTransactions, setUserTransactions } = useZoren();
+  const { connection: cc } = useConnection();
+
   const toastId = useRef(null);
 
   const handleClickPicker = (emojiData) => {
@@ -91,7 +96,7 @@ const TransactionQRModal = ({
   const update = () =>
     toast.update(toastId.current, {
       position: "bottom-right",
-      render: "Completed",
+      render: "Payment made",
       type: toast.TYPE.SUCCESS,
       isLoading: false,
       closeOnClick: true,
@@ -102,6 +107,13 @@ const TransactionQRModal = ({
       position: "bottom-right",
       render: "Transaction Request Cancelled",
       type: toast.TYPE.WARNING,
+      isLoading: false,
+      closeOnClick: true,
+      autoClose: 3000,
+    });
+  const confirmTrans = (text) =>
+    toast.success(text, {
+      position: "bottom-right",
       isLoading: false,
       closeOnClick: true,
       autoClose: 3000,
@@ -144,9 +156,9 @@ const TransactionQRModal = ({
     setListener(true);
     const register = await handleAddData({
       wallet: userAddress,
-      amount: Number(amountInput),
+      amount: Number(amountInputCrypto),
       people: Number(peopleInput),
-      icon: showPicker ? pickerValue : "💸",
+      icon: pickerValue || "💸",
       title: conceptInput,
     });
     if (register) {
@@ -207,16 +219,16 @@ const TransactionQRModal = ({
   useEffect(() => {
     if (userAddress) {
       const recipient = new PublicKey(userAddress);
-      const amount = new BigNumber(amountInput);
+      const amount = new BigNumber(amountInputCrypto);
       const reference = Keypair.generate().publicKey;
       const label = "Zoren Payment";
-      const concept = conceptInput;
+      const message = pickerValue + " " + conceptInput;
       const urlParams = {
         recipient,
         amount,
         reference,
         label,
-        concept,
+        message,
       };
 
       const urlEncoded = encodeURL(urlParams);
@@ -247,9 +259,13 @@ const TransactionQRModal = ({
                 message,
               },
               { commitment: "confirmed" }
-            ).then((res) => console.log(res));
+            ).then((res) => {
+              console.log(res);
+              // setTransactionsList(transactionsList + 1);
+              // confirmTrans("Payment made!");
+            });
 
-            const newID = (transactions.length + 1).toString();
+            const newID = (userTransactions.length + 1).toString();
             const newTransaction = {
               id: newID,
               from: recipient,
@@ -259,11 +275,6 @@ const TransactionQRModal = ({
               status: "Completed",
               amount: amount,
             };
-
-            console.log(newTransaction, "NEW TRANSACTIONS EXISTS");
-
-            setModalOpen(false);
-            clear();
           } catch (e) {
             if (e instanceof FindReferenceError) {
               // No transaction found yet, ignore this error
@@ -276,17 +287,12 @@ const TransactionQRModal = ({
             }
             console.error("Unknown error", e);
           }
-        }, 500);
+        }, 5000);
 
         return () => {
-          clearInterval(interval);
+          // clearInterval(interval);
           notify();
         };
-
-        function clear() {
-          clearInterval(interval);
-          update();
-        }
       }
     }
     return;
