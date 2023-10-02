@@ -1,10 +1,9 @@
-const path = require('path');
-
+/** @type {import('next-i18next').UserConfig} */
+const path = require("path");
 module.exports = {
   i18n: {
-    locales: ["de", "en", "es", "fr", "pt"],
     defaultLocale: "en",
+    locales: ["en", "es"],
   },
-  localePath: path.resolve('./public/locales'),
-  debug: true,
+  localePath: path.resolve("./public/locales"),
 };
