@@ -74,12 +74,14 @@ const TransactionQRModal = ({
   const { listener, setListener, state } = useContext(AppContext);
   const [counter, setCounter] = useState(0);
   const [solanaUSD, setSolanaUSD] = useState(0);
-  const [transactionsList, setTransactionsList] = useState(0);
+  const [transactionsList, setTransactionsList] = useState(undefined);
 
   const { userTransactions, setUserTransactions } = useZoren();
   const { connection: cc } = useConnection();
 
   const toastId = useRef(null);
+  // const dismiss = () =>  toast.dismiss(toastId.current);
+  const confirmTrans = () => toast.update(toastId.current, { render: "Bill Completed", type: toast.TYPE.SUCCESS, autoClose: 5000 });
 
   const handleClickPicker = (emojiData) => {
     setPickerValue(emojiData.emoji);
@@ -87,33 +89,13 @@ const TransactionQRModal = ({
     setShowPicker(false);
   };
 
-  const trans = () =>
-    (toastId.current = toast.loading("Waiting for payments...", {
-      position: "bottom-right",
-      closeOnClick: false,
-      closeButton: true,
-    }));
-  const update = () =>
-    toast.update(toastId.current, {
-      position: "bottom-right",
-      render: "Payment made",
-      type: toast.TYPE.SUCCESS,
-      isLoading: false,
-      closeOnClick: true,
-      autoClose: 3000,
-    });
+  const trans = () => toastId.current = toast("Waiting for payments...", { autoClose: false, position: "bottom-right" });
+
   const notify = () =>
     toast.update(toastId.current, {
       position: "bottom-right",
       render: "Transaction Request Cancelled",
       type: toast.TYPE.WARNING,
-      isLoading: false,
-      closeOnClick: true,
-      autoClose: 3000,
-    });
-  const confirmTrans = (text) =>
-    toast.success(text, {
-      position: "bottom-right",
       isLoading: false,
       closeOnClick: true,
       autoClose: 3000,
@@ -166,6 +148,7 @@ const TransactionQRModal = ({
       setCol(await handleGetCollection(userAddress, register));
       setQrCode(true);
       setHandleClick(true);
+      setTransactionsList(0);
       trans();
     } else {
       loadOff();
@@ -181,7 +164,11 @@ const TransactionQRModal = ({
     setHandleClick(false);
     notify();
     setTimeout(() => setListener(false), 1000);
-    setCounter(0);
+  };
+
+  const completeQR = () => {
+    setHandleClick(false);
+    confirmTrans();
   };
 
   useEffect(() => {
@@ -234,69 +221,73 @@ const TransactionQRModal = ({
       const urlEncoded = encodeURL(urlParams);
 
       const qr = createQR(urlEncoded, 350, "transparent");
+
       if (qrRef.current && amount.isGreaterThan(0)) {
         qrRef.current.innerHTML = "";
         qr.append(qrRef.current);
       }
 
-      if (handleClick) {
-        const interval = setInterval(async () => {
-          try {
-            // Check if there is any transaction for the reference
-            const signatureInfo = await findReference(connection, reference, {
-              finality: "confirmed",
-            });
+      if (transactionsList < peopleInput) {
+        const interval = 
+          setInterval(async () => {
+            try {
+              // Check if there is any transaction for the reference
+              const signatureInfo = await findReference(connection, reference, {
+                finality: "confirmed",
+              });
 
-            // Validate that the transaction has the expected recipient, amount and SPL token
-            await validateTransfer(
-              connection,
-              signatureInfo.signature,
-              {
-                recipient,
-                amount,
-                // splToken: usdcAddress,
-                reference,
-                message,
-              },
-              { commitment: "confirmed" }
-            ).then((res) => {
-              console.log(res);
-              // setTransactionsList(transactionsList + 1);
-              // confirmTrans("Payment made!");
-            });
+              // Validate that the transaction has the expected recipient, amount and SPL token
+              await validateTransfer(
+                connection,
+                signatureInfo.signature,
+                {
+                  recipient,
+                  amount,
+                  reference,
+                },
+                { commitment: "confirmed" }
+              );
 
-            const newID = (userTransactions.length + 1).toString();
-            const newTransaction = {
-              id: newID,
-              from: recipient,
-              to: reference,
-              message: message,
-              date: new Date(),
-              status: "Completed",
-              amount: amount,
-            };
-          } catch (e) {
-            if (e instanceof FindReferenceError) {
-              // No transaction found yet, ignore this error
-              return;
+              const newID = (userTransactions.length + 1).toString();
+              const newTransaction = {
+                id: newID,
+                from: {
+                  name: recipient,
+                },
+                to: {
+                  name: reference,
+                },
+                date: new Date(),
+                status: "Completed",
+                amount: amount,
+              };
+
+              console.log(newTransaction);
+              console.log(newTransaction.from.name.toString());
+              console.log(newTransaction.to.name.toString());
+
+              setTransactionsList(transactionsList + 1);
+
+              clearInterval(interval);
+            } catch (e) {
+              if (e instanceof FindReferenceError) {
+                // No transaction found yet, ignore this error
+                return;
+              }
+              if (e instanceof ValidateTransferError) {
+                // Transaction is invalid
+                console.error("Transaction is invalid", e);
+                return;
+              }
+              console.error("Unknown error", e);
             }
-            if (e instanceof ValidateTransferError) {
-              // Transaction is invalid
-              console.error("Transaction is invalid", e);
-              return;
-            }
-            console.error("Unknown error", e);
-          }
-        }, 5000);
-
-        return () => {
-          // clearInterval(interval);
-          notify();
-        };
+          }, 5000);
+      } else {
+        completeQR();
+        setTransactionsList(undefined)
       }
     }
-    return;
-  }, [handleClick]);
+  }, [transactionsList]);
 
   return (
     <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
@@ -658,7 +649,7 @@ const TransactionQRModal = ({
                     </div>
                     <div className="flex justify-center">
                       <p className="font-extrabold text-xl text-primary dark:text-white">
-                        {counter || 0}/{col.people || 0} Contributions
+                        {transactionsList || 0}/{peopleInput || 0} Contributions
                       </p>
                     </div>
                   </div>
