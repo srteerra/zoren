@@ -63,6 +63,41 @@ export async function handleGetRecentTrans(wallet) {
   }
 }
 
+export async function getCollectionByName(data) {
+  const snapshot = await getDocs(
+    query(
+      collection(firestore, "wallets", data.wallet, "wallet-collections"),
+      where("title", "==", data.title)
+    )
+  );
+  const res = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  return res[0];
+}
+
+// delete a collection
+export async function deleteCollectionByName(data) {
+  const collection = await getCollectionByName(data);
+  try {
+    await deleteDoc(
+      doc(
+        firestore,
+        "wallets",
+        data.wallet,
+        "wallet-collections",
+        collection.id
+      )
+    );
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
 // get a collection
 export async function handleGetCollection(wallet, collection) {
   const snapshot = await getDoc(
@@ -104,21 +139,6 @@ export async function handleGetCollectionsPaid(wallet) {
   }));
 
   return data;
-}
-
-export async function getCollectionByName(data) {
-  const snapshot = await getDocs(
-    query(
-      collection(firestore, "wallets", data.wallet, "wallet-collections"),
-      where("title", "==", data.title)
-    )
-  );
-  const res = snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-
-  return res[0];
 }
 
 // this function check in the database if the collection title exists in the wallet collection
