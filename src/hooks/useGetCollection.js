@@ -235,19 +235,6 @@ export async function handleModifyData(data) {
           }),
         }
       ).then(async () => {
-        try {
-          await addDoc(
-            collection(firestore, "wallets", data.walletTo, "transactions"),
-            {
-              address: data.walletFrom,
-              amount: data.amount,
-              date: `${new Date().getFullYear()}-${new Date().getDate()}-${new Date().getMonth()}`,
-              bill: data.walletCollectionTo,
-            }
-          );
-        } catch (error) {
-          console.log("ass transactions: ", error);
-        }
         if (await validatePaid(data.walletTo, data.walletCollectionTo)) {
           await updateDoc(
             doc(

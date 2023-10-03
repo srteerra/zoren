@@ -2,7 +2,6 @@
 import ActionCenterDashboard from "@/components/actions/ActionDash";
 import { Collections } from "@/containers/Collections";
 import Nav from "@/components/Nav";
-import MostRecentTransactions from "@/components/RecentTransactions";
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -102,7 +101,6 @@ const Dashboard = () => {
         </div>
       </section>
       <ActionCenterDashboard />
-      <MostRecentTransactions />
     </div>
   );
 };
