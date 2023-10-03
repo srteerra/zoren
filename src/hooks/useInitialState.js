@@ -12,7 +12,7 @@ const initialState = {
 
 const useInitialState = () => {
   const [state, setState] = useState(initialState);
-
+  const [listener, setListener] = useState(false);
   // set user avatar
   const updateProfile = (payload) => {
     setState({
@@ -31,7 +31,7 @@ const useInitialState = () => {
       avatar: payload.avatar,
       userName: payload.username,
       userAddress: payload.address,
-      userContacts: [],
+      userContacts: payload.contacts,
       userBalance: payload.balance,
       isConnected: payload.isconnected,
     });
@@ -118,6 +118,8 @@ const useInitialState = () => {
   return {
     state,
     setState,
+    listener,
+    setListener,
     setAvatar,
     setName,
     setAddress,

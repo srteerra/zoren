@@ -1,5 +1,6 @@
 # zoren
-![[Pasted image 20230928134315.png]]
+![image](https://github.com/srteerra/zoren/assets/74383100/f73a2345-6c7d-4899-a887-219a581751b7)
+
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 ![](https://img.shields.io/github/stars/srteerra/zoren)![](https://img.shields.io/github/forks/srteerra/zoren)
@@ -8,7 +9,6 @@
 Zoren is a decentralized platform built on the Solana blockchain that enables users to streamline money transfers through easily accessible QR codes. It also allows the creation of 'Parties,' which enable splitting a single payment among different users.
 
 # Table of contents
-- [Description](#description)
 - [Social Media](#social-media)
 - [Deck](#deck)
 - [Pich](#pitch)
@@ -20,24 +20,16 @@ Zoren is a decentralized platform built on the Solana blockchain that enables us
 - [Authors](#authors)
 - [See our Demo](#demo-on-figma)
   - [Requirements](#requirements)
-  -  [Quick start](#Quick-start)
+  -  [Quick start](#quick-start)
 -  [Project Structure](#project-structure)
-
-### Description
-
-Day by day, thousands of users within Latin America make use of money transfer platforms. According to a study conducted by Kantar TNS, 63% of internet users utilize digital transaction services.
-
-The lack of an efficient solution for quick money transfers and splitting payments among different users has created significant obstacles in everyday financial management. Currently, money transfer methods are often complicated and slow, resulting in delays and difficulties in splitting expenses among friends or colleagues. To address this issue, a web3 application is required to operate on the Solana network, enabling users to generate QR codes for instant transfers and the ability to create shared payments divided among multiple users. This application can effectively resolve the problem by simplifying financial transactions and promoting more efficient management of shared expenses.
-***
-Día con día miles de usuarios dentro de America Latina hace uso de plataformas de envió de dinero,según un estudio realizado por Kantar TNS, el 63% de los usuarios que hacen uso de internet, utilizan servicios de transacciones digitales.
-
-La falta de una solución eficiente para realizar transferencias de dinero rápidas y dividir pagos entre diferentes usuarios ha creado obstáculos significativos en la gestión financiera cotidiana. Actualmente, los métodos de transferencia de dinero son a menudo complicados y lentos, lo que resulta en retrasos y dificultades para dividir gastos entre amigos o colegas. Para abordar este problema, se requiere una aplicación web3 que funcione en la red de Solana y permita a los usuarios generar códigos QR para transferencias instantáneas y la capacidad de crear pagos compartidos divididos en múltiples usuarios. Esta aplicación puede resolver eficazmente la problemática al simplificar las transacciones financieras y promover una gestión más eficiente de los gastos compartidos.
 
 ## Social Media
 
 [Twitter](https://twitter.com/ZorenApp)
+
 [Instagram](https://www.instagram.com/zorenapp/)
-### This platform is now working at [Zoren.site](https://www.dashy.site/)
+
+### This platform is now working at [Zoren.site]()
 
 
 ## Pitch
@@ -76,8 +68,10 @@ This project is currently under active development and updates are made on a reg
 
 ## Development Workflow  
 
-We follow a GitFlow workflow for development. Contributions are made in feature branches and merged into the main branch after a review.
-![[Pasted image 20230928144724.png]]
+We follow a GitFlow workflow for development. Contributions are made in feature branches and merged into the main branch after a review. 
+
+![image](https://github.com/srteerra/zoren/assets/74383100/a0aa2faa-8af9-4b4d-bcf5-f0f967d4939b)
+
 
 ## Features
 
@@ -148,38 +142,38 @@ http:/localhost:3000/
     $ Zoren Tree
     Zoren/
     ├── .next:                                  
-	│    ├── cache/:                            # Next.js cache files
-	│ 	├──	server/:                           # Server-related files
-	│ 	├── static/:                           # Static files
-	│ 	├── build-manifest.json                # Build manifest for fallback
-	│ 	├── fallback-build-manifest.json
-	│ 	├── package.json                       # Package configuration
-	│ 	├── react-loadable-manifest.json
-	│ 	└──	trace                              # Trace file
+    │   ├── cache/:                             # Next.js cache files
+    │ 	├──	server/:                        # Server-related files
+    │ 	├── static/:                            # Static files
+    │ 	├── build-manifest.json                 # Build manifest for fallback
+    │ 	├── fallback-build-manifest.json
+    │ 	├── package.json                        # Package configuration
+    │ 	├── react-loadable-manifest.json
+    │ 	└──	trace                           # Trace file
     ├── .vscode/:
     │    └── settings.json                      # VS Code configuration 
     ├── lib/:  
     │    └── sanitClient.js                     # Sanitization client file    
     ├── node_modules/:                          # Folder for all project modules.
     ├── public/:
-	│	├── icons/
-	│	├── images/
-	│	├── locales/
-	│	├── logos/
-	│	├── favicon.ico
-	│	├── next.svg
-	│	└── vercel.svg                          
+    │	│	├── icons/
+    │	│	├── images/
+    │	│	├── locales/
+    │	│	├── logos/
+    │	│	├── favicon.ico
+    │	│	├── next.svg
+    │	│	└── vercel.svg                          
     ├── src/:                                   # Folder for development content.
     │    ├── components/:                       # Reusable React components
     │    ├── actions/:                         
-	│    │    ├── ActionBills.jsx               # Actions related to bills
+    │    │    ├── ActionBills.jsx               # Actions related to bills
     │    │    └── ActionDash.jsx                # Actions related to the dashboard     
     │    ├──billFuntions/:                        
     │    │    ├──deleteModal.jsx                # Modal for deleting bills
     │    │    └──setBillModal.jsx               # Modal for setting up bills   
     │    ├── transactions/:
-	│    │    └── TransactionsQRModal.jsx       # QR transactions modal
-	│    │                                      # Other components and files               
+    │    │    └── TransactionsQRModal.jsx       # QR transactions modal
+    │    │                                      # Other components and files               
     │    ├── Billtem.jsx                        
     │    ├── CollectionItem.jsx
     │    ├── DarkMode.jsx
@@ -194,7 +188,7 @@ http:/localhost:3000/
     │    ├── Region.jsx
     │    └── Sidebar.jsx                           
     ├── containers/: 
-             └── Collections.jsx                    # Collections component                
+    │        └── Collections.jsx                # Collections component                
     ├── context/:                                 
     │    ├── AppContext.jsx                     # Application context 
     │    └── WalletConectioProvider.js          # Wallet connection provider      
@@ -221,7 +215,7 @@ http:/localhost:3000/
     │    │    ├── index.js                      # Schema index
     │    │    └── users.js                      # User schema
     │    └── static/
-    │    │    └── .gitkeep                      # Placeholder to keep the directory in version control
+    │         └── .gitkeep                      # Placeholder to keep the directory in version control
     ├── .eslintrc.json                          # ESLint configuration
     ├── .gitignore                              # Git ignore configuration file
     ├── jsconfig.json

@@ -7,14 +7,25 @@ import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import axios from "axios";
 import AppContext from "@/context/AppContext";
-// import { useTranslation } from "next-i18next";
-// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import axios from "axios";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "dashboard"])),
+    },
+  };
+}
+
 
 const Dashboard = () => {
   const { state } = useContext(AppContext);
   const [balanceUSD, setBalanceUSD] = useState(0);
+  const { t } = useTranslation("dashboard");
   const nav = {
     title: "dashboard",
     isSubpage: false,
@@ -65,6 +76,7 @@ const Dashboard = () => {
             <p className="2xl:text-xl lg:text-md text-md pt-2 font-light">
               Welcome to your dashboard
             </p>
+            <p>{t('hola')}</p>
           </div>
           <div className="pt-12">
             <Link
@@ -85,7 +97,7 @@ const Dashboard = () => {
           </button>
         </div>
         {/* list of collections */}
-        <div className="flex my-4">
+        <div className="flex flex-nowrap my-4 max-w-full overflow-x-scroll">
           <Collections />
         </div>
       </section>

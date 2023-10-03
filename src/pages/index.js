@@ -6,17 +6,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ViewfinderCircleIcon } from "@heroicons/react/24/solid";
 import { Footer } from "@/components/Footer";
-import {
-  handleAddData,
-  handleGetCollections,
-  handleGetCollectionsOpen,
-  handleGetCollectionsPaid,
-  handleModifyData,
-  validatePaid,
-} from "@/hooks/useGetCollection";
-import { useZoren } from "../hooks/useZoren";
-// import { useTranslation } from "next-i18next";
-// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // Images
 import ticket from "../../public/images/ticket.png";
@@ -26,12 +17,20 @@ import { Fade, Flip, Zoom } from "react-awesome-reveal";
 import { useRouter } from "next/router";
 import { useWallet } from "@solana/wallet-adapter-react";
 
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "home"])),
+    },
+  };
+}
+
 const Home = () => {
-  // const { t: translate } = useTranslation("home");
   const router = useRouter();
   // const [show, setShow] = useState("friends");
 
   // const words = ["family", "friends", "partners", "mates", "couple"];
+  const { t } = useTranslation("home");
 
   const { connected } = useWallet();
 
@@ -69,16 +68,17 @@ const Home = () => {
       <LoginNav />
 
       {/* Fisrt section */}
-      <div className="w-full lg:w-4/5 mx-auto flex h-5/6 items-center">
+      <div className="w-full lg:w-4/5 mx-auto flex h-5/6 items-center pb-32">
         {/* left side */}
         <div className="w-full text-center md:text-start md:w-1/2 p-8 lg:p-0 overflow-hidden">
           <div className="">
-            <p className="text-slate-500 my-4">Want to separate the bill?</p>
+            <p className="text-slate-500 my-4">{t("WantSeparateBill")}</p>
             <div>
               <h1 className="text-4xl lg:text-5xl font-light">
                 Generate QR codes to <br /> split bill payments <br /> between
                 your friends
               </h1>
+              <p>{t.WantSeparateBill}</p>
             </div>
 
             <p className="my-6">
@@ -174,17 +174,9 @@ const Home = () => {
         </div>
         <div className="h-3/6 flex items-end justify-center bg-[url('../../public/images/banner.png')] bg-no-repeat bg-cover lg:bg-contain bg-center"></div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
-
-// export async function getStaticProps({ locale }) {
-//   return {
-//     props: {
-//       ...(await serverSideTranslations(locale, ["home"])),
-//     },
-//   };
-// }
 
 export default Home;
