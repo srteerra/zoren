@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useZoren } from "@/hooks/useZoren";
 import { useContext } from "react";
 import AppContext from "@/context/AppContext";
+import { useTranslation } from "next-i18next";
+//import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 function ActionCenterDashboard() {
   const { state } = useContext(AppContext);

@@ -27,7 +27,7 @@ const Dashboard = () => {
   const [balanceUSD, setBalanceUSD] = useState(0);
   const { t } = useTranslation("dashboard");
   const nav = {
-    title: "dashboard",
+    title: t("Dashboard"),
     isSubpage: false,
     id: 1,
   };
@@ -48,7 +48,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 gap-12">
         {/* Balance card */}
         <div className="bg-secondary dark:bg-gray-600 p-12 lg:p-14 rounded-3xl text-light">
-          <p className="2xl:text-lg lg:text-md text-md">Your balance</p>
+          <p className="2xl:text-lg lg:text-md text-md">{t('YourBalance')}</p>
           <p className="2xl:text-5xl lg:text-4xl text-4xl font-extrabold py-2">
             {state.userBalance < 100
               ? state.userBalance.toString().slice(0, 4)
@@ -71,19 +71,18 @@ const Dashboard = () => {
         <div className="bg-black hidden md:block dark:bg-dark p-14 rounded-3xl text-light">
           <div>
             <p className="2xl:text-4xl lg:text-3xl md:text-3xl">
-              Hi, <span className="font-bold">{state.userName}</span>
+              {t('Hi')}, <span className="font-bold">{state.userName}</span>
             </p>
             <p className="2xl:text-xl lg:text-md text-md pt-2 font-light">
-              Welcome to your dashboard
+              {t('Welcome')}
             </p>
-            <p>{t('hola')}</p>
           </div>
           <div className="pt-12">
             <Link
               href="/"
               className="2xl:text-lg lg:text-md text-md font-light underline"
             >
-              Explore more
+              {t('Explore')}
             </Link>
           </div>
         </div>
@@ -91,7 +90,7 @@ const Dashboard = () => {
       {/* Collection section */}
       <section className="block lg:hidden my-8">
         <div className="flex items-center justify-between">
-          <span className="font-bold">My collection</span>
+          <span className="font-bold">{t('Mycollection')}</span>
           <button>
             <PlusSmallIcon className="h-6 w-6" />
           </button>

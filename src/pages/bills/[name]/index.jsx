@@ -7,14 +7,25 @@ import DeleteBillModal from "@/components/billFunctions/deleteModal";
 import axios from "axios";
 import SetBillModal from "@/components/billFunctions/setBillModal";
 import { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "bills"])),
+    },
+  };
+}
 
 const BillView = (data) => {
   const [deleteBillModalOpen, setDeleteBillModalOpen] = useState(false);
   const [billModalOpen, setBillModalOpen] = useState(false);
   const [balanceUSD, setBalanceUSD] = useState(0);
   const router = useRouter();
+  const { t } = useTranslation("bills");
   const nav = {
-    title: "bills",
+    title: t("Bills"),
     isSubpage: true,
   };
   const res = {

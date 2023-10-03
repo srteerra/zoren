@@ -6,10 +6,21 @@ import Link from "next/link";
 import ActionCenterFriends from "@/components/actions/ActionFriends";
 import AllFriends from "@/components/AllFriends";
 import { QRCode } from "qrcode";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "friends"])),
+    },
+  };
+}
 
 const Friends = () => {
+  const { t } = useTranslation("friends");
   const nav = {
-    title: "friends",
+    title: t("Friends"),
     isSubpage: false,
     id: 3,
   };
@@ -52,17 +63,17 @@ const Friends = () => {
               }}
               className="text-3xl 2xl:text-4xl lg:text-3xl md:text-3xl font-bold"
             >
-              Generate a QR code
+              {t('GenerateQR')}
             </button>
             <p className="w-full xl:w-[60%] text-lg 2xl:text-xl lg:text-md text-md pt-2 font-light">
-              to share with your friends and then they can add you
+            {t('ToShare')}
             </p>
             <button
               onClick={() => {}}
               className="flex gap-3 justify-center text-center mt-5 items-center text-md font-bold text-dark bg-white hover:opacity-70 transition ease-out px-8 py-4 rounded-full"
             >
               <QrCodeIcon width={25} />
-              Generate my QR
+              {t('QR')}
             </button>
           </div>
         </div>
