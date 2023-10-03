@@ -4,6 +4,15 @@ import Nav from "@/components/Nav";
 import MostRecentBills from "@/components/RecentBills";
 import { PlusSmallIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "bills"])),
+    },
+  };
+}
 
 const Bills = () => {
   const nav = {

@@ -41,6 +41,7 @@ export default function Layout({ children }) {
       (route === "/dashboard" ||
         route === "/bills" ||
         route === "/friends" ||
+        route === "/bills/[name]" ||
         route === "/settings")
     ) {
       router.push("/");

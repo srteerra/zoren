@@ -106,6 +106,21 @@ export async function handleGetCollectionsPaid(wallet) {
   return data;
 }
 
+export async function getCollectionByName(data) {
+  const snapshot = await getDocs(
+    query(
+      collection(firestore, "wallets", data.wallet, "wallet-collections"),
+      where("title", "==", data.title)
+    )
+  );
+  const res = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  return res[0];
+}
+
 // this function check in the database if the collection title exists in the wallet collection
 export async function userExists(data) {
   const snapshot = await getDocs(
