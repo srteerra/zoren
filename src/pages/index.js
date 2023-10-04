@@ -60,21 +60,21 @@ const Home = () => {
     <div className="w-full h-screen">
       <div className="bg-black text-center text-white py-3">
         <p>
-          {t('Add1')}{" "}
-          <span className="font-bold">{t('Add2')}</span> {t('Add3')}
+          {t("Add1")} <span className="font-bold">{t("Add2")}</span> {t("Add3")}
         </p>
       </div>
       <LoginNav />
 
       {/* Fisrt section */}
-      <div className="w-full lg:w-4/5 mx-auto flex h-5/6 items-center pb-32">
+      <div className="w-full lg:w-4/5 mx-auto overflow-hidden flex h-5/6 items-center pb-32">
         {/* left side */}
         <div className="w-full text-center md:text-start md:w-1/2 p-8 lg:p-0 overflow-hidden">
           <div className="">
             <p className="text-slate-500 my-4">{t("WantSeparateBill")}</p>
             <div>
               <h1 className="text-4xl lg:text-5xl font-light">
-                {t('WantSeparateBill')} <br /> {t('GenerateQR')} <br /> {t('SplitBill')}
+                {t("WantSeparateBill")} <br /> {t("GenerateQR")} <br />{" "}
+                {t("SplitBill")}
               </h1>
             </div>
             <p className="my-6">
@@ -89,20 +89,20 @@ const Home = () => {
           </div>
           <div className="w-full flex justify-center md:justify-start items-center gap-2 my-6">
             <button className="bg-primary focus:bg-primary hover:bg-secondary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
-              {t('TryIt')}
+              {t("TryIt")}
             </button>
-            <Link href={"/"}>{t('LearnMore')}</Link>
+            <Link href={"/"}>{t("LearnMore")}</Link>
           </div>
 
           <div className="my-14 text-sm">
             <p>
-            {t('PleaseCheck')}{" "}
+              {t("PleaseCheck")}{" "}
               <Link href={"/"} className="font-bold">
-              {t('PrivacyPolicy')}
+                {t("PrivacyPolicy")}
               </Link>{" "}
-              {t('TermsConsitions')}
+              {t("TermsConsitions")}
             </p>
-            <p>{t('ThisIsProject')}</p>
+            <p>{t("ThisIsProject")}</p>
           </div>
         </div>
 
@@ -163,10 +163,39 @@ const Home = () => {
         </div>
       </div>
 
+      {/* What's is zoren section */}
+      <div className="w-full h-screen flex items-center justify-center p-2">
+        <div className="text-center w-full h-full flex flex-col justify-around">
+          <h1>What's Zoren?</h1>
+
+          <div className="bg-slate-400 w-full md:w-1/2 h-1/2 mx-auto">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/xz81kVWWqUw?si=HmMhcuBDURTiuPqJ"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          <div className="w-full sm:w-1/3 mx-auto">
+            <p>
+              Learn more about Zoren in the{" "}
+              <Link href={"/"} className="font-bold">
+                How it works
+              </Link>{" "}
+              section. You'll find videos and information to get started right
+              now.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="bg-primary flex flex-col justify-between overflow-hidden h-screen w-full text-white">
         <div className="h-2/6 flex text-center flex-col w-full sm:w-1/2 px-10 pt-20 lg:w-1/3 mx-auto">
-          <h1 className="lg:text-5xl">{t('WhatherOcassion')}</h1>
-          <p className="py-2">{t('CanUseZoren')}</p>
+          <h1 className="lg:text-5xl">{t("WhatherOcassion")}</h1>
+          <p className="py-2">{t("CanUseZoren")}</p>
         </div>
         <div className="h-3/6 flex items-end justify-center bg-[url('../../public/images/banner.png')] bg-no-repeat bg-cover lg:bg-contain bg-center"></div>
       </div>
