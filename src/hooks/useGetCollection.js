@@ -109,19 +109,23 @@ export async function handleGetCollection(wallet, collection) {
 
 // get all collections in a wallet with status 'open'
 export async function handleGetCollectionsOpen(wallet) {
-  const snapshot = await getDocs(
-    query(
-      collection(firestore, "wallets", wallet, "wallet-collections"),
-      where("status", "==", "open")
-    )
-  );
+  if (wallet) {
+    const snapshot = await getDocs(
+      query(
+        collection(firestore, "wallets", wallet, "wallet-collections"),
+        where("status", "==", "open")
+      )
+    );
 
-  const data = snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
 
-  return data;
+    console.log(data.length);
+
+    return data;
+  }
 }
 
 // get all collections in a wallet with status 'paid'
