@@ -1,10 +1,16 @@
 {
-    "Bills" : "Facturas",
+    "Bills": "Facturas",
     "Youhave": "Tienes",
-    "bill": "una factura",
-    "Incompleted": "Incompleta",
-    "Completed": "Completada",
+    "bill": "factura",
+    "Incompleted": "Incompletas",
+    "Completed": "Completas",
     "takeLook": "Echa un vistazo a tu lista para identificar la factura",
-    "AllYourBills": "¡Todas tus facturas están completadas!",
-    "keepUsingZoren" : "Sigue usando Zoren para tu comodidad"
+    "AllYourBills": "¡Todas tus facturas están completas!",
+    "keepUsingZoren": "Sigue utilizando Zoren para tu comodidad",
+    "C-StartSession": "Iniciar una sesión",
+    "C-WithNewQR": "con un nuevo código QR",
+    "C-JoinSession": "Unirse a la sesión",
+    "C-MyBills": "Mis Facturas",
+    "C-ListBills": "Lista de todas las facturas",
+    "C-DontHaveBills": "No tienes facturas."
 }

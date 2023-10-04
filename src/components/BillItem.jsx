@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 
+
 const Bill = (data) => {
   const icons = [faMugHot, faMoneyBills];
   const router = useRouter();

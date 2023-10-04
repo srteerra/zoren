@@ -78,12 +78,12 @@ const Friends = () => {
           </div>
         </div>
         <div className="row-start-2 row-span-2 col-start-1 xl:row-start-1 xl:col-start-3">
-          <ActionCenterFriends />
+          <ActionCenterFriends t={t}/>
         </div>
       </div>
       <div className="w-full">
         {/* Friends list */}
-        <AllFriends />
+        <AllFriends t={t}/>
       </div>
     </div>
   );

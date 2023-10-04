@@ -99,7 +99,7 @@ const Dashboard = () => {
           <Collections />
         </div>
       </section>
-      <ActionCenterDashboard />
+      <ActionCenterDashboard t={t}/>
     </div>
   );
 };

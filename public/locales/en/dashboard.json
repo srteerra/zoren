@@ -4,5 +4,8 @@
   "Hi": "Hi",
   "Welcome": "Welcome to your dashboard",
   "Explore": "Explore more",
-  "Mycollection" : "My collection"
+  "Mycollection" : "My collection",
+  "C-StartSession" : "Start a session",
+  "C-WithNewQR": "with a new QR code",
+  "C-JoinSession": "Join to session"
 }
