@@ -4,5 +4,8 @@
   "Hi": "Hola",
   "Welcome": "Bienvenido a tu Panel",
   "Explore": "Explora más",
-  "Mycollection": "Mi colección"
+  "Mycollection": "Mi colección",
+  "C-StartSession": "Iniciar una sesión",
+  "C-WithNewQR": "con un nuevo código QR",
+  "C-JoinSession": "Unirse a la sesión"
 }

@@ -2,5 +2,10 @@
     "Friends" : "Friends",
     "GenerateQR" : "Generate a QR code",
     "ToShare" : "to share with your friends and then they can add you",
-    "QR" : "Generate my QR"
+    "QR" : "Generate my QR",
+    "C-AddFriend": "Add a friend",
+    "C-SolanaAddress": "by Solana address",
+    "C-MyFriends": "My friends",
+    "C-ListContacts": "List of contacts",
+    "C-DontHaveAdded": "You dont have anyone added."
 }

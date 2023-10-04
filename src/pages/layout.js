@@ -9,17 +9,19 @@ import { useZoren } from "../hooks/useZoren";
 import AppContext from "@/context/AppContext";
 import toast, { ToastBar, Toaster } from "react-hot-toast";
 import { XCircleIcon } from "@heroicons/react/24/solid";
-// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-// export async function getStaticProps({ locale }) {
-//   return {
-//     props: {
-//       ...(await serverSideTranslations(locale, ["home"])),
-//     },
-//   };
-// }
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "layout"])),
+    },
+  };
+}
 
 export default function Layout({ children }) {
+  const { t } = useTranslation("layout");
   const router = useRouter();
   const route = usePathname();
   const { connected, publicKey } = useZoren();
@@ -79,7 +81,7 @@ export default function Layout({ children }) {
           </ToastBar>
         )}
       </Toaster> */}
-      <Sidebar />
+      <Sidebar t={t}/>
       <div
         className={
           limits.includes(route)

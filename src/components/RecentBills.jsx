@@ -3,7 +3,7 @@ import { Bill } from "./BillItem";
 import AppContext from "@/context/AppContext";
 import { handleGetCollections } from "@/hooks/useGetCollection";
 
-function MostRecentBills() {
+function MostRecentBills({t}) {
   const { state, listener } = useContext(AppContext);
   const [data, setData] = useState([]);
 
@@ -27,8 +27,8 @@ function MostRecentBills() {
       <div className="my-12">
         {/* Header */}
         <div>
-          <h2>My Bills</h2>
-          <p>List of all bills</p>
+          <h2>{t('C-MyBills')}</h2>
+          <p>{t('C-ListBills')}</p>
         </div>
   
         {true ? (
@@ -37,7 +37,7 @@ function MostRecentBills() {
           </div>
         ) : (
           <div className="hiddenScroll flex overflow-x-scroll justify-center gap-8 my-12">
-            <p className="opacity-50">You dont have bills.</p>
+            <p className="opacity-50">{t('C-DontHaveBills')}</p>
           </div>
         )}
       </div>
@@ -45,7 +45,7 @@ function MostRecentBills() {
   } else {
     return (
       <div className="hiddenScroll flex overflow-x-scroll justify-center gap-8 my-12">
-        <p className="opacity-50">You dont have bills.</p>
+        <p className="opacity-50">{t('C-DontHaveBills')}</p>
       </div>
     )
   }

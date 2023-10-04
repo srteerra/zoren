@@ -7,7 +7,7 @@ import AppContext from "@/context/AppContext";
 import { useTranslation } from "next-i18next";
 //import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-function ActionCenterDashboard() {
+function ActionCenterDashboard({t}) {
   const { state } = useContext(AppContext);
   const [qrCode, setQrCode] = useState(false);
   const { publicKey } = useZoren();
@@ -32,8 +32,8 @@ function ActionCenterDashboard() {
           <QrCodeIcon width={35} />
         </button>
         <div>
-          <p className="text-lg font-bold">Start a session</p>
-          <p className="text-lg">with a new QR code</p>
+          <p className="text-lg font-bold">{t('C-StartSession')}</p>
+          <p className="text-lg">{t('C-WithNewQR')}</p>
         </div>
       </div>
       <div className="flex gap-6 items-center text-black dark:text-white">
@@ -45,8 +45,8 @@ function ActionCenterDashboard() {
           <LinkIcon width={35} />
         </button>
         <div>
-          <p className="text-lg font-bold opacity-60">Join to session</p>
-          <p className="text-lg opacity-60">with a new QR code</p>
+          <p className="text-lg font-bold opacity-60">{t('C-JoinSession')}</p>
+          <p className="text-lg opacity-60">{t('C-WithNewQR')}</p>
         </div>
       </div>
     </div>
