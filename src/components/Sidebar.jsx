@@ -10,13 +10,25 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { useTranslation } from "next-i18next";
+// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // Images
 import logo from "../../public/logos/horizontal-light.png";
 import icon from "../../public/logos/icon-light.png";
 
+
+// export async function getStaticProps({ locale }) {
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale, ["common", "sidebar"])),
+//     },
+//   };
+// }
+
 const Sidebar = () => {
   const route = usePathname();
+  // const { t } = useTranslation("sidebar");
   const active = "text-white font-bold gap-6";
   const limits = [
     '/',
@@ -37,7 +49,8 @@ const Sidebar = () => {
             </Link>
           </div>
         </div>
-
+        
+        {/* <p>asdsd{t('Home')}</p> */}
         <ul className="flex flex-col text-start gap-3 w-full px-12">
           {[
             ["Home", "/dashboard"],

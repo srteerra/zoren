@@ -29,7 +29,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "billview"])),
+      ...(await serverSideTranslations(locale, ["common", "bills"])),
     },
   };
 }
@@ -41,9 +41,9 @@ const BillView = (data) => {
   const [balanceUSD, setBalanceUSD] = useState(0);
   const { state } = useContext(AppContext);
   const router = useRouter();
-  const path = router.asPath.substring(7);
+  const { t } = useTranslation("bills");
   const nav = {
-    title: "bills",
+    title: t("Bills"),
     isSubpage: true,
   };
   const res = {

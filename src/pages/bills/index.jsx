@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import MostRecentBills from "@/components/RecentBills";
 import { useContext, useEffect, useState } from "react";
 import AppContext from "@/context/AppContext";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { handleGetCollectionsOpen } from "@/hooks/useGetCollection";
 
@@ -18,8 +19,9 @@ export async function getStaticProps({ locale }) {
 const Bills = () => {
   const { state } = useContext(AppContext);
   const [bills, setBills] = useState([]);
+  const { t } = useTranslation("bills");
   const nav = {
-    title: "bills",
+    title:  t("Bills"),
     isSubpage: false,
     id: 2,
   };
@@ -42,26 +44,26 @@ const Bills = () => {
           {bills.length > 0 ? (
             <div className="w-full xl:w-[60%]">
               <p className="text-3xl 2xl:text-4xl lg:text-3xl md:text-3xl">
-                You have{" "}
+                {t('Youhave')}{" "}
                 <span className="font-bold text-red-500 dark:text-red-400">
                   {bills.length}
                 </span>{" "}
-                bill{" "}
+                {t('bill')}{" "}
                 <span className="font-bold text-red-500 dark:text-red-400">
-                  Incompleted
+                {t('Incompleted')}
                 </span>
               </p>
               <p className="text-lg 2xl:text-xl lg:text-md text-md pt-2 font-light">
-                take a look on your list to identify the bill
+              {t('takeLook')}
               </p>
             </div>
           ) : (
             <div className="w-full xl:w-[60%]">
               <p className="text-3xl 2xl:text-4xl lg:text-3xl md:text-3xl font-bold">
-                All your bills are completed!
+              {t('AllYourBills')}
               </p>
               <p className="text-lg 2xl:text-xl lg:text-md text-md pt-2 font-light">
-                keep using Zoren for your convenience
+              {t('keepUsingZoren')}
               </p>
             </div>
           )}

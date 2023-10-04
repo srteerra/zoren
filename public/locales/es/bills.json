@@ -1,1 +1,10 @@
-{}
+{
+    "Bills" : "Facturas",
+    "Youhave": "Tienes",
+    "bill": "una factura",
+    "Incompleted": "Incompleta",
+    "Completed": "Completada",
+    "takeLook": "Echa un vistazo a tu lista para identificar la factura",
+    "AllYourBills": "¡Todas tus facturas están completadas!",
+    "keepUsingZoren" : "Sigue usando Zoren para tu comodidad"
+}
