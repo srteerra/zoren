@@ -78,6 +78,31 @@ export async function getCollectionByName(data) {
   return res[0];
 }
 
+// change collection status to 'paid'
+export async function handleSetPaid(data) {
+  if (data) {
+    const collection = await getCollectionByName(data);
+    try {
+      await updateDoc(
+        doc(
+          firestore,
+          "wallets",
+          data.wallet,
+          "wallet-collections",
+          collection.id
+        ),
+        {
+          status: "paid",
+        }
+      );
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+}
+
 // delete a collection
 export async function deleteCollectionByName(data) {
   const collection = await getCollectionByName(data);
