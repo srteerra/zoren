@@ -8,8 +8,9 @@ import { PublicKey } from "@solana/web3.js";
 import { useZoren } from "../hooks/useZoren";
 import { useContext } from "react";
 import AppContext from "@/context/AppContext";
+import { useRouter } from "next/router";
 
-const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
+const AddFriendsModal = ({ modalOpen, setModalOpen, t }) => {
   const [searchPeople, setSearchPeople] = useState("");
   const [catchMsg, setCatchMsg] = useState("");
   const [isVerified, setIsVerified] = useState(undefined);
@@ -17,6 +18,7 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
   const [contacts, setContacts] = useState([]);
   const { addContact } = useZoren();
   const { state } = useContext(AppContext);
+  const { asPath, locale, locales } = useRouter();
 
   useEffect(() => {
     state.userContacts.map((e) => {
@@ -35,26 +37,80 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
           if (r) {
             setIsVerified(true);
             if (contacts.includes(searchPeople.toString())) {
-              setCatchMsg("You have already added this user");
+              setCatchMsg(`${
+                locale === "fr"
+                  ? "Vous avez déjà ajouté cet utilisateur"
+                  : locale === "es"
+                  ? "Ya has añadido a este usuario"
+                  : locale === "pt"
+                  ? "Você já adicionou este usuário"
+                  : locale === "de"
+                  ? "Du hast diesen Benutzer bereits hinzugefügt"
+                  : "You have already added this user"
+              }
+            }`);
               setIsAdded(true);
             } else {
-              setCatchMsg("This user is using Zoren!");
+              setCatchMsg(
+                `${
+                  locale === "fr"
+                    ? "Cet utilisateur utilise Zoren !"
+                    : locale === "es"
+                    ? "¡Este usuario está usando Zoren!"
+                    : locale === "pt"
+                    ? "Este usuário está usando o Zoren!"
+                    : locale === "de"
+                    ? "Dieser Benutzer verwendet Zoren!"
+                    : "This user is using Zoren!"
+                }`
+              );
               setIsAdded(false);
             }
           } else {
             setIsVerified(false);
-            setCatchMsg("This user is not using Zoren :(");
+            setCatchMsg(`${
+              locale === "fr"
+                ? "Cet utilisateur n'utilise pas Zoren :("
+                : locale === "es"
+                ? "Este usuario no está usando Zoren :("
+                : locale === "pt"
+                ? "Este usuário não está usando o Zoren :("
+                : locale === "de"
+                ? "Dieser Benutzer verwendet Zoren nicht :("
+                : "This user is not using Zoren :("
+            }
+            `);
             setIsAdded(false);
           }
         });
       } else {
-        console.log("invalid address");
-        setCatchMsg("Address not found");
+        setCatchMsg(`${
+          locale === "fr"
+            ? "Adresse introuvable"
+            : locale === "es"
+            ? "Dirección no encontrada"
+            : locale === "pt"
+            ? "Endereço não encontrado"
+            : locale === "de"
+            ? "Adresse nicht gefunden"
+            : "Address not found"
+        }
+        `);
         setIsVerified(false);
       }
     } else {
-      console.log("invalid input");
-      setCatchMsg("Please enter a valid address");
+      setCatchMsg(`${
+        locale === "fr"
+          ? "Veuillez entrer une adresse valide"
+          : locale === "es"
+          ? "Por favor, ingrese una dirección válida"
+          : locale === "pt"
+          ? "Por favor, digite um endereço válido"
+          : locale === "de"
+          ? "Bitte geben Sie eine gültige Adresse ein"
+          : "Please enter a valid address"
+      }
+      `);
       setIsVerified(false);
     }
   };
@@ -66,9 +122,27 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
           <div className="flex flex-col items-center justify-center space-y-1">
             <div>
               <div className="text-center">
-                <p className="mb-2 font-bold">Add new friend</p>
+                <p className="mb-2 font-bold">
+                  {locale === "fr"
+                    ? "Ajouter un nouvel ami"
+                    : locale === "es"
+                    ? "Agregar nuevo amigo"
+                    : locale === "pt"
+                    ? "Adicionar novo amigo"
+                    : locale === "de"
+                    ? "Neuen Freund hinzufügen"
+                    : "Add new friend"}
+                </p>
                 <p className="font-light">
-                  Search for a registered user on the platform
+                  {locale === "fr"
+                    ? "Rechercher un utilisateur enregistré sur la plateforme"
+                    : locale === "es"
+                    ? "Buscar un usuario registrado en la plataforma"
+                    : locale === "pt"
+                    ? "Procurar por um usuário registrado na plataforma"
+                    : locale === "de"
+                    ? "Nach einem registrierten Benutzer auf der Plattform suchen"
+                    : "Search for a registered user on the platform"}
                 </p>
               </div>
               <div className="flex flex-col gap-3 my-12">
@@ -84,7 +158,17 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
                     id="searchPurpose"
                     name="searchPurpose"
                     type="text"
-                    placeholder="Enter a valid solana address"
+                    placeholder={
+                      locale === "fr"
+                        ? "Saisissez une adresse Solana valide"
+                        : locale === "es"
+                        ? "Introduce una dirección Solana válida"
+                        : locale === "pt"
+                        ? "Digite um endereço Solana válido"
+                        : locale === "de"
+                        ? "Geben Sie eine gültige Solana-Adresse ein"
+                        : "Enter a valid Solana address"
+                    }
                     value={searchPeople}
                     disabled={isVerified === true}
                     onChange={(e) => setSearchPeople(e.target.value)}
@@ -129,13 +213,47 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
                 disabled={!searchPeople || isAdded}
                 className="w-full rounded-lg disabled:opacity-60 disabled:hover:bg-secondary disabled:dark:bg-secondary/60 bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
               >
-                <span className="font-bold text-white">
-                  {!isVerified
-                    ? "Verify"
-                    : isAdded
-                    ? "In contacts"
-                    : "Add friend"}
-                </span>
+                {locale === "fr" ? (
+                  <span className="font-bold text-white">
+                    {!isVerified
+                      ? "Vérifier"
+                      : isAdded
+                      ? "Dans les contacts"
+                      : "Ajouter un ami"}
+                  </span>
+                ) : locale === "es" ? (
+                  <span className="font-bold text-white">
+                    {!isVerified
+                      ? "Verificar"
+                      : isAdded
+                      ? "En contactos"
+                      : "Agregar amigo"}
+                  </span>
+                ) : locale === "pt" ? (
+                  <span className="font-bold text-white">
+                    {!isVerified
+                      ? "Verificar"
+                      : isAdded
+                      ? "Em contatos"
+                      : "Adicionar amigo"}
+                  </span>
+                ) : locale === "de" ? (
+                  <span className="font-bold text-white">
+                    {!isVerified
+                      ? "Überprüfen"
+                      : isAdded
+                      ? "In Kontakten"
+                      : "Freund hinzufügen"}
+                  </span>
+                ) : (
+                  <span className="font-bold text-white">
+                    {!isVerified
+                      ? "Verify"
+                      : isAdded
+                      ? "In contacts"
+                      : "Add friend"}
+                  </span>
+                )}
               </button>
               <button
                 onClick={() => {
@@ -147,7 +265,17 @@ const AddFriendsModal = ({ modalOpen, setModalOpen }) => {
                 }}
                 className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
               >
-                <span className="font-medium text-red-300">Cancel</span>
+                <span className="font-medium text-red-300">
+                  {locale === "fr"
+                    ? "Annuler"
+                    : locale === "es"
+                    ? "Cancelar"
+                    : locale === "pt"
+                    ? "Cancelar"
+                    : locale === "de"
+                    ? "Abbrechen"
+                    : "Cancel"}
+                </span>
               </button>
             </div>
           </div>

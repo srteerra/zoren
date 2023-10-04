@@ -79,10 +79,10 @@ const Bills = () => {
           )}
         </div>
         <div className="row-start-2 row-span-2 col-start-1 xl:row-start-1 xl:col-start-3">
-          <ActionCenterBills t={t}/>
+          <ActionCenterBills t={t} />
         </div>
       </div>
-      <MostRecentBills t={t}/>
+      <MostRecentBills t={t} />
     </div>
   );
 };
