@@ -1,12 +1,37 @@
+"use client";
 import { Modal, ModalClose } from "../Modal";
 import { TrashIcon } from "@heroicons/react/24/solid";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
+import AppContext from "@/context/AppContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { deleteCollectionByName } from "@/hooks/useGetCollection";
 
 const DeleteBillModal = ({ data, setModalOpen, modalOpen }) => {
   const [handleClick, setHandleClick] = useState(false);
+  const { state, setListener } = useContext(AppContext);
+  const router = useRouter();
+  const path = router.asPath.substring(7);
+
+  const handleDelete = async () => {
+    setListener(true);
+    const del = await deleteCollectionByName({
+      wallet: state.userAddress,
+      title: path,
+    });
+
+    if (del) {
+      console.log('deleted');
+      setModalOpen(false)
+      setListener(false);
+      router.push("/bills");
+    } else {
+      console.log('bad request')
+      setListener(false);
+    }
+  };
 
   return (
     <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
@@ -22,17 +47,19 @@ const DeleteBillModal = ({ data, setModalOpen, modalOpen }) => {
               width={110}
             />
             <div className="my-8">
-                <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
-                    Are you sure?
-                </p>
-                <p className="text-dark dark:text-white xl:text-md font-light">
-                    Once you delete this bill, it will be <span className="font-bold">permanently deleted</span> and you wont be able to recover it.
-                </p>
+              <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
+                Are you sure?
+              </p>
+              <p className="text-dark dark:text-white xl:text-md font-light">
+                Once you delete this bill, it will be{" "}
+                <span className="font-bold">permanently deleted</span> and you
+                wont be able to recover it.
+              </p>
             </div>
           </div>
           <div className="flex flex-col w-full gap-4">
             <button
-              onClick={() => {}}
+              onClick={() => handleDelete()}
               disabled={handleClick}
               className="w-full flex gap-3 justify-center text-center font-bold text-white rounded-lg bg-danger hover:bg-danger/80 dark:bg-red-400/60 py-3 px-8 dark:hover:bg-red-400/40 transition ease-out"
             >
@@ -40,12 +67,12 @@ const DeleteBillModal = ({ data, setModalOpen, modalOpen }) => {
             </button>
 
             <button
-              onClick={() => {
-                setModalOpen(false)
-              }}
+              onClick={() => setModalOpen(false)}
               className="w-full rounded-lg border-2 border-dark dark:border-white py-3 hover:opacity-40 opacity-60 transition ease-out"
             >
-              <span className="font-medium text-dark dark:text-white">Cancel</span>
+              <span className="font-medium text-dark dark:text-white">
+                Cancel
+              </span>
             </button>
           </div>
         </div>

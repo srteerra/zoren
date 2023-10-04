@@ -28,6 +28,9 @@ const Collections = () => {
         if (change.type === 'added') {
           setData(await handleGetCollections(state.userAddress));
         }
+        if (change.type === 'removed') {
+          setData(await handleGetCollections(state.userAddress));
+        }
       });
     });
   } else null;

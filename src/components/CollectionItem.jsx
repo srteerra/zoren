@@ -1,4 +1,3 @@
-import { faMugHot, faMoneyBills } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 
 const CollectionItem = (data) => {
