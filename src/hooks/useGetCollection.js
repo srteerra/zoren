@@ -40,6 +40,26 @@ export async function handleGetCollections(wallet) {
   }
 }
 
+// get 5 collections in a wallet
+export async function handleGetCollectionsLimted(wallet) {
+  if (wallet) {
+    const snapshot = await getDocs(
+      query(
+        collection(firestore, "wallets", wallet, "wallet-collections"),
+        limit(5)
+      )
+    );
+
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return data;
+  } else {
+    return false;
+  }
+}
+
 // get most recent transactions
 export async function handleGetRecentTrans(wallet) {
   if (wallet) {

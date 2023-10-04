@@ -9,6 +9,7 @@ import {
   PencilIcon,
 } from "@heroicons/react/24/solid";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
+import TransactionQRModal from "./transaction/TransactionQRModal";
 import { Slide } from "react-awesome-reveal";
 import { Collections } from "@/containers/Collections";
 import Image from "next/image";
@@ -24,14 +25,19 @@ import toast, { ToastBar, Toaster } from "react-hot-toast";
 // Images
 import logo from "../../public/logos/horizontal-dark.png";
 import EditProfleModal from "./EditProfileModal";
+import { useZoren } from "@/hooks/useZoren";
 
 const Profile = () => {
   const { state } = useContext(AppContext);
   const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const [show, steShow] = useState(false);
   const route = usePathname();
+  const { publicKey } = useZoren();
+  const [qrCode, setQrCode] = useState(false);
   const active = "text-dark font-bold gap-6";
   const limits = ["/", "/how", "/about"];
+  const [transactionQRModalOpen, setTransactionQRModalOpen] = useState(false);
+
 
   const copyText = () => {
     navigator.clipboard.writeText(state.userAddress.toString()), toast("Copied!");
@@ -96,6 +102,15 @@ const Profile = () => {
   } else {
     return (
       <aside className="flex pt-8 xl:py-16 justify-between xl:justify-around flex-row-reverse lg:block w-full h-1/6 lg:h-screen max-h-screen overflow-hidden lg:w-4/12 px-4 sm:px-8 lg:px-16 right-0">
+        <TransactionQRModal
+        modalOpen={transactionQRModalOpen}
+        setModalOpen={setTransactionQRModalOpen}
+        userAddress={state.userAddress}
+        userName={state.userName}
+        myKey={publicKey}
+        avatar={state.avatar}
+        setQrCode={setQrCode}
+      />
         {show ? slide : null}
         <EditProfleModal
           modalOpen={editProfileModalOpen}
@@ -170,7 +185,7 @@ const Profile = () => {
         <section className="hidden w-full lg:block p-0 h-full">
           <div className="flex items-center justify-between">
             <h3 className="font-bold">My bills</h3>
-            <button>
+            <button onClick={() => setTransactionQRModalOpen(!transactionQRModalOpen)}>
               <PlusSmallIcon className="h-6 w-6" />
             </button>
           </div>
