@@ -13,6 +13,9 @@ const initialState = {
 const useInitialState = () => {
   const [state, setState] = useState(initialState);
   const [listener, setListener] = useState(false);
+  const [currency, setCurrency] = useState("usd");
+  const [currencies, setCurrencies] = useState(["usd", "mxn"]);
+
   // set user avatar
   const updateProfile = (payload) => {
     setState({
@@ -128,6 +131,9 @@ const useInitialState = () => {
     setBalance,
     initialFetch,
     updateProfile,
+    currency,
+    setCurrency,
+    currencies,
   };
 };
 

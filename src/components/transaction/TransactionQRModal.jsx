@@ -35,7 +35,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { app } from "@/firebase";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import { Ring } from "@uiball/loaders";
 
 // import toast, { ToastBar, Toaster } from "react-hot-toast";
@@ -45,6 +45,7 @@ const firestore = getFirestore(app);
 
 // Images import
 import friends2 from "../../../public/images/friends2.png";
+import successBill from "../../../public/images/success-friends.png";
 import coinsIcon from "../../../public/images/coins.png";
 import receiptIcon from "../../../public/images/mobile-receipt.png";
 import swapIcon from "../../../public/images/swap.png";
@@ -67,6 +68,7 @@ const TransactionQRModal = ({
   const [conceptInput, setConceptInput] = useState("");
   const [pickerValue, setPickerValue] = useState("");
   const [showPicker, setShowPicker] = useState(false);
+  const [qrIsCompleted, setQrIsCompleted] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState("");
   const [stepModal, setStepModal] = useState(1);
   const [col, setCol] = useState("");
@@ -81,7 +83,12 @@ const TransactionQRModal = ({
 
   const toastId = useRef(null);
   // const dismiss = () =>  toast.dismiss(toastId.current);
-  const confirmTrans = () => toast.update(toastId.current, { render: "Bill Completed", type: toast.TYPE.SUCCESS, autoClose: 5000 });
+  const confirmTrans = () =>
+    toast.update(toastId.current, {
+      render: "Bill Completed",
+      type: toast.TYPE.SUCCESS,
+      autoClose: 5000,
+    });
 
   const handleClickPicker = (emojiData) => {
     setPickerValue(emojiData.emoji);
@@ -89,7 +96,11 @@ const TransactionQRModal = ({
     setShowPicker(false);
   };
 
-  const trans = () => toastId.current = toast("Waiting for payments...", { autoClose: false, position: "bottom-right" });
+  const trans = () =>
+    (toastId.current = toast("Waiting for payments...", {
+      autoClose: false,
+      position: "bottom-right",
+    }));
 
   const notify = () =>
     toast.update(toastId.current, {
@@ -111,8 +122,10 @@ const TransactionQRModal = ({
   const clearInputs = () => {
     setShowPicker(false);
     setAmountInput("");
+    setAmountInputCrypto("");
     setPeopleInput("");
     setConceptInput("");
+    setPickerValue("")
   };
 
   const { connection } = useConnection();
@@ -160,13 +173,15 @@ const TransactionQRModal = ({
   };
 
   const loadOff = () => {
-    setModalOpen(false);
     setHandleClick(false);
     notify();
     setTimeout(() => setListener(false), 1000);
   };
 
   const completeQR = () => {
+    if (qrRef.current) {
+      qrRef.current.innerHTML = "";
+    }
     setHandleClick(false);
     confirmTrans();
   };
@@ -228,63 +243,64 @@ const TransactionQRModal = ({
       }
 
       if (transactionsList < peopleInput) {
-        const interval = 
-          setInterval(async () => {
-            try {
-              // Check if there is any transaction for the reference
-              const signatureInfo = await findReference(connection, reference, {
-                finality: "confirmed",
-              });
+        const interval = setInterval(async () => {
+          try {
+            // Check if there is any transaction for the reference
+            const signatureInfo = await findReference(connection, reference, {
+              finality: "confirmed",
+            });
 
-              // Validate that the transaction has the expected recipient, amount and SPL token
-              await validateTransfer(
-                connection,
-                signatureInfo.signature,
-                {
-                  recipient,
-                  amount,
-                  reference,
-                },
-                { commitment: "confirmed" }
-              );
+            // Validate that the transaction has the expected recipient, amount and SPL token
+            await validateTransfer(
+              connection,
+              signatureInfo.signature,
+              {
+                recipient,
+                amount,
+                reference,
+              },
+              { commitment: "confirmed" }
+            );
 
-              const newID = (userTransactions.length + 1).toString();
-              const newTransaction = {
-                id: newID,
-                from: {
-                  name: recipient,
-                },
-                to: {
-                  name: reference,
-                },
-                date: new Date(),
-                status: "Completed",
-                amount: amount,
-              };
+            const newID = (userTransactions.length + 1).toString();
+            const newTransaction = {
+              id: newID,
+              from: {
+                name: recipient,
+              },
+              to: {
+                name: reference,
+              },
+              date: new Date(),
+              status: "Completed",
+              amount: amount,
+            };
 
-              console.log(newTransaction);
-              console.log(newTransaction.from.name.toString());
-              console.log(newTransaction.to.name.toString());
+            console.log(newTransaction);
+            console.log(newTransaction.from.name.toString());
+            console.log(newTransaction.to.name.toString());
 
-              setTransactionsList(transactionsList + 1);
+            setTransactionsList(transactionsList + 1);
 
-              clearInterval(interval);
-            } catch (e) {
-              if (e instanceof FindReferenceError) {
-                // No transaction found yet, ignore this error
-                return;
-              }
-              if (e instanceof ValidateTransferError) {
-                // Transaction is invalid
-                console.error("Transaction is invalid", e);
-                return;
-              }
-              console.error("Unknown error", e);
+            clearInterval(interval);
+          } catch (e) {
+            if (e instanceof FindReferenceError) {
+              // No transaction found yet, ignore this error
+              return;
             }
-          }, 5000);
+            if (e instanceof ValidateTransferError) {
+              // Transaction is invalid
+              console.error("Transaction is invalid", e);
+              return;
+            }
+            console.error("Unknown error", e);
+          }
+        }, 5000);
       } else {
         completeQR();
-        setTransactionsList(undefined)
+        clearInputs();
+        setTransactionsList(undefined);
+        setQrIsCompleted(true);
       }
     }
   }, [transactionsList]);
@@ -628,48 +644,109 @@ const TransactionQRModal = ({
             </>
           ) : (
             <div>
-              <div className="flex flex-col gap-6 items-center justify-center space-y-1">
-                <div className="w-full flex justify-between font-bold">
-                  <p className="text-dark dark:text-white text-lg">
-                    {col.people || 0} People
-                  </p>
-                  <p className="text-primary dark:text-white text-lg">
-                    {col.icon} {col.title || "..."}
-                  </p>
-                  <p className="text-dark dark:text-white text-lg">
-                    {col.amount || 0} SOL
-                  </p>
-                </div>
-                <div className="text-white bg-white rounded-3xl" ref={qrRef} />
-                <div className="flex justify-center flex-col gap-4 text-center">
-                  <div className="mx-auto flex flex-col gap-2 items-center">
-                    <div className="font-normal flex gap-3 text-2xl">
-                      <Ring size={25} lineWeight={5} speed={2} color="black" />{" "}
-                      <p>Waiting...</p>
-                    </div>
-                    <div className="flex justify-center">
-                      <p className="font-extrabold text-xl text-primary dark:text-white">
-                        {transactionsList || 0}/{peopleInput || 0} Contributions
-                      </p>
+              {!qrIsCompleted ? (
+                <div className="flex flex-col gap-6 items-center justify-center space-y-1">
+                  <div className="w-full flex justify-between font-bold">
+                    <p className="text-dark dark:text-white text-lg">
+                      {col.people || 0} People
+                    </p>
+                    <p className="text-primary dark:text-white text-lg">
+                      {col.icon} {col.title || "..."}
+                    </p>
+                    <p className="text-dark dark:text-white text-lg">
+                      {col.amount || 0} SOL
+                    </p>
+                  </div>
+                  {!qrIsCompleted ? (
+                    <div
+                      className="text-white bg-white rounded-3xl"
+                      ref={qrRef}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                  <div className="flex justify-center flex-col gap-4 text-center">
+                    <div className="mx-auto flex flex-col gap-2 items-center">
+                      <div className="font-normal flex gap-3 text-2xl">
+                        <Ring
+                          size={25}
+                          lineWeight={5}
+                          speed={2}
+                          color="black"
+                        />{" "}
+                        <p>Waiting...</p>
+                      </div>
+                      <div className="flex justify-center">
+                        <p className="font-extrabold text-xl text-primary dark:text-white">
+                          {transactionsList || 0}/{peopleInput || 0}{" "}
+                          Contributions
+                        </p>
+                      </div>
                     </div>
                   </div>
+                  <button
+                    onClick={() => {
+                      loadOff();
+                      setStepModal(4);
+                      setModalOpen(false);
+                    }}
+                    className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
+                  >
+                    <span className="font-medium text-red-300">Cancel</span>
+                  </button>
+                  <div className="w-[60%] flex justify-center mx-auto text-center">
+                    <p className="font-normal text-md opacity-60 mx-auto">
+                      Dont close this window or the transaction waiting will
+                      end.
+                    </p>
+                  </div>
                 </div>
-                <button
-                  onClick={() => {
-                    loadOff();
-                    setStepModal(4);
-                    setModalOpen(false);
-                  }}
-                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
-                >
-                  <span className="font-medium text-red-300">Cancel</span>
-                </button>
-                <div className="w-[60%] flex justify-center mx-auto text-center">
-                  <p className="font-normal text-md opacity-60 mx-auto">
-                    Dont close this window or the transaction waiting will end.
-                  </p>
+              ) : (
+                <div className="flex flex-col gap-6 items-center justify-center space-y-1">
+                  <div className="w-full flex justify-between font-bold">
+                    <p className="text-dark dark:text-white text-lg">
+                      {col.people || 0} People
+                    </p>
+                    <p className="text-primary dark:text-white text-lg">
+                      {col.icon} {col.title || "..."}
+                    </p>
+                    <p className="text-dark dark:text-white text-lg">
+                      {col.amount || 0} SOL
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-center items-center mx-auto text-center px-20">
+                    <Image
+                      className="mx-auto"
+                      src={successBill}
+                      alt="success-bill"
+                      priority={true}
+                      width={250}
+                    />
+                    <p className="dark:text-white text-[#79AC78] mb-2 text-lg xl:text-3xl font-extrabold">
+                      Bill completed
+                    </p>
+                    <p className="font-normal text-md text-dark dark:text-white">
+                      All contributions have been made.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      loadOff();
+                      setStepModal(4);
+                      setModalOpen(false);
+                      setQrIsCompleted(false);
+                    }}
+                    className="w-full rounded-lg border-2 bg-dark py-3 hover:bg-opacity-70 transition ease-out"
+                  >
+                    <span className="font-medium text-white">Close</span>
+                  </button>
+                  <div className="w-[60%] flex justify-center mx-auto text-center">
+                    <p className="font-normal text-md opacity-60 mx-auto">
+                      Thanks for using Zoren!
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
         </div>
