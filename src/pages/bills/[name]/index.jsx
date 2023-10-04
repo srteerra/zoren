@@ -10,6 +10,7 @@ import SetBillModal from "@/components/billFunctions/setBillModal";
 import { useEffect, useState, useContext } from "react";
 import AppContext from "@/context/AppContext";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import { useZoren } from "@/hooks/useZoren";
 import { getCollectionByName } from "@/hooks/useGetCollection";
 
@@ -41,6 +42,7 @@ const BillView = (data) => {
   const [balanceUSD, setBalanceUSD] = useState(0);
   const { state } = useContext(AppContext);
   const router = useRouter();
+  const path = router.asPath.substring(7);
   const { t } = useTranslation("bills");
   const nav = {
     title: t("Bills"),
