@@ -1,13 +1,13 @@
 import { faMugHot, faMoneyBills } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 
 const CollectionItem = (data) => {
-  const icons = [
-    faMugHot,
-    faMoneyBills,
-  ];
+  const route  = useRouter()
   return (
-    <div className="w-1/4 min-w-64 lg:w-full lg: p-2 lg:p-0 my-2 xl:my-4 flex gap-4 flex-col justify-center lg:justify-normal lg:flex-row items-center transition ease-linear duration-150 dark:hover:opacity-60 hover:opacity-70 rounded-lg hover:cursor-pointer">
+    <div onClick={() => route.push({
+      pathname: "/bills/[name]",
+      query: { name: data.title },
+    })} className="w-1/4 min-w-64 lg:w-full lg: p-2 lg:p-0 my-2 xl:my-4 flex gap-4 flex-col justify-center lg:justify-normal lg:flex-row items-center transition ease-linear duration-150 dark:hover:opacity-60 hover:opacity-70 rounded-lg hover:cursor-pointer">
       <div className="w-14 h-12 p-2 rounded-2xl text-dark bg-terce dark:bg-gray-600 dark:text-white grid place-items-center">
         <span className="text-2xl">{data.icon}</span>
       </div>
