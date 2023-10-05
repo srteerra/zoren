@@ -199,6 +199,162 @@ const Home = () => {
         </div>
         <div className="h-3/6 flex items-end justify-center bg-[url('../../public/images/banner.png')] bg-no-repeat bg-cover lg:bg-contain bg-center"></div>
       </div>
+
+      {/* roadmap section */}
+      <div className="w-full p-4" id="#roadmap">
+        <div className="w-full text-center my-32 text-primary">
+          <h1>Our Roadmap</h1>
+        </div>
+
+        <div className="">
+          {/* stage 01 */}
+          <div className="w-full md:w-3/5 lg:w-2/5 grid grid-cols-5 mx-auto">
+            <div className="hidden text-primary md:block text-center">
+              <h2>Stage</h2>
+              <span className="text-4xl font-bold">01</span>
+            </div>
+            <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
+              <div className="md:w-1/2">
+                <h2 className="text-primary">Plannning and Development</h2>
+              </div>
+              <ul className="list-disc p-4 flex flex-col gap-y-4">
+                <li>
+                  <p>
+                    Define the project's objectives, target audience, and scope
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Assess the feasinility of implementing the desired features
+                    on Solana
+                  </p>
+                </li>
+                <li>
+                  <p>Determine the tecnology stack and tools to be used</p>
+                </li>
+                <li>
+                  <p>
+                    Identify potential competitiors and analyze their strenghts
+                    and weaknesses
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* stage 02 */}
+          <div className="w-full md:w-3/5 lg:w-2/5 grid grid-cols-5 mx-auto">
+            <div className="hidden text-primary md:block text-center pt-10">
+              <h2>Stage</h2>
+              <span className="text-4xl font-bold">02</span>
+            </div>
+            <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
+              <div className="md:w-1/2">
+                <h2 className="text-primary pt-10">
+                  Plannning and Development
+                </h2>
+              </div>
+              <ul className="list-disc p-4 flex flex-col gap-y-4">
+                <li>
+                  <p>
+                    Define the project's objectives, target audience, and scope
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Assess the feasinility of implementing the desired features
+                    on Solana
+                  </p>
+                </li>
+                <li>
+                  <p>Determine the tecnology stack and tools to be used</p>
+                </li>
+                <li>
+                  <p>
+                    Identify potential competitiors and analyze their strenghts
+                    and weaknesses
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* stage 03 */}
+          <div className="w-full md:w-3/5 lg:w-2/5 grid grid-cols-5 mx-auto">
+            <div className="hidden text-primary md:block text-center pt-10">
+              <h2>Stage</h2>
+              <span className="text-4xl font-bold">03</span>
+            </div>
+            <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
+              <div className="md:w-1/2">
+                <h2 className="text-primary pt-10">
+                  Plannning and Development
+                </h2>
+              </div>
+              <ul className="list-disc p-4 flex flex-col gap-y-4">
+                <li>
+                  <p>
+                    Define the project's objectives, target audience, and scope
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Assess the feasinility of implementing the desired features
+                    on Solana
+                  </p>
+                </li>
+                <li>
+                  <p>Determine the tecnology stack and tools to be used</p>
+                </li>
+                <li>
+                  <p>
+                    Identify potential competitiors and analyze their strenghts
+                    and weaknesses
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* stage 04 */}
+          <div className="w-full md:w-3/5 lg:w-2/5 grid grid-cols-5 mx-auto">
+            <div className="hidden text-primary md:block text-center pt-10">
+              <h2>Stage</h2>
+              <span className="text-4xl font-bold">04</span>
+            </div>
+            <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
+              <div className="md:w-1/2">
+                <h2 className="text-primary pt-10">
+                  Plannning and Development
+                </h2>
+              </div>
+              <ul className="list-disc p-4 flex flex-col gap-y-4">
+                <li>
+                  <p>
+                    Define the project's objectives, target audience, and scope
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Assess the feasinility of implementing the desired features
+                    on Solana
+                  </p>
+                </li>
+                <li>
+                  <p>Determine the tecnology stack and tools to be used</p>
+                </li>
+                <li>
+                  <p>
+                    Identify potential competitiors and analyze their strenghts
+                    and weaknesses
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <Footer />
     </div>
   );
