@@ -81,7 +81,7 @@ export default function Layout({ children }) {
           </ToastBar>
         )}
       </Toaster> */}
-      <Sidebar t={t}/>
+      <Sidebar t={t} />
       <div
         className={
           limits.includes(route)

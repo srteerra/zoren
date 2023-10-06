@@ -47,7 +47,7 @@ const LoginNav = () => {
             <ul className="flex flex-col gap-y-10 items-center">
               {[
                 [`Home`, "/"],
-                [`How`, "/how"],
+                [`How it works?`, "/how"],
                 [`About`, "/about"],
               ].map(([title, href]) => (
                 <li key={title}>
@@ -99,7 +99,7 @@ const LoginNav = () => {
         <ul className="hidden lg:flex gap-x-10 items-center">
           {[
             [`Home`, "/"],
-            [`How`, "/how"],
+            [`How it works?`, "/how"],
             [`About`, "/about"],
           ].map(([title, href]) => (
             <li key={title}>

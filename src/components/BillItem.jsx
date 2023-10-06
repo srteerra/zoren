@@ -3,10 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 
-const Bill = ({data}) => {
+const Bill = ({ data, t }) => {
+  const { asPath, locale, locales } = useRouter();
   const icons = [faMugHot, faMoneyBills];
   const router = useRouter();
-  
+
   return (
     <button
       onClick={() => {
@@ -25,17 +26,42 @@ const Bill = ({data}) => {
               <div className="bg-slate-800 dark:bg-gray-600 grid p-0 place-items-center rounded-xl w-12 h-12">
                 <p className="text-xl">{data.icon}</p>
               </div>
-              <p className="font-bold overflow-x-hidden w-20 pr-6 text-xl text-white">{data.title}</p>
+              <p className="font-bold overflow-x-hidden w-20 pr-6 text-xl text-white">
+                {data.title}
+              </p>
             </div>
-            <p className="font-bold text-xl text-white">{data.hasPaid}/{data.people}</p>
+            <p className="font-bold text-xl text-white">
+              {data.hasPaid}/{data.people}
+            </p>
           </div>
         </div>
       </div>
       {/* Foot */}
       <div className="flex justify-between w-full group-hover:justify-center">
-        <p className="group-hover:hidden flex gap-1 text-white">{data.people.lenght > 5 ? '+5' : data.people} People</p>
+        <p className="group-hover:hidden flex gap-1 text-white">
+          {data.people.lenght > 5 ? "+5" : data.people}/
+          {locale === "fr"
+            ? "Personnes"
+            : locale === "es"
+            ? "Personas"
+            : locale === "pt"
+            ? "Pessoas"
+            : locale === "de"
+            ? "Menschen"
+            : "People"}
+        </p>
         <div className="hidden group-hover:flex justify-center gap-2 text-white">
-          <p>Open</p>
+          <p>
+            {locale === "fr"
+              ? "Ouvrir"
+              : locale === "es"
+              ? "Abrir"
+              : locale === "pt"
+              ? "Abrir"
+              : locale === "de"
+              ? "Öffnen"
+              : "Open"}
+          </p>
           <ArrowTopRightOnSquareIcon width={20} />
         </div>
         <div className="group-hover:hidden gap-1 relative">

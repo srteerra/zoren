@@ -12,14 +12,12 @@ import Image from "next/image";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useTranslation } from "next-i18next";
 
-
 // import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // Images
 import logo from "../../public/logos/horizontal-light.png";
 import icon from "../../public/logos/icon-light.png";
 import { useRouter } from "next/router";
-
 
 // export async function getStaticProps({ locale }) {
 //   return {
@@ -30,14 +28,10 @@ import { useRouter } from "next/router";
 // }
 
 const Sidebar = () => {
-  const { asPath, locale, locales} = useRouter()
+  const { asPath, locale, locales } = useRouter();
   const route = usePathname();
   const active = "text-white font-bold gap-6";
-  const limits = [
-    '/',
-    '/how',
-    '/about',
-  ]
+  const limits = ["/", "/how", "/about"];
   const { disconnect } = useWallet();
 
   if (limits.includes(route)) {
@@ -52,14 +46,66 @@ const Sidebar = () => {
             </Link>
           </div>
         </div>
-        
+
         {/* <p>asdsd{t('Home')}</p> */}
         <ul className="flex flex-col text-start gap-3 w-full px-12">
           {[
-            [`${locale === "fr" ? "Accueil" : locale === "es" ? "Inicio" : locale === "pt" ? "Início" : locale === "de" ? "Heim" : "Home"}`, "/dashboard"],
-            [`${locale === "fr" ? "Facture" : locale === "es" ? "Factura" : locale === "pt" ? "Fatura" : locale === "de" ? "Rechnung" : "Bill"}`, "/bills"],
-            [`${locale === "fr" ? "Amis" : locale === "es" ? "Amigos" : locale === "pt" ? "Amigos" : locale === "de" ? "Freunde" : "Friends"}`, "/friends"],
-            [`${locale === "fr" ? "Paramètres" : locale === "es" ? "Ajustes" : locale === "pt" ? "Configurações" : locale === "de" ? "Einstellungen" : "Settings"}`, "/settings"],
+            [
+              `${
+                locale === "fr"
+                  ? "Accueil"
+                  : locale === "es"
+                  ? "Inicio"
+                  : locale === "pt"
+                  ? "Início"
+                  : locale === "de"
+                  ? "Heim"
+                  : "Home"
+              }`,
+              "/dashboard",
+            ],
+            [
+              `${
+                locale === "fr"
+                  ? "Facture"
+                  : locale === "es"
+                  ? "Factura"
+                  : locale === "pt"
+                  ? "Fatura"
+                  : locale === "de"
+                  ? "Rechnung"
+                  : "Bill"
+              }`,
+              "/bills",
+            ],
+            [
+              `${
+                locale === "fr"
+                  ? "Amis"
+                  : locale === "es"
+                  ? "Amigos"
+                  : locale === "pt"
+                  ? "Amigos"
+                  : locale === "de"
+                  ? "Freunde"
+                  : "Friends"
+              }`,
+              "/friends",
+            ],
+            [
+              `${
+                locale === "fr"
+                  ? "Paramètres"
+                  : locale === "es"
+                  ? "Ajustes"
+                  : locale === "pt"
+                  ? "Configurações"
+                  : locale === "de"
+                  ? "Einstellungen"
+                  : "Settings"
+              }`,
+              "/settings",
+            ],
           ].map(([title, href]) => (
             <li key={title}>
               <Link
@@ -128,9 +174,22 @@ const Sidebar = () => {
           ))}
         </ul>
         <div className="w-full flex flex-col items-center">
-          <button onClick={() => disconnect()} className="w-2/3 bg-white hover:opacity-70 transition flex justify-center items-center gap-2 border-2 py-3 px-6 my-4 dark:text-dark rounded-full">
+          <button
+            onClick={() => disconnect()}
+            className="w-2/3 bg-white hover:opacity-70 transition flex justify-center items-center gap-2 border-2 py-3 px-6 my-4 dark:text-dark rounded-full"
+          >
             <ArrowLeftOnRectangleIcon width={25} />
-            <span>{locale === "fr" ? "Déconnecter" : locale === "es" ? "Desconectar" : locale === "pt" ? "Desconectar" : locale === "de" ? "Trennen" : "Disconnect"}</span>
+            <span>
+              {locale === "fr"
+                ? "Déconnecter"
+                : locale === "es"
+                ? "Desconectar"
+                : locale === "pt"
+                ? "Desconectar"
+                : locale === "de"
+                ? "Trennen"
+                : "Disconnect"}
+            </span>
           </button>
         </div>
         <Image src={icon} width={50} height={50} alt="icon" />

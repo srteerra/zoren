@@ -81,8 +81,7 @@ const TransactionQRModal = ({
 
   const { userTransactions, setUserTransactions } = useZoren();
   const { connection: cc } = useConnection();
-  const { asPath, locale, locales} = useRouter()
-
+  const { asPath, locale, locales } = useRouter();
 
   const toastId = useRef(null);
   // const dismiss = () =>  toast.dismiss(toastId.current);
@@ -128,7 +127,7 @@ const TransactionQRModal = ({
     setAmountInputCrypto("");
     setPeopleInput("");
     setConceptInput("");
-    setPickerValue("")
+    setPickerValue("");
   };
 
   const { connection } = useConnection();
@@ -323,10 +322,26 @@ const TransactionQRModal = ({
                   width={180}
                 />
                 <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
-                  {locale === "fr" ? "Définir les contributeurs" : locale === "es" ? "Establecer a los colaboradores" : locale === "pt" ? "Definir os colaboradores" : locale === "de" ? "Die Beitragenden festlegen" : "Set the contributors"}
+                  {locale === "fr"
+                    ? "Définir les contributeurs"
+                    : locale === "es"
+                    ? "Establecer a los colaboradores"
+                    : locale === "pt"
+                    ? "Definir os colaboradores"
+                    : locale === "de"
+                    ? "Die Beitragenden festlegen"
+                    : "Set the contributors"}
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
-                  {locale === "fr" ? "Spécifiez le nombre de personnes qui seront séparées" : locale === "es" ? "Especificar la cantidad de personas que serán separadas." : locale === "pt" ? "Especificar a quantidade de pessoas que serão separadas." : locale === "de" ? "Geben Sie die Anzahl der Personen an, die getrennt werden sollen." : "Specify the amount of people that will be separated."}
+                  {locale === "fr"
+                    ? "Spécifiez le nombre de personnes qui seront séparées"
+                    : locale === "es"
+                    ? "Especificar la cantidad de personas que serán separadas."
+                    : locale === "pt"
+                    ? "Especificar a quantidade de pessoas que serão separadas."
+                    : locale === "de"
+                    ? "Geben Sie die Anzahl der Personen an, die getrennt werden sollen."
+                    : "Specify the amount of people that will be separated."}
                 </p>
               </div>
               <div className="my-12 flex gap-3 justify-center">
@@ -346,14 +361,35 @@ const TransactionQRModal = ({
                   disabled={handleClick}
                   className="w-full rounded-lg bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
                 >
-                  <span className="font-bold text-white"> {locale === "fr" ? "Suivant" : locale === "es" ? "Siguiente" : locale === "pt" ? "Próximo" : locale === "de" ? "Weiter" : "Next"} </span>
+                  <span className="font-bold text-white">
+                    {" "}
+                    {locale === "fr"
+                      ? "Suivant"
+                      : locale === "es"
+                      ? "Siguiente"
+                      : locale === "pt"
+                      ? "Próximo"
+                      : locale === "de"
+                      ? "Weiter"
+                      : "Next"}{" "}
+                  </span>
                 </button>
 
                 <button
                   onClick={() => setModalOpen(false)}
                   className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-red-300">{locale === "fr" ? "Fermer" : locale === "es" ? "Cerrar" : locale === "pt" ? "Fechar" : locale === "de" ? "Schließen" : "Close"}</span>
+                  <span className="font-medium text-red-300">
+                    {locale === "fr"
+                      ? "Fermer"
+                      : locale === "es"
+                      ? "Cerrar"
+                      : locale === "pt"
+                      ? "Fechar"
+                      : locale === "de"
+                      ? "Schließen"
+                      : "Close"}
+                  </span>
                 </button>
               </div>
             </div>
@@ -368,10 +404,26 @@ const TransactionQRModal = ({
                   width={120}
                 />
                 <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
-                {locale === "fr" ? "Définir un montant" : locale === "es" ? "Establece una cantidad" : locale === "pt" ? "Definir uma quantia" : locale === "de" ? "Betrag festlegen" : "Set an amount"}
+                  {locale === "fr"
+                    ? "Définir un montant"
+                    : locale === "es"
+                    ? "Establece una cantidad"
+                    : locale === "pt"
+                    ? "Definir uma quantia"
+                    : locale === "de"
+                    ? "Betrag festlegen"
+                    : "Set an amount"}
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
-                {locale === "fr" ? "Zoren calculera le montant à payer en fonction du nombre de contributeurs." : locale === "es" ? "Zoren calculará el monto a pagar según el número de contribuyentes." : locale === "pt" ? "Zoren calculará o valor a pagar pelo número de contribuintes." : locale === "de" ? "Zoren berechnet den zu zahlenden Betrag nach der Anzahl der Beitragenden." : "Zoren will calculate the amount to pay by the number of contributors."}
+                  {locale === "fr"
+                    ? "Zoren calculera le montant à payer en fonction du nombre de contributeurs."
+                    : locale === "es"
+                    ? "Zoren calculará el monto a pagar según el número de contribuyentes."
+                    : locale === "pt"
+                    ? "Zoren calculará o valor a pagar pelo número de contribuintes."
+                    : locale === "de"
+                    ? "Zoren berechnet den zu zahlenden Betrag nach der Anzahl der Beitragenden."
+                    : "Zoren will calculate the amount to pay by the number of contributors."}
                 </p>
               </div>
               <div className="my-12 flex gap-3 justify-center">
@@ -391,14 +443,34 @@ const TransactionQRModal = ({
                   disabled={handleClick}
                   className="w-full rounded-lg bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
                 >
-                  <span className="font-bold text-white">{locale === "fr" ? "Suivant" : locale === "es" ? "Siguiente" : locale === "pt" ? "Próximo" : locale === "de" ? "Weiter" : "Next"}</span>
+                  <span className="font-bold text-white">
+                    {locale === "fr"
+                      ? "Suivant"
+                      : locale === "es"
+                      ? "Siguiente"
+                      : locale === "pt"
+                      ? "Próximo"
+                      : locale === "de"
+                      ? "Weiter"
+                      : "Next"}
+                  </span>
                 </button>
 
                 <button
                   onClick={() => setModalOpen(false)}
                   className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-red-300">{locale === "fr" ? "Fermer" : locale === "es" ? "Cerrar" : locale === "pt" ? "Fechar" : locale === "de" ? "Schließen" : "Close"}</span>
+                  <span className="font-medium text-red-300">
+                    {locale === "fr"
+                      ? "Fermer"
+                      : locale === "es"
+                      ? "Cerrar"
+                      : locale === "pt"
+                      ? "Fechar"
+                      : locale === "de"
+                      ? "Schließen"
+                      : "Close"}
+                  </span>
                 </button>
               </div>
             </div>
@@ -413,10 +485,26 @@ const TransactionQRModal = ({
                   width={100}
                 />
                 <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
-                {locale === "fr" ? "Ajouter un concept" : locale === "es" ? "Agregar un concepto" : locale === "pt" ? "Adicionar um conceito" : locale === "de" ? "Konzept hinzufügen" : "Add a concept"}
+                  {locale === "fr"
+                    ? "Ajouter un concept"
+                    : locale === "es"
+                    ? "Agregar un concepto"
+                    : locale === "pt"
+                    ? "Adicionar um conceito"
+                    : locale === "de"
+                    ? "Konzept hinzufügen"
+                    : "Add a concept"}
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
-                {locale === "fr" ? "Pour diviser une facture en un groupe et les organiser." : locale === "es" ? "Para separar una factura en un grupo y organizarlos." : locale === "pt" ? "Para separar uma conta em um grupo e organizá-los." : locale === "de" ? "Um eine Rechnung in eine Gruppe aufzuteilen und sie zu organisieren." : "To separate a bill into a group and organize them."}
+                  {locale === "fr"
+                    ? "Pour diviser une facture en un groupe et les organiser."
+                    : locale === "es"
+                    ? "Para separar una factura en un grupo y organizarlos."
+                    : locale === "pt"
+                    ? "Para separar uma conta em um grupo e organizá-los."
+                    : locale === "de"
+                    ? "Um eine Rechnung in eine Gruppe aufzuteilen und sie zu organisieren."
+                    : "To separate a bill into a group and organize them."}
                 </p>
               </div>
               <div className="my-12 flex gap-3 justify-center">
@@ -436,14 +524,34 @@ const TransactionQRModal = ({
                   disabled={handleClick}
                   className="w-full rounded-lg bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
                 >
-                  <span className="font-bold text-white">{locale === "fr" ? "D'accord, compris" : locale === "es" ? "Ok, entendido" : locale === "pt" ? "Ok, entendi" : locale === "de" ? "Ok, verstanden" : "Ok, got it"}</span>
+                  <span className="font-bold text-white">
+                    {locale === "fr"
+                      ? "D'accord, compris"
+                      : locale === "es"
+                      ? "Ok, entendido"
+                      : locale === "pt"
+                      ? "Ok, entendi"
+                      : locale === "de"
+                      ? "Ok, verstanden"
+                      : "Ok, got it"}
+                  </span>
                 </button>
 
                 <button
                   onClick={() => setModalOpen(false)}
                   className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-red-300">{locale === "fr" ? "Fermer" : locale === "es" ? "Cerrar" : locale === "pt" ? "Fechar" : locale === "de" ? "Schließen" : "Close"}</span>
+                  <span className="font-medium text-red-300">
+                    {locale === "fr"
+                      ? "Fermer"
+                      : locale === "es"
+                      ? "Cerrar"
+                      : locale === "pt"
+                      ? "Fechar"
+                      : locale === "de"
+                      ? "Schließen"
+                      : "Close"}
+                  </span>
                 </button>
               </div>
             </div>
@@ -461,7 +569,15 @@ const TransactionQRModal = ({
                     @{userName}
                   </p>
                   <p className="text-sm font-light text-gray-600 dark:text-white">
-                  {locale === "fr" ? "Créer un code" : locale === "es" ? "Crear un código" : locale === "pt" ? "Criar um código" : locale === "de" ? "Einen Code erstellen" : "Create a code"}
+                    {locale === "fr"
+                      ? "Créer un code"
+                      : locale === "es"
+                      ? "Crear un código"
+                      : locale === "pt"
+                      ? "Criar um código"
+                      : locale === "de"
+                      ? "Einen Code erstellen"
+                      : "Create a code"}
                   </p>
                 </div>
               </div>
@@ -475,7 +591,15 @@ const TransactionQRModal = ({
                           className="text-gray-500"
                           htmlFor="cryptoPurpose"
                         >
-                          {locale === "fr" ? "Montant:" : locale === "es" ? "Monto:" : locale === "pt" ? "Valor:" : locale === "de" ? "Betrag:" : "Amount:"}
+                          {locale === "fr"
+                            ? "Montant:"
+                            : locale === "es"
+                            ? "Monto:"
+                            : locale === "pt"
+                            ? "Valor:"
+                            : locale === "de"
+                            ? "Betrag:"
+                            : "Amount:"}
                         </label>
                       </div>
                       <div className="flex w-[40%] justify-end">
@@ -524,7 +648,15 @@ const TransactionQRModal = ({
                     <div className="flex w-full justify-between gap-4 rounded-lg">
                       <div>
                         <label className="text-gray-500" htmlFor="fiatPurpose">
-                        {locale === "fr" ? "Montant:" : locale === "es" ? "Monto:" : locale === "pt" ? "Valor:" : locale === "de" ? "Betrag:" : "Amount:"}
+                          {locale === "fr"
+                            ? "Montant:"
+                            : locale === "es"
+                            ? "Monto:"
+                            : locale === "pt"
+                            ? "Valor:"
+                            : locale === "de"
+                            ? "Betrag:"
+                            : "Amount:"}
                         </label>
                       </div>
                       <div className="flex w-[40%] justify-end">
@@ -574,7 +706,15 @@ const TransactionQRModal = ({
                 <div className="flex w-full justify-between gap-4 rounded-lg">
                   <div>
                     <label className="text-gray-500" htmlFor="peoplePurpose">
-                    {locale === "fr" ? "Nombre de personnes :" : locale === "es" ? "Cantidad de personas:" : locale === "pt" ? "Quantidade de pessoas:" : locale === "de" ? "Anzahl der Personen:" : "Amount of people:"}
+                      {locale === "fr"
+                        ? "Nombre de personnes :"
+                        : locale === "es"
+                        ? "Cantidad de personas:"
+                        : locale === "pt"
+                        ? "Quantidade de pessoas:"
+                        : locale === "de"
+                        ? "Anzahl der Personen:"
+                        : "Amount of people:"}
                     </label>
                   </div>
                   <input
@@ -582,7 +722,17 @@ const TransactionQRModal = ({
                     id="peoplePurpose"
                     name="peoplePurpose"
                     type="number"
-                    placeholder={locale === "fr" ? "Combien de personnes ?" : locale === "es" ? "¿Cuántas personas?" : locale === "pt" ? "Quantas pessoas?" : locale === "de" ? "Wie viele Personen?" : "How many people? "}
+                    placeholder={
+                      locale === "fr"
+                        ? "Combien de personnes ?"
+                        : locale === "es"
+                        ? "¿Cuántas personas?"
+                        : locale === "pt"
+                        ? "Quantas pessoas?"
+                        : locale === "de"
+                        ? "Wie viele Personen?"
+                        : "How many people? "
+                    }
                     value={peopleInput}
                     onChange={(e) => setPeopleInput(e.target.value)}
                   />
@@ -590,7 +740,15 @@ const TransactionQRModal = ({
                 <div className="flex w-full justify-between gap-4 rounded-lg">
                   <div>
                     <label className="text-gray-500" htmlFor="msgPurpose">
-                    {locale === "fr" ? "Concept :" : locale === "es" ? "Concepto:" : locale === "pt" ? "Conceito:" : locale === "de" ? "Begriff:" : "Concept:"}
+                      {locale === "fr"
+                        ? "Concept :"
+                        : locale === "es"
+                        ? "Concepto:"
+                        : locale === "pt"
+                        ? "Conceito:"
+                        : locale === "de"
+                        ? "Begriff:"
+                        : "Concept:"}
                     </label>
                   </div>
                   <input
@@ -598,13 +756,33 @@ const TransactionQRModal = ({
                     id="msgPurpose"
                     name="msgPurpose"
                     type="text"
-                    placeholder={locale === "fr" ? "Saisir un concept" : locale === "es" ? "Ingresar un concepto" : locale === "pt" ? "Digite um conceito" : locale === "de" ? "Geben Sie ein Konzept ein" : "Enter a concept"}
+                    placeholder={
+                      locale === "fr"
+                        ? "Saisir un concept"
+                        : locale === "es"
+                        ? "Ingresar un concepto"
+                        : locale === "pt"
+                        ? "Digite um conceito"
+                        : locale === "de"
+                        ? "Geben Sie ein Konzept ein"
+                        : "Enter a concept"
+                    }
                     value={conceptInput}
                     onChange={(e) => setConceptInput(e.target.value)}
                   />
                 </div>
                 <div className="flex w-full justify-between items-center rounded-lg">
-                  <p className="text-gray-500">{locale === "fr" ? "Icône :" : locale === "es" ? "Icono:" : locale === "pt" ? "Ícone:" : locale === "de" ? "Symbol:" : "Icon:"}</p>
+                  <p className="text-gray-500">
+                    {locale === "fr"
+                      ? "Icône :"
+                      : locale === "es"
+                      ? "Icono:"
+                      : locale === "pt"
+                      ? "Ícone:"
+                      : locale === "de"
+                      ? "Symbol:"
+                      : "Icon:"}
+                  </p>
                   <div>
                     <button
                       className="flex text-lg justify-around items-center overflow-hidden rounded-lg"
@@ -630,7 +808,17 @@ const TransactionQRModal = ({
                   disabled={!peopleInput || !conceptInput || !amountInput}
                   className="w-full rounded-lg disabled:opacity-60 disabled:hover:bg-secondary disabled:dark:bg-secondary/60 bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
                 >
-                  <span className="font-bold text-white">{locale === "fr" ? "Charger un code QR" : locale === "es" ? "Cargar código QR" : locale === "pt" ? "Carregar código QR" : locale === "de" ? "QR-Code laden" : "Load QR code"}</span>
+                  <span className="font-bold text-white">
+                    {locale === "fr"
+                      ? "Charger un code QR"
+                      : locale === "es"
+                      ? "Cargar código QR"
+                      : locale === "pt"
+                      ? "Carregar código QR"
+                      : locale === "de"
+                      ? "QR-Code laden"
+                      : "Load QR code"}
+                  </span>
                 </button>
 
                 <button
@@ -640,7 +828,17 @@ const TransactionQRModal = ({
                   }}
                   className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                 >
-                  <span className="font-medium text-red-300">{locale === "fr" ? "Fermer" : locale === "es" ? "Cerrar" : locale === "pt" ? "Fechar" : locale === "de" ? "Schließen" : "Close"}</span>
+                  <span className="font-medium text-red-300">
+                    {locale === "fr"
+                      ? "Fermer"
+                      : locale === "es"
+                      ? "Cerrar"
+                      : locale === "pt"
+                      ? "Fechar"
+                      : locale === "de"
+                      ? "Schließen"
+                      : "Close"}
+                  </span>
                 </button>
               </div>
             </>
@@ -650,7 +848,16 @@ const TransactionQRModal = ({
                 <div className="flex flex-col gap-6 items-center justify-center space-y-1">
                   <div className="w-full flex justify-between font-bold">
                     <p className="text-dark dark:text-white text-lg">
-                      {col.people || 0} {locale === "fr" ? "Personnes" : locale === "es" ? "Personas" : locale === "pt" ? "Pessoas" : locale === "de" ? "Menschen" : "People"}
+                      {col.people || 0}{" "}
+                      {locale === "fr"
+                        ? "Personnes"
+                        : locale === "es"
+                        ? "Personas"
+                        : locale === "pt"
+                        ? "Pessoas"
+                        : locale === "de"
+                        ? "Menschen"
+                        : "People"}
                     </p>
                     <p className="text-primary dark:text-white text-lg">
                       {col.icon} {col.title || "..."}
@@ -676,12 +883,30 @@ const TransactionQRModal = ({
                           speed={2}
                           color="black"
                         />{" "}
-                        <p>{locale === "fr" ? "En attente..." : locale === "es" ? "Esperando..." : locale === "pt" ? "Aguardando..." : locale === "de" ? "Warten..." : "Waiting..."}</p>
+                        <p>
+                          {locale === "fr"
+                            ? "En attente..."
+                            : locale === "es"
+                            ? "Esperando..."
+                            : locale === "pt"
+                            ? "Aguardando..."
+                            : locale === "de"
+                            ? "Warten..."
+                            : "Waiting..."}
+                        </p>
                       </div>
                       <div className="flex justify-center">
                         <p className="font-extrabold text-xl text-primary dark:text-white">
-                          {transactionsList || 0}/{peopleInput || 0}{" "}
-                          {locale === "fr" ? "Contributions" : locale === "es" ? "Contribuciones" : locale === "pt" ? "Contribuições" : locale === "de" ? "Beiträge" : "Contributions"}
+                          {counter || 0}/{col.people || 0}{" "}
+                          {locale === "fr"
+                            ? "Contributions"
+                            : locale === "es"
+                            ? "Contribuciones"
+                            : locale === "pt"
+                            ? "Contribuições"
+                            : locale === "de"
+                            ? "Beiträge"
+                            : "Contributions"}
                         </p>
                       </div>
                     </div>
@@ -694,11 +919,29 @@ const TransactionQRModal = ({
                     }}
                     className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                   >
-                    <span className="font-medium text-red-300">{locale === "fr" ? "Annuler" : locale === "es" ? "Cancelar" : locale === "pt" ? "Cancelar" : locale === "de" ? "Abbrechen" : "Cancel"}</span>
+                    <span className="font-medium text-red-300">
+                      {locale === "fr"
+                        ? "Annuler"
+                        : locale === "es"
+                        ? "Cancelar"
+                        : locale === "pt"
+                        ? "Cancelar"
+                        : locale === "de"
+                        ? "Abbrechen"
+                        : "Cancel"}
+                    </span>
                   </button>
                   <div className="w-[60%] flex justify-center mx-auto text-center">
                     <p className="font-normal text-md opacity-60 mx-auto">
-                      {locale === "fr" ? "Ne fermez pas cette fenêtre sinon l'attente de la transaction prendra fin." : locale === "es" ? "No cierre esta ventana o la espera de la transacción finalizará." : locale === "pt" ? "Não feche esta janela, ou a espera da transação será encerrada." : locale === "de" ? "Schließen Sie dieses Fenster nicht, sonst wird die Transaktionswartung beendet." : "Don't close this window or the transaction waiting will end."}
+                      {locale === "fr"
+                        ? "Ne fermez pas cette fenêtre sinon l'attente de la transaction prendra fin."
+                        : locale === "es"
+                        ? "No cierre esta ventana o la espera de la transacción finalizará."
+                        : locale === "pt"
+                        ? "Não feche esta janela, ou a espera da transação será encerrada."
+                        : locale === "de"
+                        ? "Schließen Sie dieses Fenster nicht, sonst wird die Transaktionswartung beendet."
+                        : "Don't close this window or the transaction waiting will end."}
                     </p>
                   </div>
                 </div>
@@ -706,7 +949,16 @@ const TransactionQRModal = ({
                 <div className="flex flex-col gap-6 items-center justify-center space-y-1">
                   <div className="w-full flex justify-between font-bold">
                     <p className="text-dark dark:text-white text-lg">
-                      {col.people || 0} {locale === "fr" ? "Personnes" : locale === "es" ? "Personas" : locale === "pt" ? "Pessoas" : locale === "de" ? "Menschen" : "People"}
+                      {col.people || 0}{" "}
+                      {locale === "fr"
+                        ? "Personnes"
+                        : locale === "es"
+                        ? "Personas"
+                        : locale === "pt"
+                        ? "Pessoas"
+                        : locale === "de"
+                        ? "Menschen"
+                        : "People"}
                     </p>
                     <p className="text-primary dark:text-white text-lg">
                       {col.icon} {col.title || "..."}
