@@ -1,12 +1,34 @@
+'use client';
 import { Modal, ModalClose } from "../Modal";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { CheckIcon } from "@heroicons/react/24/solid";
 import { ToastContainer, toast } from "react-toastify";
+import { handleSetPaid } from "@/hooks/useGetCollection";
+import AppContext from "@/context/AppContext";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const SetBillModal = ({ data, setModalOpen, modalOpen }) => {
+  const { state } = useContext(AppContext);
   const [handleClick, setHandleClick] = useState(false);
+  const router = useRouter();
+  const path = router.asPath.substring(7);
+
+  const handlePaid = async () => {
+    const res = await handleSetPaid({
+      wallet: state.userAddress,
+      title: path,
+    })
+
+    if (res) {
+      console.log('Paid');
+      setModalOpen(false)
+      router.push("/bills");
+    } else {
+      console.log('bad request');
+    }
+  }
 
   return (
     <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
@@ -32,7 +54,7 @@ const SetBillModal = ({ data, setModalOpen, modalOpen }) => {
           </div>
           <div className="flex flex-col w-full gap-4">
             <button
-              onClick={() => {}}
+              onClick={() => handlePaid()}
               disabled={handleClick}
               className="w-full flex gap-3 justify-center items-center text-center font-bold text-white rounded-lg bg-danger hover:bg-danger/80 dark:bg-red-400/60 py-3 px-8 dark:hover:bg-red-400/40 transition ease-out"
             >

@@ -1,0 +1,16 @@
+{
+    "Bills" : "Bills",
+    "Youhave": "You have",
+    "bill": "bill",
+    "Incompleted": "Incompleted",
+    "Completed": "Completed",
+    "takeLook": "take a look on your list to identify the bill",
+    "AllYourBills": "All your bills are completed!",
+    "keepUsingZoren" : "keep using Zoren for your convenience",
+    "C-StartSession" : "Start a session",
+    "C-WithNewQR": "with a new QR code",
+    "C-JoinSession": "Join to session",
+    "C-MyBills": "My Bills",
+    "C-ListBills": "List of all bills",
+    "C-DontHaveBills":"You dont have bills."
+}

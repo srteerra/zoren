@@ -40,6 +40,26 @@ export async function handleGetCollections(wallet) {
   }
 }
 
+// get 5 collections in a wallet
+export async function handleGetCollectionsLimted(wallet) {
+  if (wallet) {
+    const snapshot = await getDocs(
+      query(
+        collection(firestore, "wallets", wallet, "wallet-collections"),
+        limit(5)
+      )
+    );
+
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return data;
+  } else {
+    return false;
+  }
+}
+
 // get most recent transactions
 export async function handleGetRecentTrans(wallet) {
   if (wallet) {
@@ -63,6 +83,66 @@ export async function handleGetRecentTrans(wallet) {
   }
 }
 
+export async function getCollectionByName(data) {
+  const snapshot = await getDocs(
+    query(
+      collection(firestore, "wallets", data.wallet, "wallet-collections"),
+      where("title", "==", data.title)
+    )
+  );
+  const res = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  return res[0];
+}
+
+// change collection status to 'paid'
+export async function handleSetPaid(data) {
+  if (data) {
+    const collection = await getCollectionByName(data);
+    try {
+      await updateDoc(
+        doc(
+          firestore,
+          "wallets",
+          data.wallet,
+          "wallet-collections",
+          collection.id
+        ),
+        {
+          status: "paid",
+        }
+      );
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+}
+
+// delete a collection
+export async function deleteCollectionByName(data) {
+  const collection = await getCollectionByName(data);
+  try {
+    await deleteDoc(
+      doc(
+        firestore,
+        "wallets",
+        data.wallet,
+        "wallet-collections",
+        collection.id
+      )
+    );
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
 // get a collection
 export async function handleGetCollection(wallet, collection) {
   const snapshot = await getDoc(
@@ -74,19 +154,23 @@ export async function handleGetCollection(wallet, collection) {
 
 // get all collections in a wallet with status 'open'
 export async function handleGetCollectionsOpen(wallet) {
-  const snapshot = await getDocs(
-    query(
-      collection(firestore, "wallets", wallet, "wallet-collections"),
-      where("status", "==", "open")
-    )
-  );
+  if (wallet) {
+    const snapshot = await getDocs(
+      query(
+        collection(firestore, "wallets", wallet, "wallet-collections"),
+        where("status", "==", "open")
+      )
+    );
 
-  const data = snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
 
-  return data;
+    console.log(data.length);
+
+    return data;
+  }
 }
 
 // get all collections in a wallet with status 'paid'
@@ -235,19 +319,6 @@ export async function handleModifyData(data) {
           }),
         }
       ).then(async () => {
-        try {
-          await addDoc(
-            collection(firestore, "wallets", data.walletTo, "transactions"),
-            {
-              address: data.walletFrom,
-              amount: data.amount,
-              date: `${new Date().getFullYear()}-${new Date().getDate()}-${new Date().getMonth()}`,
-              bill: data.walletCollectionTo,
-            }
-          );
-        } catch (error) {
-          console.log("ass transactions: ", error);
-        }
         if (await validatePaid(data.walletTo, data.walletCollectionTo)) {
           await updateDoc(
             doc(

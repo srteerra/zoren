@@ -1,0 +1,11 @@
+{
+    "Friends": "Amigos",
+    "GenerateQR": "Generar un código QR",
+    "ToShare": "para compartir con tus amigos y que puedan agregarte",
+    "QR": "Generar mi código QR",
+    "C-AddFriend": "Agregar un amigo",
+    "C-SolanaAddress": "por dirección de Solana",
+    "C-MyFriends": "Mis amigos",
+    "C-ListContacts": "Lista de contactos",
+    "C-DontHaveAdded": "No tienes a nadie agregado."
+}  

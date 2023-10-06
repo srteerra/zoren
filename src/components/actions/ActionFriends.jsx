@@ -2,7 +2,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { useState } from 'react';
 import AddFriendsModal from "../AddFriendsModal";
 
-function ActionCenterFriends() {
+function ActionCenterFriends({t}) {
   const [addFriendsModalOpen, setAddFriendsModalOpen] = useState(false);
 
   return (
@@ -20,8 +20,8 @@ function ActionCenterFriends() {
           <PlusIcon width={35} />
         </button>
         <div>
-          <p className="text-lg font-bold">Add a friend</p>
-          <p className="text-lg">by Solana address</p>
+          <p className="text-lg font-bold">{t('C-AddFriend')}</p>
+          <p className="text-lg">{t('C-SolanaAddress')}</p>
         </div>
       </div>
     </div>

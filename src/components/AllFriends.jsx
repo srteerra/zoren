@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import AppContext from "@/context/AppContext";
 import FriendItem from "./FriendItem";
 
-function AllFriends() {
+function AllFriends({t}) {
   const [friendsList, setFriendsList] = useState([]);
   const { state } = useContext(AppContext);
 
@@ -15,13 +15,13 @@ function AllFriends() {
     <div className="my-12">
       {/* Header */}
       <div>
-        <h2>My friends</h2>
-        <p>List of contacts</p>
+        <h2>{t('C-MyFriends')}</h2>
+        <p>{t('C-ListContacts')}</p>
       </div>
       <div className="hiddenScroll my-12 overflow-x-scroll">
         {!state.userContacts ? (
           <div className="flex items-center justify-between min-w-[800px]">
-            <p>You dont have anyone added.</p>
+            <p>{t('C-DontHaveAdded')}</p>
           </div>
         ) : (
           <div className="flex flex-col gap-6">

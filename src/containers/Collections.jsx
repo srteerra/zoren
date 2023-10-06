@@ -1,6 +1,6 @@
 "use client";
 import { CollectionItem } from "@/components/CollectionItem";
-import { handleGetCollections } from "@/hooks/useGetCollection";
+import { handleGetCollections, handleGetCollectionsLimted } from "@/hooks/useGetCollection";
 import AppContext from "@/context/AppContext";
 import { getFirestore, collection, query, onSnapshot } from 'firebase/firestore';
 import { app } from "@/firebase";
@@ -26,7 +26,10 @@ const Collections = () => {
     onSnapshot(q, (snapshot) => {
       snapshot.docChanges().forEach(async (change) => {
         if (change.type === 'added') {
-          setData(await handleGetCollections(state.userAddress));
+          setData(await handleGetCollectionsLimted(state.userAddress));
+        }
+        if (change.type === 'removed') {
+          setData(await handleGetCollectionsLimited(state.userAddress));
         }
       });
     });

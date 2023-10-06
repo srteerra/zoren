@@ -60,9 +60,8 @@ const Home = () => {
     <div className="w-full h-screen">
       <div className="bg-black text-center text-white py-3">
         <p>
-          This application is working on{" "}
-          <span className="font-bold">Devnet</span> for now, please make sure
-          you're connected
+          {t('Add1')}{" "}
+          <span className="font-bold">{t('Add2')}</span> {t('Add3')}
         </p>
       </div>
       <LoginNav />
@@ -75,12 +74,9 @@ const Home = () => {
             <p className="text-slate-500 my-4">{t("WantSeparateBill")}</p>
             <div>
               <h1 className="text-4xl lg:text-5xl font-light">
-                Generate QR codes to <br /> split bill payments <br /> between
-                your friends
+                {t('WantSeparateBill')} <br /> {t('GenerateQR')} <br /> {t('SplitBill')}
               </h1>
-              <p>{t.WantSeparateBill}</p>
             </div>
-
             <p className="my-6">
               <Link href={"/"}>
                 <strong>Solana</strong>
@@ -93,20 +89,20 @@ const Home = () => {
           </div>
           <div className="w-full flex justify-center md:justify-start items-center gap-2 my-6">
             <button className="bg-primary focus:bg-primary hover:bg-secondary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
-              Try it now
+              {t('TryIt')}
             </button>
-            <Link href={"/"}>Learn more</Link>
+            <Link href={"/"}>{t('LearnMore')}</Link>
           </div>
 
           <div className="my-14 text-sm">
             <p>
-              Please check our{" "}
+            {t('PleaseCheck')}{" "}
               <Link href={"/"} className="font-bold">
-                Privacy policy
+              {t('PrivacyPolicy')}
               </Link>{" "}
-              and Terms and consitions.
+              {t('TermsConsitions')}
             </p>
-            <p>This is a project for Hyperdrive Hackaton.</p>
+            <p>{t('ThisIsProject')}</p>
           </div>
         </div>
 
@@ -169,8 +165,8 @@ const Home = () => {
 
       <div className="bg-primary flex flex-col justify-between overflow-hidden h-screen w-full text-white">
         <div className="h-2/6 flex text-center flex-col w-full sm:w-1/2 px-10 pt-20 lg:w-1/3 mx-auto">
-          <h1 className="lg:text-5xl">For whatever the occasion</h1>
-          <p className="py-2">You can use Zoren form your phone or PC</p>
+          <h1 className="lg:text-5xl">{t('WhatherOcassion')}</h1>
+          <p className="py-2">{t('CanUseZoren')}</p>
         </div>
         <div className="h-3/6 flex items-end justify-center bg-[url('../../public/images/banner.png')] bg-no-repeat bg-cover lg:bg-contain bg-center"></div>
       </div>
