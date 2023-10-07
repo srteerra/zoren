@@ -214,14 +214,14 @@ const Profile = () => {
 
         {/* Profile image */}
         <div className="flex lg:flex-col lg:my-10 lg:text-center min-[280]:justify-center items-center max-[280]:gap-2 gap-4">
-          <div className="pl-2 lg:pl-0 w-[25%] lg:w-1/2 relative">
+          <div className="pl-2 lg:pl-0 w-full lg:w-[70%] xl:w-[50%] relative">
             <div
-              className="rounded-full w-[200px] h-[200px] bg-no-repeat bg-center bg-cover"
+              className="rounded-full w-[50px] h-[50px] lg:w-[200px] lg:h-[200px] bg-no-repeat bg-center bg-cover"
               style={{
                 backgroundImage: `url("${state.avatar}")`,
               }}
             ></div>
-            <button onClick={() => setEditProfileModalOpen(true)} className="dark:bg-white bg-black hover:bg-gray-800 dark:hover:bg-gray-400 rounded-full h-10 w-10 hidden lg:grid place-content-center absolute right-[-5px] bottom-[-5px] transition ease-out">
+            <button onClick={() => setEditProfileModalOpen(true)} className="dark:bg-white bg-black hover:bg-gray-800 dark:hover:bg-gray-400 rounded-full h-10 w-10 hidden lg:grid place-content-center absolute right-0 bottom-0 transition ease-out">
               <PencilIcon className="h-4 w-4 text-white dark:text-dark" />
             </button>
           </div>

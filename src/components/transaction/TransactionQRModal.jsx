@@ -35,7 +35,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { app } from "@/firebase";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import { Ring } from "@uiball/loaders";
 import { useRouter } from "next/router";
 
@@ -46,6 +46,7 @@ const firestore = getFirestore(app);
 
 // Images import
 import friends2 from "../../../public/images/friends2.png";
+import successBill from "../../../public/images/success-friends.png";
 import coinsIcon from "../../../public/images/coins.png";
 import receiptIcon from "../../../public/images/mobile-receipt.png";
 import swapIcon from "../../../public/images/swap.png";
@@ -68,6 +69,7 @@ const TransactionQRModal = ({
   const [conceptInput, setConceptInput] = useState("");
   const [pickerValue, setPickerValue] = useState("");
   const [showPicker, setShowPicker] = useState(false);
+  const [qrIsCompleted, setQrIsCompleted] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState("");
   const [stepModal, setStepModal] = useState(1);
   const [col, setCol] = useState("");
@@ -75,13 +77,20 @@ const TransactionQRModal = ({
   const { listener, setListener, state } = useContext(AppContext);
   const [counter, setCounter] = useState(0);
   const [solanaUSD, setSolanaUSD] = useState(0);
-  const [transactionsList, setTransactionsList] = useState(0);
+  const [transactionsList, setTransactionsList] = useState(undefined);
 
   const { userTransactions, setUserTransactions } = useZoren();
   const { connection: cc } = useConnection();
   const { asPath, locale, locales } = useRouter();
 
   const toastId = useRef(null);
+  // const dismiss = () =>  toast.dismiss(toastId.current);
+  const confirmTrans = () =>
+    toast.update(toastId.current, {
+      render: "Bill Completed",
+      type: toast.TYPE.SUCCESS,
+      autoClose: 5000,
+    });
 
   const handleClickPicker = (emojiData) => {
     setPickerValue(emojiData.emoji);
@@ -90,32 +99,16 @@ const TransactionQRModal = ({
   };
 
   const trans = () =>
-    (toastId.current = toast.loading("Waiting for payments...", {
+    (toastId.current = toast("Waiting for payments...", {
+      autoClose: false,
       position: "bottom-right",
-      closeOnClick: false,
-      closeButton: true,
     }));
-  const update = () =>
-    toast.update(toastId.current, {
-      position: "bottom-right",
-      render: "Payment made",
-      type: toast.TYPE.SUCCESS,
-      isLoading: false,
-      closeOnClick: true,
-      autoClose: 3000,
-    });
+
   const notify = () =>
     toast.update(toastId.current, {
       position: "bottom-right",
       render: "Transaction Request Cancelled",
       type: toast.TYPE.WARNING,
-      isLoading: false,
-      closeOnClick: true,
-      autoClose: 3000,
-    });
-  const confirmTrans = (text) =>
-    toast.success(text, {
-      position: "bottom-right",
       isLoading: false,
       closeOnClick: true,
       autoClose: 3000,
@@ -131,8 +124,10 @@ const TransactionQRModal = ({
   const clearInputs = () => {
     setShowPicker(false);
     setAmountInput("");
+    setAmountInputCrypto("");
     setPeopleInput("");
     setConceptInput("");
+    setPickerValue("");
   };
 
   const { connection } = useConnection();
@@ -168,6 +163,7 @@ const TransactionQRModal = ({
       setCol(await handleGetCollection(userAddress, register));
       setQrCode(true);
       setHandleClick(true);
+      setTransactionsList(0);
       trans();
     } else {
       loadOff();
@@ -179,11 +175,17 @@ const TransactionQRModal = ({
   };
 
   const loadOff = () => {
-    setModalOpen(false);
     setHandleClick(false);
     notify();
     setTimeout(() => setListener(false), 1000);
-    setCounter(0);
+  };
+
+  const completeQR = () => {
+    if (qrRef.current) {
+      qrRef.current.innerHTML = "";
+    }
+    setHandleClick(false);
+    confirmTrans();
   };
 
   useEffect(() => {
@@ -236,12 +238,13 @@ const TransactionQRModal = ({
       const urlEncoded = encodeURL(urlParams);
 
       const qr = createQR(urlEncoded, 350, "transparent");
+
       if (qrRef.current && amount.isGreaterThan(0)) {
         qrRef.current.innerHTML = "";
         qr.append(qrRef.current);
       }
 
-      if (handleClick) {
+      if (transactionsList < peopleInput) {
         const interval = setInterval(async () => {
           try {
             // Check if there is any transaction for the reference
@@ -256,27 +259,32 @@ const TransactionQRModal = ({
               {
                 recipient,
                 amount,
-                // splToken: usdcAddress,
                 reference,
-                message,
               },
               { commitment: "confirmed" }
-            ).then((res) => {
-              console.log(res);
-              // setTransactionsList(transactionsList + 1);
-              // confirmTrans("Payment made!");
-            });
+            );
 
             const newID = (userTransactions.length + 1).toString();
             const newTransaction = {
               id: newID,
-              from: recipient,
-              to: reference,
-              message: message,
+              from: {
+                name: recipient,
+              },
+              to: {
+                name: reference,
+              },
               date: new Date(),
               status: "Completed",
               amount: amount,
             };
+
+            console.log(newTransaction);
+            console.log(newTransaction.from.name.toString());
+            console.log(newTransaction.to.name.toString());
+
+            setTransactionsList(transactionsList + 1);
+
+            clearInterval(interval);
           } catch (e) {
             if (e instanceof FindReferenceError) {
               // No transaction found yet, ignore this error
@@ -290,15 +298,14 @@ const TransactionQRModal = ({
             console.error("Unknown error", e);
           }
         }, 5000);
-
-        return () => {
-          // clearInterval(interval);
-          notify();
-        };
+      } else {
+        completeQR();
+        clearInputs();
+        setTransactionsList(undefined);
+        setQrIsCompleted(true);
       }
     }
-    return;
-  }, [handleClick]);
+  }, [transactionsList]);
 
   return (
     <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
@@ -837,94 +844,162 @@ const TransactionQRModal = ({
             </>
           ) : (
             <div>
-              <div className="flex flex-col gap-6 items-center justify-center space-y-1">
-                <div className="w-full flex justify-between font-bold">
-                  <p className="text-dark dark:text-white text-lg">
-                    {col.people || 0}{" "}
-                    {locale === "fr"
-                      ? "Personnes"
-                      : locale === "es"
-                      ? "Personas"
-                      : locale === "pt"
-                      ? "Pessoas"
-                      : locale === "de"
-                      ? "Menschen"
-                      : "People"}
-                  </p>
-                  <p className="text-primary dark:text-white text-lg">
-                    {col.icon} {col.title || "..."}
-                  </p>
-                  <p className="text-dark dark:text-white text-lg">
-                    {col.amount || 0} SOL
-                  </p>
-                </div>
-                <div className="text-white bg-white rounded-3xl" ref={qrRef} />
-                <div className="flex justify-center flex-col gap-4 text-center">
-                  <div className="mx-auto flex flex-col gap-2 items-center">
-                    <div className="font-normal flex gap-3 text-2xl">
-                      <Ring size={25} lineWeight={5} speed={2} color="black" />{" "}
-                      <p>
-                        {locale === "fr"
-                          ? "En attente..."
-                          : locale === "es"
-                          ? "Esperando..."
-                          : locale === "pt"
-                          ? "Aguardando..."
-                          : locale === "de"
-                          ? "Warten..."
-                          : "Waiting..."}
-                      </p>
-                    </div>
-                    <div className="flex justify-center">
-                      <p className="font-extrabold text-xl text-primary dark:text-white">
-                        {counter || 0}/{col.people || 0}{" "}
-                        {locale === "fr"
-                          ? "Contributions"
-                          : locale === "es"
-                          ? "Contribuciones"
-                          : locale === "pt"
-                          ? "Contribuições"
-                          : locale === "de"
-                          ? "Beiträge"
-                          : "Contributions"}
-                      </p>
+              {!qrIsCompleted ? (
+                <div className="flex flex-col gap-6 items-center justify-center space-y-1">
+                  <div className="w-full flex justify-between font-bold">
+                    <p className="text-dark dark:text-white text-lg">
+                      {col.people || 0}{" "}
+                      {locale === "fr"
+                        ? "Personnes"
+                        : locale === "es"
+                        ? "Personas"
+                        : locale === "pt"
+                        ? "Pessoas"
+                        : locale === "de"
+                        ? "Menschen"
+                        : "People"}
+                    </p>
+                    <p className="text-primary dark:text-white text-lg">
+                      {col.icon} {col.title || "..."}
+                    </p>
+                    <p className="text-dark dark:text-white text-lg">
+                      {col.amount || 0} SOL
+                    </p>
+                  </div>
+                  {!qrIsCompleted ? (
+                    <div
+                      className="text-white bg-white rounded-3xl"
+                      ref={qrRef}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                  <div className="flex justify-center flex-col gap-4 text-center">
+                    <div className="mx-auto flex flex-col gap-2 items-center">
+                      <div className="font-normal flex gap-3 text-2xl">
+                        <Ring
+                          size={25}
+                          lineWeight={5}
+                          speed={2}
+                          color="black"
+                        />{" "}
+                        <p>
+                          {locale === "fr"
+                            ? "En attente..."
+                            : locale === "es"
+                            ? "Esperando..."
+                            : locale === "pt"
+                            ? "Aguardando..."
+                            : locale === "de"
+                            ? "Warten..."
+                            : "Waiting..."}
+                        </p>
+                      </div>
+                      <div className="flex justify-center">
+                        <p className="font-extrabold text-xl text-primary dark:text-white">
+                          {counter || 0}/{col.people || 0}{" "}
+                          {locale === "fr"
+                            ? "Contributions"
+                            : locale === "es"
+                            ? "Contribuciones"
+                            : locale === "pt"
+                            ? "Contribuições"
+                            : locale === "de"
+                            ? "Beiträge"
+                            : "Contributions"}
+                        </p>
+                      </div>
                     </div>
                   </div>
+                  <button
+                    onClick={() => {
+                      loadOff();
+                      setStepModal(4);
+                      setModalOpen(false);
+                    }}
+                    className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
+                  >
+                    <span className="font-medium text-red-300">
+                      {locale === "fr"
+                        ? "Annuler"
+                        : locale === "es"
+                        ? "Cancelar"
+                        : locale === "pt"
+                        ? "Cancelar"
+                        : locale === "de"
+                        ? "Abbrechen"
+                        : "Cancel"}
+                    </span>
+                  </button>
+                  <div className="w-[60%] flex justify-center mx-auto text-center">
+                    <p className="font-normal text-md opacity-60 mx-auto">
+                      {locale === "fr"
+                        ? "Ne fermez pas cette fenêtre sinon l'attente de la transaction prendra fin."
+                        : locale === "es"
+                        ? "No cierre esta ventana o la espera de la transacción finalizará."
+                        : locale === "pt"
+                        ? "Não feche esta janela, ou a espera da transação será encerrada."
+                        : locale === "de"
+                        ? "Schließen Sie dieses Fenster nicht, sonst wird die Transaktionswartung beendet."
+                        : "Don't close this window or the transaction waiting will end."}
+                    </p>
+                  </div>
                 </div>
-                <button
-                  onClick={() => {
-                    loadOff();
-                    setStepModal(4);
-                    setModalOpen(false);
-                  }}
-                  className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
-                >
-                  <span className="font-medium text-red-300">
-                    {locale === "fr"
-                      ? "Annuler"
-                      : locale === "es"
-                      ? "Cancelar"
-                      : locale === "pt"
-                      ? "Cancelar"
-                      : locale === "de"
-                      ? "Abbrechen"
-                      : "Cancel"}
-                  </span>
-                </button>
-                <div className="w-[60%] flex justify-center mx-auto text-center">
-                  <p className="font-normal text-md opacity-60 mx-auto">
-                    {locale === "fr"
-                      ? "Ne fermez pas cette fenêtre sinon l'attente de la transaction prendra fin."
-                      : locale === "es"
-                      ? "No cierre esta ventana o la espera de la transacción finalizará."
-                      : locale === "pt"
-                      ? "Não feche esta janela, ou a espera da transação será encerrada."
-                      : locale === "de"
-                      ? "Schließen Sie dieses Fenster nicht, sonst wird die Transaktionswartung beendet."
-                      : "Don't close this window or the transaction waiting will end."}
-                  </p>
+              ) : (
+                <div className="flex flex-col gap-6 items-center justify-center space-y-1">
+                  <div className="w-full flex justify-between font-bold">
+                    <p className="text-dark dark:text-white text-lg">
+                      {col.people || 0}{" "}
+                      {locale === "fr"
+                        ? "Personnes"
+                        : locale === "es"
+                        ? "Personas"
+                        : locale === "pt"
+                        ? "Pessoas"
+                        : locale === "de"
+                        ? "Menschen"
+                        : "People"}
+                    </p>
+                    <p className="text-primary dark:text-white text-lg">
+                      {col.icon} {col.title || "..."}
+                    </p>
+                    <p className="text-dark dark:text-white text-lg">
+                      {col.amount || 0} SOL
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-center items-center mx-auto text-center px-20">
+                    <Image
+                      className="mx-auto"
+                      src={successBill}
+                      alt="success-bill"
+                      priority={true}
+                      width={250}
+                    />
+                    <p className="dark:text-white text-[#79AC78] mb-2 text-lg xl:text-3xl font-extrabold">
+                      Bill completed
+                    </p>
+                    <p className="font-normal text-md text-dark dark:text-white">
+                      All contributions have been made.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      loadOff();
+                      setStepModal(4);
+                      setModalOpen(false);
+                      setQrIsCompleted(false);
+                    }}
+                    className="w-full rounded-lg border-2 bg-dark py-3 hover:bg-opacity-70 transition ease-out"
+                  >
+                    <span className="font-medium text-white">Close</span>
+                  </button>
+                  <div className="w-[60%] flex justify-center mx-auto text-center">
+                    <p className="font-normal text-md opacity-60 mx-auto">
+                      Thanks for using Zoren!
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
         </div>
