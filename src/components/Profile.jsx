@@ -21,6 +21,7 @@ import { useContext } from "react";
 import AppContext from "@/context/AppContext";
 import { truncate } from "../utils/string";
 import toast, { ToastBar, Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 // Images
 import logo from "../../public/logos/horizontal-dark.png";
@@ -37,6 +38,7 @@ const Profile = () => {
   const active = "text-dark font-bold gap-6";
   const limits = ["/", "/how", "/about"];
   const [transactionQRModalOpen, setTransactionQRModalOpen] = useState(false);
+  const { asPath, locale, locales } = useRouter();
 
 
   const copyText = () => {
@@ -65,12 +67,64 @@ const Profile = () => {
               <RegionChange />
             </div>
             <ul className="flex flex-col text-center gap-6">
-              {[
-                ["Home", "/dashboard"],
-                ["Bills", "/bills"],
-                ["Friends", "/friends"],
-                ["Settings", "/settings"],
-              ].map(([title, href]) => (
+            {[
+            [
+              `${
+                locale === "fr"
+                  ? "Accueil"
+                  : locale === "es"
+                  ? "Inicio"
+                  : locale === "pt"
+                  ? "Início"
+                  : locale === "de"
+                  ? "Heim"
+                  : "Home"
+              }`,
+              "/dashboard",
+            ],
+            [
+              `${
+                locale === "fr"
+                  ? "Facture"
+                  : locale === "es"
+                  ? "Factura"
+                  : locale === "pt"
+                  ? "Fatura"
+                  : locale === "de"
+                  ? "Rechnung"
+                  : "Bill"
+              }`,
+              "/bills",
+            ],
+            [
+              `${
+                locale === "fr"
+                  ? "Amis"
+                  : locale === "es"
+                  ? "Amigos"
+                  : locale === "pt"
+                  ? "Amigos"
+                  : locale === "de"
+                  ? "Freunde"
+                  : "Friends"
+              }`,
+              "/friends",
+            ],
+            [
+              `${
+                locale === "fr"
+                  ? "Paramètres"
+                  : locale === "es"
+                  ? "Ajustes"
+                  : locale === "pt"
+                  ? "Configurações"
+                  : locale === "de"
+                  ? "Einstellungen"
+                  : "Settings"
+              }`,
+              "/settings",
+            ],
+          ].map(([title, href]) => (
                 <li key={title}>
                   <Link
                     className={
@@ -88,7 +142,15 @@ const Profile = () => {
             <div className="w-full flex flex-col items-center">
               <button className="w-[70%] bg-dark text-white transition duration-150 ease-linear flex justify-center items-center gap-2 border-2 py-4 px-8 my-4 rounded-full">
                 <ArrowLeftOnRectangleIcon className="w-6 h-6" />
-                Disconnect
+                {locale === "fr"
+                ? "Déconnecter"
+                : locale === "es"
+                ? "Desconectar"
+                : locale === "pt"
+                ? "Desconectar"
+                : locale === "de"
+                ? "Trennen"
+                : "Disconnect"}
               </button>
             </div>
           </div>
