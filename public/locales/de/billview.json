@@ -1,1 +1,14 @@
-{}
+{
+    "BillReady": "Diese Rechnung wurde bereits bezahlt",
+    "BillIncompleted": "Diese Rechnung ist unvollständig",
+    "Concept": "Konzept",
+    "Contributors": "Mitwirkende",
+    "Total": "Gesamt",
+    "People": "Personen",
+    "Delete": "Löschen",
+    "Pool": "Pool",
+    "Collected" : "Gesammelt",
+    "SetCompleted": "Als abgeschlossen markieren",
+    "Wrong": "Etwas ist schiefgegangen!",
+    "PleaseTryAgian": "Bitte versuchen Sie es erneut oder laden Sie die Seite neu."
+}

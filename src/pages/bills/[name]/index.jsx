@@ -30,7 +30,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "bills"])),
+      ...(await serverSideTranslations(locale, ["common", "billview"])),
     },
   };
 }
@@ -43,7 +43,7 @@ const BillView = (data) => {
   const { state } = useContext(AppContext);
   const router = useRouter();
   const path = router.asPath.substring(7);
-  const { t } = useTranslation("bills");
+  const { t } = useTranslation("billview");
   const nav = {
     title: t("Bills"),
     isSubpage: true,
@@ -108,26 +108,26 @@ const BillView = (data) => {
         {billData.status === 'paid' ? (
           <div className="w-full bg-success dark:bg-success/40 text-white px-8 py-3 md:py-2 rounded-full">
             <p className="text-md flex gap-3 items-center">
-              <CheckCircleIcon width={20} /> This bill is already paid
+              <CheckCircleIcon width={20} />{t("BillReady")}
             </p>
           </div>
         ) : (
           <div className="w-full bg-danger text-white px-8 py-3 md:py-2 rounded-full">
             <p className="text-md flex gap-3 items-center">
-              <ExclamationCircleIcon width={20} /> This bill is incompleted
+              <ExclamationCircleIcon width={20} /> {t("BillIncompleted")}
             </p>
           </div>
         )}
         <div className="my-20">
           <div className="flex justify-between">
             <div className="flex flex-col gap-8 text-start text-gray-500">
-              <p>Concept</p>
-              <p>Contributors</p>
-              <p>Total</p>
+              <p>{t("Total")}</p>
+              <p>{t("People")}</p>
+              <p>{t("Delete")}</p>
             </div>
             <div className="flex flex-col gap-8 text-end font-bold">
               <p>{billData.icon} {billData.title}</p>
-              <p>{billData.people} People</p>
+              <p>{billData.people} {t("")}</p>
               <div className="flex flex-col gap-2">
                 <p>{billData.amount} SOL</p>
                 <p className="opacity-50 font-semibold">${trunacteNumbers(billData.amount)} USD</p>
@@ -139,8 +139,8 @@ const BillView = (data) => {
         <div className="my-20">
           <div className="flex justify-between">
             <div className="flex flex-col gap-8 text-start text-gray-500">
-              <p>Pool</p>
-              <p>Collected</p>
+              <p>{t("Pool")}</p>
+              <p>{t("Collected")}</p>
             </div>
             <div className="flex flex-col gap-8 text-end font-bold">
               <p>{billData.hasPaid} / {billData.people}</p>
@@ -155,11 +155,11 @@ const BillView = (data) => {
           <div className="flex gap-4 flex-col md:flex-row text-center justify-end">
             <button onClick={() => setDeleteBillModalOpen(true)} className="flex gap-3 justify-center text-center items-center text-sm font-bold text-danger border-danger border-2 px-8 py-4 rounded-full">
               <TrashIcon width={20} />
-              Delete
+              {t(" Delete")}
             </button>
             {billData.status === 'open' ? (<button onClick={() => setBillModalOpen(true)} className="flex gap-3 justify-center text-center items-center text-sm font-bold text-white bg-primary dark:bg-success/40 px-8 py-4 rounded-full">
               <CheckIcon width={20} />
-              Set completed
+              {t("SetCompleted")}
             </button>) : <></>}
           </div>
         </div>
@@ -169,8 +169,8 @@ const BillView = (data) => {
     return(
       <div className="w-full h-screen flex items-center justify-center text-center">
         <div className="bg-red-300 text-white p-10 rounded-2xl">
-          <h3>Something went wrong!</h3>
-          <p className="py-2">Please try again or reload the page.</p>
+          <h3> {t("Wrong")}</h3>
+          <p className="py-2"> {t("PleaseTryAgian")}</p>
         </div>
       </div>
     )
