@@ -1,1 +1,14 @@
-{}
+{
+    "BillReady": "Esta factura ya está pagada",
+    "BillIncompleted": "Esta factura está incompleta",
+    "Concept": "Concepto",
+    "Contributors": "Contribuyentes",
+    "Total": "Total",
+    "People": "Personas",
+    "Delete": "Eliminar",
+    "Pool": "Grupo",
+    "Collected" : "Recaudado",
+    "SetCompleted": "Marcar como completado",
+    "Wrong": "¡Algo salió mal!",
+    "PleaseTryAgian": "Por favor, inténtelo de nuevo o recargue la página."
+}

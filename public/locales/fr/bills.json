@@ -1,0 +1,16 @@
+{
+    "Bills": "Factures",
+    "Youhave": "Vous avez",
+    "bill": "facture",
+    "Incompleted": "Non terminé",
+    "Completed": "Terminé",
+    "takeLook": "Jetez un œil à votre liste pour identifier la facture",
+    "AllYourBills": "Toutes vos factures sont terminées !",
+    "keepUsingZoren": "Continuez à utiliser Zoren pour votre confort",
+    "C-StartSession": "Démarrer une session",
+    "C-WithNewQR": "avec un nouveau code QR",
+    "C-JoinSession": "Rejoindre une session",
+    "C-MyBills": "Mes factures",
+    "C-ListBills": "Liste de toutes les factures",
+    "C-DontHaveBills": "Vous n'avez pas de factures."
+}

@@ -21,6 +21,7 @@ import { useContext } from "react";
 import AppContext from "@/context/AppContext";
 import { truncate } from "../utils/string";
 import toast, { ToastBar, Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 // Images
 import logo from "../../public/logos/horizontal-dark.png";
@@ -37,6 +38,7 @@ const Profile = () => {
   const active = "text-dark font-bold gap-6";
   const limits = ["/", "/how", "/about"];
   const [transactionQRModalOpen, setTransactionQRModalOpen] = useState(false);
+  const { asPath, locale, locales } = useRouter();
 
 
   const copyText = () => {
@@ -65,12 +67,64 @@ const Profile = () => {
               <RegionChange />
             </div>
             <ul className="flex flex-col text-center gap-6">
-              {[
-                ["Home", "/dashboard"],
-                ["Bills", "/bills"],
-                ["Friends", "/friends"],
-                ["Settings", "/settings"],
-              ].map(([title, href]) => (
+            {[
+            [
+              `${
+                locale === "fr"
+                  ? "Accueil"
+                  : locale === "es"
+                  ? "Inicio"
+                  : locale === "pt"
+                  ? "Início"
+                  : locale === "de"
+                  ? "Heim"
+                  : "Home"
+              }`,
+              "/dashboard",
+            ],
+            [
+              `${
+                locale === "fr"
+                  ? "Facture"
+                  : locale === "es"
+                  ? "Factura"
+                  : locale === "pt"
+                  ? "Fatura"
+                  : locale === "de"
+                  ? "Rechnung"
+                  : "Bill"
+              }`,
+              "/bills",
+            ],
+            [
+              `${
+                locale === "fr"
+                  ? "Amis"
+                  : locale === "es"
+                  ? "Amigos"
+                  : locale === "pt"
+                  ? "Amigos"
+                  : locale === "de"
+                  ? "Freunde"
+                  : "Friends"
+              }`,
+              "/friends",
+            ],
+            [
+              `${
+                locale === "fr"
+                  ? "Paramètres"
+                  : locale === "es"
+                  ? "Ajustes"
+                  : locale === "pt"
+                  ? "Configurações"
+                  : locale === "de"
+                  ? "Einstellungen"
+                  : "Settings"
+              }`,
+              "/settings",
+            ],
+          ].map(([title, href]) => (
                 <li key={title}>
                   <Link
                     className={
@@ -88,7 +142,15 @@ const Profile = () => {
             <div className="w-full flex flex-col items-center">
               <button className="w-[70%] bg-dark text-white transition duration-150 ease-linear flex justify-center items-center gap-2 border-2 py-4 px-8 my-4 rounded-full">
                 <ArrowLeftOnRectangleIcon className="w-6 h-6" />
-                Disconnect
+                {locale === "fr"
+                ? "Déconnecter"
+                : locale === "es"
+                ? "Desconectar"
+                : locale === "pt"
+                ? "Desconectar"
+                : locale === "de"
+                ? "Trennen"
+                : "Disconnect"}
               </button>
             </div>
           </div>
@@ -152,14 +214,14 @@ const Profile = () => {
 
         {/* Profile image */}
         <div className="flex lg:flex-col lg:my-10 lg:text-center min-[280]:justify-center items-center max-[280]:gap-2 gap-4">
-          <div className="pl-2 lg:pl-0 w-[25%] lg:w-1/2 relative">
+          <div className="pl-2 lg:pl-0 w-full lg:w-[70%] xl:w-[50%] relative">
             <div
-              className="rounded-full w-[200px] h-[200px] bg-no-repeat bg-center bg-cover"
+              className="rounded-full w-[50px] h-[50px] lg:w-[200px] lg:h-[200px] bg-no-repeat bg-center bg-cover"
               style={{
                 backgroundImage: `url("${state.avatar}")`,
               }}
             ></div>
-            <button onClick={() => setEditProfileModalOpen(true)} className="dark:bg-white bg-black hover:bg-gray-800 dark:hover:bg-gray-400 rounded-full h-10 w-10 hidden lg:grid place-content-center absolute right-[-5px] bottom-[-5px] transition ease-out">
+            <button onClick={() => setEditProfileModalOpen(true)} className="dark:bg-white bg-black hover:bg-gray-800 dark:hover:bg-gray-400 rounded-full h-10 w-10 hidden lg:grid place-content-center absolute right-0 bottom-0 transition ease-out">
               <PencilIcon className="h-4 w-4 text-white dark:text-dark" />
             </button>
           </div>

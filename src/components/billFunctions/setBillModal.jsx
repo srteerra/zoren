@@ -14,6 +14,7 @@ const SetBillModal = ({ data, setModalOpen, modalOpen }) => {
   const [handleClick, setHandleClick] = useState(false);
   const router = useRouter();
   const path = router.asPath.substring(7);
+  const { asPath, locale, locales } = useRouter();
 
   const handlePaid = async () => {
     const res = await handleSetPaid({
@@ -45,10 +46,10 @@ const SetBillModal = ({ data, setModalOpen, modalOpen }) => {
             />
             <div className="my-8">
                 <p className="text-dark dark:text-white mb-2 text-lg xl:text-2xl font-bold">
-                    Change status
+                {locale === "fr" ? "Changer de statut" : locale === "es" ? "Cambiar estado" : locale === "pt" ? "Alterar status" : locale === "de" ? "Status ändern" : "Change status"}
                 </p>
                 <p className="text-dark dark:text-white xl:text-md font-light">
-                    Once you set this bill completed it <span className="font-bold">cannot longer</span> be modified.
+                {locale === "fr" ? "Une fois que vous avez marqué cette facture comme terminée" : locale === "es" ? "Una vez que establezcas esta factura como completada" : locale === "pt" ? "Depois de definir esta conta como concluída" : locale === "de" ? "Sobald Sie diese Rechnung als abgeschlossen markiert haben" : "Once you set this bill completed it"} <span className="font-bold">{locale === "fr" ? "ne peut plus" : locale === "es" ? "ya no puede" : locale === "pt" ? "não pode mais" : locale === "de" ? "kann nicht mehr" : "cannot longer"} </span> {locale === "fr" ? "être modifié" : locale === "es" ? "ser modificado" : locale === "pt" ? "ser modificado" : locale === "de" ? "geändert werden" : "be modified"}
                 </p>
             </div>
           </div>
@@ -59,7 +60,7 @@ const SetBillModal = ({ data, setModalOpen, modalOpen }) => {
               className="w-full flex gap-3 justify-center items-center text-center font-bold text-white rounded-lg bg-danger hover:bg-danger/80 dark:bg-red-400/60 py-3 px-8 dark:hover:bg-red-400/40 transition ease-out"
             >
               <CheckIcon width={20} />
-              <span>Set this bill completed</span>
+              <span>{locale === "fr" ? "Marquer cette facture comme terminée" : locale === "es" ? "Marcar esta factura como completada" : locale === "pt" ? "Marcar esta conta como concluída" : locale === "de" ? "Diese Rechnung als abgeschlossen markieren" : "Set this bill completed"}</span>
             </button>
 
             <button
@@ -68,7 +69,7 @@ const SetBillModal = ({ data, setModalOpen, modalOpen }) => {
               }}
               className="w-full rounded-lg border-2 border-dark dark:border-white py-3 hover:opacity-40 opacity-60 transition ease-out"
             >
-              <span className="font-medium text-dark dark:text-white">Cancel</span>
+              <span className="font-medium text-dark dark:text-white">{locale === "fr" ? "Annuler" : locale === "es" ? "Cancelar" : locale === "pt" ? "Cancelar" : locale === "de" ? "Abbrechen" : "Cancel"}</span>
             </button>
           </div>
         </div>
