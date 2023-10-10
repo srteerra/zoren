@@ -9,6 +9,8 @@ import {
   faSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { Fade, Zoom } from "react-awesome-reveal";
+import { useRouter } from "next/router";
+
 
 const index = () => {
   return (
