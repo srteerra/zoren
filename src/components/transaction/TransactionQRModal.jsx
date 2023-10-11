@@ -407,7 +407,7 @@ const TransactionQRModal = ({
                   {locale === "fr"
                     ? "Définir un montant"
                     : locale === "es"
-                    ? "Establece una cantidad"
+                    ? "Establece el total"
                     : locale === "pt"
                     ? "Definir uma quantia"
                     : locale === "de"

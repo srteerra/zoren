@@ -78,7 +78,7 @@ const Dashboard = () => {
           </div>
           <div className="pt-12">
             <Link
-              href="/"
+              href="/bills"
               className="2xl:text-lg lg:text-md text-md font-light underline"
             >
               {t('Explore')}

@@ -48,7 +48,15 @@ const Bills = () => {
                   <span className="font-bold text-red-500 dark:text-red-400">
                     {bills.length}
                   </span>{" "}
-                  {t("bill")}{" "}
+                  {bills.length > 1 ? (
+                    <>
+                      {t("bill2")}{" "}
+                    </>
+                  ) : (
+                    <>
+                      {t("bill")}{" "}
+                    </>
+                  )}
                   <span className="font-bold text-red-500 dark:text-red-400">
                     {t("Incompleted")}
                   </span>

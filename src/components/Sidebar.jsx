@@ -69,12 +69,12 @@ const Sidebar = () => {
                 locale === "fr"
                   ? "Facture"
                   : locale === "es"
-                  ? "Factura"
+                  ? "Facturas"
                   : locale === "pt"
                   ? "Fatura"
                   : locale === "de"
                   ? "Rechnung"
-                  : "Bill"
+                  : "Bills"
               }`,
               "/bills",
             ],
