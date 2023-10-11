@@ -1,0 +1,16 @@
+{
+    "Bills": "Rechnungen",
+    "Youhave": "Du hast",
+    "bill": "Rechnung",
+    "Incompleted": "Unvollständig",
+    "Completed": "Abgeschlossen",
+    "takeLook": "Schau dir deine Liste an, um die Rechnung zu identifizieren",
+    "AllYourBills": "Alle deine Rechnungen sind abgeschlossen!",
+    "keepUsingZoren": "Weiterhin Zoren für deine Bequemlichkeit nutzen",
+    "C-StartSession": "Eine Sitzung starten",
+    "C-WithNewQR": "mit einem neuen QR-Code",
+    "C-JoinSession": "Sitzung beitreten",
+    "C-MyBills": "Meine Rechnungen",
+    "C-ListBills": "Liste aller Rechnungen",
+    "C-DontHaveBills": "Du hast keine Rechnungen."
+}

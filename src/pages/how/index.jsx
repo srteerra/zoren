@@ -9,21 +9,51 @@ import {
   faSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { Fade, Zoom } from "react-awesome-reveal";
+import { useRouter } from "next/router";
 
-const index = () => {
+const HowItWorks = () => {
+  const { asPath, locale, locales } = useRouter();
+
   return (
     <main className="w-full h-screen">
       <LoginNav />
       <div className="w-full h-5/6 flex flex-col items-center justify-center text-center gap-y-20 p-4">
         <div>
-          <h1 className="text-primary text-4xl lg:text-5xl my-2">Learn</h1>
-          <p className="font-light">What Zoren offers to you?</p>
+          <h1 className="text-primary text-4xl lg:text-5xl my-2">
+            {locale === "fr"
+              ? "Apprendre"
+              : locale === "es"
+              ? "Aprender"
+              : locale === "pt"
+              ? "Aprender"
+              : locale === "de"
+              ? "Lernen"
+              : "Learn"}
+          </h1>
+          <p className="font-light">
+            {locale === "fr"
+              ? "Qu'est-ce que Zoren vous offre?"
+              : locale === "es"
+              ? "¿Qué te ofrece Zoren?"
+              : locale === "pt"
+              ? "O que a Zoren oferece a você?"
+              : locale === "de"
+              ? "Was bietet Ihnen Zoren?"
+              : "What Zoren offers to you?"}
+          </p>
         </div>
 
         <div className="flex flex-col items-center gap-6">
           <p className="font-light">
-            Please check our Privacy Policy and Terms and Conditions. This is a
-            project for Hyperdrive Hackathon.
+            {locale === "fr"
+              ? "Veuillez consulter notre Politique de confidentialité et nos Conditions d'utilisation. Il s'agit d'un projet pour le Hackathon Hyperdrive."
+              : locale === "es"
+              ? "Por favor, consulte nuestra Política de privacidad y Términos y Condiciones. Este es un proyecto para el Hackathon Hyperdrive."
+              : locale === "pt"
+              ? "Por favor, verifique nossa Política de Privacidade e Termos e Condições. Este é um projeto para o Hackathon Hyperdrive."
+              : locale === "de"
+              ? "Bitte überprüfen Sie unsere Datenschutzrichtlinie und Nutzungsbedingungen. Dies ist ein Projekt für den Hyperdrive Hackathon."
+              : "Please check our Privacy Policy and Terms and Conditions. This is a project for Hyperdrive Hackathon."}
           </p>
 
           <ChevronDoubleDownIcon className="w-6 h-6 animate-bounce" />
@@ -35,11 +65,26 @@ const index = () => {
           <div className="flex flex-col justify-center items-center">
             <div className="sm:w-3/5 md:w-4/5">
               <p className="text-4xl lg:text-5xl py-4 font-light">
-                Split bill payments
+                {locale === "fr"
+                  ? "Partager les paiements de factures"
+                  : locale === "es"
+                  ? "Dividir los pagos de la factura"
+                  : locale === "pt"
+                  ? "Dividir pagamentos de contas"
+                  : locale === "de"
+                  ? "Rechnungszahlungen aufteilen"
+                  : "Split bill payments"}
               </p>
               <p className="font-light">
-                Please check our Privacy Policy and Terms and Conditions. This
-                is a project for Hyperdrive Hackathon.
+                {locale === "fr"
+                  ? "Veuillez vérifier notre Politique de confidentialité et nos Conditions générales. Il s'agit d'un projet pour le Hackathon Hyperdrive."
+                  : locale === "es"
+                  ? "Por favor, consulte nuestra Política de privacidad y Términos y condiciones. Este es un proyecto para el Hackathon Hyperdrive."
+                  : locale === "pt"
+                  ? "Por favor, verifique nossa Política de Privacidade e Termos e Condições. Este é um projeto para o Hyperdrive Hackathon."
+                  : locale === "de"
+                  ? "Bitte überprüfen Sie unsere Datenschutzrichtlinie und Allgemeinen Geschäftsbedingungen. Dies ist ein Projekt für den Hyperdrive Hackathon."
+                  : "Please check our Privacy Policy and Terms and Conditions. This is a project for Hyperdrive Hackathon."}
               </p>
             </div>
           </div>
@@ -100,11 +145,26 @@ const index = () => {
           <div className="flex flex-col justify-center items-center gap-4 order-3 md:order-last">
             <div className="sm:w-3/5 md:w-4/5">
               <p className="text-4xl lg:text-5xl py-4 font-light">
-                Group bills into collections
+                {locale === "fr"
+                  ? "Regrouper les factures en collections"
+                  : locale === "es"
+                  ? "Agrupar facturas en colecciones"
+                  : locale === "pt"
+                  ? "Agrupar contas em coleções"
+                  : locale === "de"
+                  ? "Rechnungen in Sammlungen gruppieren"
+                  : "Group bills into collections"}
               </p>
               <p className="font-light">
-                Please check our Privacy Policy and Terms and Conditions. This
-                is a project for Hyperdrive Hackathon.
+                {locale === "fr"
+                  ? "Veuillez vérifier notre Politique de confidentialité et nos Conditions générales. Il s'agit d'un projet pour le Hackathon Hyperdrive."
+                  : locale === "es"
+                  ? "Por favor, consulte nuestra Política de privacidad y Términos y condiciones. Este es un proyecto para el Hackathon Hyperdrive."
+                  : locale === "pt"
+                  ? "Por favor, verifique nossa Política de Privacidade e Termos e Condições. Este é um projeto para o Hackathon Hyperdrive."
+                  : locale === "de"
+                  ? "Bitte überprüfen Sie unsere Datenschutzrichtlinie und Allgemeinen Geschäftsbedingungen. Dies ist ein Projekt für den Hyperdrive Hackathon."
+                  : "Please check our Privacy Policy and Terms and Conditions. This is a project for Hyperdrive Hackathon."}
               </p>
             </div>
           </div>
@@ -114,9 +174,37 @@ const index = () => {
       <div className="w-full h-screen p-4">
         <div className="h-full w-full flex flex-col justify-center">
           <div className="mb-20">
-            <p className="text-4xl lg:text-5xl py-4 text-primary">Tutorials</p>
+            <p className="text-4xl lg:text-5xl py-4 text-primary">
+              {locale === "fr"
+                ? "Tutoriels"
+                : locale === "es"
+                ? "Tutoriales"
+                : locale === "pt"
+                ? "Tutoriais"
+                : locale === "de"
+                ? "Anleitungen"
+                : "Tutorials"}
+            </p>
             <p>
-              Using <span className="text-primary font-bold">Solana</span> and{" "}
+              {locale === "fr"
+                ? "En utilisant"
+                : locale === "es"
+                ? "Usando"
+                : locale === "pt"
+                ? "Usando"
+                : locale === "de"
+                ? "Verwenden"
+                : "Using"}{" "}
+              <span className="text-primary font-bold">Solana</span>{" "}
+              {locale === "fr"
+                ? "et"
+                : locale === "es"
+                ? "y"
+                : locale === "pt"
+                ? "e"
+                : locale === "de"
+                ? "und"
+                : "and"}{" "}
               <span className="text-primary font-bold">Phantom</span>
             </p>
           </div>
@@ -145,4 +233,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default HowItWorks;

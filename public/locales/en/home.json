@@ -14,5 +14,16 @@
     "TermsConsitions": "and Terms and consitions.",
     "ThisIsProject": "This is a project for Hyperdrive Hackaton.",
     "WhatherOcassion": "For whatever the occasion",
-    "CanUseZoren": "You can use Zoren form your phone or PC"
+    "CanUseZoren": "You can use Zoren form your phone or PC",
+    "WhatsZoren": "What's Zoren?",
+    "LearnMoreAbout":"Learn more about Zoren in the",
+    "HowItWorks":"How it works",
+    "sections":"section. You'll find videos and information to get started right now.",
+    "OurRoadmap":"Our Roadmap",
+    "Stage":"Stage",
+    "PlannningAndDev":"Plannning and Development",
+    "projectObjectives":"Define the project's objectives, target audience, and scope",
+    "AssessTheFeasinility":"Assess the feasinility of implementing the desired features on Solana",
+    "DetermineTheTecnology":"Determine the tecnology stack and tools to be used",
+    "IdentifyPotential":"Identify potential competitiors and analyze their strenghts and weaknesses"
 }       
