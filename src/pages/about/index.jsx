@@ -43,6 +43,7 @@ const About = () => {
             <Link
               className="font-bold hover:text-white transition duration-300 ease-linear"
               href="https://www.pexels.com/es-es/@mikhail-nilov/"
+              target="_bank"
             >
               Mikhail Nilov
             </Link>{" "}
@@ -50,6 +51,7 @@ const About = () => {
             <Link
               className="font-bold hover:text-white transition duration-300 ease-linear"
               href="https://www.pexels.com/es-es/"
+              target="_bank"
             >
               Pexels
             </Link>
