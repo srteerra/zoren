@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { LoginNav } from "@/components/LoginNav";
+import RegionChange from "@/components/Region";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ViewfinderCircleIcon } from "@heroicons/react/24/solid";
@@ -57,7 +58,7 @@ const Home = () => {
   // }, []);
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-screen relative">
       <div className="bg-black text-center text-white py-3">
         <p>
           {t("Add1")} <span className="font-bold">{t("Add2")}</span> {t("Add3")}
@@ -66,45 +67,50 @@ const Home = () => {
       <LoginNav />
 
       {/* Fisrt section */}
-      <div className="w-full lg:w-4/5 mx-auto overflow-hidden flex h-5/6 items-center pb-32">
-        {/* left side */}
-        <div className="w-full text-center md:text-start md:w-1/2 p-8 lg:p-0 overflow-hidden">
-          <div className="">
-            <p className="text-slate-500 my-4">{t("WantSeparateBill")}</p>
-            <div>
-              <h1 className="text-4xl lg:text-5xl font-light">
-                {t("WantSeparateBill")} <br /> {t("GenerateQR")} <br />{" "}
-                {t("SplitBill")}
-              </h1>
-            </div>
-            <p className="my-6">
-              <Link href={"/"}>
-                <strong>Solana</strong>
-              </Link>{" "}
-              <Link href={"/"}>
-                {" "}
-                <strong>Phantom</strong>
-              </Link>
-            </p>
-          </div>
-          <div className="w-full flex justify-center md:justify-start items-center gap-2 my-6">
-            <button className="bg-primary focus:bg-primary hover:bg-secondary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
-              {t("TryIt")}
-            </button>
-            <Link href={"/"}>{t("LearnMore")}</Link>
-          </div>
-
-          <div className="my-14 text-sm">
-            <p>
-              {t("PleaseCheck")}{" "}
-              <Link href={"/"} className="font-bold">
-                {t("PrivacyPolicy")}
-              </Link>{" "}
-              {t("TermsConsitions")}
-            </p>
-            <p>{t("ThisIsProject")}</p>
-          </div>
+      <div className="w-full lg:w-4/5 mx-auto relative overflow-hidden flex h-5/6 items-center pb-32">
+        <div className="absolute right-2 top-2 z-20 hidden lg:block w-auto">
+          <RegionChange />
         </div>
+        {/* left side */}
+        <Fade direction="left" triggerOnce>
+          <div className="w-full text-center md:text-start p-8 lg:p-0 overflow-hidden">
+            <div className="">
+              <p className="text-slate-500 my-4">{t("WantSeparateBill")}</p>
+              <div>
+                <h1 className="text-4xl lg:text-5xl font-light">
+                  {t("WantSeparateBill")} <br /> {t("GenerateQR")} <br />{" "}
+                  {t("SplitBill")}
+                </h1>
+              </div>
+              <p className="my-6">
+                <Link href={"/"}>
+                  <strong>Solana</strong>
+                </Link>{" "}
+                <Link href={"/"}>
+                  {" "}
+                  <strong>Phantom</strong>
+                </Link>
+              </p>
+            </div>
+            <div className="w-full flex justify-center md:justify-start items-center gap-2 my-6">
+              <button className="bg-primary focus:bg-primary hover:bg-secondary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
+                {t("TryIt")}
+              </button>
+              <Link href={"/"}>{t("LearnMore")}</Link>
+            </div>
+
+            <div className="my-14 text-sm">
+              <p>
+                {t("PleaseCheck")}{" "}
+                <Link href={"/"} className="font-bold">
+                  {t("PrivacyPolicy")}
+                </Link>{" "}
+                {t("TermsConsitions")}
+              </p>
+              <p>{t("ThisIsProject")}</p>
+            </div>
+          </div>
+        </Fade>
 
         {/* right side */}
         <div className="w-1/2 h-full hidden md:flex pb-10">
@@ -127,7 +133,7 @@ const Home = () => {
                     />
                   </Fade>
                 </div>
-                <span className="absolute bottom-40 left-32">
+                <span className="absolute bottom-1/4 3xl:bottom-1/2 left-1/3">
                   <Zoom triggerOnce>
                     <ViewfinderCircleIcon className="h-16 w-16" />
                   </Zoom>
@@ -135,7 +141,7 @@ const Home = () => {
               </div>
             </div>
             <div className="relative">
-              <span className="absolute top-40 left-14">
+              <span className="absolute top-20 left-1/4">
                 <Zoom triggerOnce>
                   <ViewfinderCircleIcon className="h-12 w-12" />
                 </Zoom>
@@ -166,9 +172,14 @@ const Home = () => {
       {/* What's is zoren section */}
       <div className="w-full h-screen flex items-center justify-center p-2">
         <div className="text-center w-full h-full flex flex-col justify-around">
-          <h1>What's Zoren?</h1>
+          <Zoom duration={300} triggerOnce>
+            <h1>What's Zoren?</h1>
+          </Zoom>
 
-          <div className="bg-slate-400 w-full md:w-1/2 h-1/2 mx-auto">
+          <Fade
+            className="bg-slate-400 w-full md:w-1/2 h-1/2 mx-auto"
+            triggerOnce
+          >
             <iframe
               width="100%"
               height="100%"
@@ -177,12 +188,12 @@ const Home = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
-          </div>
+          </Fade>
 
           <div className="w-full sm:w-1/3 mx-auto">
             <p>
               Learn more about Zoren in the{" "}
-              <Link href={"/"} className="font-bold">
+              <Link href={"/how"} className="font-bold">
                 How it works
               </Link>{" "}
               section. You'll find videos and information to get started right
@@ -193,20 +204,26 @@ const Home = () => {
       </div>
 
       <div className="bg-primary flex flex-col justify-between overflow-hidden h-screen w-full text-white">
-        <div className="h-2/6 flex text-center flex-col w-full sm:w-1/2 px-10 pt-20 lg:w-1/3 mx-auto">
-          <h1 className="lg:text-5xl">{t("WhatherOcassion")}</h1>
-          <p className="py-2">{t("CanUseZoren")}</p>
-        </div>
+        <Zoom duration={300} triggerOnce>
+          <div className="h-2/6 flex text-center flex-col w-full sm:w-1/2 px-10 pt-20 lg:w-1/3 mx-auto">
+            <h1 className="lg:text-5xl">{t("WhatherOcassion")}</h1>
+            <p className="py-2">{t("CanUseZoren")}</p>
+          </div>
+        </Zoom>
         <div className="h-3/6 flex items-end justify-center bg-[url('../../public/images/banner.png')] bg-no-repeat bg-cover lg:bg-contain bg-center"></div>
       </div>
 
       {/* roadmap section */}
-      <div className="w-full p-4" id="#roadmap">
-        <div className="w-full text-center my-32 text-primary">
+      <div className="w-full p-4">
+        <Zoom
+          duration={300}
+          triggerOnce
+          className="w-full text-center my-32 text-primary"
+        >
           <h1>Our Roadmap</h1>
-        </div>
+        </Zoom>
 
-        <div className="">
+        <Zoom cascade triggerOnce duration={300} className="">
           {/* stage 01 */}
           <div className="w-full md:w-3/5 lg:w-2/5 grid grid-cols-5 mx-auto">
             <div className="hidden text-primary md:block text-center">
@@ -352,7 +369,7 @@ const Home = () => {
               </ul>
             </div>
           </div>
-        </div>
+        </Zoom>
       </div>
 
       <Footer />
