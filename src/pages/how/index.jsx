@@ -6,7 +6,9 @@ import {
   faReceipt,
   faUser,
   faArrowRightLong,
-  faSquare,
+  faBrain,
+  faMoneyBill,
+  faPeopleGroup
 } from "@fortawesome/free-solid-svg-icons";
 import { Fade, Zoom } from "react-awesome-reveal";
 import { useRouter } from "next/router";
@@ -17,7 +19,16 @@ const HowItWorks = () => {
   return (
     <main className="w-full h-screen">
       <LoginNav />
-      <div className="w-full h-5/6 flex flex-col items-center justify-center text-center gap-y-20 p-4">
+      <div className="w-full relative h-5/6 flex flex-col items-center justify-center text-center gap-y-20 p-4">
+        <span className="absolute animate-wiggle left-1/4 top-1/3 hidden sm:block">
+          <FontAwesomeIcon icon={faBrain} className="w-10 h-10 opacity-50" />
+        </span>
+        <span className="absolute animate-wiggleRev right-1/4 top-1/3 hidden sm:block">
+          <FontAwesomeIcon icon={faMoneyBill} className="w-10 h-10 opacity-50" />
+        </span>
+        <span className="absolute animate-wiggle top-[10%] hidden sm:block">
+          <FontAwesomeIcon icon={faPeopleGroup} className="w-10 h-10 opacity-50" />
+        </span>
         <div>
           <h1 className="text-primary text-4xl lg:text-5xl my-2">
             {locale === "fr"
@@ -43,7 +54,7 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-6 w-full md:w-1/2 lg:w-1/3 mx-auto">
           <p className="font-light">
             {locale === "fr"
               ? "Veuillez consulter notre Politique de confidentialité et nos Conditions d'utilisation. Il s'agit d'un projet pour le Hackathon Hyperdrive."
@@ -61,7 +72,7 @@ const HowItWorks = () => {
       </div>
 
       <div className="w-full h-screen p-4">
-        <div className="grid grid-col-1 md:grid-cols-2 h-full grid-rows-4 md:grid-rows-2 gap-2 md:w-4/5 mx-auto">
+        <div className="grid grid-col-1 md:grid-cols-2 h-full grid-rows-4 md:grid-rows-2 gap-2 md:w-4/5 2xl:w-3/5 mx-auto">
           <div className="flex flex-col justify-center items-center">
             <div className="sm:w-3/5 md:w-4/5">
               <p className="text-4xl lg:text-5xl py-4 font-light">
@@ -130,13 +141,13 @@ const HowItWorks = () => {
 
           <div className="order-last md:order-3 flex items-center justify-center gap-4">
             <Zoom duration={300} cascade triggerOnce>
-              <span className="bg-primary p-4 rounded-lg grid place-items-center">
+              <span className="bg-secondary dark:bg-primary p-4 rounded-lg grid place-items-center">
                 <FontAwesomeIcon icon={faReceipt} className="h-8 w-8" />
               </span>
-              <span className="bg-primary p-4 rounded-lg grid place-items-center">
+              <span className="bg-secondary dark:bg-primary p-4 rounded-lg grid place-items-center">
                 <FontAwesomeIcon icon={faReceipt} className="h-8 w-8" />
               </span>
-              <span className="bg-primary p-4 rounded-lg grid place-items-center">
+              <span className="bg-secondary dark:bg-primary p-4 rounded-lg grid place-items-center">
                 <FontAwesomeIcon icon={faReceipt} className="h-8 w-8" />
               </span>
             </Zoom>
