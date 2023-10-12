@@ -251,7 +251,7 @@ const Profile = () => {
         {/* Collection section */}
         <section className="hidden w-full lg:block p-0 h-full">
           <div className="flex items-center justify-between">
-            <h3 className="font-bold">My bills</h3>
+            <h3 className="font-bold">{locale === "fr" ? "Mes factures" : locale === "es" ? "Mis facturas" : locale === "pt" ? "Minhas contas" : locale === "de" ? "Meine Rechnungen" : "My bills"}</h3>
             <button onClick={() => setTransactionQRModalOpen(!transactionQRModalOpen)}>
               <PlusSmallIcon className="h-6 w-6" />
             </button>
