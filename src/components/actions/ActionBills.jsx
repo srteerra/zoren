@@ -6,7 +6,7 @@ function ActionCenterBills({t}) {
   const [qrCode, setQrCode] = useState(false);
   const [transactionQRModalOpen, setTransactionQRModalOpen] = useState(false);
   return (
-    <div className="hidden lg:flex flex-col gap-8 my-4 xl:my-16">
+    <div className="flex flex-col sm:flex-row justify-center items-center sm:justify-start gap-8 my-4 xl:my-16">
       <TransactionQRModal
         modalOpen={transactionQRModalOpen}
         setModalOpen={setTransactionQRModalOpen}

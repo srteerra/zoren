@@ -13,6 +13,7 @@ const initialState = {
 const useInitialState = () => {
   const [state, setState] = useState(initialState);
   const [listener, setListener] = useState(false);
+  const [perfMenu, setPerfMenu] = useState(false);
   const [currency, setCurrency] = useState("usd");
   const [currencies, setCurrencies] = useState(["usd", "mxn"]);
 
@@ -134,6 +135,8 @@ const useInitialState = () => {
     currency,
     setCurrency,
     currencies,
+    perfMenu,
+    setPerfMenu,
   };
 };
 

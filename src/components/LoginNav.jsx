@@ -53,7 +53,7 @@ const LoginNav = () => {
                 <li key={title}>
                   <Link
                     className={
-                      path === title
+                      path === href
                         ? active
                         : "text-dark hover:text-secondary transition duration-150 ease-linear"
                     }
@@ -100,34 +100,43 @@ const LoginNav = () => {
           />
         </div>
 
-        <ul className="hidden lg:flex gap-x-10 items-center">
-          {[
-            [`Home`, "/"],
-            [`How it works?`, "/how"],
-            [`About`, "/about"],
-          ].map(([title, href]) => (
-            <li key={title}>
-              <Link
-                className={
-                  path === href
-                    ? active
-                    : "hover:text-secondary transition duration-150 ease-linear"
-                }
-                href={href}
-              >
-                {title}
-              </Link>
-            </li>
-          ))}
-          <DarkMode />
-          <WalletMultiButton className="flex items-center wallet-btn">
-            {connected ? (
-              <span className="text-sm">{"Dashboard"}</span>
-            ) : (
-              <span className="text-sm">{"Connect Wallet"}</span>
-            )}
-          </WalletMultiButton>
-        </ul>
+        <div className="flex gap-x-8">
+          <ul className="hidden relative lg:flex gap-x-10 pr-10 items-center">
+            {[
+              [`Home`, "/"],
+              [`How it works?`, "/how"],
+              [`About`, "/about"],
+            ].map(([title, href]) => (
+              <li key={title}>
+                <Link
+                  className={
+                    path === href
+                      ? active
+                      : "hover:text-secondary transition duration-150 ease-linear"
+                  }
+                  href={href}
+                >
+                  {title}
+                </Link>
+              </li>
+            ))}
+            <DarkMode />
+            <div className="absolute z-20 right-0">
+              <RegionChange />
+            </div>
+          </ul>
+          {path === "/" ? (
+            <div className="hidden lg:block">
+              <WalletMultiButton className="flex items-center wallet-btn">
+                {connected ? (
+                  <span className="text-sm">{"Dashboard"}</span>
+                ) : (
+                  <span className="text-sm">{"Connect Wallet"}</span>
+                )}
+              </WalletMultiButton>
+            </div>
+          ) : null}
+        </div>
 
         <button onClick={() => steShow(!show)} className="block lg:hidden">
           <Bars3Icon className="w-6 h-6" />

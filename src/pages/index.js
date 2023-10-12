@@ -67,12 +67,9 @@ const Home = () => {
       <LoginNav />
 
       {/* Fisrt section */}
-      <div className="w-full lg:w-4/5 mx-auto relative overflow-hidden flex h-5/6 items-center pb-32">
-        <div className="absolute right-2 top-2 z-20 hidden lg:block w-auto">
-          <RegionChange />
-        </div>
+      <div className="w-full lg:w-4/5 mx-auto overflow-hidden flex h-5/6 items-center pb-32">
         {/* left side */}
-        <Fade direction="left" triggerOnce>
+        <Fade direction="left" triggerOnce className="w-full md:w-1/2">
           <div className="w-full text-center md:text-start p-8 lg:p-0 overflow-hidden">
             <div className="">
               <p className="text-slate-500 my-4">{t("WantSeparateBill")}</p>
@@ -83,9 +80,11 @@ const Home = () => {
                 </h1>
               </div>
               <p className="my-6">
+                Using{" "}
                 <Link href={"/"}>
                   <strong>Solana</strong>
-                </Link>{" "}
+                </Link>
+                {" and "}
                 <Link href={"/"}>
                   {" "}
                   <strong>Phantom</strong>
@@ -93,10 +92,13 @@ const Home = () => {
               </p>
             </div>
             <div className="w-full flex justify-center md:justify-start items-center gap-2 my-6">
-              <button className="bg-primary focus:bg-primary hover:bg-secondary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold">
+              <button
+                onClick={() => router.push("/how")}
+                className="bg-primary focus:bg-primary hover:bg-secondary transition suration-150 ease-linear p-2 w-36 rounded-full text-white font-bold"
+              >
                 {t("TryIt")}
               </button>
-              <Link href={"/"}>{t("LearnMore")}</Link>
+              <Link href={"/about"}>{t("LearnMore")}</Link>
             </div>
 
             <div className="my-14 text-sm">
