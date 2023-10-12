@@ -58,28 +58,18 @@ export const useZoren = () => {
       console.log(value);
 
       const collectData = await client.fetch(query);
-
-      if (await collectData[0].imageUrl) {
-        // Setting up the user data on fetch
-        initialFetch({
-          username: await collectData[0].userName,
-          address: publicKey.toString(),
-          balance: value / LAMPORTS_PER_SOL,
-          avatar: await collectData[0].imageUrl,
-          contacts: await collectData[0].userContacts,
-        });
-      } else {
-        // Setting up the user data on fetch
-        initialFetch({
-          username: await collectData[0].userName,
-          address: publicKey.toString(),
-          balance: value / LAMPORTS_PER_SOL,
-          avatar: "https://avatar.iran.liara.run/public/12",
-          contacts: await collectData[0].userContacts,
-        });
-      }
+      // console.log( await collectData);
+      // console.log(await collectData[0].imageUrl);
+      initialFetch({
+        username: await collectData[0].userName || "Unnamed",
+        address: publicKey.toString(),
+        balance: value / LAMPORTS_PER_SOL,
+        avatar: await collectData[0].imageUrl || "https://avatar.iran.liara.run/public/12",
+        contacts: await collectData[0].userContacts || [],
+      });
     });
   };
+
 
   useEffect(() => {
     if (publicKey) {
