@@ -1,11 +1,12 @@
 {
-    "Dashboard": "Painel",
-    "YourBalance": "Seu saldo",
-    "Hi": "Olá",
-    "Welcome": "Bem-vindo ao seu painel",
-    "Explore": "Explore mais",
-    "Mycollection": "Minha coleção",
-    "C-StartSession": "Iniciar uma sessão",
-    "C-WithNewQR": "com um novo código QR",
-    "C-JoinSession": "Participar da sessão"
+    "Dashboard": "Dashboard",
+    "YourBalance": "Ihr Guthaben",
+    "Hi": "Hallo",
+    "Welcome": "Willkommen auf Ihrem Dashboard",
+    "Explore": "Mehr erkunden",
+    "Mycollection": "Meine Sammlung",
+    "C-StartSession": "Eine Sitzung starten",
+    "C-WithNewQR": "mit einem neuen QR-Code",
+    "C-JoinSession": "An einer Sitzung teilnehmen"
 }
+
