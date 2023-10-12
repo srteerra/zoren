@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
     "Add1":"This application is working on",
     "Add2":"Devnet",
     "Add3":"for now, please make sure you're connected",
@@ -27,3 +28,33 @@
     "DetermineTheTecnology":"Determine the tecnology stack and tools to be used",
     "IdentifyPotential":"Identify potential competitiors and analyze their strenghts and weaknesses"
 }
+=======
+    "Add1": "Esta aplicação está funcionando em",
+    "Add2": "Devnet",
+    "Add3": "por enquanto, certifique-se de que está conectado",
+    "WantSeparateBill": "Quer dividir a conta?",
+    "GenerateQR": "Gerar códigos QR paraasas",
+    "SplitBill": "dividir pagamentos de contas",
+    "BetweenYFriends": "entre seus amigos",
+    "And": "e",
+    "TryIt": "Experimente agora",
+    "LearnMore": "Saiba mais",
+    "PleaseCheck": "Por favor, verifique nossa",
+    "PrivacyPolicy": "Política de privacidade",
+    "TermsConsitions": "e Termos e condições.",
+    "ThisIsProject": "Este é um projeto para o Hyperdrive Hackaton.",
+    "WhatherOcassion": "Para qualquer ocasião",
+    "CanUseZoren": "Você pode usar o Zoren a partir do seu telefone ou PC",
+    "WhatsZoren": "O que é o Zoren?",
+    "LearnMoreAbout": "Saiba mais sobre o Zoren na",
+    "HowItWorks": "Como funciona",
+    "sections": "seção. Você encontrará vídeos e informações para começar agora.",
+    "OurRoadmap": "Nosso Roadmap",
+    "Stage": "Estágio",
+    "PlannningAndDev": "Planejamento e Desenvolvimento",
+    "projectObjectives": "Definir os objetivos do projeto, público-alvo e escopo",
+    "AssessTheFeasibility": "Avaliar a viabilidade de implementar as funcionalidades desejadas no Solana",
+    "DetermineTheTechnology": "Determinar o conjunto de tecnologia e ferramentas a serem utilizadas",
+    "IdentifyPotential": "Identificar concorrentes potenciais e analisar suas forças e fraquezas"
+}      
+>>>>>>> Stashed changes

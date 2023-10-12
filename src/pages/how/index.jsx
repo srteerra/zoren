@@ -92,7 +92,7 @@ const HowItWorks = () => {
                 {locale === "fr"
                   ? "Veuillez vérifier notre Politique de confidentialité et nos Conditions générales. Il s'agit d'un projet pour le Hackathon Hyperdrive."
                   : locale === "es"
-                  ? "Por favor, consulte nuestra Política de privacidad y Términos y condiciones. Este es un proyecto para el Hackathon Hyperdrive."
+                  ? "Comparte gastos sin compliacaciones y deja las cuantas claras entre amigos."
                   : locale === "pt"
                   ? "Por favor, verifique nossa Política de Privacidade e Termos e Condições. Este é um projeto para o Hyperdrive Hackathon."
                   : locale === "de"
@@ -172,7 +172,7 @@ const HowItWorks = () => {
                 {locale === "fr"
                   ? "Veuillez vérifier notre Politique de confidentialité et nos Conditions générales. Il s'agit d'un projet pour le Hackathon Hyperdrive."
                   : locale === "es"
-                  ? "Por favor, consulte nuestra Política de privacidad y Términos y condiciones. Este es un proyecto para el Hackathon Hyperdrive."
+                  ? "Gestiona y agrupa tus factura con facilidad teniendo un registro ordenado."
                   : locale === "pt"
                   ? "Por favor, verifique nossa Política de Privacidade e Termos e Condições. Este é um projeto para o Hackathon Hyperdrive."
                   : locale === "de"
@@ -184,7 +184,7 @@ const HowItWorks = () => {
         </div>
       </div>
 
-      <div className="w-full h-screen p-4">
+      <div className="w-full md:w-4/5 2xl:w-3/5 mx-auto h-screen p-4">
         <div className="h-full w-full flex flex-col justify-center">
           <div className="mb-20">
             <p className="text-4xl lg:text-5xl py-4 text-primary">
@@ -233,10 +233,7 @@ const HowItWorks = () => {
           </div>
 
           <p className="my-10 w-full md:w-4/5">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi soluta
-            quam incidunt. Corrupti eius delectus nesciunt eos reprehenderit
-            fuga nemo ducimus rerum? Enim repellendus facere voluptates
-            consequuntur, porro corporis pariatur!
+          Si tienes alguna pregunta o sugerencia para futuros tutoriales, no dudes en ponerte en contacto con nuestro equipo de soporte.
           </p>
         </div>
       </div>

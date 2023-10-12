@@ -234,7 +234,7 @@ const Home = () => {
             </div>
             <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
               <div className="md:w-1/2">
-                <h2 className="text-primary">Plannning and Development</h2>
+                <h2 className="text-primary">Plannning and design</h2>
               </div>
               <ul className="list-disc p-4 flex flex-col gap-y-4">
                 <li>
@@ -269,30 +269,17 @@ const Home = () => {
             </div>
             <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
               <div className="md:w-1/2">
-                <h2 className="text-primary pt-10">
-                  Plannning and Development
-                </h2>
+                <h2 className="text-primary pt-10">Development</h2>
               </div>
               <ul className="list-disc p-4 flex flex-col gap-y-4">
                 <li>
-                  <p>
-                    Define the project's objectives, target audience, and scope
-                  </p>
+                  <p>Develop a Solana smart contract for payment management</p>
                 </li>
                 <li>
-                  <p>
-                    Assess the feasinility of implementing the desired features
-                    on Solana
-                  </p>
+                  <p>Create the application's user interface</p>
                 </li>
                 <li>
-                  <p>Determine the tecnology stack and tools to be used</p>
-                </li>
-                <li>
-                  <p>
-                    Identify potential competitiors and analyze their strenghts
-                    and weaknesses
-                  </p>
+                  <p>Implement user authentication and security features.</p>
                 </li>
               </ul>
             </div>
@@ -306,30 +293,26 @@ const Home = () => {
             </div>
             <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
               <div className="md:w-1/2">
-                <h2 className="text-primary pt-10">
-                  Plannning and Development
-                </h2>
+                <h2 className="text-primary pt-10">Testing and Launch</h2>
               </div>
               <ul className="list-disc p-4 flex flex-col gap-y-4">
                 <li>
                   <p>
-                    Define the project's objectives, target audience, and scope
+                    Invite beta users to test the application and provide
+                    feedback
                   </p>
                 </li>
                 <li>
                   <p>
-                    Assess the feasinility of implementing the desired features
-                    on Solana
+                    Address issues and make improvements based on beta user
+                    feedback
                   </p>
                 </li>
                 <li>
-                  <p>Determine the tecnology stack and tools to be used</p>
+                  <p>Conduct final security and performance testing</p>
                 </li>
                 <li>
-                  <p>
-                    Identify potential competitiors and analyze their strenghts
-                    and weaknesses
-                  </p>
+                  <p>Prepare servers and resources for the official launch</p>
                 </li>
               </ul>
             </div>
@@ -344,29 +327,26 @@ const Home = () => {
             <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
               <div className="md:w-1/2">
                 <h2 className="text-primary pt-10">
-                  Plannning and Development
+                  Post-Launch Growth and Maintenance
                 </h2>
               </div>
               <ul className="list-disc p-4 flex flex-col gap-y-4">
                 <li>
+                  <p>Release the application to the public</p>
+                </li>
+                <li>
                   <p>
-                    Define the project's objectives, target audience, and scope
+                    Develop new features based on feedback and market trends
                   </p>
                 </li>
                 <li>
                   <p>
-                    Assess the feasinility of implementing the desired features
-                    on Solana
+                    Actively engage with users, gather feedback, and make
+                    refinements
                   </p>
                 </li>
                 <li>
-                  <p>Determine the tecnology stack and tools to be used</p>
-                </li>
-                <li>
-                  <p>
-                    Identify potential competitiors and analyze their strenghts
-                    and weaknesses
-                  </p>
+                  <p>Consider expanding to other blockchain networks</p>
                 </li>
               </ul>
             </div>
