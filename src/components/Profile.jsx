@@ -22,6 +22,7 @@ import AppContext from "@/context/AppContext";
 import { truncate } from "../utils/string";
 import toast, { ToastBar, Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useWallet } from "@solana/wallet-adapter-react"; 
 
 // Images
 import logo from "../../public/logos/horizontal-dark.png";
@@ -29,7 +30,7 @@ import EditProfleModal from "./EditProfileModal";
 import { useZoren } from "@/hooks/useZoren";
 
 const Profile = () => {
-  const { state } = useContext(AppContext);
+  const { state, perfMenu, setPerfMenu } = useContext(AppContext);
   const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const [show, steShow] = useState(false);
   const route = usePathname();
@@ -39,6 +40,7 @@ const Profile = () => {
   const limits = ["/", "/how", "/about"];
   const [transactionQRModalOpen, setTransactionQRModalOpen] = useState(false);
   const { asPath, locale, locales } = useRouter();
+  const { disconnect } = useWallet();
 
 
   const copyText = () => {
@@ -46,14 +48,17 @@ const Profile = () => {
   };
 
   const slide = (
-    <div className="lg:hidden fixed z-20 top-0 right-0 w-full flex justify-end h-screen backdrop-brightness-75">
+    <div className="2xl:hidden fixed z-20 top-0 right-0 w-full flex justify-end h-screen backdrop-brightness-75">
       <Slide
         direction="right"
         className="w-[90%] sm:w-[50%] md:w-[40%] lg:w-[30%]"
       >
         <div className="w-full h-full bg-white rounded-l-2xl p-4 relative">
           <button
-            onClick={() => steShow(!show)}
+            onClick={() => {
+              steShow(!show)
+              setPerfMenu(false)
+            }}
             className="absolute top-6 sm:top-10 left-6 sm:left-10 text-dark dark:text-dark"
           >
             <XMarkIcon className="h-8 w-8" />
@@ -140,7 +145,7 @@ const Profile = () => {
               ))}
             </ul>
             <div className="w-full flex flex-col items-center">
-              <button className="w-[70%] bg-dark text-white transition duration-150 ease-linear flex justify-center items-center gap-2 border-2 py-4 px-8 my-4 rounded-full">
+              <button onClick={() => disconnect()} className="w-[70%] bg-dark text-white transition duration-150 ease-linear flex justify-center items-center gap-2 border-2 py-4 px-8 my-4 rounded-full">
                 <ArrowLeftOnRectangleIcon className="w-6 h-6" />
                 {locale === "fr"
                 ? "Déconnecter"
@@ -173,7 +178,7 @@ const Profile = () => {
         avatar={state.avatar}
         setQrCode={setQrCode}
       />
-        {show ? slide : null}
+        { show || perfMenu ? slide : null}
         <EditProfleModal
           modalOpen={editProfileModalOpen}
           setModalOpen={setEditProfileModalOpen}

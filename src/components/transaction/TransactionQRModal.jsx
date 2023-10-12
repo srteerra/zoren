@@ -244,65 +244,68 @@ const TransactionQRModal = ({
         qr.append(qrRef.current);
       }
 
-      if (transactionsList < peopleInput) {
-        const interval = setInterval(async () => {
-          try {
-            // Check if there is any transaction for the reference
-            const signatureInfo = await findReference(connection, reference, {
-              finality: "confirmed",
-            });
-
-            // Validate that the transaction has the expected recipient, amount and SPL token
-            await validateTransfer(
-              connection,
-              signatureInfo.signature,
-              {
-                recipient,
-                amount,
-                reference,
-              },
-              { commitment: "confirmed" }
-            );
-
-            const newID = (userTransactions.length + 1).toString();
-            const newTransaction = {
-              id: newID,
-              from: {
-                name: recipient,
-              },
-              to: {
-                name: reference,
-              },
-              date: new Date(),
-              status: "Completed",
-              amount: amount,
-            };
-
-            console.log(newTransaction);
-            console.log(newTransaction.from.name.toString());
-            console.log(newTransaction.to.name.toString());
-
-            setTransactionsList(transactionsList + 1);
-
-            clearInterval(interval);
-          } catch (e) {
-            if (e instanceof FindReferenceError) {
-              // No transaction found yet, ignore this error
-              return;
+      if(transactionsList !== undefined) {
+        if (transactionsList < peopleInput && transactionsList !== undefined) {
+          const interval = setInterval(async () => {
+            try {
+              // Check if there is any transaction for the reference
+              const signatureInfo = await findReference(connection, reference, {
+                finality: "confirmed",
+              });
+  
+              // Validate that the transaction has the expected recipient, amount and SPL token
+              await validateTransfer(
+                connection,
+                signatureInfo.signature,
+                {
+                  recipient,
+                  amount,
+                  reference,
+                },
+                { commitment: "confirmed" }
+              );
+  
+              const newID = (userTransactions.length + 1).toString();
+              const newTransaction = {
+                id: newID,
+                from: {
+                  name: recipient,
+                },
+                to: {
+                  name: reference,
+                },
+                date: new Date(),
+                status: "Completed",
+                amount: amount,
+              };
+  
+              console.log(newTransaction);
+              console.log(newTransaction.from.name.toString());
+              console.log(newTransaction.to.name.toString());
+  
+              setTransactionsList(transactionsList + 1);
+  
+              clearInterval(interval);
+            } catch (e) {
+              if (e instanceof FindReferenceError) {
+                // No transaction found yet, ignore this error
+                return;
+              }
+              if (e instanceof ValidateTransferError) {
+                // Transaction is invalid
+                console.error("Transaction is invalid", e);
+                return;
+              }
+              console.error("Unknown error", e);
             }
-            if (e instanceof ValidateTransferError) {
-              // Transaction is invalid
-              console.error("Transaction is invalid", e);
-              return;
-            }
-            console.error("Unknown error", e);
-          }
-        }, 5000);
-      } else {
-        completeQR();
-        clearInputs();
-        setTransactionsList(undefined);
-        setQrIsCompleted(true);
+          }, 5000);
+        } else {
+          completeQR();
+          clearInputs();
+          setTransactionsList(undefined);
+          setQrIsCompleted(true);
+  
+        }
       }
     }
   }, [transactionsList]);
@@ -916,6 +919,7 @@ const TransactionQRModal = ({
                       loadOff();
                       setStepModal(4);
                       setModalOpen(false);
+                      setTransactionsList(undefined);
                     }}
                     className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
                   >

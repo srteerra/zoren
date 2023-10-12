@@ -14,7 +14,7 @@ const CollectionItem = (data) => {
 
       <div className="flex flex-col w-full justify-center text-center lg:text-start items-center lg:items-start">
         <span className="font-bold text-md 2xl:text-lg">{data.title}</span>
-        <span className="text-sm 2xl:text-md hidden lg:inline-block">{data.contrib} / {locale === "fr" ? "Contributeurs" : locale === "es" ? "Contribuidores" : locale === "pt" ? "Contribuidores" : locale === "de" ? "Mitwirkende" : "Contributors"}</span>
+        <span className="text-sm 2xl:text-md hidden lg:inline-block">{data.contrib} {locale === "fr" ? "Contributeurs" : locale === "es" ? "Contribuidores" : locale === "pt" ? "Contribuidores" : locale === "de" ? "Mitwirkende" : "Contributors"}</span>
         <span className="text-sm 2xl:text-md flex lg:hidden">{data.contrib} / {data.placeH}</span>
       </div>
     </div>

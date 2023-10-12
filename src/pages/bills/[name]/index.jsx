@@ -40,7 +40,7 @@ const BillView = (data) => {
   const [billModalOpen, setBillModalOpen] = useState(false);
   const [billData, setBillData] = useState('');
   const [balanceUSD, setBalanceUSD] = useState(0);
-  const { state } = useContext(AppContext);
+  const { state, currency } = useContext(AppContext);
   const router = useRouter();
   const path = router.asPath.substring(7);
   const { t } = useTranslation("billview");
@@ -53,13 +53,23 @@ const BillView = (data) => {
   }
 
   useEffect(() => {
-    axios
+    if (currency === "usd") {
+      axios
       .get(
         "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
       )
       .then((res) => {
         setBalanceUSD(res.data.solana.usd);
       });
+    } else {
+      axios
+      .get(
+        "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=mxn"
+      )
+      .then((res) => {
+        setBalanceUSD(res.data.solana.mxn);
+      });
+    }
 
     const fetchData = async () => {
       setBillData(await getCollectionByName({
@@ -87,7 +97,7 @@ const BillView = (data) => {
       const sum = billData.transactions.map((tranns) => amount += tranns.amount);
       return sum;
     } else {
-      return amount;
+      return 0;
     }
   }
 
@@ -130,7 +140,7 @@ const BillView = (data) => {
               <p>{billData.people} {t("")}</p>
               <div className="flex flex-col gap-2">
                 <p>{billData.amount} SOL</p>
-                <p className="opacity-50 font-semibold">${trunacteNumbers(billData.amount)} USD</p>
+                <p className="opacity-50 font-semibold">${trunacteNumbers(billData.amount)} {currency.toUpperCase()}</p>
               </div>
             </div>
           </div>
@@ -146,7 +156,7 @@ const BillView = (data) => {
               <p>{billData.hasPaid} / {billData.people}</p>
               <div className="flex flex-col gap-2">
                 <p className="text-danger">{getCollected()} SOL</p>
-                <p className="text-danger opacity-70 font-semibold">${trunacteNumbers(getCollected())} USD</p>
+                <p className="text-danger opacity-70 font-semibold">${trunacteNumbers(getCollected())} {currency.toUpperCase()}</p>
               </div>
             </div>
           </div>

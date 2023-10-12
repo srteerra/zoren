@@ -22,7 +22,7 @@ export async function getStaticProps({ locale }) {
 
 
 const Dashboard = () => {
-  const { state } = useContext(AppContext);
+  const { state, currency } = useContext(AppContext);
   const [balanceUSD, setBalanceUSD] = useState(0);
   const { t } = useTranslation("dashboard");
   const nav = {
@@ -32,13 +32,23 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    axios
+    if (currency === "usd") {
+      axios
       .get(
         "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
       )
       .then((res) => {
         setBalanceUSD(res.data.solana.usd);
       });
+    } else {
+      axios
+      .get(
+        "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=mxn"
+      )
+      .then((res) => {
+        setBalanceUSD(res.data.solana.mxn);
+      });
+    }
   }, []);
 
   return (
@@ -63,7 +73,7 @@ const Dashboard = () => {
               : balanceUSD * state.userBalance > 1000
               ? (balanceUSD * state.userBalance).toString().slice(0, 7)
               : (balanceUSD * state.userBalance).toString().slice(0, 6)}{" "}
-            USD
+            {currency.toUpperCase()}
           </p>
         </div>
         {/* Reminder card */}

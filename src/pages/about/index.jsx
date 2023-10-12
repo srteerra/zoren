@@ -1,3 +1,4 @@
+'use client';
 import { DevCard } from "@/components/DevCard";
 import { Footer } from "@/components/Footer";
 import { LoginNav } from "@/components/LoginNav";
@@ -6,9 +7,10 @@ import Link from "next/link";
 import { Fade, Zoom } from "react-awesome-reveal";
 import { useRouter } from "next/router";
 
+
 const About = () => {
   const { asPath, locale, locales } = useRouter();
-  
+
   return (
     <main className="w-full h-screen">
       <LoginNav />

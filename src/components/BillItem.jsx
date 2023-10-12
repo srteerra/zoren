@@ -1,7 +1,10 @@
 import { faMugHot, faMoneyBills } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 import { useRouter } from "next/router";
+
+const img = "https://i.pravatar.cc/100?img=";
 
 const Bill = ({ data, t }) => {
   const { asPath, locale, locales } = useRouter();
@@ -39,7 +42,7 @@ const Bill = ({ data, t }) => {
       {/* Foot */}
       <div className="flex justify-between w-full group-hover:justify-center">
         <p className="group-hover:hidden flex gap-1 text-white">
-          {data.people.lenght > 5 ? "+5" : data.people}/
+          {data.people.lenght > 5 ? "+5" : data.people} {" "}
           {locale === "fr"
             ? "Personnes"
             : locale === "es"
@@ -65,9 +68,15 @@ const Bill = ({ data, t }) => {
           <ArrowTopRightOnSquareIcon width={20} />
         </div>
         <div className="group-hover:hidden gap-1 relative">
-          <div className="w-7 h-7 absolute right-10 bottom-0 bg-dark rounded-full"></div>
-          <div className="w-7 h-7 absolute right-5 bottom-0 bg-red-500 rounded-full"></div>
-          <div className="w-7 h-7 absolute right-0 bottom-0 bg-blue-400 rounded-full"></div>
+          <div className="w-7 h-7 absolute right-10 bottom-0 bg-dark rounded-full overflow-hidden">
+            <Image src={img + "3"} width={100} height={100} alt="avatar" />
+          </div>
+          <div className="w-7 h-7 absolute right-5 bottom-0 bg-dark rounded-full overflow-hidden">
+            <Image src={img + "5"} width={100} height={100} alt="avatar" />
+          </div>
+          <div className="w-7 h-7 absolute right-0 bottom-0 bg-dark rounded-full overflow-hidden">
+            <Image src={img + "10"} width={100} height={100} alt="avatar" />
+          </div>
         </div>
       </div>
     </button>

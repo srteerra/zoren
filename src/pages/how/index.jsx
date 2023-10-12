@@ -1,3 +1,4 @@
+'use client';
 import { Footer } from "@/components/Footer";
 import { LoginNav } from "@/components/LoginNav";
 import { ChevronDoubleDownIcon } from "@heroicons/react/24/solid";
@@ -15,6 +16,7 @@ import { useRouter } from "next/router";
 
 const HowItWorks = () => {
   const { asPath, locale, locales } = useRouter();
+
 
   return (
     <main className="w-full h-screen">
