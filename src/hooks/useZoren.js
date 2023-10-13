@@ -61,15 +61,16 @@ export const useZoren = () => {
       // console.log( await collectData);
       // console.log(await collectData[0].imageUrl);
       initialFetch({
-        username: await collectData[0].userName || "Unnamed",
+        username: (await collectData[0]?.userName) || "Unnamed",
         address: publicKey.toString(),
         balance: value / LAMPORTS_PER_SOL,
-        avatar: await collectData[0].imageUrl || "https://avatar.iran.liara.run/public/12",
-        contacts: await collectData[0].userContacts || [],
+        avatar:
+          (await collectData[0]?.imageUrl) ||
+          "https://avatar.iran.liara.run/public/12",
+        contacts: (await collectData[0]?.userContacts) || [],
       });
     });
   };
-
 
   useEffect(() => {
     if (publicKey) {
