@@ -6,6 +6,9 @@
     "C-AddFriend": "Ajouter un ami",
     "C-SolanaAddress": "par adresse Solana",
     "C-MyFriends": "Mes amis",
-    "C-ListContacts": "Liste de contacts",
-    "C-DontHaveAdded": "Vous n'avez ajouté personne."
+    "C-ListContacts": "Liste des contacts",
+    "C-DontHaveAdded": "Vous n'avez ajouté personne.",
+    "ShareZorenFrinds": "Partagez Zoren avec des amis",
+    "ToAdd": "pour les ajouter et partager les paiements facilement.",
+    "ShareZoren": "Partager Zoren"
 }

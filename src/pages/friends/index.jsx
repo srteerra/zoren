@@ -35,17 +35,17 @@ const Friends = () => {
             <p
               className="text-start text-3xl 2xl:text-4xl lg:text-3xl md:text-3xl font-bold"
             >
-              Share Zoren to friends
+              {t("ShareZorenFrinds")}
             </p>
             <p className="w-full xl:w-[60%] text-lg 2xl:text-xl lg:text-md text-md pt-2 font-light">
-            to add them and split payments easly.
+            {t("ToAdd")}
             </p>
             <button
               onClick={() => {}}
               className="flex gap-3 justify-center text-center mt-5 items-center text-md font-bold text-dark bg-white hover:opacity-70 transition ease-out px-8 py-4 rounded-full"
             >
               <ShareIcon width={20} />
-              Share Zoren
+              {t("ShareZoren")}
             </button>
           </div>
         </div>

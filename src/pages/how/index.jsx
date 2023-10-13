@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { Footer } from "@/components/Footer";
 import { LoginNav } from "@/components/LoginNav";
 import { ChevronDoubleDownIcon } from "@heroicons/react/24/solid";
@@ -9,14 +9,13 @@ import {
   faArrowRightLong,
   faBrain,
   faMoneyBill,
-  faPeopleGroup
+  faPeopleGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { Fade, Zoom } from "react-awesome-reveal";
 import { useRouter } from "next/router";
 
 const HowItWorks = () => {
   const { asPath, locale, locales } = useRouter();
-
 
   return (
     <main className="w-full h-screen">
@@ -26,10 +25,16 @@ const HowItWorks = () => {
           <FontAwesomeIcon icon={faBrain} className="w-10 h-10 opacity-50" />
         </span>
         <span className="absolute animate-wiggleRev right-1/4 top-1/3 hidden sm:block">
-          <FontAwesomeIcon icon={faMoneyBill} className="w-10 h-10 opacity-50" />
+          <FontAwesomeIcon
+            icon={faMoneyBill}
+            className="w-10 h-10 opacity-50"
+          />
         </span>
         <span className="absolute animate-wiggle top-[10%] hidden sm:block">
-          <FontAwesomeIcon icon={faPeopleGroup} className="w-10 h-10 opacity-50" />
+          <FontAwesomeIcon
+            icon={faPeopleGroup}
+            className="w-10 h-10 opacity-50"
+          />
         </span>
         <div>
           <h1 className="text-primary text-4xl lg:text-5xl my-2">
@@ -233,7 +238,15 @@ const HowItWorks = () => {
           </div>
 
           <p className="my-10 w-full md:w-4/5">
-          Si tienes alguna pregunta o sugerencia para futuros tutoriales, no dudes en ponerte en contacto con nuestro equipo de soporte.
+            {locale === "fr"
+              ? "Si vous avez des questions ou des suggestions pour de futures tutoriels, n'hésitez pas à contacter notre équipe de support."
+              : locale === "es"
+              ? "Si tienes alguna pregunta o sugerencia para futuros tutoriales, no dudes en ponerte en contacto con nuestro equipo de soporte."
+              : locale === "pt"
+              ? "Se tiver alguma pergunta ou sugestão para futuros tutoriais, não hesite em entrar em contato com nossa equipe de suporte."
+              : locale === "de"
+              ? "Wenn Sie Fragen oder Anregungen für zukünftige Tutorials haben, zögern Sie nicht, sich an unser Support-Team zu wenden."
+              : "If you have any questions or suggestions for future tutorials, don't hesitate to contact our support team."}
           </p>
         </div>
       </div>
