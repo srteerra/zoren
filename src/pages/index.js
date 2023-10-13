@@ -75,8 +75,8 @@ const Home = () => {
               <p className="text-slate-500 my-4">{t("WantSeparateBill")}</p>
               <div>
                 <h1 className="text-4xl lg:text-5xl font-light">
-                  {t("WantSeparateBill")} <br /> {t("GenerateQR")} <br />{" "}
-                  {t("SplitBill")}
+                  {t("GenerateQR")} <br /> {t("SplitBill")} <br />{" "}
+                  {t("BetweenYFriends")}
                 </h1>
               </div>
               <p className="my-6">
@@ -84,7 +84,7 @@ const Home = () => {
                 <Link href={"/"}>
                   <strong>Solana</strong>
                 </Link>
-                {" and "}
+                {" And "}
                 <Link href={"/"}>
                   {" "}
                   <strong>Phantom</strong>
@@ -175,7 +175,7 @@ const Home = () => {
       <div className="w-full h-screen flex items-center justify-center p-2">
         <div className="text-center w-full h-full flex flex-col justify-around">
           <Zoom duration={300} triggerOnce>
-            <h1>What's Zoren?</h1>
+            <h1>{t("WhatsZoren")}</h1>
           </Zoom>
 
           <Fade
@@ -194,12 +194,11 @@ const Home = () => {
 
           <div className="w-full sm:w-1/3 mx-auto">
             <p>
-              Learn more about Zoren in the{" "}
+              {t("LearnMoreAbout")}{" "}
               <Link href={"/how"} className="font-bold">
-                How it works
+              {t("HowItWorks")}
               </Link>{" "}
-              section. You'll find videos and information to get started right
-              now.
+              {t("sections")}
             </p>
           </div>
         </div>
@@ -222,39 +221,37 @@ const Home = () => {
           triggerOnce
           className="w-full text-center my-32 text-primary"
         >
-          <h1>Our Roadmap</h1>
+          <h1>{t("OurRoadmap")}</h1>
         </Zoom>
 
         <Zoom cascade triggerOnce duration={300} className="">
           {/* stage 01 */}
           <div className="w-full md:w-3/5 lg:w-2/5 grid grid-cols-5 mx-auto">
             <div className="hidden text-primary md:block text-center">
-              <h2>Stage</h2>
+              <h2>{t("Stage")}</h2>
               <span className="text-4xl font-bold">01</span>
             </div>
             <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
               <div className="md:w-1/2">
-                <h2 className="text-primary">Plannning and design</h2>
+                <h2 className="text-primary">{t("PlannningAndDes")}</h2>
               </div>
               <ul className="list-disc p-4 flex flex-col gap-y-4">
                 <li>
                   <p>
-                    Define the project's objectives, target audience, and scope
+                    {t("projectObjectives")}
                   </p>
                 </li>
                 <li>
                   <p>
-                    Assess the feasinility of implementing the desired features
-                    on Solana
+                  {t("AssessTheFeasinility")}
                   </p>
                 </li>
                 <li>
-                  <p>Determine the tecnology stack and tools to be used</p>
+                  <p>{t("DetermineTheTecnology")}</p>
                 </li>
                 <li>
                   <p>
-                    Identify potential competitiors and analyze their strenghts
-                    and weaknesses
+                    {t("IdentifyPotential")}
                   </p>
                 </li>
               </ul>
@@ -264,22 +261,22 @@ const Home = () => {
           {/* stage 02 */}
           <div className="w-full md:w-3/5 lg:w-2/5 grid grid-cols-5 mx-auto">
             <div className="hidden text-primary md:block text-center pt-10">
-              <h2>Stage</h2>
+              <h2>{t("Stage")}</h2>
               <span className="text-4xl font-bold">02</span>
             </div>
             <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
               <div className="md:w-1/2">
-                <h2 className="text-primary pt-10">Development</h2>
+                <h2 className="text-primary pt-10">{t("Development")}</h2>
               </div>
               <ul className="list-disc p-4 flex flex-col gap-y-4">
                 <li>
-                  <p>Develop a Solana smart contract for payment management</p>
+                  <p>{t("DevelopSolana")}</p>
                 </li>
                 <li>
-                  <p>Create the application's user interface</p>
+                  <p>{t("CreateThe")}</p>
                 </li>
                 <li>
-                  <p>Implement user authentication and security features.</p>
+                  <p>{t("ImplementUser")}</p>
                 </li>
               </ul>
             </div>
@@ -288,31 +285,29 @@ const Home = () => {
           {/* stage 03 */}
           <div className="w-full md:w-3/5 lg:w-2/5 grid grid-cols-5 mx-auto">
             <div className="hidden text-primary md:block text-center pt-10">
-              <h2>Stage</h2>
+              <h2>{t("Stage")}</h2>
               <span className="text-4xl font-bold">03</span>
             </div>
             <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
               <div className="md:w-1/2">
-                <h2 className="text-primary pt-10">Testing and Launch</h2>
+                <h2 className="text-primary pt-10">{t("TestingLaunch")}</h2>
               </div>
               <ul className="list-disc p-4 flex flex-col gap-y-4">
                 <li>
                   <p>
-                    Invite beta users to test the application and provide
-                    feedback
+                    {t("Invitebeta")}
                   </p>
                 </li>
                 <li>
                   <p>
-                    Address issues and make improvements based on beta user
-                    feedback
+                    {t("AddressIssues")}
                   </p>
                 </li>
                 <li>
-                  <p>Conduct final security and performance testing</p>
+                  <p>{t("ConductFinal")}</p>
                 </li>
                 <li>
-                  <p>Prepare servers and resources for the official launch</p>
+                  <p>{t("PrepareServers")}</p>
                 </li>
               </ul>
             </div>
@@ -321,32 +316,31 @@ const Home = () => {
           {/* stage 04 */}
           <div className="w-full md:w-3/5 lg:w-2/5 grid grid-cols-5 mx-auto">
             <div className="hidden text-primary md:block text-center pt-10">
-              <h2>Stage</h2>
+              <h2>{t("Stage")}</h2>
               <span className="text-4xl font-bold">04</span>
             </div>
             <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
               <div className="md:w-1/2">
                 <h2 className="text-primary pt-10">
-                  Post-Launch Growth and Maintenance
+                  {t("Post-Launch")}
                 </h2>
               </div>
               <ul className="list-disc p-4 flex flex-col gap-y-4">
                 <li>
-                  <p>Release the application to the public</p>
+                  <p>{t("ReleaseApplication")}</p>
                 </li>
                 <li>
                   <p>
-                    Develop new features based on feedback and market trends
+                    {t("DevelopNewFeatures")}
                   </p>
                 </li>
                 <li>
                   <p>
-                    Actively engage with users, gather feedback, and make
-                    refinements
+                   {t("ActivelyEngage")}
                   </p>
                 </li>
                 <li>
-                  <p>Consider expanding to other blockchain networks</p>
+                  <p>{t("ConsiderExpanding")}</p>
                 </li>
               </ul>
             </div>
