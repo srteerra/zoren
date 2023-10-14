@@ -29,13 +29,16 @@ Zoren is a decentralized platform built on the Solana blockchain that enables us
 
 [Instagram](https://www.instagram.com/zorenapp/)
 
-### This platform is now working at [Zoren.site]()
+### This platform is now working at [Zoren.site](https://www.zoren.site/)
 
 
 ## Pitch
 
+[![Video](https://img.youtube.com/vi/rmmv4c7YG9M/maxresdefault.jpg)](https://www.youtube.com/watch?v=rmmv4c7YG9M)
+
 ## Deck
 
+![Zoren_OnePager_page-0001](https://github.com/srteerra/zoren/assets/74383100/a316b847-4607-4f7a-a69e-759d61dc2a2e)
 
  # Built with
 - [Next.js](https://nextjs.org/) - Next.js is a framework that allows developers to create single-page applications and high-performance web applications through server-side rendering.
@@ -48,17 +51,42 @@ Zoren is a decentralized platform built on the Solana blockchain that enables us
 
 # Screenshots
 
-### Home view
+### Home
 
-### Home logged view
+### How it works? 
 
-### Profile modal
 
-### Pay modal
+### About Us
 
-### QR modal
+![Web capture_14-10-2023_10193_www zoren site](https://github.com/srteerra/zoren/assets/74383100/1615c504-0249-4bbc-b0ec-b7508b82fd9e)
 
-### Friends list modal
+### Dashboard view
+
+![Web capture_14-10-2023_10242_localhost](https://github.com/srteerra/zoren/assets/74383100/c40930a3-20e8-4208-b253-d14e042e9df4)
+
+### Start a session modal
+
+![Web capture_14-10-2023_10251_localhost](https://github.com/srteerra/zoren/assets/74383100/5d2ba1cd-afea-41ee-a865-a408f80a344b)
+
+### Edit profile modal
+
+![Web capture_14-10-2023_102548_localhost](https://github.com/srteerra/zoren/assets/74383100/c7f279e6-aad5-4ef5-90ea-5901ef9df7fa)
+
+### Bills
+
+![Web capture_14-10-2023_102654_localhost](https://github.com/srteerra/zoren/assets/74383100/d049f168-3637-4a8e-909c-ce592852cba0)
+
+### Friends
+
+![Web capture_14-10-2023_102727_localhost](https://github.com/srteerra/zoren/assets/74383100/aaa32633-806a-419c-a7b4-f4f5c823d1f1)
+
+### Add friend modal
+
+![Web capture_14-10-2023_102817_localhost](https://github.com/srteerra/zoren/assets/74383100/d368c907-60c9-4ac4-952d-a80f84036c0f)
+
+### Settings
+
+![Web capture_14-10-2023_102955_localhost](https://github.com/srteerra/zoren/assets/74383100/bf6f3492-fe2b-4af4-b437-4533dca2d0e3)
 
 
 
@@ -70,7 +98,7 @@ This project is currently under active development and updates are made on a reg
 
 We follow a GitFlow workflow for development. Contributions are made in feature branches and merged into the main branch after a review. 
 
-![image](https://github.com/srteerra/zoren/assets/74383100/a0aa2faa-8af9-4b4d-bcf5-f0f967d4939b)
+![Workflow](https://github.com/srteerra/zoren/assets/74383100/1899ed7e-a8ff-4999-887a-105f042e71f9)
 
 
 ## Features
@@ -226,3 +254,4 @@ http:/localhost:3000/
     ├── postcss.config.js                       # PostCSS configuration
     ├── README.md:                              # Main project documentation          
     └── tailwind.config.js                      # Tailwind CSS configuration              
+            
