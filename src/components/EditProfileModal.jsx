@@ -9,6 +9,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { useZoren } from "../hooks/useZoren";
 import { useContext } from "react";
 import AppContext from "@/context/AppContext";
+import { useRouter } from "next/router";
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
@@ -21,6 +22,7 @@ const EditProfleModal = ({
   const [newUsername, setNewUsername] = useState("");
   const [newAvatar, setNewAvatar] = useState("");
   const { state, updateProfile } = useContext(AppContext);
+  const { asPath, locale, locales } = useRouter();
 
   const toastId = useRef(null);
 
@@ -66,7 +68,7 @@ const EditProfleModal = ({
                 @{state.userName}
               </p>
               <p className="text-md font-light text-gray-600 dark:text-white">
-                Edit profile
+              {locale === "fr" ? "Modifier le profil" : locale === "es" ? "Editar perfil" : locale === "pt" ? "Editar perfil" : locale === "de" ? "Profil bearbeiten" : "Edit profile"}
               </p>
             </div>
           </div>
@@ -78,7 +80,7 @@ const EditProfleModal = ({
                   className="text-gray-500 dark:text-gray-200"
                   htmlFor="usernamePurpose"
                 >
-                  Your username:
+                  {locale === "fr" ? "Votre nom d'utilisateur :" : locale === "es" ? "Tu nombre de usuario:" : locale === "pt" ? "Seu nome de usuário:" : locale === "de" ? "Dein Benutzername:" : "Your username:"}
                 </label>
               </div>
               <div className="flex justify-end">
@@ -102,7 +104,7 @@ const EditProfleModal = ({
                   className="text-gray-500 dark:text-gray-200"
                   htmlFor="avatarPurpose"
                 >
-                  Change Avatar:
+                  {locale === "fr" ? "Changer d'avatar :" : locale === "es" ? "Cambiar avatar:" : locale === "pt" ? "Alterar avatar:" : locale === "de" ? "Avatar ändern:" : "Change Avatar:"}
                 </label>
               </div>
               <input
@@ -113,6 +115,7 @@ const EditProfleModal = ({
                 multiple={false}
                 onChange={(e) => uploadImage(e)}
               />
+              <p className="text-sm opacity-50">{locale === "fr" ? "*Veuillez entrer votre nom d'utilisateur pour confirmer cette action." : locale === "es" ? "*Por favor, ingresa tu nombre de usuario para confirmar esta acción." : locale === "pt" ? "*Por favor, digite seu nome de usuário para confirmar esta ação." : locale === "de" ? "*Bitte geben Sie Ihren Benutzernamen ein, um diese Aktion zu bestätigen." : "*Please enter your username to confirm this action."}</p>
             </div>
           </div>
 
@@ -122,14 +125,14 @@ const EditProfleModal = ({
               disabled={!newUsername}
               className="w-full rounded-lg disabled:opacity-60 disabled:hover:bg-secondary disabled:dark:bg-secondary/60 bg-secondary hover:bg-secondary/80 dark:bg-secondary/60 py-3 px-8 dark:hover:bg-secondary/30 transition ease-out"
             >
-              <span className="font-bold text-white">Confirm</span>
+              <span className="font-bold text-white">{locale === "fr" ? "Confirmer" : locale === "es" ? "Confirmar" : locale === "pt" ? "Confirmar" : locale === "de" ? "Bestätigen" : "Confirm"}</span>
             </button>
 
             <button
               onClick={() => setModalOpen(false)}
               className="w-full rounded-lg border-2 border-red-300 py-3 hover:bg-opacity-70"
             >
-              <span className="font-medium text-red-300">Close</span>
+              <span className="font-medium text-red-300">{locale === "fr" ? "Fermer" : locale === "es" ? "Cerrar" : locale === "pt" ? "Fechar" : locale === "de" ? "Schließen" : "Close"}</span>
             </button>
           </div>
         </div>

@@ -6,8 +6,9 @@ import { Slide } from "react-awesome-reveal";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
 import Link from "next/link";
-// import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 
@@ -17,10 +18,10 @@ import logo_l from "../../public/logos/horizontal-light.png";
 import RegionChange from "./Region";
 
 const LoginNav = () => {
-  // const { t: translate } = useTranslation("loginav");
-  // console.log("Translations:", translate("Home"), translate("How"), translate("About"), translate("ConnectWallet"));
   const [show, steShow] = useState(false);
   const path = usePathname();
+  const { connected } = useWallet();
+  const { asPath, locale, locales } = useRouter();
 
   const active = "font-bold text-primary dark:text-secondary";
 
@@ -44,14 +45,54 @@ const LoginNav = () => {
             </div>
             <ul className="flex flex-col gap-y-10 items-center">
               {[
-                [`Home`, "/"],
-                [`How`, "/how"],
-                [`About`, "/about"],
+                [
+                  `${
+                    locale === "fr"
+                      ? "Accueil"
+                      : locale === "es"
+                      ? "Inicio"
+                      : locale === "pt"
+                      ? "Início"
+                      : locale === "de"
+                      ? "Heim"
+                      : "Home"
+                  }`,
+                  "/",
+                ],
+                [
+                  `${
+                    locale === "fr"
+                      ? "Comment ça marche ?"
+                      : locale === "es"
+                      ? "¿Cómo funciona?"
+                      : locale === "pt"
+                      ? "Como funciona?"
+                      : locale === "de"
+                      ? "Wie funktioniert es?"
+                      : "How it works?"
+                  }`,
+                  "/how",
+                ],
+                [
+                  `${
+                    locale === "fr"
+                      ? "À propos de nous"
+                      : locale === "es"
+                      ? "Sobre nosotros"
+                      : locale === "pt"
+                      ? "Sobre nós"
+                      : locale === "de"
+                      ? "Über uns"
+                      : "About us"
+                  }
+              `,
+                  "/about",
+                ],
               ].map(([title, href]) => (
                 <li key={title}>
                   <Link
                     className={
-                      path === title
+                      path === href
                         ? active
                         : "text-dark hover:text-secondary transition duration-150 ease-linear"
                     }
@@ -61,9 +102,33 @@ const LoginNav = () => {
                   </Link>
                 </li>
               ))}
-              <button className="bg-primary my-6 text-white hover:bg-secondary transition duration-150 ease-linear px-4 py-3 w-40 rounded-full">
-                {"ConnectWallet"}
-              </button>
+              <WalletMultiButton className="flex items-center wallet-btn">
+                {connected ? (
+                  <span className="text-sm">
+                    {locale === "fr"
+                      ? "Tableau de bord"
+                      : locale === "es"
+                      ? "Panel"
+                      : locale === "pt"
+                      ? "Painel"
+                      : locale === "de"
+                      ? "Dashboard"
+                      : "Dashboard"}
+                  </span>
+                ) : (
+                  <span className="text-sm">
+                    {locale === "fr"
+                      ? "Connecter le portefeuille"
+                      : locale === "es"
+                      ? "Conectar billetera"
+                      : locale === "pt"
+                      ? "Conectar carteira"
+                      : locale === "de"
+                      ? "Wallet verbinden"
+                      : "Connect Wallet"}
+                  </span>
+                )}
+              </WalletMultiButton>
             </ul>
           </div>
         </div>
@@ -94,33 +159,103 @@ const LoginNav = () => {
           />
         </div>
 
-        <ul className="hidden lg:flex gap-x-10 items-center">
-          {[
-              [`Home`, "/"],
-              [`How`, "/how"],
-              [`About`, "/about"],
-          ].map(([title, href]) => (
-            <li key={title}>
-              <Link
-                className={
-                  path === href
-                    ? active
-                    : "hover:text-secondary transition duration-150 ease-linear"
+        <div className="flex gap-x-8">
+          <ul className="hidden relative lg:flex gap-x-10 pr-10 items-center">
+            {[
+              [
+                `${
+                  locale === "fr"
+                    ? "Accueil"
+                    : locale === "es"
+                    ? "Inicio"
+                    : locale === "pt"
+                    ? "Início"
+                    : locale === "de"
+                    ? "Heim"
+                    : "Home"
+                }`,
+                "/",
+              ],
+              [
+                `${
+                  locale === "fr"
+                    ? "Comment ça marche ?"
+                    : locale === "es"
+                    ? "¿Cómo funciona?"
+                    : locale === "pt"
+                    ? "Como funciona?"
+                    : locale === "de"
+                    ? "Wie funktioniert es?"
+                    : "How it works?"
+                }`,
+                "/how",
+              ],
+              [
+                `${
+                  locale === "fr"
+                    ? "À propos de nous"
+                    : locale === "es"
+                    ? "Sobre nosotros"
+                    : locale === "pt"
+                    ? "Sobre nós"
+                    : locale === "de"
+                    ? "Über uns"
+                    : "About us"
                 }
-                href={href}
-              >
-                {title}
-              </Link>
-            </li>
-          ))}
-          <DarkMode />
-          <WalletMultiButton className="flex items-center wallet-btn">
-            <span className="text-sm">{"ConnectWallet"}</span>
-          </WalletMultiButton>
-          {/* <button className="bg-primary text-white hover:opacity-70 transition duration-150 ease-in px-10 py-3 rounded-full">
-            Connect Wallet
-          </button> */}
-        </ul>
+              `,
+                "/about",
+              ],
+            ].map(([title, href]) => (
+              <li key={title}>
+                <Link
+                  className={
+                    path === href
+                      ? active
+                      : "hover:text-secondary transition duration-150 ease-linear"
+                  }
+                  href={href}
+                >
+                  {title}
+                </Link>
+              </li>
+            ))}
+            <DarkMode />
+            <div className="absolute z-20 right-0">
+              <RegionChange />
+            </div>
+          </ul>
+          {path === "/" ? (
+            <div className="hidden lg:block">
+              <WalletMultiButton className="flex items-center wallet-btn">
+                {connected ? (
+                  <span className="text-sm">
+                    {locale === "fr"
+                      ? "Tableau de bord"
+                      : locale === "es"
+                      ? "Panel"
+                      : locale === "pt"
+                      ? "Painel"
+                      : locale === "de"
+                      ? "Dashboard"
+                      : "Dashboard"}
+                  </span>
+                ) : (
+                  <span className="text-sm">
+                    {locale === "fr"
+                      ? "Connecter le portefeuille"
+                      : locale === "es"
+                      ? "Conectar billetera"
+                      : locale === "pt"
+                      ? "Conectar carteira"
+                      : locale === "de"
+                      ? "Wallet verbinden"
+                      : "Connect Wallet"}
+                  </span>
+                )}
+              </WalletMultiButton>
+            </div>
+          ) : null}
+        </div>
 
         <button onClick={() => steShow(!show)} className="block lg:hidden">
           <Bars3Icon className="w-6 h-6" />

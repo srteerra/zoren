@@ -12,6 +12,10 @@ const initialState = {
 
 const useInitialState = () => {
   const [state, setState] = useState(initialState);
+  const [listener, setListener] = useState(false);
+  const [perfMenu, setPerfMenu] = useState(false);
+  const [currency, setCurrency] = useState("usd");
+  const [currencies, setCurrencies] = useState(["usd", "mxn"]);
 
   // set user avatar
   const updateProfile = (payload) => {
@@ -31,7 +35,7 @@ const useInitialState = () => {
       avatar: payload.avatar,
       userName: payload.username,
       userAddress: payload.address,
-      userContacts: [],
+      userContacts: payload.contacts,
       userBalance: payload.balance,
       isConnected: payload.isconnected,
     });
@@ -118,6 +122,8 @@ const useInitialState = () => {
   return {
     state,
     setState,
+    listener,
+    setListener,
     setAvatar,
     setName,
     setAddress,
@@ -126,6 +132,11 @@ const useInitialState = () => {
     setBalance,
     initialFetch,
     updateProfile,
+    currency,
+    setCurrency,
+    currencies,
+    perfMenu,
+    setPerfMenu,
   };
 };
 

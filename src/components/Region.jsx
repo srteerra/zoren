@@ -49,7 +49,7 @@ const RegionChange = () => {
                     onClick={handleClick(l)}
                     className={`${
                       active ? " text-white bg-secondary dark:bg-gray-600" : "text-gray-900"
-                    } flex w-full gap-3 items-center justify-center rounded-md px-2 py-2`}
+                    } flex w-full gap-3 items-center justify-start rounded-md px-2 py-2`}
                   >
                     <Image
                       src={l === "en" ? usFlag : l === "es" ? mexicoFlag : l === "pt" ? portugueseflag : l === "de" ? alemanflag : frenchflag}

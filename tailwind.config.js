@@ -21,6 +21,20 @@ module.exports = {
         danger: "#C77676",
         alert: "#E5D283",
       },
+      keyframes: {
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-45deg)" },
+          "50%": { transform: "rotate(45deg)" },
+        },
+        wiggle_rev: {
+          "0%, 100%": { transform: "rotate(45deg)" },
+          "50%": { transform: "rotate(-45deg)" },
+        },
+      },
+      animation: {
+        wiggle: "wiggle 3s ease-in-out infinite",
+        wiggleRev: "wiggle_rev 3s ease-in-out infinite",
+      },
     },
   },
   plugins: [

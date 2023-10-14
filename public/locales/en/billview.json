@@ -1,0 +1,14 @@
+{
+    "BillReady": "This bill is already paid",
+    "BillIncompleted": "This bill is incompleted",
+    "Concept": "Concept",
+    "Contributors": "Contributors",
+    "Total": "Total",
+    "People": "People",
+    "Delete": "Delete",
+    "Pool": "Pool",
+    "Collected" : "Collected",
+    "SetCompleted": "Set completed",
+    "Wrong": "Something went wrong!",
+    "PleaseTryAgian": "Please try again or reload the page."
+}

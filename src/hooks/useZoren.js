@@ -15,12 +15,14 @@ import { client } from "../../lib/sanityClient";
 import imageUrlBuilder from "@sanity/image-url";
 import { useContext } from "react";
 import AppContext from "@/context/AppContext";
+import Base58 from "base58";
 
 // Get a pre-configured url-builder from your sanity client
 const builder = imageUrlBuilder(client);
 
 export const useZoren = () => {
-  const { state, initialFetch, updateProfile } = useContext(AppContext);
+  const { state, initialFetch, updateProfile, setContacts } =
+    useContext(AppContext);
   const [amount, setAmount] = useState(0);
   const [receiver, setReceiver] = useState("");
   const [transactionPurpose, setTransactionPurpose] = useState("");
@@ -48,6 +50,7 @@ export const useZoren = () => {
   const fetchData = async () => {
     const query = `*[_type == "users" && userAddress == "${publicKey.toString()}"] {
       userName,
+      userContacts,
       "imageUrl": userAvatar.asset->url
     }`;
 
@@ -55,13 +58,16 @@ export const useZoren = () => {
       console.log(value);
 
       const collectData = await client.fetch(query);
-
-      // Setting up the user data on fetch
+      // console.log( await collectData);
+      // console.log(await collectData[0].imageUrl);
       initialFetch({
-        username: await collectData[0].userName,
+        username: (await collectData[0]?.userName) || "Unnamed",
         address: publicKey.toString(),
         balance: value / LAMPORTS_PER_SOL,
-        avatar: await collectData[0].imageUrl,
+        avatar:
+          (await collectData[0]?.imageUrl) ||
+          "https://avatar.iran.liara.run/public/12",
+        contacts: (await collectData[0]?.userContacts) || [],
       });
     });
   };
@@ -101,6 +107,33 @@ export const useZoren = () => {
     transaction.add(transferInstruction);
 
     return transaction;
+  };
+
+  const addContact = (address) => {
+    if (address) {
+      client
+        .patch(state.userAddress)
+        .setIfMissing({ userContacts: [] })
+        .append("userContacts", [{ contactAddress: address }])
+        .commit({ autoGenerateArrayKeys: true })
+        .then((res) => {
+          setContacts(res.userContacts);
+        });
+    }
+  };
+
+  const removeContact = (address) => {
+    if (address) {
+      // const reviewsToRemove = ["reviews[0]", 'reviews[_key=="abc123"]'];
+      client
+        .patch(state.userAddress)
+        .unset([`userContacts[contactAddress=="${address.toString()}"]`])
+        .commit()
+        .then((res) => {
+          console.log(res);
+          setContacts(res.userContacts);
+        });
+    }
   };
 
   const updateAcc = (newN, newA) => {
@@ -209,5 +242,7 @@ export const useZoren = () => {
     newTransactionModalOpen,
     setNewTransactionModalOpen,
     userTransactions,
+    addContact,
+    removeContact,
   };
 };

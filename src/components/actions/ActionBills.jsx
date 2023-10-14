@@ -2,11 +2,11 @@ import { QrCodeIcon, LinkIcon } from "@heroicons/react/24/solid";
 import TransactionQRModal from "../transaction/TransactionQRModal";
 import { useState } from 'react';
 
-function ActionCenterBills() {
+function ActionCenterBills({t}) {
   const [qrCode, setQrCode] = useState(false);
   const [transactionQRModalOpen, setTransactionQRModalOpen] = useState(false);
   return (
-    <div className="hidden lg:flex flex-col gap-8 my-4 xl:my-16">
+    <div className="flex flex-col sm:flex-row justify-center items-center sm:justify-start gap-8 my-4 xl:my-16">
       <TransactionQRModal
         modalOpen={transactionQRModalOpen}
         setModalOpen={setTransactionQRModalOpen}
@@ -25,8 +25,8 @@ function ActionCenterBills() {
           <QrCodeIcon width={35} />
         </button>
         <div>
-          <p className="text-lg font-bold">Start a session</p>
-          <p className="text-lg">with a new QR code</p>
+          <p className="text-lg font-bold">{t('C-StartSession')}</p>
+          <p className="text-lg">{t('C-WithNewQR')}</p>
         </div>
       </div>
       <div className="flex items-center gap-6 text-black dark:text-white">
@@ -38,8 +38,8 @@ function ActionCenterBills() {
           <LinkIcon width={35} />
         </button>
         <div>
-          <p className="text-lg font-bold opacity-60">Join to session</p>
-          <p className="text-lg opacity-60">with a new QR code</p>
+          <p className="text-lg font-bold opacity-60">{t('C-JoinSession')}</p>
+          <p className="text-lg opacity-60">{t('C-WithNewQR')}</p>
         </div>
       </div>
     </div>
