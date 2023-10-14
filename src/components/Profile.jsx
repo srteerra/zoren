@@ -37,11 +37,11 @@ const Profile = () => {
   const { publicKey } = useZoren();
   const [qrCode, setQrCode] = useState(false);
   const active = "text-dark font-bold gap-6";
-  const limits = ["/", "/how", "/about"];
+  const limits = ["/", "/how", "/about", "/404"];
   const [transactionQRModalOpen, setTransactionQRModalOpen] = useState(false);
   const { asPath, locale, locales } = useRouter();
+  const testing = useRouter();
   const { disconnect } = useWallet();
-
 
   const copyText = () => {
     navigator.clipboard.writeText(state.userAddress.toString()), toast("Copied!");
@@ -164,7 +164,7 @@ const Profile = () => {
     </div>
   );
 
-  if (limits.includes(route)) {
+  if (limits.includes(route) || testing.pathname === '/404') {
     return null;
   } else {
     return (

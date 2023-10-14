@@ -15,7 +15,7 @@ export default function Layout({ children }) {
   const route = usePathname();
   const { connected, publicKey } = useZoren();
   const { state } = useContext(AppContext);
-  const limits = ["/", "/how", "/about"];
+  const limits = ["/", "/how", "/about", "/404"];
 
   setInterval(() => {
     if (state.userAddress && window.solana.publicKey) {
@@ -52,7 +52,7 @@ export default function Layout({ children }) {
       <Sidebar />
       <div
         className={
-          limits.includes(route)
+          limits.includes(route) || router.pathname === "/404"
             ? "w-full h-screen"
             : "w-full lg:w-2/3 xl:w-3/4 max-h-screen overflow-hidden"
         }

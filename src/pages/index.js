@@ -9,6 +9,7 @@ import { ViewfinderCircleIcon } from "@heroicons/react/24/solid";
 import { Footer } from "@/components/Footer";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+const zoren = "../zoren.pdf";
 
 // Images
 import ticket from "../../public/images/ticket.png";
@@ -17,6 +18,7 @@ import Image from "next/image";
 import { Fade, Flip, Zoom } from "react-awesome-reveal";
 import { useRouter } from "next/router";
 import { useWallet } from "@solana/wallet-adapter-react";
+// const deck = "../zoren.pdf";
 
 export async function getStaticProps({ locale }) {
   return {
@@ -42,6 +44,16 @@ const Home = () => {
       router.push("/");
     }
   }, [connected]);
+
+  const downloadPdfn = () => {
+    const down = document.createElement("a");
+    down.href = zoren;
+    down.setAttribute("download", "deck.pdf");
+    down.style.display = "none";
+    document.body.appendChild(down);
+    down.click();
+    document.body.removeChild(down);
+  };
 
   // useEffect(() => {
   //   const changeWords = () => {
@@ -196,7 +208,7 @@ const Home = () => {
             <p>
               {t("LearnMoreAbout")}{" "}
               <Link href={"/how"} className="font-bold">
-              {t("HowItWorks")}
+                {t("HowItWorks")}
               </Link>{" "}
               {t("sections")}
             </p>
@@ -237,22 +249,16 @@ const Home = () => {
               </div>
               <ul className="list-disc p-4 flex flex-col gap-y-4">
                 <li>
-                  <p>
-                    {t("projectObjectives")}
-                  </p>
+                  <p>{t("projectObjectives")}</p>
                 </li>
                 <li>
-                  <p>
-                  {t("AssessTheFeasinility")}
-                  </p>
+                  <p>{t("AssessTheFeasinility")}</p>
                 </li>
                 <li>
                   <p>{t("DetermineTheTecnology")}</p>
                 </li>
                 <li>
-                  <p>
-                    {t("IdentifyPotential")}
-                  </p>
+                  <p>{t("IdentifyPotential")}</p>
                 </li>
               </ul>
             </div>
@@ -294,14 +300,10 @@ const Home = () => {
               </div>
               <ul className="list-disc p-4 flex flex-col gap-y-4">
                 <li>
-                  <p>
-                    {t("Invitebeta")}
-                  </p>
+                  <p>{t("Invitebeta")}</p>
                 </li>
                 <li>
-                  <p>
-                    {t("AddressIssues")}
-                  </p>
+                  <p>{t("AddressIssues")}</p>
                 </li>
                 <li>
                   <p>{t("ConductFinal")}</p>
@@ -321,23 +323,17 @@ const Home = () => {
             </div>
             <div className="col-span-5 md:col-span-4 md:col-start-2 md:border-l-4 pl-4 md:pl-6 border-primary">
               <div className="md:w-1/2">
-                <h2 className="text-primary pt-10">
-                  {t("Post-Launch")}
-                </h2>
+                <h2 className="text-primary pt-10">{t("Post-Launch")}</h2>
               </div>
               <ul className="list-disc p-4 flex flex-col gap-y-4">
                 <li>
                   <p>{t("ReleaseApplication")}</p>
                 </li>
                 <li>
-                  <p>
-                    {t("DevelopNewFeatures")}
-                  </p>
+                  <p>{t("DevelopNewFeatures")}</p>
                 </li>
                 <li>
-                  <p>
-                   {t("ActivelyEngage")}
-                  </p>
+                  <p>{t("ActivelyEngage")}</p>
                 </li>
                 <li>
                   <p>{t("ConsiderExpanding")}</p>
@@ -346,6 +342,16 @@ const Home = () => {
             </div>
           </div>
         </Zoom>
+      </div>
+
+      <div className="w-full h-1/3 mx-auto text-center my-28 flex flex-col gap-8">
+        <h1>Download our deck</h1>
+        <button
+          onClick={() => downloadPdfn()}
+          className="w-auto mx-auto py-2 px-8 rounded-full bg-primary text-white hover:opacity-75 transition duration-150 ease-linear"
+        >
+          Download
+        </button>
       </div>
 
       <Footer />

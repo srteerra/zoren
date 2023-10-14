@@ -284,7 +284,7 @@ const TransactionQRModal = ({
               console.log(newTransaction.to.name.toString());
   
               setTransactionsList(transactionsList + 1);
-  
+              
               clearInterval(interval);
             } catch (e) {
               if (e instanceof FindReferenceError) {

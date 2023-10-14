@@ -30,11 +30,12 @@ import { useRouter } from "next/router";
 const Sidebar = () => {
   const { asPath, locale, locales } = useRouter();
   const route = usePathname();
+  const test = useRouter();
   const active = "text-white font-bold gap-6";
-  const limits = ["/", "/how", "/about"];
+  const limits = ["/", "/how", "/about", "/404"];
   const { disconnect } = useWallet();
 
-  if (limits.includes(route)) {
+  if (limits.includes(route) || test.pathname === "/404") {
     null;
   } else {
     return (
