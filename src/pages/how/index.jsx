@@ -95,14 +95,14 @@ const HowItWorks = () => {
               </p>
               <p className="font-light">
                 {locale === "fr"
-                  ? "Veuillez vérifier notre Politique de confidentialité et nos Conditions générales. Il s'agit d'un projet pour le Hackathon Hyperdrive."
+                  ? "Partagez les dépenses sans complications et clarifiez les choses entre amis."
                   : locale === "es"
-                  ? "Comparte gastos sin compliacaciones y deja las cuantas claras entre amigos."
+                  ? "Comparte gastos sin complicaciones y aclara las cosas entre amigos."
                   : locale === "pt"
-                  ? "Por favor, verifique nossa Política de Privacidade e Termos e Condições. Este é um projeto para o Hyperdrive Hackathon."
+                  ? "Compartilhe despesas sem complicações e deixe as coisas claras entre amigos."
                   : locale === "de"
-                  ? "Bitte überprüfen Sie unsere Datenschutzrichtlinie und Allgemeinen Geschäftsbedingungen. Dies ist ein Projekt für den Hyperdrive Hackathon."
-                  : "Please check our Privacy Policy and Terms and Conditions. This is a project for Hyperdrive Hackathon."}
+                  ? "Teilen Sie die Ausgaben ohne Komplikationen und klären Sie die Dinge unter Freunden."
+                  : "Share expenses without complications and make things clear among friends."}
               </p>
             </div>
           </div>
