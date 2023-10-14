@@ -30,11 +30,8 @@ export async function getStaticProps({ locale }) {
 
 const Home = () => {
   const router = useRouter();
-  // const [show, setShow] = useState("friends");
-
-  // const words = ["family", "friends", "partners", "mates", "couple"];
+  const { asPath, locale, locales } = useRouter();
   const { t } = useTranslation("home");
-
   const { connected } = useWallet();
 
   useEffect(() => {
@@ -54,20 +51,6 @@ const Home = () => {
     down.click();
     document.body.removeChild(down);
   };
-
-  // useEffect(() => {
-  //   const changeWords = () => {
-  //     let i = 0;
-  //     setInterval(() => {
-  //       setShow(words[i]);
-  //       if (i === 2) {
-  //         i = 0;
-  //       } else i++;
-  //     }, 4000);
-  //   };
-
-  //   changeWords();
-  // }, []);
 
   return (
     <div className="w-full h-screen relative">
@@ -197,7 +180,7 @@ const Home = () => {
             <iframe
               width="100%"
               height="100%"
-              src="https://www.youtube.com/embed/xz81kVWWqUw?si=HmMhcuBDURTiuPqJ"
+              src="https://www.youtube.com/embed/rmmv4c7YG9M?si=BswJRKgbHqSmPJEw"
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
@@ -345,12 +328,30 @@ const Home = () => {
       </div>
 
       <div className="w-full h-1/3 mx-auto text-center my-28 flex flex-col gap-8">
-        <h1>Download our deck</h1>
+        <h1>
+          {locale === "fr"
+            ? "Téléchargez notre deck"
+            : locale === "es"
+            ? "Descarga nuestro deck"
+            : locale === "pt"
+            ? "Baixe nosso deck"
+            : locale === "de"
+            ? "Laden Sie unsere deck herunter"
+            : "Download our deck"}
+        </h1>
         <button
           onClick={() => downloadPdfn()}
           className="w-auto mx-auto py-2 px-8 rounded-full bg-primary text-white hover:opacity-75 transition duration-150 ease-linear"
         >
-          Download
+          {locale === "fr"
+            ? "Télécharger"
+            : locale === "es"
+            ? "Descargar"
+            : locale === "pt"
+            ? "Baixar"
+            : locale === "de"
+            ? "Herunterladen"
+            : "Download"}
         </button>
       </div>
 
