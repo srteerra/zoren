@@ -70,11 +70,12 @@ const BillView = (data) => {
         setBalanceUSD(res.data.solana.mxn);
       });
     }
+    console.log(router.query.name);
 
     const fetchData = async () => {
       setBillData(await getCollectionByName({
         wallet: state.userAddress,
-        title: path,
+        title: router.query.name,
       }));
     }
 

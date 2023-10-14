@@ -20,7 +20,7 @@ const DeleteBillModal = ({ data, setModalOpen, modalOpen }) => {
     setListener(true);
     const del = await deleteCollectionByName({
       wallet: state.userAddress,
-      title: path,
+      title: router.query.name,
     });
 
     if (del) {
