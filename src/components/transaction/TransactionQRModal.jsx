@@ -223,7 +223,7 @@ const TransactionQRModal = ({
   useEffect(() => {
     if (userAddress) {
       const recipient = new PublicKey(userAddress);
-      const amount = new BigNumber(amountInputCrypto);
+      const amount = new BigNumber(amountInputCrypto / peopleInput);
       const reference = Keypair.generate().publicKey;
       const label = "Zoren Payment";
       const message = pickerValue + " " + conceptInput;
@@ -288,7 +288,7 @@ const TransactionQRModal = ({
                 await handleModifyData({
                   walletTo: userAddress,
                   walletCollectionTo: newAdded,
-                  amount: amountInputCrypto,
+                  amount: amountInputCrypto / peopleInput,
                   walletFrom: `person-${transactionsList}`,
                 });
               } catch (error) {

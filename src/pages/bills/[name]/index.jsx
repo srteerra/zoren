@@ -93,10 +93,12 @@ const BillView = (data) => {
   }
 
   const getCollected = () => {
-    let amount = 0;
-    if(billData.transactions) {
-      const sum = billData.transactions.map((tranns) => amount += tranns.amount);
-      return sum;
+    let amount = [];
+    if(billData.transactions.length > 0) {
+      billData.transactions.map((trans) => amount.push(trans.amount));
+
+      const collected = amount.reduce((value, newValue) => value + newValue, 0)
+      return collected;
     } else {
       return 0;
     }

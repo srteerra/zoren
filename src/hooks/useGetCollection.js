@@ -296,7 +296,7 @@ export const validatePaid = async (wallet, collection) => {
   let sum = 0;
   data.transactions.map((trans) => (sum += trans.amount));
 
-  return sum === data.amount ? true : false;
+  return sum >= data.amount ? true : false;
 };
 
 // change the doc with new transaction
