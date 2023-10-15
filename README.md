@@ -53,8 +53,11 @@ Zoren is a decentralized platform built on the Solana blockchain that enables us
 
 ### Home
 
+![Web capture_14-10-2023_183821_localhost](https://github.com/srteerra/zoren/assets/74383100/03d2d051-8712-4f9e-8cac-6bd975f539f4)
+
 ### How it works? 
 
+![Web capture_14-10-2023_183924_localhost](https://github.com/srteerra/zoren/assets/74383100/4ab12dee-a382-4a77-91e1-ae6281857d1f)
 
 ### About Us
 
