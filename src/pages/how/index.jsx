@@ -95,14 +95,14 @@ const HowItWorks = () => {
               </p>
               <p className="font-light">
                 {locale === "fr"
-                  ? "Veuillez vérifier notre Politique de confidentialité et nos Conditions générales. Il s'agit d'un projet pour le Hackathon Hyperdrive."
+                  ? "Partagez les dépenses sans complications et clarifiez les choses entre amis."
                   : locale === "es"
-                  ? "Comparte gastos sin compliacaciones y deja las cuantas claras entre amigos."
+                  ? "Comparte gastos sin complicaciones y aclara las cosas entre amigos."
                   : locale === "pt"
-                  ? "Por favor, verifique nossa Política de Privacidade e Termos e Condições. Este é um projeto para o Hyperdrive Hackathon."
+                  ? "Compartilhe despesas sem complicações e deixe as coisas claras entre amigos."
                   : locale === "de"
-                  ? "Bitte überprüfen Sie unsere Datenschutzrichtlinie und Allgemeinen Geschäftsbedingungen. Dies ist ein Projekt für den Hyperdrive Hackathon."
-                  : "Please check our Privacy Policy and Terms and Conditions. This is a project for Hyperdrive Hackathon."}
+                  ? "Teilen Sie die Ausgaben ohne Komplikationen und klären Sie die Dinge unter Freunden."
+                  : "Share expenses without complications and make things clear among friends."}
               </p>
             </div>
           </div>
@@ -228,15 +228,68 @@ const HowItWorks = () => {
           </div>
 
           <div className="w-full max-w-full hiddenScroll overflow-scroll flex gap-2">
-            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400"></div>
-            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400"></div>
-            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400"></div>
-            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400"></div>
-            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400"></div>
-            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400"></div>
-            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400"></div>
+            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/8-KJoMEaMvg?si=CzPKEsCJpJ96uDRA"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400">
+            <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/vBG83D-F7QA?si=eZ73vADMJdz6FvdZ"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400">
+            <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/BUVb-dT_bR0?si=pbTypM3a9PdXgY0T"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400">
+            <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/VIEjg5vuSjc?si=H9cqX1JmNU0vDNeU"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400">
+            <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/hQVvWmmgI3g?si=xmLnd2bB4s7jnlts"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="w-[400px] min-w-[400px] h-64 bg-slate-400">
+            <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/zt1wZCdkVgs?si=OnBiQKLe3gi7gvca"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
-
+          
           <p className="my-10 w-full md:w-4/5">
             {locale === "fr"
               ? "Si vous avez des questions ou des suggestions pour de futures tutoriels, n'hésitez pas à contacter notre équipe de support."

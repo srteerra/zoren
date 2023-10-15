@@ -19,7 +19,7 @@ const SetBillModal = ({ data, setModalOpen, modalOpen }) => {
   const handlePaid = async () => {
     const res = await handleSetPaid({
       wallet: state.userAddress,
-      title: path,
+      title: router.query.name,
     })
 
     if (res) {

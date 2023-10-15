@@ -223,7 +223,7 @@ const TransactionQRModal = ({
   useEffect(() => {
     if (userAddress) {
       const recipient = new PublicKey(userAddress);
-      const amount = new BigNumber(amountInputCrypto);
+      const amount = new BigNumber(amountInputCrypto / peopleInput);
       const reference = Keypair.generate().publicKey;
       const label = "Zoren Payment";
       const message = pickerValue + " " + conceptInput;
@@ -244,7 +244,7 @@ const TransactionQRModal = ({
         qr.append(qrRef.current);
       }
 
-      if(transactionsList !== undefined) {
+      if (transactionsList !== undefined) {
         if (transactionsList < peopleInput && transactionsList !== undefined) {
           const interval = setInterval(async () => {
             try {
@@ -252,7 +252,7 @@ const TransactionQRModal = ({
               const signatureInfo = await findReference(connection, reference, {
                 finality: "confirmed",
               });
-  
+
               // Validate that the transaction has the expected recipient, amount and SPL token
               await validateTransfer(
                 connection,
@@ -264,7 +264,7 @@ const TransactionQRModal = ({
                 },
                 { commitment: "confirmed" }
               );
-  
+
               const newID = (userTransactions.length + 1).toString();
               const newTransaction = {
                 id: newID,
@@ -278,13 +278,22 @@ const TransactionQRModal = ({
                 status: "Completed",
                 amount: amount,
               };
-  
+
               console.log(newTransaction);
               console.log(newTransaction.from.name.toString());
               console.log(newTransaction.to.name.toString());
-  
+
               setTransactionsList(transactionsList + 1);
-              
+              try {
+                await handleModifyData({
+                  walletTo: userAddress,
+                  walletCollectionTo: newAdded,
+                  amount: amountInputCrypto / peopleInput,
+                  walletFrom: `person-${transactionsList}`,
+                });
+              } catch (error) {
+                console.log(error);
+              }
               clearInterval(interval);
             } catch (e) {
               if (e instanceof FindReferenceError) {
@@ -304,7 +313,6 @@ const TransactionQRModal = ({
           clearInputs();
           setTransactionsList(undefined);
           setQrIsCompleted(true);
-  
         }
       }
     }
